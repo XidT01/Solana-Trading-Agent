@@ -1,0 +1,58 @@
+# Solana meme-coin "smart wallet" agent — all filters live here.
+
+campaign:
+  start_date: "2026-11-10"      # first day of the 30-day run (UTC)
+  end_date: "2026-12-09"        # last day (inclusive)
+  # Peak Solana meme-coin hours: US morning -> US afternoon, overlapping the
+  # EU afternoon. 13:00–22:59 UTC = 8am–5:59pm New York (EST).
+  peak_hours_utc: [13, 23]      # [start, end) — scans only run inside this window
+
+# Filter 1 — only launches from these platforms.
+# Matched (substring, case-insensitive) against the launch origin we detect:
+# pump.fun mints (address ends in "pump") -> "pumpfun"; otherwise the dexId of the
+# token's oldest pair on DexScreener / GeckoTerminal (raydium, meteora, ...).
+launchpads:
+  allowed: [pumpfun, pump-fun, pumpswap, raydium, meteora, stonk]
+
+discovery:
+  geckoterminal_new_pool_pages: 5   # 20 pools per page
+  use_dexscreener_profiles: true
+  max_token_age_hours: 48           # only analyse fresh launches (chain history stays cheap)
+  max_tokens_per_run: 6             # wallet analysis is the expensive part
+  max_tokens_per_day: 30            # ~1K RPC credits per token -> ~0.9M/month (Helius free tier ~1M)
+
+# Filter 2 — ignore honeypots, low liquidity and scams.
+safety:
+  min_liquidity_usd: 15000
+  min_liquidity_to_mcap: 0.05       # liquidity must be >= 5% of market cap
+  require_revoked_mint_authority: true
+  require_revoked_freeze_authority: true   # freeze authority = classic Solana honeypot
+  reject_token2022_extensions: [transferFeeConfig, transferHook, permanentDelegate, nonTransferable, defaultAccountState, pausableConfig]
+  require_sells_in_24h: true        # buys but zero sells => probably can't sell
+  max_rugcheck_score_normalised: 50 # RugCheck 0-100, higher = riskier
+  reject_rugcheck_danger_risks: true
+  max_top10_holder_pct: 35          # excluding AMM / bonding-curve accounts
+  require_rugcheck: false           # if RugCheck is down, rely on on-chain checks only
+
+# Filters 3 & 4 — which wallets get tracked.
+wallets:
+  max_entry_mcap_usd: 10000         # entered below $10K market cap
+  target_mcap_usd: 50000            # ...and still holding when the coin reached $50K
+  min_hold_fraction_at_target: 0.5  # still held >= 50% of their bag at the $50K moment
+  min_multiple: 5                   # must have achieved >= 5x on entry, otherwise not tracked
+  pnl_mode: total                   # total = realised + unrealised at current price; realised = sells only
+  min_buy_sol: 0.1                  # ignore dust buys
+  exclude_creator: true             # dev wallet
+  exclude_same_slot_as_launch: true # block-0 snipers / bundles
+  max_early_txs: 300                # how many first transactions to scan for early buyers
+  max_candidates_per_token: 50
+  max_txs_per_wallet: 60
+  max_signature_pages: 25           # x1000 signatures; tokens with more history are skipped
+
+rpc:
+  requests_per_second: 8            # Helius free tier allows ~10
+
+report:
+  ai_summary: true                  # needs ANTHROPIC_API_KEY
+  model: claude-opus-5-5
+  leaderboard_size: 25

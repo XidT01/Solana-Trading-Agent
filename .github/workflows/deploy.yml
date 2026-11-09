@@ -1,0 +1,36 @@
+name: Deploy website
+
+on:
+  workflow_call:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["site/**"]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.pages.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.repository.default_branch }}   # include the data just pushed
+      - name: Assemble site
+        run: |
+          mkdir -p public
+          cp -r site/. public/
+          cp -r data public/data
+          rm -f public/data/seen.json
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
+      - id: pages
+        uses: actions/deploy-pages@v4

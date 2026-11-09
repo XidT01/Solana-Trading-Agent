@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Smart Wallet Tracker</title>
+<meta name="description" content="Daily on-chain report of Solana wallets that bought meme coins under $10K market cap and held to $50K+.">
+<style>
+  :root {
+    --bg: #f6f7f9; --panel: #ffffff; --text: #14171c; --muted: #5d6673; --line: #e3e6eb;
+    --accent: #7c4dff; --good: #0f8a5f; --bad: #c2373a; --chip: #eef0f4;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #0d0f13; --panel: #161a20; --text: #e8eaee; --muted: #9aa3b1; --line: #262c35;
+            --accent: #a98bff; --good: #3ccf91; --bad: #ff6b6e; --chip: #20252d; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+         font: 15px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 1120px; margin: 0 auto; padding: 28px 16px 64px; }
+  header h1 { margin: 0; font-size: 26px; letter-spacing: -0.01em; }
+  header p { margin: 6px 0 0; color: var(--muted); }
+  .rules { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 0; padding: 0; list-style: none; }
+  .rules li { background: var(--chip); border-radius: 999px; padding: 4px 12px; font-size: 13px; color: var(--muted); }
+  .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin: 24px 0; }
+  .tile { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; }
+  .tile .k { color: var(--muted); font-size: 13px; }
+  .tile .v { font-size: 26px; font-weight: 650; font-variant-numeric: tabular-nums; margin-top: 2px; }
+  section { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 18px; margin-top: 18px; }
+  section h2 { margin: 0 0 12px; font-size: 18px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .scroll { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+  th { color: var(--muted); font-weight: 550; font-size: 12px; text-transform: uppercase; letter-spacing: .04em; }
+  td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  code { font: 13px ui-monospace, SFMono-Regular, Menlo, monospace; }
+  .good { color: var(--good); } .bad { color: var(--bad); } .muted { color: var(--muted); }
+  select { font: inherit; padding: 4px 8px; border-radius: 8px; border: 1px solid var(--line); background: var(--bg); color: var(--text); }
+  .summary { line-height: 1.6; } .summary h3 { font-size: 15px; margin: 16px 0 4px; }
+  .summary ul { margin: 4px 0; padding-left: 20px; }
+  .empty { color: var(--muted); padding: 12px 0; }
+  footer { color: var(--muted); font-size: 13px; margin-top: 28px; }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Solana Smart Wallet Tracker</h1>
+    <p id="status">Loading…</p>
+    <ul class="rules">
+      <li>Launches: Pump.fun · Raydium · Meteora · Stonk</li>
+      <li>Honeypots, low liquidity &amp; scams removed</li>
+      <li>Entry &lt; $10K mcap</li>
+      <li>Held to $50K+ mcap</li>
+      <li>≥ 5x from entry</li>
+    </ul>
+  </header>
+
+  <div class="tiles" id="tiles"></div>
+
+  <section>
+    <h2>Daily report <select id="day" aria-label="Report date"></select></h2>
+    <div id="report"><p class="empty">No reports yet — the first one is written after today's peak window closes.</p></div>
+  </section>
+
+  <section>
+    <h2>Wallet leaderboard</h2>
+    <div class="scroll" id="leaderboard"></div>
+  </section>
+
+  <section>
+    <h2>Recently analysed tokens</h2>
+    <div class="scroll" id="tokens"></div>
+  </section>
+
+  <footer>Automated on-chain analysis. Wallet history does not predict future results. Not financial advice.</footer>
+</main>
+<script>
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const short = (a) => a ? `${a.slice(0, 4)}…${a.slice(-4)}` : "";
+const usd = (n) => n == null ? "–" : "$" + Math.round(n).toLocaleString();
+const num = (n, d = 2) => n == null ? "–" : Number(n).toLocaleString(undefined, {maximumFractionDigits: d});
+const walletLink = (a) => `<a href="https://solscan.io/account/${esc(a)}" target="_blank" rel="noopener"><code>${esc(short(a))}</code></a>
+  <a class="muted" href="https://gmgn.ai/sol/address/${esc(a)}" target="_blank" rel="noopener" title="Open on GMGN">↗</a>`;
+const tokenLink = (t) => `<a href="https://dexscreener.com/solana/${esc(t.mint)}" target="_blank" rel="noopener">${esc(t.symbol || short(t.mint))}</a>`;
+const pnl = (v) => `<span class="${v >= 0 ? "good" : "bad"}">${v >= 0 ? "+" : ""}${num(v)}</span>`;
+
+async function getJSON(path, fallback) {
+  try { const r = await fetch(path, {cache: "no-store"}); return r.ok ? await r.json() : fallback; }
+  catch { return fallback; }
+}
+
+function md(text) {  // tiny, safe Markdown subset for the AI summary
+  const out = []; let list = false;
+  for (const raw of esc(text).split("\n")) {
+    let line = raw.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>").replace(/`(.+?)`/g, "<code>$1</code>");
+    const bullet = /^\s*[-*]\s+/.test(line);
+    if (bullet && !list) { out.push("<ul>"); list = true; }
+    if (!bullet && list) { out.push("</ul>"); list = false; }
+    if (bullet) out.push("<li>" + line.replace(/^\s*[-*]\s+/, "") + "</li>");
+    else if (/^#{1,6}\s/.test(line)) out.push("<h3>" + line.replace(/^#+\s/, "") + "</h3>");
+    else if (line.trim()) out.push("<p>" + line + "</p>");
+  }
+  if (list) out.push("</ul>");
+  return out.join("");
+}
+
+function table(cols, rows) {
+  if (!rows.length) return `<p class="empty">Nothing yet.</p>`;
+  return `<table><thead><tr>${cols.map(c => `<th class="${c.num ? "num" : ""}">${c.h}</th>`).join("")}</tr></thead>
+    <tbody>${rows.map(r => `<tr>${cols.map(c => `<td class="${c.num ? "num" : ""}">${c.f(r)}</td>`).join("")}</tr>`).join("")}</tbody></table>`;
+}
+
+async function showReport(day) {
+  const r = await getJSON(`data/reports/${day}.json`, null);
+  if (!r) return;
+  const s = r.stats;
+  $("report").innerHTML = `
+    ${r.ai_summary ? `<div class="summary">${md(r.ai_summary)}</div>` : ""}
+    <p class="muted">${s.runs} scans · ${s.tokens_checked} tokens checked · ${s.rejected} rejected as unsafe ·
+      ${s.analyzed} fully analysed · <strong>${s.wallets_found}</strong> qualifying wallets</p>
+    <div class="scroll">${table([
+      {h: "Wallet", f: w => walletLink(w.wallet)}, {h: "Token", f: tokenLink},
+      {h: "Avg entry", num: 1, f: w => usd(w.avg_entry_mcap)}, {h: "Multiple", num: 1, f: w => num(w.multiple) + "x"},
+      {h: "PnL (SOL)", num: 1, f: w => pnl(w.pnl_sol)}, {h: "Still holding", num: 1, f: w => num(w.still_holding_pct, 0) + "%"},
+    ], r.new_wallets)}</div>`;
+}
+
+(async () => {
+  const [index, wallets, tokens, runs] = await Promise.all([
+    getJSON("data/reports/index.json", []), getJSON("data/wallets.json", {}),
+    getJSON("data/tokens.json", {}), getJSON("data/runs.json", []),
+  ]);
+  const last = runs[runs.length - 1];
+  $("status").textContent = last ? `Last scan ${new Date(last.at).toLocaleString()} · SOL $${num(last.sol_usd)}`
+                                 : "Waiting for the first scan.";
+
+  const tok = Object.values(tokens);
+  const lb = Object.entries(wallets).map(([wallet, w]) => {
+    const m = w.hits.map(h => h.multiple).sort((a, b) => a - b);
+    return {wallet, hits: w.hits.length, tokens: w.hits.map(h => h.symbol),
+            median: m[Math.floor((m.length - 1) / 2)], best: m[m.length - 1],
+            entry: w.hits.reduce((a, h) => a + h.avg_entry_mcap, 0) / w.hits.length,
+            pnl: w.hits.reduce((a, h) => a + h.pnl_sol, 0)};
+  }).sort((a, b) => b.hits - a.hits || b.median - a.median);
+
+  $("tiles").innerHTML = [
+    ["Tokens analysed", tok.filter(t => t.verdict === "analyzed").length],
+    ["Rejected as unsafe", tok.filter(t => t.verdict === "rejected").length],
+    ["Wallets tracked", lb.length],
+    ["Repeat winners (2+ coins)", lb.filter(w => w.hits > 1).length],
+  ].map(([k, v]) => `<div class="tile"><div class="k">${k}</div><div class="v">${v.toLocaleString()}</div></div>`).join("");
+
+  $("leaderboard").innerHTML = table([
+    {h: "#", f: w => lb.indexOf(w) + 1}, {h: "Wallet", f: w => walletLink(w.wallet)},
+    {h: "Hits", num: 1, f: w => w.hits}, {h: "Coins", f: w => esc(w.tokens.slice(-4).join(", "))},
+    {h: "Median x", num: 1, f: w => num(w.median) + "x"}, {h: "Best x", num: 1, f: w => num(w.best) + "x"},
+    {h: "Avg entry", num: 1, f: w => usd(w.entry)}, {h: "PnL (SOL)", num: 1, f: w => pnl(w.pnl)},
+  ], lb.slice(0, 50));
+
+  $("tokens").innerHTML = table([
+    {h: "Token", f: tokenLink}, {h: "Launch", f: t => esc(t.origin)},
+    {h: "Mcap", num: 1, f: t => usd(t.mcap_usd)}, {h: "Liquidity", num: 1, f: t => usd(t.liquidity_usd)},
+    {h: "Early buyers", num: 1, f: t => t.early_buyers_checked ?? "–"},
+    {h: "Qualifying wallets", num: 1, f: t => (t.wallets || []).length},
+    {h: "Checked", f: t => esc(new Date(t.checked_at).toLocaleString())},
+  ], tok.filter(t => t.verdict === "analyzed").sort((a, b) => b.checked_at.localeCompare(a.checked_at)).slice(0, 30));
+
+  if (index.length) {
+    $("day").innerHTML = index.map(e => `<option value="${esc(e.date)}">${esc(e.date)} · ${e.wallets_found} wallets</option>`).join("");
+    $("day").onchange = (e) => showReport(e.target.value);
+    showReport(index[0].date);
+  } else {
+    $("day").hidden = true;
+  }
+})();
+</script>
+</body>
+</html>
