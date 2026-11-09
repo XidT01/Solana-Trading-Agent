@@ -4,11 +4,53 @@ from __future__ import annotations
 TOKEN_2022 = "TokenzQdBNbLqP5VEhdkAS6EF4tbsScdEnpz8iEEyBF"
 
 
-def launch_origin(mint: str, pairs: list[dict]) -> str:
+# ---------------------------------------------------------------- launch platform
+
+def _instructions(tx: dict) -> list[tuple[str, list[str]]]:
+    """(program id, account list) for every top-level and inner (CPI) instruction."""
+    out = []
+    ixs = list(tx["transaction"]["message"].get("instructions") or [])
+    for inner in (tx.get("meta") or {}).get("innerInstructions") or []:
+        ixs += inner.get("instructions") or []
+    for ix in ixs:
+        accounts = ix.get("accounts") or []
+        out.append((ix.get("programId"), [a["pubkey"] if isinstance(a, dict) else a for a in accounts]))
+    return out
+
+
+def _all_keys(tx: dict) -> set[str]:
+    return {k["pubkey"] if isinstance(k, dict) else k for k in tx["transaction"]["message"]["accountKeys"]}
+
+
+def launchlab_platform(tx: dict | None, cfg: dict) -> str | None:
+    """The LaunchLab platform-config account used by the creation tx (identifies stonk.fun, letsbonk, ...)."""
+    if not tx:
+        return None
+    lp = cfg["launchpads"]
+    keys = _all_keys(tx)
+    for addr in lp.get("launchlab_platforms") or {}:
+        if addr in keys:
+            return addr
+    for program, accounts in _instructions(tx):
+        if program == lp["programs"]["launchlab"] and len(accounts) > 3:
+            return accounts[3]  # initialize / buy / sell: payer, creator|authority, global_config, platform_config
+    return None
+
+
+def launch_origin(mint: str, pairs: list[dict], cfg: dict, creation_tx: dict | None = None) -> str:
+    lp = cfg["launchpads"]
+    progs = lp["programs"]
     if mint.endswith("pump"):
         return "pumpfun"
-    if mint.lower().endswith("stonk"):
-        return "stonk"
+    if creation_tx:
+        programs = {p for p, _ in _instructions(creation_tx)}
+        if progs["pumpfun"] in programs:
+            return "pumpfun"
+        if progs["launchlab"] in programs:
+            pc = launchlab_platform(creation_tx, cfg)
+            return (lp.get("launchlab_platforms") or {}).get(pc) or lp["unknown_launchlab_origin"]
+        if progs["meteora_dbc"] in programs:
+            return "meteora-dbc"
     dated = [p for p in pairs if p.get("pairCreatedAt")]
     oldest = min(dated, key=lambda p: p["pairCreatedAt"]) if dated else (pairs[0] if pairs else {})
     return (oldest.get("dexId") or "unknown").lower()
@@ -17,6 +59,8 @@ def launch_origin(mint: str, pairs: list[dict]) -> str:
 def allowed_launch(origin: str, cfg: dict) -> bool:
     return any(a.lower() in origin for a in cfg["launchpads"]["allowed"])
 
+
+# ---------------------------------------------------------------- market
 
 def market_snapshot(pairs: list[dict]) -> dict:
     """Aggregate DexScreener pairs for one token."""
@@ -32,6 +76,7 @@ def market_snapshot(pairs: list[dict]) -> dict:
         "dex": best.get("dexId"),
         "pair": best.get("pairAddress"),
         "url": best.get("url"),
+        "quote": quote,
         "price_usd": price_usd,
         "price_sol": price_native if quote in ("SOL", "WSOL") else None,
         "mcap_usd": best.get("marketCap") or best.get("fdv") or 0,
@@ -55,6 +100,25 @@ def market_checks(m: dict, cfg: dict) -> list[str]:
     return reasons
 
 
+# ---------------------------------------------------------------- on-chain
+
+def _risky_extension(ext: dict) -> bool:
+    """Token-2022 extensions only matter when they are actually armed (stonk.fun mints are Token-2022)."""
+    name, st = ext.get("extension"), ext.get("state") or {}
+    if name == "transferFeeConfig":
+        bps = [(st.get(k) or {}).get("transferFeeBasisPoints") or 0 for k in ("olderTransferFee", "newerTransferFee")]
+        return max(bps) > 0 or bool(st.get("transferFeeConfigAuthority"))
+    if name == "transferHook":
+        return bool(st.get("programId") or st.get("authority"))
+    if name == "permanentDelegate":
+        return bool(st.get("delegate"))
+    if name == "defaultAccountState":
+        return str(st.get("accountState", "")).lower() == "frozen"
+    if name == "pausableConfig":
+        return bool(st.get("authority") or st.get("paused"))
+    return name == "nonTransferable"
+
+
 def onchain_checks(info: dict | None, cfg: dict) -> list[str]:
     s = cfg["safety"]
     if not info:
@@ -65,9 +129,10 @@ def onchain_checks(info: dict | None, cfg: dict) -> list[str]:
     if s["require_revoked_freeze_authority"] and info["freeze_authority"]:
         reasons.append("freeze_authority_enabled_honeypot")
     if info["program"] == TOKEN_2022:
-        bad = set(info["extensions"]) & set(s["reject_token2022_extensions"])
+        bad = sorted({e.get("extension") for e in info["extensions"]
+                      if e.get("extension") in s["reject_token2022_extensions"] and _risky_extension(e)})
         if bad:
-            reasons.append("token2022_risky_extensions:" + ",".join(sorted(bad)))
+            reasons.append("token2022_risky_extensions:" + ",".join(bad))
     return reasons
 
 

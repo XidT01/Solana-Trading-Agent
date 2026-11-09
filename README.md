@@ -8,7 +8,8 @@ for 30 days, publishes a daily report, and serves a dashboard on your website.
 Every 30 minutes, 13:00–22:30 UTC (8am–5:30pm New York), from **2026-11-10 to 2026-12-09**:
 
 1. **Discover** fresh launches from GeckoTerminal's new pools and DexScreener's latest tokens.
-2. **Filter 1, launch platform.** Keeps only Pump.fun, Raydium, Meteora and Stonk launches.
+2. **Filter 1, launch platform.** Keeps only Pump.fun, Raydium, Meteora and stonk.fun launches. The platform
+   is read from each token's creation transaction on-chain (see [stonk.fun](#stonkfun) below).
 3. **Filter 2, safety.** Rejects a token if any of these apply:
    - Liquidity under $15K, or under 5% of market cap.
    - Mint authority still enabled.
@@ -47,6 +48,34 @@ Every number in `config.yaml` can be changed.
 
 From then on it runs by itself and stops automatically after 2026-12-09.
 
+## stonk.fun
+
+stonk.fun runs on Raydium LaunchLab, and its tokens have no address suffix (unlike pump.fun's `...pump`).
+The agent therefore identifies each launch by the LaunchLab platform-config account in its creation transaction.
+Other LaunchLab platforms such as letsbonk.fun have their own config account, so they can be told apart and
+filtered out.
+
+stonk.fun's config address isn't published. **Until you pin it, stonk.fun launches are still caught**, but
+they're labelled `raydium-launchlab`. To label them `stonk`, run the lookup on any token you know launched
+on stonk.fun:
+
+```bash
+SOLANA_RPC_URL=... python -m agent.identify <stonk.fun token address>
+```
+
+Then put the printed `launchlab platform config` into `config.yaml`:
+
+```yaml
+  launchlab_platforms:
+    <that address>: stonk
+```
+
+stonk.fun launches can also be paired against tokenized stocks instead of SOL. The agent converts those
+trades to SOL value using each quote asset's current price, so entries and PnL stay comparable.
+stonk.fun tokens are also Token-2022 tokens. They're rejected only if a dangerous setting is actually armed:
+a non-zero or changeable transfer fee, a transfer hook, a permanent delegate, frozen-by-default accounts,
+or a pause switch.
+
 ## Putting it on your personal website
 
 The dashboard is published at `https://<you>.github.io/<repo>/`. You can:
@@ -77,6 +106,7 @@ python -m agent.report --force
 | `agent/safety.py` | launchpad + honeypot / liquidity / scam checks |
 | `agent/wallets.py` | on-chain entry, hold and PnL analysis |
 | `agent/report.py` | daily report, AI summary, Telegram |
+| `agent/identify.py` | shows which launch platform a token is detected as |
 | `site/index.html` | the dashboard |
 | `data/` | results, written back by GitHub Actions |
 

@@ -137,13 +137,15 @@ def test_signer_trade_ignores_failed_and_unrelated():
 
 
 def test_safety_filters(cfg):
-    assert launch_origin("abcpump", []) == "pumpfun"
-    assert launch_origin("abc", [{"dexId": "meteora", "pairCreatedAt": 1}, {"dexId": "raydium", "pairCreatedAt": 5}]) == "meteora"
+    assert launch_origin("abcpump", [], cfg) == "pumpfun"
+    assert launch_origin("abc", [{"dexId": "meteora", "pairCreatedAt": 1}, {"dexId": "raydium", "pairCreatedAt": 5}], cfg) == "meteora"
     m = {"liquidity_usd": 5000, "mcap_usd": 80000, "buys_24h": 300, "sells_24h": 0}
     r = market_checks(m, cfg)
     assert any("low_liquidity" in x for x in r) and "no_sells_possible_honeypot" in r
     info = {"program": "TokenzQdBNbLqP5VEhdkAS6EF4tbsScdEnpz8iEEyBF", "mint_authority": None,
-            "freeze_authority": "X", "extensions": ["transferHook", "metadataPointer"]}
+            "freeze_authority": "X", "extensions": [
+                {"extension": "transferHook", "state": {"programId": "Hook111", "authority": None}},
+                {"extension": "metadataPointer", "state": {}}]}
     r = onchain_checks(info, cfg)
     assert "freeze_authority_enabled_honeypot" in r and "token2022_risky_extensions:transferHook" in r
     rep = {"score_normalised": 80, "risks": [{"name": "Mutable metadata", "level": "warn"}],
@@ -229,3 +231,66 @@ def test_scan_end_to_end(cfg, tmp_path, monkeypatch):
     assert "OTHER" not in tokens  # orca launch filtered out
     wallets = scan_mod.read_json(tmp_path / "wallets.json", {})
     assert list(wallets) == ["ALPHA"]
+
+
+LAUNCHLAB = "LanMV9sAd7wArD4vJFi2qDdfnVhFxYSUg6eADduJ3uj"
+STONK_PC = "StonkPlatformConfig1111111111111111111111111"
+BONK_PC = "FfYek5vEz23cMkWsdJwG2oa6EphsvXSHrGpdALN4g6W1"
+
+
+def creation_tx(platform_config, via_cpi=False):
+    ix = {"programId": LAUNCHLAB, "accounts": ["payer", "creator", "global", platform_config, "auth", "pool", "mint"]}
+    keys = [{"pubkey": k} for k in ["payer", "creator", "global", platform_config, LAUNCHLAB]]
+    if via_cpi:  # launched through the platform's own program, which CPIs into LaunchLab
+        return {"transaction": {"message": {"accountKeys": keys,
+                                            "instructions": [{"programId": "Wrapper", "accounts": []}]}},
+                "meta": {"innerInstructions": [{"index": 0, "instructions": [ix]}]}}
+    return {"transaction": {"message": {"accountKeys": keys, "instructions": [ix]}}, "meta": {}}
+
+
+def test_stonk_fun_detection(cfg):
+    from agent.safety import allowed_launch, launchlab_platform
+    pairs = [{"dexId": "raydium", "pairCreatedAt": 1}]
+    # before stonk.fun's platform config is pinned: still allowed, as a Raydium LaunchLab launch
+    o = launch_origin("Rand0mMint", pairs, cfg, creation_tx(STONK_PC))
+    assert o == "raydium-launchlab" and allowed_launch(o, cfg)
+    assert launchlab_platform(creation_tx(STONK_PC), cfg) == STONK_PC
+    # after pinning it in config.yaml
+    cfg["launchpads"]["launchlab_platforms"][STONK_PC] = "stonk"
+    for cpi in (False, True):
+        o = launch_origin("Rand0mMint", pairs, cfg, creation_tx(STONK_PC, via_cpi=cpi))
+        assert o == "stonk" and allowed_launch(o, cfg)
+    # letsbonk (also LaunchLab) is not on the user's list
+    o = launch_origin("Rand0mMint", pairs, cfg, creation_tx(BONK_PC))
+    assert o == "letsbonk" and not allowed_launch(o, cfg)
+    # Meteora DBC
+    dbc = {"transaction": {"message": {"accountKeys": [], "instructions": [
+        {"programId": cfg["launchpads"]["programs"]["meteora_dbc"], "accounts": []}]}}, "meta": {}}
+    assert launch_origin("x", pairs, cfg, dbc) == "meteora-dbc"
+
+
+def test_trade_paid_in_tokenized_stock():
+    """stonk.fun lets launches quote in tokenized stocks: value them in SOL."""
+    STOCK = "XStock1111111111111111111111111111111111111"
+    tx = {"slot": 5, "blockTime": 10,
+          "transaction": {"message": {"accountKeys": [{"pubkey": "W"}, {"pubkey": "ata"}, {"pubkey": "ata2"}]}},
+          "meta": {"err": None, "fee": 5000, "preBalances": [10**9, 0, 0], "postBalances": [10**9 - 5000, 0, 0],
+                   "preTokenBalances": [
+                       {"accountIndex": 2, "mint": STOCK, "owner": "W", "uiTokenAmount": {"uiAmountString": "3"}}],
+                   "postTokenBalances": [
+                       {"accountIndex": 1, "mint": MINT, "owner": "W", "uiTokenAmount": {"uiAmountString": "1000000"}},
+                       {"accountIndex": 2, "mint": STOCK, "owner": "W", "uiTokenAmount": {"uiAmountString": "1"}}]}}
+    assert signer_trade("s", tx, MINT) is None or not signer_trade("s", tx, MINT).is_buy  # invisible without quotes
+    t = signer_trade("s", tx, MINT, quotes={STOCK: 1.5})  # 1 stock = 1.5 SOL; paid 2 stock = 3 SOL
+    assert t.is_buy and t.sol_delta == pytest.approx(-3.0)
+
+
+def test_token2022_defaults_not_flagged(cfg):
+    info = {"program": "TokenzQdBNbLqP5VEhdkAS6EF4tbsScdEnpz8iEEyBF", "mint_authority": None, "freeze_authority": None,
+            "extensions": [{"extension": "transferFeeConfig", "state": {
+                "transferFeeConfigAuthority": None, "olderTransferFee": {"transferFeeBasisPoints": 0},
+                "newerTransferFee": {"transferFeeBasisPoints": 0}}},
+                {"extension": "metadataPointer", "state": {}}]}
+    assert onchain_checks(info, cfg) == []
+    info["extensions"][0]["state"]["newerTransferFee"]["transferFeeBasisPoints"] = 500
+    assert onchain_checks(info, cfg) == ["token2022_risky_extensions:transferFeeConfig"]

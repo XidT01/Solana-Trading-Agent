@@ -10,7 +10,8 @@ import sys
 from datetime import date, timedelta
 
 from .common import DATA, WSOL, load_config, log, read_json, setup_logging, utcnow, write_json
-from .safety import allowed_launch, launch_origin, market_checks, market_snapshot, onchain_checks, rugcheck_checks
+from .safety import (allowed_launch, launch_origin, launchlab_platform, market_checks, market_snapshot,
+                     onchain_checks, rugcheck_checks)
 from .sources import DexScreener, GeckoTerminal, RugCheck, SolanaRPC
 from .wallets import TokenAnalyzer
 
@@ -24,6 +25,23 @@ def in_campaign_window(cfg: dict, now) -> tuple[bool, str]:
     if not (start <= now.hour < end):
         return False, f"outside peak hours {start:02d}:00-{end:02d}:00 UTC"
     return True, "ok"
+
+
+STABLES = {"EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v", "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB"}
+
+
+def quote_values(pairs: list[dict], ds, sol_usd: float, cache: dict) -> dict[str, float]:
+    """Non-SOL quote assets of a token's pools -> value in SOL per unit."""
+    out = {}
+    for p in pairs:
+        q = (p.get("quoteToken") or {}).get("address")
+        if not q or q == WSOL:
+            continue
+        if q not in cache:
+            cache[q] = 1.0 if q in STABLES else ds.price_usd(q)
+        if cache[q]:
+            out[q] = cache[q] / sol_usd
+    return out
 
 
 def main(argv=None) -> int:
@@ -78,12 +96,7 @@ def main(argv=None) -> int:
         if not ps:
             continue  # not indexed yet — try again next run
         m = market_snapshot(ps)
-        origin = launch_origin(mint, ps)
         age_h = (now.timestamp() * 1000 - m["first_pair_ms"]) / 3.6e6 if m["first_pair_ms"] else 0
-        if not allowed_launch(origin, cfg):
-            stats["launchpad_rejected"] += 1
-            seen[mint] = today
-            continue
         if age_h > d["max_token_age_hours"]:
             stats["too_old"] += 1
             seen[mint] = today
@@ -91,7 +104,18 @@ def main(argv=None) -> int:
         if m["mcap_usd"] < w["target_mcap_usd"]:
             stats["below_target_mcap"] += 1  # not recorded: may still run past $50K later
             continue
-        rec = {"mint": mint, "origin": origin, "age_hours": round(age_h, 1), "checked_at": now.isoformat(), **m}
+        # Launch platform from the creation tx (stonk.fun has no vanity suffix, so this needs the chain).
+        creation_tx = None
+        if not mint.endswith("pump"):
+            sigs, _ = rpc.signatures_asc(mint, w["max_signature_pages"])
+            creation_tx = rpc.get_transaction(sigs[0]["signature"]) if sigs else None
+        origin = launch_origin(mint, ps, cfg, creation_tx)
+        if not allowed_launch(origin, cfg):
+            stats["launchpad_rejected"] += 1
+            seen[mint] = today
+            continue
+        rec = {"mint": mint, "origin": origin, "launchlab_platform": launchlab_platform(creation_tx, cfg),
+               "age_hours": round(age_h, 1), "checked_at": now.isoformat(), **m}
         reasons = market_checks(m, cfg)
         if reasons:
             stats["market_rejected"] += 1
@@ -100,6 +124,7 @@ def main(argv=None) -> int:
         shortlist.append(rec)
 
     shortlist.sort(key=lambda r: -r["volume_24h"])
+    price_cache: dict[str, float | None] = {}
     analyzer = TokenAnalyzer(rpc, cfg)
     for rec in shortlist:
         if budget <= 0:
@@ -116,7 +141,8 @@ def main(argv=None) -> int:
         budget -= 1
         price_sol = rec["price_sol"] or rec["price_usd"] / sol_usd
         try:
-            res = analyzer.analyze(mint, info["supply"], sol_usd, price_sol)
+            quotes = quote_values(pairs[mint], ds, sol_usd, price_cache)
+            res = analyzer.analyze(mint, info["supply"], sol_usd, price_sol, quotes)
         except Exception as e:  # one bad token must not kill the run
             log.exception("analysis failed for %s", mint)
             res = {"status": "skipped", "reason": f"error: {e}"}

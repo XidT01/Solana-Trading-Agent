@@ -51,8 +51,11 @@ def _owner_token_amount(balances: list[dict], owner: str, mint: str) -> tuple[fl
     return total, idx
 
 
-def signer_trade(sig: str, tx: dict | None, mint: str) -> Trade | None:
-    """The fee payer's token/SOL change in this transaction, or None if it didn't touch `mint`."""
+def signer_trade(sig: str, tx: dict | None, mint: str, quotes: dict[str, float] | None = None) -> Trade | None:
+    """The fee payer's token/SOL change in this transaction, or None if it didn't touch `mint`.
+
+    `quotes` maps other quote-asset mints (USDC, tokenized stocks on stonk.fun, ...) to their value in SOL
+    per unit, so trades paid in those assets get a SOL-equivalent `sol_delta`."""
     if not tx or not tx.get("meta") or tx["meta"].get("err") is not None:
         return None
     meta = tx["meta"]
@@ -68,8 +71,13 @@ def signer_trade(sig: str, tx: dict | None, mint: str) -> Trade | None:
     pre_w, _ = _owner_token_amount(meta.get("preTokenBalances"), signer, WSOL)
     post_w, _ = _owner_token_amount(meta.get("postTokenBalances"), signer, WSOL)
     lamports = meta["postBalances"][0] - meta["preBalances"][0] + meta.get("fee", 0)
+    other = 0.0
+    for q, sol_per_unit in (quotes or {}).items():
+        pre_q, _ = _owner_token_amount(meta.get("preTokenBalances"), signer, q)
+        post_q, _ = _owner_token_amount(meta.get("postTokenBalances"), signer, q)
+        other += (post_q - pre_q) * sol_per_unit
     return Trade(sig=sig, slot=tx.get("slot", 0), time=tx.get("blockTime") or 0, wallet=signer,
-                 token_delta=tok, sol_delta=lamports / 1e9 + (post_w - pre_w),
+                 token_delta=tok, sol_delta=lamports / 1e9 + (post_w - pre_w) + other,
                  token_account=keys[idx] if idx is not None and idx < len(keys) else None)
 
 
@@ -83,7 +91,8 @@ class TokenAnalyzer:
 
     def _mcap_at_index(self, sigs: list[dict], i: int) -> float | None:
         for j in range(i, min(i + 4, len(sigs))):
-            t = signer_trade(sigs[j]["signature"], self.rpc.get_transaction(sigs[j]["signature"]), self.mint)
+            t = signer_trade(sigs[j]["signature"], self.rpc.get_transaction(sigs[j]["signature"]), self.mint,
+                             self.quotes)
             if t and (t.is_buy or t.is_sell):
                 return self.mcap(t.price_sol())
         return None
@@ -116,8 +125,9 @@ class TokenAnalyzer:
                 lo = mid
         return sigs[hi].get("blockTime")
 
-    def analyze(self, mint: str, supply: float, sol_usd: float, price_sol_now: float) -> dict:
-        self.mint, self.supply, self.sol_usd = mint, supply, sol_usd
+    def analyze(self, mint: str, supply: float, sol_usd: float, price_sol_now: float,
+                quotes: dict[str, float] | None = None) -> dict:
+        self.mint, self.supply, self.sol_usd, self.quotes = mint, supply, sol_usd, quotes or {}
         sigs, complete = self.rpc.signatures_asc(mint, self.w["max_signature_pages"])
         if not complete or not sigs:
             return {"status": "skipped", "reason": "history_too_long_or_unavailable"}
@@ -127,7 +137,7 @@ class TokenAnalyzer:
         first_tx = txs.get(early_sigs[0])
         creator = _keys(first_tx)[0] if first_tx else None
         launch_slot = sigs[0].get("slot")
-        early = [t for s in early_sigs if (t := signer_trade(s, txs[s], mint))]
+        early = [t for s in early_sigs if (t := signer_trade(s, txs[s], mint, self.quotes))]
 
         t_target = self._find_target_time(sigs, early)
         if t_target is None:
@@ -162,7 +172,7 @@ class TokenAnalyzer:
             page = self.rpc.call("getSignaturesForAddress", [first.token_account, {"limit": 1000}]) or []
             sigs = [s["signature"] for s in reversed(page) if s.get("err") is None][:self.w["max_txs_per_wallet"]]
             for s, tx in self.rpc.get_transactions(sigs).items():
-                t = signer_trade(s, tx, self.mint)
+                t = signer_trade(s, tx, self.mint, self.quotes)
                 if t and t.wallet == first.wallet:
                     trades[s] = t
                 elif tx and t is None:

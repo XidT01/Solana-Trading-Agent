@@ -8,11 +8,25 @@ campaign:
   peak_hours_utc: [13, 23]      # [start, end) — scans only run inside this window
 
 # Filter 1 — only launches from these platforms.
-# Matched (substring, case-insensitive) against the launch origin we detect:
-# pump.fun mints (address ends in "pump") -> "pumpfun"; otherwise the dexId of the
-# token's oldest pair on DexScreener / GeckoTerminal (raydium, meteora, ...).
+# The launch origin is read from the token's creation transaction on-chain:
+#   pump.fun program            -> "pumpfun"
+#   Raydium LaunchLab program   -> name of its platform config below (stonk.fun, letsbonk, ...)
+#                                  or `unknown_launchlab_origin` (Raydium's own LaunchLab)
+#   Meteora DBC program         -> "meteora-dbc"
+#   otherwise                   -> dexId of the oldest pool (raydium, meteora, orca, ...)
+# A token passes if any `allowed` entry is a substring of its origin.
 launchpads:
-  allowed: [pumpfun, pump-fun, pumpswap, raydium, meteora, stonk]
+  allowed: [pumpfun, raydium, meteora, stonk]
+  programs:
+    pumpfun: 6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P
+    launchlab: LanMV9sAd7wArD4vJFi2qDdfnVhFxYSUg6eADduJ3uj
+    meteora_dbc: dbcij3LWUppWqq96dh6gJWwBifmcGfLSB5D4DuSMaqN
+  # stonk.fun runs on Raydium LaunchLab; each LaunchLab platform has its own platform-config account.
+  launchlab_platforms:
+    FfYek5vEz23cMkWsdJwG2oa6EphsvXSHrGpdALN4g6W1: letsbonk   # not in `allowed` -> filtered out
+    # <stonk.fun platform config>: stonk    <- find it with: python -m agent.identify <any stonk.fun token>
+  # Until stonk.fun's config is pinned above, its launches are still caught here (allowed via "raydium").
+  unknown_launchlab_origin: raydium-launchlab
 
 discovery:
   geckoterminal_new_pool_pages: 5   # 20 pools per page

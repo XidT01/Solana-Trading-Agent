@@ -31,6 +31,15 @@ class DexScreener:
                     out[base].append(p)
         return out
 
+    def price_usd(self, mint: str) -> float | None:
+        """USD price of any token (used for non-SOL quote assets, e.g. stonk.fun's tokenized stocks)."""
+        pairs = [p for p in self.http.get(f"{self.BASE}/tokens/v1/solana/{mint}") or []
+                 if (p.get("baseToken") or {}).get("address") == mint and p.get("priceUsd")]
+        if not pairs:
+            return None
+        best = max(pairs, key=lambda p: (p.get("liquidity") or {}).get("usd") or 0)
+        return float(best["priceUsd"])
+
     def sol_usd(self) -> float | None:
         pairs = self.http.get(f"{self.BASE}/tokens/v1/solana/{WSOL}") or []
         best = None
@@ -82,6 +91,7 @@ class SolanaRPC:
         self.url = url
         self.http = Http(rps=rps, timeout=40)
         self.tx_cache: dict[str, dict | None] = {}
+        self.sig_cache: dict[str, tuple[list[dict], bool]] = {}
         self.calls = 0
 
     def call(self, method: str, params: list):
@@ -108,11 +118,16 @@ class SolanaRPC:
             "decimals": decimals,
             "mint_authority": info.get("mintAuthority"),
             "freeze_authority": info.get("freezeAuthority"),
-            "extensions": [e.get("extension") for e in info.get("extensions", []) if isinstance(e, dict)],
+            "extensions": [e for e in info.get("extensions", []) if isinstance(e, dict)],
         }
 
     def signatures_asc(self, address: str, max_pages: int) -> tuple[list[dict], bool]:
         """All successful signatures for an address, oldest first. complete=False if history exceeded max_pages."""
+        if address not in self.sig_cache:
+            self.sig_cache[address] = self._signatures_asc(address, max_pages)
+        return self.sig_cache[address]
+
+    def _signatures_asc(self, address: str, max_pages: int) -> tuple[list[dict], bool]:
         sigs: list[dict] = []
         before = None
         for _ in range(max_pages):

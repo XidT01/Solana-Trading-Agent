@@ -91,6 +91,8 @@ def to_markdown(r: dict) -> str:
               f"- Passed launchpad/age/mcap and checked: {s['tokens_checked']}",
               f"- Rejected (liquidity / honeypot / scam): {s['rejected']}",
               f"- Fully analysed: {s['analyzed']} · qualifying wallets found: {s['wallets_found']}", ""]
+    if r.get("analyzed_by_launchpad"):
+        lines += ["Analysed by launchpad: " + ", ".join(f"{k} ({v})" for k, v in r["analyzed_by_launchpad"]), ""]
     if r["rejection_reasons"]:
         lines += ["Top rejection reasons: " + ", ".join(f"{k} ({v})" for k, v in r["rejection_reasons"][:8]), ""]
     lines += ["## New qualifying wallets today", ""]
@@ -132,6 +134,7 @@ def build(day: str, cfg: dict) -> dict:
         ({**h, "symbol": t["symbol"], "mint": t["mint"]} for t in analyzed for h in t.get("wallets", [])),
         key=lambda h: -h["multiple"])
     reasons = Counter(reason_key(r) for t in rejected for r in t["reasons"])
+    origins = Counter(t.get("origin", "unknown") for t in analyzed)
     report = {
         "date": day, "generated_at": utcnow().isoformat(),
         "filters": {k: cfg["wallets"][k] for k in ("max_entry_mcap_usd", "target_mcap_usd", "min_multiple")},
@@ -139,6 +142,7 @@ def build(day: str, cfg: dict) -> dict:
                   "tokens_checked": len(todays), "rejected": len(rejected), "analyzed": len(analyzed),
                   "skipped": sum(t["verdict"] == "skipped" for t in todays), "wallets_found": len(new_wallets)},
         "rejection_reasons": reasons.most_common(),
+        "analyzed_by_launchpad": origins.most_common(),
         "passed_tokens": [{k: t.get(k) for k in ("mint", "symbol", "origin", "mcap_usd", "liquidity_usd",
                                                   "early_buyers_checked", "url")} for t in analyzed],
         "new_wallets": new_wallets,
