@@ -1,7 +1,7 @@
 """Filters 1 & 2: launch platform, liquidity, honeypot and scam checks."""
 from __future__ import annotations
 
-TOKEN_2022 = "TokenzQdBNbLqP5VEhdkAS6EF4tbsScdEnpz8iEEyBF"
+TOKEN_2022 = "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
 
 
 # ---------------------------------------------------------------- launch platform

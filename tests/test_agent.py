@@ -142,7 +142,7 @@ def test_safety_filters(cfg):
     m = {"liquidity_usd": 5000, "mcap_usd": 80000, "buys_24h": 300, "sells_24h": 0}
     r = market_checks(m, cfg)
     assert any("low_liquidity" in x for x in r) and "no_sells_possible_honeypot" in r
-    info = {"program": "TokenzQdBNbLqP5VEhdkAS6EF4tbsScdEnpz8iEEyBF", "mint_authority": None,
+    info = {"program": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb", "mint_authority": None,
             "freeze_authority": "X", "extensions": [
                 {"extension": "transferHook", "state": {"programId": "Hook111", "authority": None}},
                 {"extension": "metadataPointer", "state": {}}]}
@@ -286,7 +286,7 @@ def test_trade_paid_in_tokenized_stock():
 
 
 def test_token2022_defaults_not_flagged(cfg):
-    info = {"program": "TokenzQdBNbLqP5VEhdkAS6EF4tbsScdEnpz8iEEyBF", "mint_authority": None, "freeze_authority": None,
+    info = {"program": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb", "mint_authority": None, "freeze_authority": None,
             "extensions": [{"extension": "transferFeeConfig", "state": {
                 "transferFeeConfigAuthority": None, "olderTransferFee": {"transferFeeBasisPoints": 0},
                 "newerTransferFee": {"transferFeeBasisPoints": 0}}},

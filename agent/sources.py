@@ -147,7 +147,7 @@ class SolanaRPC:
     def get_transaction(self, sig: str) -> dict | None:
         if sig not in self.tx_cache:
             self.tx_cache[sig] = self.call("getTransaction", [sig, {
-                "encoding": "jsonParsed", "maxSupportedTransactionVersion": 0, "commitment": "confirmed"}])
+                "encoding": "jsonParsed", "maxSupportedTransactionVersion": 1, "commitment": "confirmed"}])
         return self.tx_cache[sig]
 
     def get_transactions(self, sigs: list[str], workers: int = 8) -> dict[str, dict | None]:

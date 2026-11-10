@@ -24,8 +24,8 @@ launchpads:
   # stonk.fun runs on Raydium LaunchLab; each LaunchLab platform has its own platform-config account.
   launchlab_platforms:
     FfYek5vEz23cMkWsdJwG2oa6EphsvXSHrGpdALN4g6W1: letsbonk   # not in `allowed` -> filtered out
-    # <stonk.fun platform config>: stonk    <- find it with: python -m agent.identify <any stonk.fun token>
-  # Until stonk.fun's config is pinned above, its launches are still caught here (allowed via "raydium").
+    6BwHHDg3u1854jC8PDLXvR4spTcLNaoBxLJNGC4nTESt: stonk      # stonk.fun (verified on-chain: "StonkFun", stonkfun.xyz)
+  # Any other LaunchLab platform (e.g. Raydium's own) gets this label. Add more with: python -m agent.identify <mint>
   unknown_launchlab_origin: raydium-launchlab
 
 discovery:

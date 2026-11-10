@@ -55,19 +55,12 @@ The agent therefore identifies each launch by the LaunchLab platform-config acco
 Other LaunchLab platforms such as letsbonk.fun have their own config account, so they can be told apart and
 filtered out.
 
-stonk.fun's config address isn't published. **Until you pin it, stonk.fun launches are still caught**, but
-they're labelled `raydium-launchlab`. To label them `stonk`, run the lookup on any token you know launched
-on stonk.fun:
+stonk.fun's platform config is `6BwHHDg3u1854jC8PDLXvR4spTcLNaoBxLJNGC4nTESt` (already set in `config.yaml`).
+It was verified on-chain: the account belongs to LaunchLab and is named "StonkFun". To check how any other
+token is classified, run:
 
 ```bash
-SOLANA_RPC_URL=... python -m agent.identify <stonk.fun token address>
-```
-
-Then put the printed `launchlab platform config` into `config.yaml`:
-
-```yaml
-  launchlab_platforms:
-    <that address>: stonk
+SOLANA_RPC_URL=... python -m agent.identify <token address>
 ```
 
 stonk.fun launches can also be paired against tokenized stocks instead of SOL. The agent converts those
