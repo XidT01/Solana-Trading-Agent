@@ -2,7 +2,7 @@ name: Daily report
 
 on:
   schedule:
-    - cron: "20 23 * * *"   # 23:20 UTC, after the peak window closes
+    - cron: "50 23 * * *"   # 23:50 UTC, end of the UTC day
   workflow_dispatch:
     inputs:
       date:

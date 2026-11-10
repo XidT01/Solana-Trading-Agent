@@ -1,16 +1,19 @@
 # Solana Smart Wallet Agent
 
-Finds Solana meme-coin wallets with strong entries and PnL. It runs on a schedule during peak trading hours
-for 30 days, publishes a daily report, and serves a dashboard on your website.
+Finds Solana meme-coin wallets that got in early on coins that ran to $100K+ and made 5x or 10x.
+It runs around the clock for 30 days, publishes a daily report, and serves a dashboard on your website.
 
 ## What it does
 
-Every 30 minutes, 13:00–22:30 UTC (8am–5:30pm New York), from **2026-11-11 to 2026-12-10**:
+Every 30 minutes, day and night, from **2026-11-11 to 2026-12-10**:
 
-1. **Discover** fresh launches from GeckoTerminal's new pools and DexScreener's latest tokens.
-2. **Filter 1, launch platform.** Keeps only Pump.fun, Raydium, Meteora and stonk.fun launches. The platform
+1. **Discover** fresh launches from GeckoTerminal's new pools and DexScreener's latest tokens. Young coins go on
+   a watchlist and are re-checked every run for up to 48 hours. Coins still under $8K after 3 hours are dropped.
+2. **Peak $100K+.** Only coins whose market cap **peaked** at $100K or more move on. The peak comes from 15-minute
+   price candles, so a coin that hit $100K and then dumped still counts.
+3. **Launch platform.** Keeps only Pump.fun, Raydium, Meteora and stonk.fun launches. The platform
    is read from each token's creation transaction on-chain (see [stonk.fun](#stonkfun) below).
-3. **Filter 2, safety.** Rejects a token if any of these apply:
+4. **Safety.** Rejects a token if any of these apply:
    - Liquidity under $15K, or under 5% of market cap.
    - Mint authority still enabled.
    - Freeze authority enabled (the classic Solana honeypot).
@@ -18,14 +21,14 @@ Every 30 minutes, 13:00–22:30 UTC (8am–5:30pm New York), from **2026-11-11 t
    - Buys but zero sells.
    - RugCheck score above 50 or any "danger" risk.
    - Top 10 holders own more than 35%.
-4. **Filters 3 & 4, wallets.** For each token that passed and reached **$50K+** market cap, the agent reads the
-   token's first transactions straight from the Solana chain. It finds wallets that:
-   - Bought below **$10K** market cap (excluding the dev wallet and same-block snipers).
-   - Still held at least 50% of their bag when the coin crossed **$50K**.
-   - Made at least **5x**: realised sells plus current value of what they still hold, divided by SOL spent.
+5. **Wallets.** For each coin that passed, the agent reads its first transactions straight from the Solana chain.
+   It finds wallets that:
+   - Bought below **$10K** market cap on average (excluding the dev wallet and same-block snipers).
+   - Made at least **5x**: SOL from sells plus the current value of what they still hold, divided by SOL spent.
 
-   Wallets that don't reach 5x are not tracked.
-5. **Daily report at 23:20 UTC.** Covers the day's stats, the new qualifying wallets, a campaign-to-date
+   Wallets under 5x are not tracked. Wallets at **10x+** are tagged and called out separately.
+   To also require holding to $100K, set `min_hold_fraction_at_target` in `config.yaml`.
+6. **Daily report at 23:50 UTC.** Covers the day's stats, the new qualifying wallets, a campaign-to-date
    leaderboard (wallets that win on several different coins rank first), and a written summary by Claude.
    It can optionally be sent to Telegram.
 
@@ -43,7 +46,7 @@ Every number in `config.yaml` can be changed.
    | `ANTHROPIC_API_KEY` | optional | AI-written summary in the daily report |
    | `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID` | optional | daily report pushed to Telegram |
 4. **Turn on the website** under Settings → Pages → Source: **GitHub Actions**.
-5. **Test it once.** Go to Actions → "Scan (peak hours)" → Run workflow, and tick *force*.
+5. **Test it once.** Go to Actions → "Scan" → Run workflow, and tick *force*.
    Then run "Daily report" the same way.
 
 From then on it runs by itself and stops automatically after 2026-12-10.
@@ -105,7 +108,7 @@ python -m agent.report --force
 
 ## Limits to know
 
-- **Fresh tokens only.** Tokens older than 48 hours, or with more than 25,000 transactions, are skipped.
+- **Fresh tokens only.** Coins older than 48 hours, or with more than 200,000 transactions, are skipped.
   This keeps RPC usage down.
 - **Entry market cap is estimated from each trade's SOL in/out.** Fees and priority tips make entries look
   slightly *worse*, so the estimate is conservative. It uses the current SOL price.
@@ -114,6 +117,6 @@ python -m agent.report --force
 - **Snipers and bundles.** Wallets this early are often bots, snipers or insiders. The agent drops the dev
   wallet and same-block buys. The AI summary flags other suspicious patterns. Wallets that win on 2 or more
   coins are the meaningful signal.
-- **RPC budget.** Analysis is capped at 30 tokens a day, about 1K RPC credits each. Raise
-  `max_tokens_per_day` if your RPC plan allows.
+- **RPC budget.** Analysis is capped at 20 coins a day, spread across the day, at roughly 1–2K RPC credits each.
+  Raise `max_tokens_per_day` if your RPC plan allows.
 - **Not financial advice.** Past wallet performance doesn't predict future results.

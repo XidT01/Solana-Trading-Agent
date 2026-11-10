@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Smart Wallet Tracker</title>
-<meta name="description" content="Daily on-chain report of Solana wallets that bought meme coins under $10K market cap and held to $50K+.">
+<meta name="description" content="Daily on-chain report of Solana wallets that bought meme coins under $10K market cap that later peaked at $100K+, and made 5x or 10x.">
 <style>
   :root {
     --bg: #f6f7f9; --panel: #ffffff; --text: #14171c; --muted: #5d6673; --line: #e3e6eb;
@@ -36,6 +36,9 @@
   a { color: var(--accent); text-decoration: none; }
   a:hover { text-decoration: underline; }
   code { font: 13px ui-monospace, SFMono-Regular, Menlo, monospace; }
+  .tier { display: inline-block; border-radius: 6px; padding: 1px 7px; font-size: 12px; font-weight: 600;
+          background: var(--chip); color: var(--muted); }
+  .tier.ten { background: var(--accent); color: var(--panel); }
   .good { color: var(--good); } .bad { color: var(--bad); } .muted { color: var(--muted); }
   select { font: inherit; padding: 4px 8px; border-radius: 8px; border: 1px solid var(--line); background: var(--bg); color: var(--text); }
   .summary { line-height: 1.6; } .summary h3 { font-size: 15px; margin: 16px 0 4px; }
@@ -51,10 +54,10 @@
     <p id="status">Loading…</p>
     <ul class="rules">
       <li>Launches: Pump.fun · Raydium · Meteora · Stonk</li>
+      <li>Coins that peaked at $100K+ mcap</li>
       <li>Honeypots, low liquidity &amp; scams removed</li>
       <li>Entry &lt; $10K mcap</li>
-      <li>Held to $50K+ mcap</li>
-      <li>≥ 5x from entry</li>
+      <li>5x+ from entry · 10x+ highlighted</li>
     </ul>
   </header>
 
@@ -86,6 +89,7 @@ const num = (n, d = 2) => n == null ? "–" : Number(n).toLocaleString(undefined
 const walletLink = (a) => `<a href="https://solscan.io/account/${esc(a)}" target="_blank" rel="noopener"><code>${esc(short(a))}</code></a>
   <a class="muted" href="https://gmgn.ai/sol/address/${esc(a)}" target="_blank" rel="noopener" title="Open on GMGN">↗</a>`;
 const tokenLink = (t) => `<a href="https://dexscreener.com/solana/${esc(t.mint)}" target="_blank" rel="noopener">${esc(t.symbol || short(t.mint))}</a>`;
+const tier = (x) => `<span class="tier ${x >= 10 ? "ten" : ""}">${x >= 10 ? "10x+" : "5x+"}</span>`;
 const pnl = (v) => `<span class="${v >= 0 ? "good" : "bad"}">${v >= 0 ? "+" : ""}${num(v)}</span>`;
 
 async function getJSON(path, fallback) {
@@ -121,9 +125,10 @@ async function showReport(day) {
   $("report").innerHTML = `
     ${r.ai_summary ? `<div class="summary">${md(r.ai_summary)}</div>` : ""}
     <p class="muted">${s.runs} scans · ${s.tokens_checked} tokens checked · ${s.rejected} rejected as unsafe ·
-      ${s.analyzed} fully analysed · <strong>${s.wallets_found}</strong> qualifying wallets</p>
+      ${s.analyzed} fully analysed · <strong>${s.wallets_found}</strong> qualifying wallets
+      (<strong>${s.wallets_10x ?? 0}</strong> at 10x+)</p>
     <div class="scroll">${table([
-      {h: "Wallet", f: w => walletLink(w.wallet)}, {h: "Token", f: tokenLink},
+      {h: "Tier", f: w => tier(w.multiple)}, {h: "Wallet", f: w => walletLink(w.wallet)}, {h: "Token", f: tokenLink},
       {h: "Avg entry", num: 1, f: w => usd(w.avg_entry_mcap)}, {h: "Multiple", num: 1, f: w => num(w.multiple) + "x"},
       {h: "PnL (SOL)", num: 1, f: w => pnl(w.pnl_sol)}, {h: "Still holding", num: 1, f: w => num(w.still_holding_pct, 0) + "%"},
     ], r.new_wallets)}</div>`;
@@ -141,7 +146,7 @@ async function showReport(day) {
   const tok = Object.values(tokens);
   const lb = Object.entries(wallets).map(([wallet, w]) => {
     const m = w.hits.map(h => h.multiple).sort((a, b) => a - b);
-    return {wallet, hits: w.hits.length, tokens: w.hits.map(h => h.symbol),
+    return {wallet, hits: w.hits.length, tokens: w.hits.map(h => h.symbol), tenx: m.filter(x => x >= 10).length,
             median: m[Math.floor((m.length - 1) / 2)], best: m[m.length - 1],
             entry: w.hits.reduce((a, h) => a + h.avg_entry_mcap, 0) / w.hits.length,
             pnl: w.hits.reduce((a, h) => a + h.pnl_sol, 0)};
@@ -151,19 +156,22 @@ async function showReport(day) {
     ["Tokens analysed", tok.filter(t => t.verdict === "analyzed").length],
     ["Rejected as unsafe", tok.filter(t => t.verdict === "rejected").length],
     ["Wallets tracked", lb.length],
+    ["10x+ wallets", lb.filter(w => w.tenx > 0).length],
     ["Repeat winners (2+ coins)", lb.filter(w => w.hits > 1).length],
   ].map(([k, v]) => `<div class="tile"><div class="k">${k}</div><div class="v">${v.toLocaleString()}</div></div>`).join("");
 
   $("leaderboard").innerHTML = table([
     {h: "#", f: w => lb.indexOf(w) + 1}, {h: "Wallet", f: w => walletLink(w.wallet)},
-    {h: "Hits", num: 1, f: w => w.hits}, {h: "Coins", f: w => esc(w.tokens.slice(-4).join(", "))},
+    {h: "Hits", num: 1, f: w => w.hits}, {h: "10x+ hits", num: 1, f: w => w.tenx},
+    {h: "Coins", f: w => esc(w.tokens.slice(-4).join(", "))},
     {h: "Median x", num: 1, f: w => num(w.median) + "x"}, {h: "Best x", num: 1, f: w => num(w.best) + "x"},
     {h: "Avg entry", num: 1, f: w => usd(w.entry)}, {h: "PnL (SOL)", num: 1, f: w => pnl(w.pnl)},
   ], lb.slice(0, 50));
 
   $("tokens").innerHTML = table([
     {h: "Token", f: tokenLink}, {h: "Launch", f: t => esc(t.origin)},
-    {h: "Mcap", num: 1, f: t => usd(t.mcap_usd)}, {h: "Liquidity", num: 1, f: t => usd(t.liquidity_usd)},
+    {h: "Peak mcap", num: 1, f: t => usd(t.peak_mcap_usd ?? t.mcap_usd)}, {h: "Mcap now", num: 1, f: t => usd(t.mcap_usd)},
+    {h: "Liquidity", num: 1, f: t => usd(t.liquidity_usd)},
     {h: "Early buyers", num: 1, f: t => t.early_buyers_checked ?? "–"},
     {h: "Qualifying wallets", num: 1, f: t => (t.wallets || []).length},
     {h: "Checked", f: t => esc(new Date(t.checked_at).toLocaleString())},

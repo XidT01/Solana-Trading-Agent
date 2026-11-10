@@ -3,9 +3,9 @@
 campaign:
   start_date: "2026-11-11"      # first day of the 30-day run (UTC)
   end_date: "2026-12-10"        # last day (inclusive)
-  # Peak Solana meme-coin hours: US morning -> US afternoon, overlapping the
-  # EU afternoon. 13:00–22:59 UTC = 8am–5:59pm New York (EST).
-  peak_hours_utc: [13, 23]      # [start, end) — scans only run inside this window
+  # Coins can hit $100K at any hour, so scans run around the clock.
+  # To limit to peak hours instead, use e.g. [13, 23] (8am–6pm New York) and match the cron in scan.yml.
+  scan_hours_utc: [0, 24]       # [start, end)
 
 # Filter 1 — only launches from these platforms.
 # The launch origin is read from the token's creation transaction on-chain:
@@ -32,8 +32,16 @@ discovery:
   geckoterminal_new_pool_pages: 5   # 20 pools per page
   use_dexscreener_profiles: true
   max_token_age_hours: 48           # only analyse fresh launches (chain history stays cheap)
-  max_tokens_per_run: 6             # wallet analysis is the expensive part
-  max_tokens_per_day: 30            # ~1K RPC credits per token -> ~0.9M/month (Helius free tier ~1M)
+  # Watchlist: young coins are re-checked every run until they reach the target or fizzle out.
+  watch_drop_after_hours: 3         # ...stop watching a coin still under this mcap after 3h
+  watch_drop_below_mcap_usd: 8000
+  watchlist_max: 5000
+  # Peak market cap comes from 15-min price candles (GeckoTerminal), so coins that hit $100K and
+  # then dumped still count.
+  peak_check_min_mcap_usd: 20000    # only fetch candles for coins currently above this
+  max_peak_checks_per_run: 25
+  max_tokens_per_run: 4             # wallet analysis is the expensive part
+  max_tokens_per_day: 20            # ~1-2K RPC credits per coin -> ~1M/month (Helius free tier ~1M)
 
 # Filter 2 — ignore honeypots, low liquidity and scams.
 safety:
@@ -48,20 +56,21 @@ safety:
   max_top10_holder_pct: 35          # excluding AMM / bonding-curve accounts
   require_rugcheck: false           # if RugCheck is down, rely on on-chain checks only
 
-# Filters 3 & 4 — which wallets get tracked.
+# Filters 3 & 4 — which coins and wallets count.
 wallets:
-  max_entry_mcap_usd: 10000         # entered below $10K market cap
-  target_mcap_usd: 50000            # ...and still holding when the coin reached $50K
-  min_hold_fraction_at_target: 0.5  # still held >= 50% of their bag at the $50K moment
-  min_multiple: 5                   # must have achieved >= 5x on entry, otherwise not tracked
+  target_mcap_usd: 100000           # only coins whose market cap peaked at $100K or more
+  max_entry_mcap_usd: 10000         # wallets whose average entry was below $10K market cap
+  min_multiple: 5                   # ...and made at least 5x; anything less is not tracked
+  highlight_multiple: 10            # 10x+ wallets are tagged and called out separately
+  min_hold_fraction_at_target: 0    # 0 = no holding rule (0.5 would require holding half the bag to $100K)
   pnl_mode: total                   # total = realised + unrealised at current price; realised = sells only
   min_buy_sol: 0.1                  # ignore dust buys
   exclude_creator: true             # dev wallet
   exclude_same_slot_as_launch: true # block-0 snipers / bundles
-  max_early_txs: 300                # how many first transactions to scan for early buyers
+  max_early_txs: 2000               # first transactions read for early buyers (stops once past $15K mcap)
   max_candidates_per_token: 50
   max_txs_per_wallet: 60
-  max_signature_pages: 25           # x1000 signatures; tokens with more history are skipped
+  max_signature_pages: 200          # x1000 signatures (1 cheap call each); coins with more history are skipped
 
 rpc:
   requests_per_second: 8            # Helius free tier allows ~10

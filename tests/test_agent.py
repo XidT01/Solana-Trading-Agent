@@ -86,7 +86,9 @@ def launch():
 
 @pytest.fixture
 def cfg():
-    return load_config()
+    c = load_config()
+    c["wallets"]["target_mcap_usd"] = 50000  # the simulated launch below is drawn on a $50K scale
+    return c
 
 
 @pytest.mark.parametrize("max_early", [300, 5])  # 5 forces the sampled/binary search path
@@ -150,7 +152,8 @@ def test_safety_filters(cfg):
     assert "freeze_authority_enabled_honeypot" in r and "token2022_risky_extensions:transferHook" in r
     rep = {"score_normalised": 80, "risks": [{"name": "Mutable metadata", "level": "warn"}],
            "topHolders": [{"owner": "POOL", "pct": 60}] + [{"owner": f"h{i}", "pct": 4} for i in range(10)],
-           "knownAccounts": {"POOL": {"type": "AMM"}}}
+           "knownAccounts": {"POOL": {"type": "AMM"}},
+           "markets": [{"pubkey": "M1", "liquidityA": "VAULT", "liquidityAAccount": {"owner": "AUTH"}}]}
     r = rugcheck_checks(rep, "pair", cfg)
     assert r == ["rugcheck_score_80", "concentrated_holders_top10_40pct"]
     assert rugcheck_checks(None, None, cfg) == []
@@ -159,6 +162,8 @@ def test_safety_filters(cfg):
 def test_campaign_window(cfg):
     at = lambda s: datetime.fromisoformat(s).replace(tzinfo=timezone.utc)
     assert in_campaign_window(cfg, at("2026-11-15T15:00"))[0]
+    assert in_campaign_window(cfg, at("2026-11-15T05:00"))[0]  # around the clock
+    cfg["campaign"]["scan_hours_utc"] = [13, 23]
     assert not in_campaign_window(cfg, at("2026-11-15T05:00"))[0]
     assert not in_campaign_window(cfg, at("2026-12-11T15:00"))[0]
 
@@ -186,18 +191,25 @@ def test_daily_report(cfg, tmp_path, monkeypatch):
 
 def test_scan_end_to_end(cfg, tmp_path, monkeypatch):
     """Full scan cycle with fake market APIs + the simulated chain."""
+    import yaml
     from agent import scan as scan_mod
     chain = launch()
-    now_ms = datetime(2026, 11, 15, 15, tzinfo=timezone.utc).timestamp() * 1000
+    now_ms = datetime.now(timezone.utc).timestamp() * 1000
 
     def pair(mint, dex, liq, mcap, sells=50):
         return {"baseToken": {"address": mint, "symbol": mint[:4]}, "quoteToken": {"symbol": "SOL"},
-                "dexId": dex, "pairAddress": "P" + mint, "priceUsd": str(55000 / SUPPLY),
-                "priceNative": str(price_sol_at(55000)), "marketCap": mcap, "liquidity": {"usd": liq},
+                "dexId": dex, "pairAddress": "P" + mint, "priceUsd": str(mcap / SUPPLY),
+                "priceNative": str(price_sol_at(mcap)), "marketCap": mcap, "liquidity": {"usd": liq},
                 "pairCreatedAt": now_ms - 3.6e6, "txns": {"h24": {"buys": 500, "sells": sells}},
                 "volume": {"h24": 1e5}}
 
-    pairs = {MINT: [pair(MINT, "pumpswap", 30000, 55000)],
+    # MINT is at $40K now but peaked at $60K (above the $50K target) -> must still be analysed.
+    # DUD peaked at $30K -> not analysed, stays on the watchlist.
+    candles = {"P" + MINT: [[1200, 0, 30000 / SUPPLY, 0, 0, 0], [1500, 0, 60000 / SUPPLY, 0, 0, 0],
+                            [1800, 0, 45000 / SUPPLY, 0, 0, 0]],
+               "PDUDpump": [[1200, 0, 30000 / SUPPLY, 0, 0, 0]]}
+    pairs = {MINT: [pair(MINT, "pumpswap", 30000, 40000)],
+             "DUDpump": [pair("DUDpump", "pumpswap", 30000, 25000)],
              "RUG": [pair("RUG", "raydium", 30000, 90000)],
              "HONEY": [pair("HONEY", "meteora", 40000, 70000, sells=0)],
              "OTHER": [pair("OTHER", "orca", 50000, 90000)]}
@@ -209,6 +221,7 @@ def test_scan_end_to_end(cfg, tmp_path, monkeypatch):
 
     class FakeGT:
         def new_pools(self, pages): return []
+        def ohlcv(self, pool, hours): return candles.get(pool, [])
 
     class FakeRC:
         def report(self, mint): return {"score_normalised": 90 if mint == "RUG" else 5, "risks": []}
@@ -222,7 +235,9 @@ def test_scan_end_to_end(cfg, tmp_path, monkeypatch):
     monkeypatch.setattr(scan_mod, "RugCheck", FakeRC)
     monkeypatch.setattr(scan_mod, "SolanaRPC", lambda *a: rpc)
     monkeypatch.setenv("SOLANA_RPC_URL", "http://fake")
-    assert scan_mod.main(["--force"]) == 0
+    cfg_file = tmp_path / "cfg.yaml"
+    cfg_file.write_text(yaml.safe_dump(cfg))
+    assert scan_mod.main(["--force", "--config", str(cfg_file)]) == 0
 
     tokens = scan_mod.read_json(tmp_path / "tokens.json", {})
     assert tokens[MINT]["verdict"] == "analyzed" and tokens[MINT]["origin"] == "pumpfun"
@@ -231,6 +246,11 @@ def test_scan_end_to_end(cfg, tmp_path, monkeypatch):
     assert "OTHER" not in tokens  # orca launch filtered out
     wallets = scan_mod.read_json(tmp_path / "wallets.json", {})
     assert list(wallets) == ["ALPHA"]
+    hit = wallets["ALPHA"]["hits"][0]
+    assert hit["tier"] == "10x+" and hit["multiple"] == pytest.approx(10.0, rel=0.01)
+    assert tokens[MINT]["peak_mcap_usd"] == 60000 and tokens[MINT]["target_time"] == 1500
+    assert "DUDpump" not in tokens
+    assert "DUDpump" in scan_mod.read_json(tmp_path / "watchlist.json", {})
 
 
 LAUNCHLAB = "LanMV9sAd7wArD4vJFi2qDdfnVhFxYSUg6eADduJ3uj"

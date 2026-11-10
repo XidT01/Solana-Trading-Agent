@@ -58,13 +58,13 @@ class GeckoTerminal:
     BASE = "https://api.geckoterminal.com/api/v2"
 
     def __init__(self):
-        self.http = Http(rps=0.4)  # free tier ~30 calls/min
+        self.http = Http(rps=0.3)  # free tier is strict: ~30 calls/min, shared
 
     def new_pools(self, pages: int) -> list[tuple[str, str]]:
         """Returns (mint, dex_id) for the newest Solana pools."""
         out = []
         for page in range(1, pages + 1):
-            res = self.http.get(f"{self.BASE}/networks/solana/new_pools", params={"page": page})
+            res = self.http.get(f"{self.BASE}/networks/solana/new_pools", params={"page": page}, retries=7)
             for pool in (res or {}).get("data", []):
                 rel = pool.get("relationships", {})
                 base_id = ((rel.get("base_token") or {}).get("data") or {}).get("id", "")
@@ -72,6 +72,15 @@ class GeckoTerminal:
                 if base_id.startswith("solana_"):
                     out.append((base_id[len("solana_"):], dex_id))
         return out
+
+
+    def ohlcv(self, pool: str, hours: int = 50) -> list[list[float]]:
+        """15-minute USD candles of the base token in `pool`, oldest first: [ts, open, high, low, close, volume]."""
+        res = self.http.get(f"{self.BASE}/networks/solana/pools/{pool}/ohlcv/minute",
+                            params={"aggregate": 15, "limit": min(1000, hours * 4), "currency": "usd", "token": "base"},
+                            retries=7)
+        rows = (((res or {}).get("data") or {}).get("attributes") or {}).get("ohlcv_list") or []
+        return sorted(rows)
 
 
 class RugCheck:

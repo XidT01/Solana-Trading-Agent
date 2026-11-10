@@ -27,7 +27,7 @@ jobs:
           mkdir -p public
           cp -r site/. public/
           cp -r data public/data
-          rm -f public/data/seen.json
+          rm -f public/data/seen.json public/data/watchlist.json
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

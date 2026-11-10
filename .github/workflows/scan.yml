@@ -1,14 +1,14 @@
-name: Scan (peak hours)
+name: Scan
 
 on:
   schedule:
-    # Every 30 min, 13:00–22:30 UTC (peak Solana meme-coin hours). The agent itself
-    # also checks the campaign dates in config.yaml and exits outside them.
-    - cron: "*/30 13-22 * * *"
+    # Every 30 minutes, around the clock. The agent checks the campaign dates in
+    # config.yaml and exits outside them.
+    - cron: "*/30 * * * *"
   workflow_dispatch:
     inputs:
       force:
-        description: "Run even outside peak hours / campaign dates"
+        description: "Run even outside the campaign dates"
         type: boolean
         default: false
 

@@ -1,4 +1,4 @@
-"""Filters 3 & 4: find wallets that bought under $10K mcap, held to $50K, and made >= 5x.
+"""Find wallets that bought under $10K mcap on coins that peaked at $100K+, and made >= 5x (10x+ tagged).
 
 Everything is derived from raw Solana transactions (balance deltas), so it works the
 same for pump.fun bonding curves, PumpSwap, Raydium, Meteora or any other venue.
@@ -102,7 +102,7 @@ class TokenAnalyzer:
         for t in early:
             if (t.is_buy or t.is_sell) and (self.mcap(t.price_sol()) or 0) >= target:
                 return t.time
-        start = min(self.w["max_early_txs"], len(sigs))
+        start = min(self.early_count, len(sigs))
         if start >= len(sigs):
             return None
         # Coarse sampling over the rest of history, then binary search inside the bracket.
@@ -126,20 +126,38 @@ class TokenAnalyzer:
         return sigs[hi].get("blockTime")
 
     def analyze(self, mint: str, supply: float, sol_usd: float, price_sol_now: float,
-                quotes: dict[str, float] | None = None) -> dict:
+                quotes: dict[str, float] | None = None, target_time_hint: int | None = None) -> dict:
+        """`target_time_hint`: when the coin first reached the target market cap, from price candles.
+        Without it, the crossing is searched for on-chain."""
         self.mint, self.supply, self.sol_usd, self.quotes = mint, supply, sol_usd, quotes or {}
         sigs, complete = self.rpc.signatures_asc(mint, self.w["max_signature_pages"])
         if not complete or not sigs:
             return {"status": "skipped", "reason": "history_too_long_or_unavailable"}
 
-        early_sigs = [s["signature"] for s in sigs[:self.w["max_early_txs"]]]
-        txs = self.rpc.get_transactions(early_sigs)
+        # Read the first transactions in batches until the coin is clearly past the entry market cap.
+        early_sigs, txs, early = [], {}, []
+        stop_mcap = self.w["max_entry_mcap_usd"] * 1.5
+        limit = min(len(sigs), self.w["max_early_txs"])
+        for i in range(0, limit, 100):
+            chunk = [s["signature"] for s in sigs[i:min(i + 100, limit)]]
+            got = self.rpc.get_transactions(chunk)
+            txs.update(got)
+            early_sigs += chunk
+            early += [t for s in chunk if (t := signer_trade(s, got[s], mint, self.quotes))]
+            recent = [m for t in early[-10:] if (t.is_buy or t.is_sell) and (m := self.mcap(t.price_sol()))]
+            if len(recent) >= 5 and min(recent) > stop_mcap:
+                break
+        self.early_count = len(early_sigs)
         first_tx = txs.get(early_sigs[0])
         creator = _keys(first_tx)[0] if first_tx else None
         launch_slot = sigs[0].get("slot")
-        early = [t for s in early_sigs if (t := signer_trade(s, txs[s], mint, self.quotes))]
 
-        t_target = self._find_target_time(sigs, early)
+        if target_time_hint:
+            early_cross = [t.time for t in early if (t.is_buy or t.is_sell)
+                           and (self.mcap(t.price_sol()) or 0) >= self.w["target_mcap_usd"]]
+            t_target = min([target_time_hint] + early_cross)
+        else:
+            t_target = self._find_target_time(sigs, early)
         if t_target is None:
             return {"status": "skipped", "reason": "target_mcap_time_not_found", "creator": creator}
 
@@ -218,6 +236,7 @@ class TokenAnalyzer:
             "sol_in": round(sol_in, 4), "sol_out": round(sol_out, 4),
             "unrealised_sol": round(unrealised, 4), "pnl_sol": round(sol_out + unrealised - sol_in, 4),
             "multiple": round(multiple, 2), "realised_multiple": round(sol_out / sol_in, 2),
+            "tier": "10x+" if multiple >= self.w["highlight_multiple"] else f"{self.w['min_multiple']:g}x+",
             "still_holding_pct": round(100 * remaining / max(peak, remaining, DUST), 1),
             "transferred_out": transferred_out > DUST, "n_trades": len(trades),
         }

@@ -151,8 +151,13 @@ def rugcheck_checks(report: dict | None, pair_address: str | None, cfg: dict) ->
             if (r.get("level") or "").lower() == "danger":
                 reasons.append("rugcheck:" + (r.get("name") or "danger"))
     known = report.get("knownAccounts") or {}
-    pools = {pair_address} | {m.get("pubkey") for m in report.get("markets") or []}
-    pools |= {(m.get("liquidityA") or "") for m in report.get("markets") or []}
+    pools = {pair_address}
+    for mk in report.get("markets") or []:  # pool, its vaults, and the vaults' owner (the pool authority)
+        pools |= {mk.get("pubkey"), mk.get("liquidityA"), mk.get("liquidityB")}
+        for side in ("liquidityAAccount", "liquidityBAccount"):
+            acct = mk.get(side)
+            pools.add(acct.get("owner") if isinstance(acct, dict) else acct)
+    pools.discard(None)
     holders = [h for h in report.get("topHolders") or []
                if h.get("owner") not in pools and h.get("address") not in pools
                and (known.get(h.get("owner")) or {}).get("type") != "AMM"]

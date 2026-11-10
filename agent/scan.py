@@ -1,13 +1,14 @@
-"""One scan cycle: discover fresh launches -> filter -> analyse early wallets -> store.
+"""One scan cycle: discover launches -> keep coins that peaked at $100K+ -> filter -> analyse early wallets.
 
 Run:  SOLANA_RPC_URL=... python -m agent.scan [--force]
 """
 from __future__ import annotations
 
 import argparse
+import math
 import os
 import sys
-from datetime import date, timedelta
+from datetime import date, datetime, timedelta
 
 from .common import DATA, WSOL, load_config, log, read_json, setup_logging, utcnow, write_json
 from .safety import (allowed_launch, launch_origin, launchlab_platform, market_checks, market_snapshot,
@@ -15,19 +16,18 @@ from .safety import (allowed_launch, launch_origin, launchlab_platform, market_c
 from .sources import DexScreener, GeckoTerminal, RugCheck, SolanaRPC
 from .wallets import TokenAnalyzer
 
+STABLES = {"EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v", "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB"}
+
 
 def in_campaign_window(cfg: dict, now) -> tuple[bool, str]:
     c = cfg["campaign"]
     today = now.date()
     if today < date.fromisoformat(c["start_date"]) or today > date.fromisoformat(c["end_date"]):
         return False, f"outside campaign dates {c['start_date']}..{c['end_date']}"
-    start, end = c["peak_hours_utc"]
+    start, end = c["scan_hours_utc"]
     if not (start <= now.hour < end):
-        return False, f"outside peak hours {start:02d}:00-{end:02d}:00 UTC"
+        return False, f"outside scan hours {start:02d}:00-{end:02d}:00 UTC"
     return True, "ok"
-
-
-STABLES = {"EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v", "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB"}
 
 
 def quote_values(pairs: list[dict], ds, sol_usd: float, cache: dict) -> dict[str, float]:
@@ -44,9 +44,18 @@ def quote_values(pairs: list[dict], ds, sol_usd: float, cache: dict) -> dict[str
     return out
 
 
+def peak_from_candles(candles: list[list[float]], supply: float, target: float) -> tuple[float | None, int | None]:
+    """(peak market cap, unix time of the first candle whose high reached `target`)."""
+    if not candles or not supply:
+        return None, None
+    peak = max(c[2] for c in candles) * supply
+    cross = next((int(c[0]) for c in candles if c[2] * supply >= target), None)
+    return peak, cross
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--force", action="store_true", help="ignore campaign dates / peak hours")
+    ap.add_argument("--force", action="store_true", help="ignore campaign dates / scan hours")
     ap.add_argument("--config")
     args = ap.parse_args(argv)
     setup_logging()
@@ -62,48 +71,80 @@ def main(argv=None) -> int:
         log.error("SOLANA_RPC_URL is not set (e.g. https://mainnet.helius-rpc.com/?api-key=...)")
         return 2
 
-    d, s, w = cfg["discovery"], cfg["safety"], cfg["wallets"]
+    d, w = cfg["discovery"], cfg["wallets"]
+    target = w["target_mcap_usd"]
     tokens = read_json(DATA / "tokens.json", {})
     wallets = read_json(DATA / "wallets.json", {})
     seen = read_json(DATA / "seen.json", {})
+    watch = read_json(DATA / "watchlist.json", {})
     cutoff = (now.date() - timedelta(days=3)).isoformat()
     seen = {k: v for k, v in seen.items() if v >= cutoff}
     today = now.date().isoformat()
     done_today = sum(1 for r in tokens.values()
                      if r.get("verdict") == "analyzed" and r.get("checked_at", "").startswith(today))
-    budget = max(0, min(d["max_tokens_per_run"], d["max_tokens_per_day"] - done_today))
+    # Spread the daily analysis budget over the day instead of spending it all in the first hours.
+    paced = math.ceil(d["max_tokens_per_day"] * (now.hour + 1) / 24)
+    budget = max(0, min(d["max_tokens_per_run"], paced - done_today))
 
     ds, gt, rc = DexScreener(), GeckoTerminal(), RugCheck()
     rpc = SolanaRPC(rpc_url, cfg["rpc"]["requests_per_second"])
 
-    # ---- discovery
+    # ---- discovery: new launches + the watchlist of young coins that may still pump to the target
     found = [m for m, _ in gt.new_pools(d["geckoterminal_new_pool_pages"])]
     if d["use_dexscreener_profiles"]:
         found += ds.latest_solana_mints()
-    fresh = list(dict.fromkeys(m for m in found if m != WSOL and m not in tokens and m not in seen))
-    log.info("Discovered %d mints, %d new", len(set(found)), len(fresh))
+    for m in found:
+        if m != WSOL and m not in tokens and m not in seen:
+            watch.setdefault(m, now.isoformat())
+    candidates = [m for m in watch if m not in tokens and m not in seen]
+    log.info("Discovered %d mints; checking %d (watchlist)", len(set(found)), len(candidates))
     sol_usd = ds.sol_usd()
     if not sol_usd:
         log.error("Could not fetch SOL/USD price")
         return 1
-    pairs = ds.pairs_for(fresh)
+    pairs = ds.pairs_for(candidates)
 
-    stats = {"discovered": len(fresh), "launchpad_rejected": 0, "too_old": 0, "below_target_mcap": 0,
-             "market_rejected": 0, "safety_rejected": 0, "analyzed": 0, "skipped": 0, "wallets_found": 0}
-    shortlist = []
-    for mint in fresh:
+    stats = {"discovered": len(set(found)), "watchlist": len(candidates), "launchpad_rejected": 0, "too_old": 0,
+             "below_target_peak": 0, "market_rejected": 0, "safety_rejected": 0, "analyzed": 0, "skipped": 0,
+             "wallets_found": 0}
+    snaps = {}
+    for mint in candidates:
         ps = pairs.get(mint) or []
+        watched_h = (now - datetime.fromisoformat(watch[mint])).total_seconds() / 3600
         if not ps:
-            continue  # not indexed yet — try again next run
+            if watched_h > d["max_token_age_hours"]:
+                watch.pop(mint, None)  # never got indexed
+            continue
         m = market_snapshot(ps)
-        age_h = (now.timestamp() * 1000 - m["first_pair_ms"]) / 3.6e6 if m["first_pair_ms"] else 0
+        age_h = (now.timestamp() * 1000 - m["first_pair_ms"]) / 3.6e6 if m["first_pair_ms"] else watched_h
         if age_h > d["max_token_age_hours"]:
             stats["too_old"] += 1
             seen[mint] = today
+            watch.pop(mint, None)
             continue
-        if m["mcap_usd"] < w["target_mcap_usd"]:
-            stats["below_target_mcap"] += 1  # not recorded: may still run past $50K later
+        if age_h > d["watch_drop_after_hours"] and m["mcap_usd"] < d["watch_drop_below_mcap_usd"]:
+            seen[mint] = today  # never took off: stop watching
+            watch.pop(mint, None)
             continue
+        snaps[mint] = (m, age_h)
+
+    # ---- peak market cap: coins that reached the target, even if they have dropped since
+    peak_checks = 0
+    shortlist = []
+    for mint, (m, age_h) in sorted(snaps.items(), key=lambda kv: -kv[1][0]["mcap_usd"]):
+        if m["mcap_usd"] < d["peak_check_min_mcap_usd"] and m["mcap_usd"] < target:
+            stats["below_target_peak"] += 1
+            continue
+        supply_est = m["mcap_usd"] / m["price_usd"] if m["price_usd"] else 0
+        peak, cross_t = None, None
+        if peak_checks < d["max_peak_checks_per_run"] and m["pair"]:
+            peak_checks += 1
+            peak, cross_t = peak_from_candles(gt.ohlcv(m["pair"], d["max_token_age_hours"] + 2), supply_est, target)
+        peak = max(peak or 0, m["mcap_usd"])
+        if peak < target:
+            stats["below_target_peak"] += 1  # stays on the watchlist
+            continue
+        ps = pairs[mint]
         # Launch platform from the creation tx (stonk.fun has no vanity suffix, so this needs the chain).
         creation_tx = None
         if not mint.endswith("pump"):
@@ -113,13 +154,16 @@ def main(argv=None) -> int:
         if not allowed_launch(origin, cfg):
             stats["launchpad_rejected"] += 1
             seen[mint] = today
+            watch.pop(mint, None)
             continue
         rec = {"mint": mint, "origin": origin, "launchlab_platform": launchlab_platform(creation_tx, cfg),
-               "age_hours": round(age_h, 1), "checked_at": now.isoformat(), **m}
+               "age_hours": round(age_h, 1), "checked_at": now.isoformat(), "peak_mcap_usd": round(peak),
+               "target_time_hint": cross_t, **m}
         reasons = market_checks(m, cfg)
         if reasons:
             stats["market_rejected"] += 1
             tokens[mint] = {**rec, "verdict": "rejected", "stage": "market", "reasons": reasons}
+            watch.pop(mint, None)
             continue
         shortlist.append(rec)
 
@@ -128,8 +172,9 @@ def main(argv=None) -> int:
     analyzer = TokenAnalyzer(rpc, cfg)
     for rec in shortlist:
         if budget <= 0:
-            break  # unrecorded -> picked up next run
+            break  # stays on the watchlist -> picked up next run
         mint = rec["mint"]
+        watch.pop(mint, None)
         info = rpc.mint_info(mint)
         reasons = onchain_checks(info, cfg)
         if not reasons:
@@ -142,7 +187,7 @@ def main(argv=None) -> int:
         price_sol = rec["price_sol"] or rec["price_usd"] / sol_usd
         try:
             quotes = quote_values(pairs[mint], ds, sol_usd, price_cache)
-            res = analyzer.analyze(mint, info["supply"], sol_usd, price_sol, quotes)
+            res = analyzer.analyze(mint, info["supply"], sol_usd, price_sol, quotes, rec["target_time_hint"])
         except Exception as e:  # one bad token must not kill the run
             log.exception("analysis failed for %s", mint)
             res = {"status": "skipped", "reason": f"error: {e}"}
@@ -159,15 +204,17 @@ def main(argv=None) -> int:
             entry["hits"] = [h for h in entry["hits"] if h["mint"] != mint] + [
                 {**hit, "mint": mint, "symbol": rec["symbol"], "origin": rec["origin"], "found_at": now.isoformat()}]
 
+    if len(watch) > d["watchlist_max"]:
+        watch = dict(sorted(watch.items(), key=lambda kv: kv[1])[-d["watchlist_max"]:])
     write_json(DATA / "tokens.json", tokens)
     write_json(DATA / "wallets.json", wallets)
     write_json(DATA / "seen.json", seen)
+    write_json(DATA / "watchlist.json", watch)
     runs = read_json(DATA / "runs.json", [])
     runs.append({"at": now.isoformat(), "rpc_calls": rpc.calls, "sol_usd": sol_usd, **stats})
     write_json(DATA / "runs.json", runs[-3000:])
     log.info("Run done: %s (rpc calls: %d)", stats, rpc.calls)
     return 0
-
 
 
 if __name__ == "__main__":
