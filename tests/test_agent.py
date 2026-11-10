@@ -160,7 +160,7 @@ def test_campaign_window(cfg):
     at = lambda s: datetime.fromisoformat(s).replace(tzinfo=timezone.utc)
     assert in_campaign_window(cfg, at("2026-11-15T15:00"))[0]
     assert not in_campaign_window(cfg, at("2026-11-15T05:00"))[0]
-    assert not in_campaign_window(cfg, at("2026-12-10T15:00"))[0]
+    assert not in_campaign_window(cfg, at("2026-12-11T15:00"))[0]
 
 
 def test_daily_report(cfg, tmp_path, monkeypatch):
@@ -176,7 +176,7 @@ def test_daily_report(cfg, tmp_path, monkeypatch):
                "reasons": ["low_liquidity ($3,000)", "rugcheck_score_77"]}})
     write_json(tmp_path / "wallets.json", {"ALPHA": {"hits": [{**hit, "mint": "M1", "symbol": "AAA"}]}})
     write_json(tmp_path / "runs.json", [{"at": "2026-11-10T15:00:00", "discovered": 40}])
-    assert report_mod.main(["--date", "2026-11-10"]) == 0
+    assert report_mod.main(["--date", "2026-11-10", "--force"]) == 0
     md = (tmp_path / "reports" / "2026-11-10.md").read_text()
     assert "`ALPHA` | AAA | $6,000 | 10.0x" in md
     rep = report_mod.read_json(tmp_path / "reports" / "2026-11-10.json", {})

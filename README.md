@@ -5,7 +5,7 @@ for 30 days, publishes a daily report, and serves a dashboard on your website.
 
 ## What it does
 
-Every 30 minutes, 13:00–22:30 UTC (8am–5:30pm New York), from **2026-11-10 to 2026-12-09**:
+Every 30 minutes, 13:00–22:30 UTC (8am–5:30pm New York), from **2026-11-11 to 2026-12-10**:
 
 1. **Discover** fresh launches from GeckoTerminal's new pools and DexScreener's latest tokens.
 2. **Filter 1, launch platform.** Keeps only Pump.fun, Raydium, Meteora and stonk.fun launches. The platform
@@ -46,7 +46,7 @@ Every number in `config.yaml` can be changed.
 5. **Test it once.** Go to Actions → "Scan (peak hours)" → Run workflow, and tick *force*.
    Then run "Daily report" the same way.
 
-From then on it runs by itself and stops automatically after 2026-12-09.
+From then on it runs by itself and stops automatically after 2026-12-10.
 
 ## stonk.fun
 

@@ -1,8 +1,8 @@
 # Solana meme-coin "smart wallet" agent — all filters live here.
 
 campaign:
-  start_date: "2026-11-10"      # first day of the 30-day run (UTC)
-  end_date: "2026-12-09"        # last day (inclusive)
+  start_date: "2026-11-11"      # first day of the 30-day run (UTC)
+  end_date: "2026-12-10"        # last day (inclusive)
   # Peak Solana meme-coin hours: US morning -> US afternoon, overlapping the
   # EU afternoon. 13:00–22:59 UTC = 8am–5:59pm New York (EST).
   peak_hours_utc: [13, 23]      # [start, end) — scans only run inside this window
