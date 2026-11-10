@@ -110,6 +110,7 @@ def test_wallet_analysis(cfg, max_early):
     assert a["hold_fraction_at_target"] == 1.0
     near = {w["wallet"]: w for w in res["near_misses"]}
     assert near["HALF"]["multiple"] == pytest.approx(4.44, rel=0.01)
+    assert near["HALF"]["tier"] is None and qualified["ALPHA"]["tier"] == "10x+"
     assert near["PAPER"]["hold_fraction_at_target"] == pytest.approx(0, abs=0.01)
 
 

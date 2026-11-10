@@ -236,7 +236,8 @@ class TokenAnalyzer:
             "sol_in": round(sol_in, 4), "sol_out": round(sol_out, 4),
             "unrealised_sol": round(unrealised, 4), "pnl_sol": round(sol_out + unrealised - sol_in, 4),
             "multiple": round(multiple, 2), "realised_multiple": round(sol_out / sol_in, 2),
-            "tier": "10x+" if multiple >= self.w["highlight_multiple"] else f"{self.w['min_multiple']:g}x+",
+            "tier": ("10x+" if multiple >= self.w["highlight_multiple"]
+                     else f"{self.w['min_multiple']:g}x+" if multiple >= self.w["min_multiple"] else None),
             "still_holding_pct": round(100 * remaining / max(peak, remaining, DUST), 1),
             "transferred_out": transferred_out > DUST, "n_trades": len(trades),
         }
