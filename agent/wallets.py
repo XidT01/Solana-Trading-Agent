@@ -156,6 +156,8 @@ class TokenAnalyzer:
             early_cross = [t.time for t in early if (t.is_buy or t.is_sell)
                            and (self.mcap(t.price_sol()) or 0) >= self.w["target_mcap_usd"]]
             t_target = min([target_time_hint] + early_cross)
+            if sigs[0].get("blockTime") and t_target < sigs[0]["blockTime"]:
+                return {"status": "skipped", "reason": "target_time_before_launch", "creator": creator}
         else:
             t_target = self._find_target_time(sigs, early)
         if t_target is None:

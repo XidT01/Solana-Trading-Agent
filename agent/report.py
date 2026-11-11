@@ -12,6 +12,7 @@ import re
 import statistics
 import sys
 from collections import Counter
+from datetime import timedelta
 
 import requests
 
@@ -166,7 +167,8 @@ def main(argv=None) -> int:
     args = ap.parse_args(argv)
     setup_logging()
     cfg = load_config(args.config)
-    day = args.date or utcnow().date().isoformat()
+    # GitHub can start the 23:50 run hours late; before 06:00 UTC it still means yesterday's report.
+    day = args.date or (utcnow() - timedelta(hours=6)).date().isoformat()
     c = cfg["campaign"]
     if not args.force and not (c["start_date"] <= day <= c["end_date"]):
         log.info("No report: %s is outside the campaign %s..%s", day, c["start_date"], c["end_date"])

@@ -249,7 +249,8 @@ def test_scan_end_to_end(cfg, tmp_path, monkeypatch):
     assert list(wallets) == ["ALPHA"]
     hit = wallets["ALPHA"]["hits"][0]
     assert hit["tier"] == "10x+" and hit["multiple"] == pytest.approx(10.0, rel=0.01)
-    assert tokens[MINT]["peak_mcap_usd"] == 60000 and tokens[MINT]["target_time"] == 1500
+    # candle starting at 1500 reached $60K -> crossing by its end (2400); the chain shows it at 1600
+    assert tokens[MINT]["peak_mcap_usd"] == 60000 and tokens[MINT]["target_time"] == 1600
     assert "DUDpump" not in tokens
     assert "DUDpump" in scan_mod.read_json(tmp_path / "watchlist.json", {})
 
@@ -315,3 +316,12 @@ def test_token2022_defaults_not_flagged(cfg):
     assert onchain_checks(info, cfg) == []
     info["extensions"][0]["state"]["newerTransferFee"]["transferFeeBasisPoints"] = 500
     assert onchain_checks(info, cfg) == ["token2022_risky_extensions:transferFeeConfig"]
+
+
+def test_candle_cross_uses_candle_end():
+    """Regression: a coin launched mid-candle must not get a target time before its launch."""
+    from agent.scan import peak_from_candles
+    launch = 1794337390  # 16:23:10, inside the candle that starts 16:15:00
+    candles = [[1794336300, 0, 2e-4, 0, 0, 0], [1794337200, 0, 3e-4, 0, 0, 0]]
+    peak, cross = peak_from_candles(candles, 1e9, 250000)
+    assert peak == pytest.approx(300000) and cross == 1794337200 + 900 and cross > launch
