@@ -1,4 +1,31 @@
 {
+ "2Tp9scbrD3mrzFCQexmw56QY19bZ7VtRydAqkXUB8D65": {
+  "hits": [
+   {
+    "avg_entry_mcap": 4946,
+    "first_buy_sig": "jfEktgoo7mLKEkA4agEcRmsdYRm6jESECNr9h8DRSoZd1pr9zZfNSzWocQhsKfK6UosDt5Linqj6pmS84aVr3Lc",
+    "first_buy_time": 1793708422,
+    "first_entry_mcap": 4946,
+    "found_at": "2026-11-11T08:48:25.656382+00:00",
+    "hold_fraction_at_target": 1.0,
+    "mint": "GHtnAtTCPFz8MRTMQiEyuEob283EUgqd1d1Fysnhpump",
+    "multiple": 36.12,
+    "n_trades": 60,
+    "origin": "pumpfun",
+    "pnl_sol": 49.8114,
+    "qualified": true,
+    "realised_multiple": 0.8,
+    "sol_in": 1.4185,
+    "sol_out": 1.1291,
+    "still_holding_pct": 51.6,
+    "symbol": "VEYL",
+    "tier": "10x+",
+    "transferred_out": false,
+    "unrealised_sol": 50.1008,
+    "wallet": "2Tp9scbrD3mrzFCQexmw56QY19bZ7VtRydAqkXUB8D65"
+   }
+  ]
+ },
  "9JQVoSiJjUuNoVrJnFKt1NF7UBmHgvTuTtWywARTRLcP": {
   "hits": [
    {
