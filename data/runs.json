@@ -1,0 +1,17 @@
+[
+ {
+  "analyzed": 2,
+  "at": "2026-11-11T01:41:53.976875+00:00",
+  "below_target_peak": 110,
+  "discovered": 141,
+  "launchpad_rejected": 0,
+  "market_rejected": 1,
+  "rpc_calls": 424,
+  "safety_rejected": 0,
+  "skipped": 0,
+  "sol_usd": 83.83,
+  "too_old": 14,
+  "wallets_found": 0,
+  "watchlist": 141
+ }
+]
