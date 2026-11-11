@@ -1,10 +1,12 @@
 name: Scan
 
+# GitHub's scheduler often runs cron jobs late or skips them, so instead of relying on it every
+# 30 minutes, each run scans every 30 minutes for ~5 hours and then starts the next run itself.
+# The cron below is only a backup that restarts the chain if it ever breaks.
+
 on:
   schedule:
-    # Every 30 minutes, around the clock. The agent checks the campaign dates in
-    # config.yaml and exits outside them.
-    - cron: "*/30 * * * *"
+    - cron: "17 */3 * * *"
   workflow_dispatch:
     inputs:
       force:
@@ -14,17 +16,20 @@ on:
 
 permissions:
   contents: write
-  pages: write
-  id-token: write
+  actions: write   # to start the website deploy and the next scan run
 
 concurrency:
-  group: agent-data
+  group: agent-scan
   cancel-in-progress: false
 
 jobs:
   scan:
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 350
+    env:
+      SOLANA_RPC_URL: ${{ secrets.SOLANA_RPC_URL }}
+      GH_TOKEN: ${{ github.token }}
+      FORCE: ${{ inputs.force && '--force' || '' }}
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-python@v7
@@ -32,20 +37,34 @@ jobs:
           python-version: "3.12"
           cache: pip
       - run: pip install -r requirements.txt
-      - name: Scan
-        env:
-          SOLANA_RPC_URL: ${{ secrets.SOLANA_RPC_URL }}
-        run: python -m agent.scan ${{ inputs.force && '--force' || '' }}
-      - name: Commit data
+      - name: Scan every 30 minutes for ~5 hours
         run: |
           git config user.name "wallet-agent"
           git config user.email "wallet-agent@users.noreply.github.com"
-          git add data
-          git diff --cached --quiet && exit 0
-          git commit -m "scan $(date -u +%Y-%m-%dT%H:%MZ)"
-          git pull --rebase origin "${GITHUB_REF_NAME}"
-          git push
-
-  deploy:
-    needs: scan
-    uses: ./.github/workflows/deploy.yml
+          stop_at=$(( $(date +%s) + 5*3600 + 20*60 ))
+          while :; do
+            started=$(date +%s)
+            python -m agent.scan $FORCE || echo "::warning::scan cycle failed"
+            git add data
+            if ! git diff --cached --quiet; then
+              git commit -q -m "scan $(date -u +%Y-%m-%dT%H:%MZ)"
+              if git pull -q --rebase -X theirs origin "$GITHUB_REF_NAME" && git push -q; then
+                gh workflow run deploy.yml --ref "$GITHUB_REF_NAME" || echo "::warning::could not start deploy"
+              else
+                git rebase --abort 2>/dev/null || true
+                echo "::warning::push failed; retrying next cycle"
+              fi
+            fi
+            next=$(( started + 1800 ))
+            [ "$next" -ge "$stop_at" ] && break
+            wait=$(( next - $(date +%s) ))
+            [ "$wait" -gt 0 ] && sleep "$wait"
+          done
+      - name: Start the next run
+        if: always()
+        run: |
+          if python -c "import sys; from agent.common import load_config, utcnow; sys.exit(utcnow().date().isoformat() > load_config()['campaign']['end_date'])"; then
+            gh workflow run scan.yml --ref "$GITHUB_REF_NAME"
+          else
+            echo "Campaign is over; not starting another run."
+          fi

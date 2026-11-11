@@ -15,7 +15,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: agent-data
+  group: agent-report   # separate from the long-running scan job
   cancel-in-progress: false
 
 jobs:
@@ -42,7 +42,7 @@ jobs:
           git add data
           git diff --cached --quiet && exit 0
           git commit -m "report $(date -u +%Y-%m-%d)"
-          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git pull --rebase -X theirs origin "${GITHUB_REF_NAME}"
           git push
 
   deploy:
