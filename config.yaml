@@ -59,7 +59,7 @@ safety:
 # Filters 3 & 4 — which coins and wallets count.
 wallets:
   target_mcap_usd: 100000           # only coins whose market cap peaked at $100K or more
-  max_entry_mcap_usd: 10000         # wallets whose average entry was below $10K market cap
+  max_entry_mcap_usd: 30000         # wallets whose average entry was below $30K market cap
   min_multiple: 5                   # ...and made at least 5x; anything less is not tracked
   highlight_multiple: 10            # 10x+ wallets are tagged and called out separately
   min_hold_fraction_at_target: 0    # 0 = no holding rule (0.5 would require holding half the bag to $100K)

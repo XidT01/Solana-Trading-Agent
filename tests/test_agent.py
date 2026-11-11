@@ -88,6 +88,7 @@ def launch():
 def cfg():
     c = load_config()
     c["wallets"]["target_mcap_usd"] = 50000  # the simulated launch below is drawn on a $50K scale
+    c["wallets"]["max_entry_mcap_usd"] = 10000  # ...with a $10K entry cap
     return c
 
 

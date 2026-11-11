@@ -23,7 +23,7 @@ Every 30 minutes, day and night, from **2026-11-11 to 2026-12-10**:
    - Top 10 holders own more than 35%.
 5. **Wallets.** For each coin that passed, the agent reads its first transactions straight from the Solana chain.
    It finds wallets that:
-   - Bought below **$10K** market cap on average (excluding the dev wallet and same-block snipers).
+   - Bought below **$30K** market cap on average (excluding the dev wallet and same-block snipers).
    - Made at least **5x**: SOL from sells plus the current value of what they still hold, divided by SOL spent.
 
    Wallets under 5x are not tracked. Wallets at **10x+** are tagged and called out separately.

@@ -1,4 +1,4 @@
-"""Find wallets that bought under $10K mcap on coins that peaked at $100K+, and made >= 5x (10x+ tagged).
+"""Find wallets that bought under $30K mcap on coins that peaked at $100K+, and made >= 5x (10x+ tagged).
 
 Everything is derived from raw Solana transactions (balance deltas), so it works the
 same for pump.fun bonding curves, PumpSwap, Raydium, Meteora or any other venue.
