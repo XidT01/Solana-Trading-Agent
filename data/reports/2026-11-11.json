@@ -1,0 +1,59 @@
+{
+ "ai_summary": null,
+ "analyzed_by_launchpad": [
+  [
+   "pumpfun",
+   1
+  ],
+  [
+   "raydium-launchlab",
+   1
+  ]
+ ],
+ "date": "2026-11-11",
+ "filters": {
+  "highlight_multiple": 10,
+  "max_entry_mcap_usd": 10000,
+  "min_multiple": 5,
+  "target_mcap_usd": 100000
+ },
+ "generated_at": "2026-11-11T03:10:40.316114+00:00",
+ "leaderboard": [],
+ "new_wallets": [],
+ "passed_tokens": [
+  {
+   "early_buyers_checked": 0,
+   "liquidity_usd": 109079.7,
+   "mcap_usd": 1897986,
+   "mint": "5tBXkPVh716zSXHNZSr8i1PX7e6Uuj46JnBLdYchpump",
+   "origin": "pumpfun",
+   "symbol": "DACITY",
+   "url": "https://dexscreener.com/solana/89rsdzz3wncebojfruvi6omxbdytnrelfvqcvq1ophnq"
+  },
+  {
+   "early_buyers_checked": 0,
+   "liquidity_usd": 43277.42,
+   "mcap_usd": 64903,
+   "mint": "6bFAqDnEQhwiZaoT4VFbwAGfFtg23DrB3bNKjPFji2QU",
+   "origin": "raydium-launchlab",
+   "symbol": "BABYMINHAO",
+   "url": "https://dexscreener.com/solana/5pyde3jewwrtwvojzitrmhtq2omc7bdmvnhz4pcpgrwd"
+  }
+ ],
+ "rejection_reasons": [
+  [
+   "thin_liquidity_vs_mcap",
+   1
+  ]
+ ],
+ "stats": {
+  "analyzed": 2,
+  "discovered": 141,
+  "rejected": 1,
+  "runs": 1,
+  "skipped": 0,
+  "tokens_checked": 3,
+  "wallets_10x": 0,
+  "wallets_found": 0
+ }
+}
