@@ -325,3 +325,14 @@ def test_candle_cross_uses_candle_end():
     candles = [[1794336300, 0, 2e-4, 0, 0, 0], [1794337200, 0, 3e-4, 0, 0, 0]]
     peak, cross = peak_from_candles(candles, 1e9, 250000)
     assert peak == pytest.approx(300000) and cross == 1794337200 + 900 and cross > launch
+
+
+def test_dust_trade_does_not_fake_target_cross(cfg):
+    """Regression (BUZZ): a 25-token buy costing 0.002 SOL (fees + rent) implied a $5M mcap at launch,
+    so the coin 'reached the target' in the launch block and no early buyer could qualify."""
+    c = launch()
+    c.trade("DUSTBOT", 101, 1005, 0.002, 5_000_000)
+    c.order.insert(2, c.order.pop())  # put it right after launch
+    res = TokenAnalyzer(c.rpc(), cfg).analyze(MINT, SUPPLY, SOL_USD, price_sol_at(55000))
+    assert res["target_time"] == 1600
+    assert {w["wallet"] for w in res["wallets"]} == {"ALPHA"}

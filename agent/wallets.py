@@ -11,6 +11,9 @@ from .common import WSOL, log
 from .sources import SolanaRPC
 
 DUST = 1e-9
+# Trades smaller than this are ignored for pricing: network fees and account rent (~0.002 SOL)
+# dominate them, e.g. a 25-token "buy" costing 0.002 SOL would imply a $5M market cap.
+MIN_PRICED_SOL = 0.02
 
 
 @dataclass
@@ -32,7 +35,7 @@ class Trade:
         return self.token_delta < 0 and self.sol_delta > 0
 
     def price_sol(self) -> float | None:
-        if abs(self.token_delta) < DUST or abs(self.sol_delta) < DUST:
+        if abs(self.token_delta) < DUST or abs(self.sol_delta) < MIN_PRICED_SOL:
             return None
         return abs(self.sol_delta) / abs(self.token_delta)
 
