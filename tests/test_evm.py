@@ -99,7 +99,9 @@ def prices():
 
 @pytest.fixture
 def cfg():
-    return load_config()
+    c = load_config()
+    c["wallets"]["pnl_mode"] = "total"  # the mechanics tests below value held tokens too
+    return c
 
 
 def test_market_detection_and_trade_extraction():
@@ -243,3 +245,22 @@ def test_telegram_digest(cfg, monkeypatch):
     assert digest.send(["<b>hi</b> &amp; bye"], "https://example.org/")
     assert sent[0]["parse_mode"] == "HTML" and sent[0]["reply_markup"]["inline_keyboard"][0][0]["url"] == "https://example.org/"
     assert "parse_mode" not in sent[1] and sent[1]["text"] == "hi & bye"
+
+
+def test_evm_realised_mode_and_transfer_out(cfg):
+    """Default rules: only sold profits count, and wallets passing tokens on are excluded."""
+    cfg["wallets"]["pnl_mode"] = "realised"
+    c = launch()
+    alpha_tokens = 200 / price_at(T0 + 60)
+    c.sell(addr("ALPHA"), alpha_tokens / 2, T0 + 1600)            # ALPHA now sold everything at $150K
+    omega_tokens = 120 / price_at(T0 + 150)
+    c.buy(addr("OMEGA"), 120, T0 + 150)
+    c.tx(addr("OMEGA"), (addr("OMEGA"), addr("SIDE"), omega_tokens / 2), block=100 + 400)  # passes half on
+    c.sell(addr("OMEGA"), omega_tokens / 2, T0 + 1700)
+    res = EvmAnalyzer(FakeRPC(c), cfg).analyze(
+        "0xtoken", {"tx": "0x" + "%064x" % 0, "block": 99}, SUPPLY, DEC, prices(), price_at(T0 + 3000), head=10 ** 6)
+    q = {w["wallet"]: w for w in res["wallets"]}
+    assert set(q) == {addr("ALPHA")}                               # DELTA holds (paper), OMEGA transferred out
+    assert q[addr("ALPHA")]["multiple"] == q[addr("ALPHA")]["realised_multiple"]
+    near = {w["wallet"]: w for w in res["near_misses"]}
+    assert near[addr("OMEGA")]["transferred_out"] and near[addr("DELTA")]["realised_multiple"] == 0

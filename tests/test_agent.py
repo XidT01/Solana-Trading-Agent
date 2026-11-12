@@ -91,6 +91,7 @@ def cfg():
     c = load_config()
     c["wallets"]["target_mcap_usd"] = 50000  # the simulated launch below is drawn on a $50K scale
     c["wallets"]["max_entry_mcap_usd"] = 10000  # ...with a $10K entry cap
+    c["discovery"]["max_token_age_hours"] = 10 ** 9  # simulated block times are from 1970
     return c
 
 
@@ -121,6 +122,7 @@ def test_wallet_analysis(cfg, max_early):
 
 
 def test_unrealised_counts_in_total_mode(cfg):
+    cfg["wallets"]["pnl_mode"] = "total"
     c = launch()
     sell = [s for s, w in c.order if w == "ALPHA"][-1]  # ALPHA never sells
     c.order = [o for o in c.order if o[0] != sell]
@@ -365,3 +367,41 @@ def test_launch_tx_outlier_does_not_fake_target_cross(cfg):
     assert res["target_time"] >= 1500 and {w["wallet"] for w in res["wallets"]} == {"ALPHA"}
     hinted = TokenAnalyzer(c.rpc(), cfg).analyze(MINT, SUPPLY, SOL_USD, price_sol_at(55000), target_time_hint=2400)
     assert hinted["target_time"] >= 1500 and {w["wallet"] for w in hinted["wallets"]} == {"ALPHA"}
+
+
+def test_paper_profits_do_not_count_by_default(cfg):
+    """Regression (ape hao, VEYL): wallets that never sold looked like 6-36x winners until the coin rugged."""
+    assert load_config()["wallets"]["pnl_mode"] == "realised"
+    c = launch()
+    sell = [s for s, w in c.order if w == "ALPHA"][-1]  # ALPHA never sells
+    c.order = [o for o in c.order if o[0] != sell]
+    del c.txs[sell]
+    res = TokenAnalyzer(c.rpc(), cfg).analyze(MINT, SUPPLY, SOL_USD, price_sol_at(55000))
+    assert res["wallets"] == []
+    alpha = next(w for w in res["near_misses"] if w["wallet"] == "ALPHA")
+    assert alpha["realised_multiple"] == 0 and alpha["total_multiple"] == pytest.approx(55000 / 6000, rel=0.01)
+
+
+def test_revived_old_coin_is_skipped(cfg):
+    """Regression (VEYL): launched a week earlier, revived with a new pool that looked young."""
+    cfg["discovery"]["max_token_age_hours"] = 48
+    res = TokenAnalyzer(launch().rpc(), cfg).analyze(MINT, SUPPLY, SOL_USD, price_sol_at(55000))
+    assert res["status"] == "skipped" and res["reason"].startswith("launched_") and res["reason"].endswith("d_ago")
+
+
+def test_bundled_launch_is_rejected(cfg):
+    """Regression (BULLHARIS): 24 winners all bought 0-24s after launch, then passed tokens around."""
+    c = launch()
+    for i in range(6):  # six wallets buying within 20s of launch at $5-9K, all selling at $60K
+        c.trade(f"B{i}", 100 + i + 1, 1001 + i * 3, 1.0, 5000 + i * 700)
+    for i in range(6):
+        c.trade(f"B{i}", 140 + i, 2050 + i, -(60000 / (5000 + i * 700)), 60000)
+    res = TokenAnalyzer(c.rpc(), cfg).analyze(MINT, SUPPLY, SOL_USD, price_sol_at(55000))
+    assert res["status"] == "rejected" and res["reason"].startswith("bundled_launch (7 winners")  # 6 + ALPHA at +10s
+
+
+def test_insider_network_rejected(cfg):
+    """Regression (mihao): RugCheck found a 237-wallet insider network."""
+    rep = {"score_normalised": 1, "risks": [], "insiderNetworks": [{"size": 237}, {"size": 4}]}
+    assert rugcheck_checks(rep, None, load_config()) == ["insider_network_237_wallets"]
+    assert rugcheck_checks({"insiderNetworks": [{"size": 19}]}, None, load_config()) == []

@@ -51,6 +51,20 @@ Every number in `config.yaml` can be changed.
 
 From then on it runs by itself and stops automatically after 2026-12-10.
 
+## Anti-manipulation rules (all chains)
+
+Added after a review of coins that turned out to be controlled charts and rugs (BULLHARIS, mihao, ape hao, VEYL):
+
+| Rule | Catches | Setting |
+|---|---|---|
+| Only **sold** profits count toward 5x / 10x | wallets that never sold and looked like 10–30x winners until the rug | `wallets.pnl_mode: realised` |
+| Wallets that **pass tokens on** to other wallets are excluded | bundle wallets spreading supply out | `wallets.exclude_transfer_out` |
+| **Bundled launch:** 5+ winners all buying within 20s of launch → coin rejected | coordinated launch bundles | `integrity.bundle_*` |
+| RugCheck **insider network** of 20+ linked wallets → coin rejected (Solana) | insider wallet farms | `safety.max_insider_network` |
+| Real launch time from the coin's **first on-chain transaction** | old coins revived with a new pool | `discovery.max_token_age_hours` |
+
+A coin's wallet hits always follow its latest verdict: if a re-check rejects it, its wallets are removed.
+
 ## BSC, Base and Robinhood Chain
 
 The same rules run on three EVM chains, in a separate workflow (`Scan EVM`) that runs alongside the

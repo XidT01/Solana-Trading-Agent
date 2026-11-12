@@ -7,7 +7,10 @@ from __future__ import annotations
 
 from dataclasses import asdict, dataclass
 
+import time
+
 from .common import WSOL, log
+from .integrity import bundled_launch, wallet_passes
 from .sources import SolanaRPC
 
 DUST = 1e-9
@@ -88,6 +91,7 @@ def signer_trade(sig: str, tx: dict | None, mint: str, quotes: dict[str, float] 
 class TokenAnalyzer:
     def __init__(self, rpc: SolanaRPC, cfg: dict):
         self.rpc = rpc
+        self.cfg = cfg
         self.w = cfg["wallets"]
 
     def mcap(self, price_sol: float | None) -> float | None:
@@ -153,6 +157,10 @@ class TokenAnalyzer:
         sigs, complete = self.rpc.signatures_asc(mint, self.w["max_signature_pages"])
         if not complete or not sigs:
             return {"status": "skipped", "reason": "history_too_long_or_unavailable"}
+        age_h = (time.time() - (sigs[0].get("blockTime") or time.time())) / 3600
+        if age_h > self.cfg["discovery"]["max_token_age_hours"]:
+            # e.g. VEYL: launched a week earlier, revived with a new pool that looked young
+            return {"status": "skipped", "reason": f"launched_{age_h / 24:.0f}d_ago"}
 
         # Read the first transactions in batches until the coin is clearly past the entry market cap.
         early_sigs, txs, early = [], {}, []
@@ -197,6 +205,11 @@ class TokenAnalyzer:
         cand_list = sorted(cands.values(), key=lambda t: t.time)[:self.w["max_candidates_per_token"]]
 
         results = [r for t in cand_list if (r := self._wallet_result(t, t_target, price_sol_now))]
+        launch_time = sigs[0].get("blockTime")
+        n = bundled_launch(results, launch_time, self.cfg)
+        if n:
+            return {"status": "rejected", "creator": creator,
+                    "reason": f"bundled_launch ({n} winners within {self.cfg['integrity']['bundle_window_seconds']}s of launch)"}
         qualified = [r for r in results if r["qualified"]]
         log.info("%s: %d early buyers <$%dK, %d qualified", mint[:8], len(cand_list),
                  self.w["max_entry_mcap_usd"] // 1000, len(qualified))
@@ -246,9 +259,10 @@ class TokenAnalyzer:
         avg_entry = self.mcap(sol_pre / bought_pre) if bought_pre > 0 else None
         first_entry = self.mcap(first.price_sol())
 
+        result = {"transferred_out": transferred_out > DUST}
         qualified = (avg_entry is not None and avg_entry < self.w["max_entry_mcap_usd"]
                      and hold_frac >= self.w["min_hold_fraction_at_target"]
-                     and multiple >= self.w["min_multiple"])
+                     and multiple >= self.w["min_multiple"] and wallet_passes(result, self.cfg))
         return {
             "wallet": first.wallet, "qualified": qualified,
             "first_buy_time": first.time, "first_buy_sig": first.sig,
@@ -257,6 +271,7 @@ class TokenAnalyzer:
             "sol_in": round(sol_in, 4), "sol_out": round(sol_out, 4),
             "unrealised_sol": round(unrealised, 4), "pnl_sol": round(sol_out + unrealised - sol_in, 4),
             "multiple": round(multiple, 2), "realised_multiple": round(sol_out / sol_in, 2),
+            "total_multiple": round((sol_out + unrealised) / sol_in, 2),
             "tier": ("10x+" if multiple >= self.w["highlight_multiple"]
                      else f"{self.w['min_multiple']:g}x+" if multiple >= self.w["min_multiple"] else None),
             "still_holding_pct": round(100 * remaining / max(peak, remaining, DUST), 1),

@@ -12,6 +12,7 @@ from collections import defaultdict
 from dataclasses import dataclass
 
 from .common import Http, log
+from .integrity import bundled_launch, wallet_passes
 
 TRANSFER = "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef"
 ZERO = "0x0000000000000000000000000000000000000000"
@@ -290,6 +291,7 @@ def extract_trades(transfers: list[tuple], markets: set[str], ts_of) -> list[Evm
 class EvmAnalyzer:
     def __init__(self, rpc: EvmRPC, cfg: dict, known_markets: list[str] = ()):
         self.rpc = rpc
+        self.cfg = cfg
         self.known_markets = [m.lower() for m in known_markets]
         self.w = cfg["wallets"]
         self.e = cfg["evm"]
@@ -350,6 +352,10 @@ class EvmAnalyzer:
         results = [self._wallet_result(t, by_wallet[t.wallet], t_target, prices, price_now, supply)
                    for t in cand_list]
         results = [r for r in results if r]
+        n = bundled_launch(results, buys[0].time, self.cfg)
+        if n:
+            return {"status": "rejected", "creator": creator,
+                    "reason": f"bundled_launch ({n} winners within {self.cfg['integrity']['bundle_window_seconds']}s of launch)"}
         qualified = [r for r in results if r["qualified"]]
         log.info("%s: %d markets, %d early buyers, %d qualified", token[:10], len(markets), len(cand_list), len(qualified))
         return {"status": "analyzed", "creator": creator, "launch_time": buys[0].time, "target_time": t_target,
@@ -378,7 +384,8 @@ class EvmAnalyzer:
         multiple = (proceeds + (unrealised if self.w["pnl_mode"] == "total" else 0)) / cost
         avg_entry = cost_pre / bought_pre * supply if bought_pre > 0 else None
         qualified = (avg_entry is not None and avg_entry < self.w["max_entry_mcap_usd"]
-                     and hold_frac >= self.w["min_hold_fraction_at_target"] and multiple >= self.w["min_multiple"])
+                     and hold_frac >= self.w["min_hold_fraction_at_target"] and multiple >= self.w["min_multiple"]
+                     and wallet_passes({"transferred_out": any(t.kind == "out" for t in trades)}, self.cfg))
         return {
             "wallet": first.wallet, "qualified": qualified,
             "first_buy_time": first.time, "first_buy_sig": first.tx,
@@ -387,6 +394,7 @@ class EvmAnalyzer:
             "usd_in": round(cost, 2), "usd_out": round(proceeds, 2), "unrealised_usd": round(unrealised, 2),
             "pnl_usd": round(proceeds + unrealised - cost, 2),
             "multiple": round(multiple, 2), "realised_multiple": round(proceeds / cost, 2),
+            "total_multiple": round((proceeds + unrealised) / cost, 2),
             "tier": ("10x+" if multiple >= self.w["highlight_multiple"]
                      else f"{self.w['min_multiple']:g}x+" if multiple >= self.w["min_multiple"] else None),
             "still_holding_pct": round(100 * remaining / max(peak, remaining, 1e-12), 1),

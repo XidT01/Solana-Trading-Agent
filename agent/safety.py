@@ -143,6 +143,9 @@ def rugcheck_checks(report: dict | None, pair_address: str | None, cfg: dict) ->
     reasons = []
     if report.get("rugged"):
         reasons.append("rugcheck_rugged")
+    nets = [n.get("size") or 0 for n in report.get("insiderNetworks") or []]
+    if nets and max(nets) >= s["max_insider_network"]:
+        reasons.append(f"insider_network_{max(nets)}_wallets")
     score = report.get("score_normalised")
     if score is not None and score > s["max_rugcheck_score_normalised"]:
         reasons.append(f"rugcheck_score_{score}")

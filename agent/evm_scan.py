@@ -54,7 +54,7 @@ def scan_chain(key: str, chain: dict, cfg: dict, now, ds, gt, rpc=None) -> dict:
     candidates = [t for t in watch if t not in tokens and t not in seen]
     pairs = ds.pairs_for(candidates, chain["dexscreener"])
     stats = {"discovered": len(set(found)), "watchlist": len(candidates), "launchpad_rejected": 0, "too_old": 0,
-             "below_target_peak": 0, "market_rejected": 0, "safety_rejected": 0, "analyzed": 0, "skipped": 0,
+             "below_target_peak": 0, "market_rejected": 0, "safety_rejected": 0, "integrity_rejected": 0, "analyzed": 0, "skipped": 0,
              "wallets_found": 0}
     unknown_factories: Counter = Counter()
 
@@ -152,9 +152,13 @@ def scan_chain(key: str, chain: dict, cfg: dict, now, ds, gt, rpc=None) -> dict:
             log.exception("%s analysis failed for %s", key, t)
             res = {"status": "skipped", "reason": f"error: {err}"}
             budget -= 1
+        for entry in wallets.values():  # the latest verdict on a coin replaces its earlier wallet hits
+            entry["hits"] = [h for h in entry["hits"] if h["mint"] != t]
         if res["status"] != "analyzed":
-            stats["skipped"] += 1
-            tokens[t] = {**rec, "verdict": "skipped", "stage": "wallets", "reasons": [res["reason"]]}
+            rejected = res["status"] == "rejected"
+            stats["integrity_rejected" if rejected else "skipped"] += 1
+            tokens[t] = {**rec, "verdict": "rejected" if rejected else "skipped",
+                            "stage": "integrity" if rejected else "wallets", "reasons": [res["reason"]]}
             continue
         stats["analyzed"] += 1
         stats["wallets_found"] += len(res["wallets"])
@@ -164,6 +168,12 @@ def scan_chain(key: str, chain: dict, cfg: dict, now, ds, gt, rpc=None) -> dict:
             entry["hits"] = [h for h in entry["hits"] if h["mint"] != t] + [
                 {**hit, "mint": t, "symbol": rec["symbol"], "origin": rec["origin"], "found_at": now.isoformat()}]
 
+    # Hits only stand for coins whose latest verdict is "analyzed" (a coin rejected later, e.g. by a new
+    # safety rule on re-check, takes its wallets' hits with it).
+    not_ok = {m for m, r in tokens.items() if r.get("verdict") != "analyzed"}
+    for entry in wallets.values():
+        entry["hits"] = [h for h in entry["hits"] if h["mint"] not in not_ok]
+    wallets = {a: w for a, w in wallets.items() if w["hits"]}
     if len(watch) > d["watchlist_max"]:
         watch = dict(sorted(watch.items(), key=lambda kv: kv[1])[-d["watchlist_max"]:])
     write_json(out / "tokens.json", tokens)
