@@ -217,7 +217,7 @@ def test_scan_end_to_end(cfg, tmp_path, monkeypatch):
     candles = {"P" + MINT: [[1200, 0, 30000 / SUPPLY, 0, 28000 / SUPPLY, 0], [1500, 0, 60000 / SUPPLY, 0, 55000 / SUPPLY, 0],
                             [1800, 0, 45000 / SUPPLY, 0, 40000 / SUPPLY, 0]],
                "PDUDpump": [[1200, 0, 30000 / SUPPLY, 0, 25000 / SUPPLY, 0]]}
-    pairs = {MINT: [pair(MINT, "pumpswap", 30000, 40000)],
+    pairs = {MINT: [pair(MINT, "pumpswap", 18000, 40000)],
              "DUDpump": [pair("DUDpump", "pumpswap", 30000, 25000)],
              "RUG": [pair("RUG", "raydium", 30000, 90000)],
              "HONEY": [pair("HONEY", "meteora", 40000, 70000, sells=0)],
@@ -418,7 +418,7 @@ def test_peak_checks_rotate(cfg, tmp_path, monkeypatch):
     def pair(mint, mcap):
         return {"baseToken": {"address": mint, "symbol": mint[:4]}, "quoteToken": {"symbol": "SOL"},
                 "dexId": "pumpswap", "pairAddress": "P" + mint, "priceUsd": str(mcap / SUPPLY),
-                "priceNative": str(price_sol_at(mcap)), "marketCap": mcap, "liquidity": {"usd": 30000},
+                "priceNative": str(price_sol_at(mcap)), "marketCap": mcap, "liquidity": {"usd": mcap * 0.5},
                 "pairCreatedAt": now_ms - 3.6e6, "txns": {"h24": {"buys": 500, "sells": 50}}, "volume": {"h24": 1e5}}
 
     pairs = {"BIGpump": [pair("BIGpump", 45000)], MINT: [pair(MINT, 30000)]}   # MINT is smaller now...
@@ -457,3 +457,12 @@ def test_peak_checks_rotate(cfg, tmp_path, monkeypatch):
     assert tokens[MINT]["verdict"] == "analyzed" and tokens[MINT]["peak_mcap_usd"] == 55000
     peaks = scan_mod.read_json(tmp_path / "peaks.json", {})
     assert "BIGpump" in peaks and MINT not in peaks   # only coins still on the watchlist are remembered
+
+
+def test_single_sided_pool_rejected(cfg):
+    """Regression (TXO, GLDSTN, UTOF on Base): Zora coins launch with the whole supply in the pool, so
+    liquidity ~= market cap and the "peak" is just the launch price."""
+    zora = {"liquidity_usd": 249099, "mcap_usd": 251616, "buys_24h": 50, "sells_24h": 20}
+    assert market_checks(zora, cfg) == ["never_pumped (liquidity ≈ market cap: supply still unsold in the pool)"]
+    penny = {"liquidity_usd": 28843, "mcap_usd": 67824, "buys_24h": 50, "sells_24h": 20}
+    assert market_checks(penny, cfg) == []

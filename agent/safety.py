@@ -95,6 +95,8 @@ def market_checks(m: dict, cfg: dict) -> list[str]:
         reasons.append(f"low_liquidity (${m['liquidity_usd']:,.0f})")
     elif m["mcap_usd"] and m["liquidity_usd"] / m["mcap_usd"] < s["min_liquidity_to_mcap"]:
         reasons.append("thin_liquidity_vs_mcap")
+    elif m["mcap_usd"] and m["liquidity_usd"] / m["mcap_usd"] >= s.get("max_liquidity_to_mcap", 1.01):
+        reasons.append("never_pumped (liquidity ≈ market cap: supply still unsold in the pool)")
     if s["require_sells_in_24h"] and m["buys_24h"] > 20 and m["sells_24h"] == 0:
         reasons.append("no_sells_possible_honeypot")
     return reasons

@@ -47,6 +47,8 @@ discovery:
 safety:
   min_liquidity_usd: 15000
   min_liquidity_to_mcap: 0.05       # liquidity must be >= 5% of market cap
+  max_liquidity_to_mcap: 0.6        # ...and below 60%: at ~100% the supply sits unsold in the pool and the
+                                    # "market cap" is just the launch price (Zora coins: 0.99), not a pump
   require_revoked_mint_authority: true
   require_revoked_freeze_authority: true   # freeze authority = classic Solana honeypot
   reject_token2022_extensions: [transferFeeConfig, transferHook, permanentDelegate, nonTransferable, defaultAccountState, pausableConfig]
