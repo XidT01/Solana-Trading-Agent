@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 from concurrent.futures import ThreadPoolExecutor
+from datetime import datetime
 
 from .common import WSOL, Http, log
 
@@ -12,21 +13,23 @@ class DexScreener:
     def __init__(self):
         self.http = Http(rps=4)
 
-    def latest_solana_mints(self) -> list[str]:
+    def latest_solana_mints(self, chain: str = "solana") -> list[str]:
         mints: list[str] = []
         for path in ("/token-profiles/latest/v1", "/token-boosts/latest/v1"):
             for item in self.http.get(self.BASE + path) or []:
-                if item.get("chainId") == "solana" and item.get("tokenAddress"):
+                if item.get("chainId") == chain and item.get("tokenAddress"):
                     mints.append(item["tokenAddress"])
         return mints
 
-    def pairs_for(self, mints: list[str]) -> dict[str, list[dict]]:
+    def pairs_for(self, mints: list[str], chain: str = "solana") -> dict[str, list[dict]]:
         """mint -> list of DexScreener pairs where the mint is the base token."""
         out: dict[str, list[dict]] = {m: [] for m in mints}
+        lower = {m.lower(): m for m in mints} if chain != "solana" else {}
         for i in range(0, len(mints), 30):
             chunk = mints[i:i + 30]
-            for p in self.http.get(f"{self.BASE}/tokens/v1/solana/{','.join(chunk)}") or []:
+            for p in self.http.get(f"{self.BASE}/tokens/v1/{chain}/{','.join(chunk)}") or []:
                 base = (p.get("baseToken") or {}).get("address")
+                base = lower.get((base or "").lower(), base) if lower else base
                 if base in out:
                     out[base].append(p)
         return out
@@ -60,27 +63,50 @@ class GeckoTerminal:
     def __init__(self):
         self.http = Http(rps=0.3)  # free tier is strict: ~30 calls/min, shared
 
-    def new_pools(self, pages: int) -> list[tuple[str, str]]:
-        """Returns (mint, dex_id) for the newest Solana pools."""
+    def new_pools(self, pages: int, network: str = "solana") -> list[tuple[str, str]]:
+        """Returns (token address, dex_id) for the newest pools on a network."""
         out = []
+        prefix = network + "_"
         for page in range(1, pages + 1):
-            res = self.http.get(f"{self.BASE}/networks/solana/new_pools", params={"page": page}, retries=7)
+            res = self.http.get(f"{self.BASE}/networks/{network}/new_pools", params={"page": page}, retries=7)
             for pool in (res or {}).get("data", []):
                 rel = pool.get("relationships", {})
                 base_id = ((rel.get("base_token") or {}).get("data") or {}).get("id", "")
                 dex_id = ((rel.get("dex") or {}).get("data") or {}).get("id", "")
-                if base_id.startswith("solana_"):
-                    out.append((base_id[len("solana_"):], dex_id))
+                if base_id.startswith(prefix):
+                    out.append((base_id[len(prefix):], dex_id))
         return out
 
-
-    def ohlcv(self, pool: str, hours: int = 50) -> list[list[float]]:
+    def ohlcv(self, pool: str, hours: int = 50, network: str = "solana") -> list[list[float]]:
         """15-minute USD candles of the base token in `pool`, oldest first: [ts, open, high, low, close, volume]."""
-        res = self.http.get(f"{self.BASE}/networks/solana/pools/{pool}/ohlcv/minute",
+        res = self.http.get(f"{self.BASE}/networks/{network}/pools/{pool}/ohlcv/minute",
                             params={"aggregate": 15, "limit": min(1000, hours * 4), "currency": "usd", "token": "base"},
                             retries=7)
         rows = (((res or {}).get("data") or {}).get("attributes") or {}).get("ohlcv_list") or []
         return sorted(rows)
+
+    def token_pools(self, network: str, token: str) -> list[dict]:
+        """Pools trading `token`: [{"address", "dex", "created_at" (unix), "reserve_usd"}], biggest first."""
+        res = self.http.get(f"{self.BASE}/networks/{network}/tokens/{token}/pools", params={"page": 1}, retries=7)
+        out = []
+        for p in (res or {}).get("data", []):
+            a = p.get("attributes") or {}
+            created = a.get("pool_created_at")
+            try:
+                created_ts = int(datetime.fromisoformat(created.replace("Z", "+00:00")).timestamp()) if created else None
+            except ValueError:
+                created_ts = None
+            out.append({"address": a.get("address"),
+                        "dex": (((p.get("relationships") or {}).get("dex") or {}).get("data") or {}).get("id"),
+                        "created_at": created_ts, "reserve_usd": float(a.get("reserve_in_usd") or 0)})
+        return sorted(out, key=lambda x: -x["reserve_usd"])
+
+    def ohlcv_minutes(self, network: str, pool: str, token: str, before: int) -> list[list[float]]:
+        """Up to 1000 one-minute USD candles of `token` in `pool`, ending before `before` (unix)."""
+        res = self.http.get(f"{self.BASE}/networks/{network}/pools/{pool}/ohlcv/minute",
+                            params={"aggregate": 1, "limit": 1000, "currency": "usd", "token": token,
+                                    "before_timestamp": before}, retries=7)
+        return sorted((((res or {}).get("data") or {}).get("attributes") or {}).get("ohlcv_list") or [])
 
 
 class RugCheck:

@@ -79,3 +79,71 @@ report:
   ai_summary: true                  # needs ANTHROPIC_API_KEY
   model: claude-opus-5-5
   leaderboard_size: 25
+
+# ---------------------------------------------------------------- EVM chains
+# Same coin and wallet rules as Solana (the `wallets:` section above). Trades are read from each token's
+# Transfer logs on a free public RPC and priced with 1-minute GeckoTerminal candles, so PnL is in USD.
+evm:
+  max_tokens_per_run: 2             # per chain
+  max_tokens_per_day: 15            # per chain
+  max_transfer_logs: 150000         # coins with a longer history are skipped
+  min_buy_usd: 10                   # ignore dust buys
+  safety:
+    max_tax_pct: 10
+    require_security_scan: false    # Robinhood Chain has no honeypot scanner yet: rely on liquidity + sells checks
+  chains:
+    bsc:
+      name: BSC
+      chain_id: 56
+      rpc: https://bsc-rpc.publicnode.com           # override with the EVM_RPC_BSC secret
+      geckoterminal: bsc
+      dexscreener: bsc
+      honeypot_is: true
+      log_chunk_blocks: 50000
+      launchpads:
+        allowed: [four.meme, flap]
+        gt_dex: {four-meme: four.meme}
+        contracts:
+          "0x5c952063c7fc8610ffdb798152d69f0b9550762b": four.meme   # TokenManager (seen on four.meme launches)
+          "0xe2ce6ab80874fa9fa2aae65d277dd6b8e65c9de0": flap        # Flap Portal
+          "0x1de460f363af910f51726def188f9004276bf4bc": flap        # Flap launchpad
+        suffixes: {"4444": four.meme, "7777": flap, "8888": flap}
+    base:
+      name: Base
+      chain_id: 8453
+      rpc: https://base-rpc.publicnode.com          # override with the EVM_RPC_BASE secret
+      geckoterminal: base
+      dexscreener: base
+      honeypot_is: true
+      log_chunk_blocks: 50000
+      markets: ["0x498581ff718922c3f8e6a244956af099b2652b2b"]   # Uniswap v4 PoolManager
+      launchpads:
+        allowed: [clanker, zora, bankr]
+        gt_dex: {bankr: bankr}
+        contracts:
+          "0xe85a59c628f7d27878aceb4bf3b35733630083a9": clanker     # Clanker v4 factory
+          "0x777777751622c0d3258f214f9df38e35bf45baf3": zora        # Zora coin factory
+        suffixes: {}
+    robinhood:
+      name: Robinhood
+      chain_id: 4663
+      rpc: https://rpc.mainnet.chain.robinhood.com  # override with the EVM_RPC_ROBINHOOD secret
+      geckoterminal: robinhood
+      dexscreener: robinhood
+      honeypot_is: false
+      log_chunk_blocks: 50000
+      launchpads:
+        allowed: [pons, pools.trade, long.xyz, launchpad.meme]
+        gt_dex:
+          pons-dot-family: pons
+          pons-v2: pons
+          pons-v2-dex: pons
+          uniswap-pools-trade: pools.trade
+          long-xyz: long.xyz
+          clanker-robinhood: clanker
+          bankr-robinhood: bankr
+          up-v3: up
+        contracts:
+          "0xe33e9e479df8802cb0866d5d05258bec4cf62948": pons        # Pons V2 (seen on pons-v2 launches)
+          "0xd3f2cc1731b7fd17f28798835c2e02f0a1839a94": clanker
+        suffixes: {}

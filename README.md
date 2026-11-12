@@ -51,6 +51,31 @@ Every number in `config.yaml` can be changed.
 
 From then on it runs by itself and stops automatically after 2026-12-10.
 
+## BSC, Base and Robinhood Chain
+
+The same rules run on three EVM chains, in a separate workflow (`Scan EVM`) that runs alongside the
+Solana scan. The website has a chain switcher at the top.
+
+| Chain | Launchpads tracked | How the launchpad is recognised |
+|---|---|---|
+| BSC | four.meme, Flap | GeckoTerminal's `four-meme` label, the four.meme / Flap contracts, `…4444` / `…7777` / `…8888` addresses |
+| Base | Clanker, Zora, Bankr | the Clanker and Zora factory contracts, GeckoTerminal's `bankr` label |
+| Robinhood | Pons, Pools.trade, Long.xyz, launchpad.meme | GeckoTerminal's launchpad labels, the Pons contract |
+
+How it works on EVM:
+- **Trades** come from each coin's `Transfer` logs on a free public RPC (publicnode for BSC and Base,
+  Robinhood's official RPC). Wallets that gain tokens from a market contract (bonding curve, pool, or the
+  Uniswap v4 PoolManager) are buyers; routers and fee wallets are filtered out.
+- **Prices** come from GeckoTerminal's 1-minute candles, so PnL and multiples are in **USD**.
+- **Safety:** GoPlus (honeypot, taxes over 10%, mintable, blacklist, hidden owner, holder concentration) on
+  all three chains, plus a honeypot.is buy/sell simulation on BSC and Base. Robinhood Chain has no
+  honeypot scanner yet, so there it relies on GoPlus where available plus the liquidity and sells checks.
+- Coins from launchpads the agent can't identify are skipped and counted; each run records the most common
+  unknown factory contracts (`data/chains/<chain>/runs.json`) so they can be named in `config.yaml`.
+
+Optional secrets for faster, more reliable RPCs: `EVM_RPC_BSC`, `EVM_RPC_BASE`, `EVM_RPC_ROBINHOOD`.
+Without them the free public RPCs are used.
+
 ## stonk.fun
 
 stonk.fun runs on Raydium LaunchLab, and its tokens have no address suffix (unlike pump.fun's `...pump`).
@@ -103,6 +128,9 @@ python -m agent.report --force
 | `agent/wallets.py` | on-chain entry, hold and PnL analysis |
 | `agent/report.py` | daily report, AI summary, Telegram |
 | `agent/identify.py` | shows which launch platform a token is detected as |
+| `agent/evm_scan.py` | one scan cycle on BSC, Base and Robinhood Chain |
+| `agent/evm.py` | EVM transfer history, market detection, USD pricing, wallet analysis |
+| `agent/evm_safety.py` | GoPlus + honeypot.is checks |
 | `site/index.html` | the dashboard |
 | `data/` | results, written back by GitHub Actions |
 

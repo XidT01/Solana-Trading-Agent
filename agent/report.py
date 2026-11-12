@@ -31,12 +31,24 @@ the strongest signal, a single hit is often luck; 10x+ wallets with repeat hits 
 bundlers (first buy within seconds of launch, near-identical timing across tokens, tokens transferred out
 instead of sold, huge multiples on tiny size). Refer to wallets by their first 4 and last 4 characters.
 Stay factual and neutral, never hype, and do not give buy or sell instructions. If the data is thin,
-say so plainly."""
+say so plainly. The JSON names the chain; PnL figures are in the unit given by `pnl_unit` (SOL or USD)."""
 
 
 def reason_key(r: str) -> str:
     r = r.split(" (")[0]
     return re.sub(r"_\d+(pct)?$", "", r)
+
+
+CHAIN_NAMES = {"solana": "Solana", "bsc": "BSC", "base": "Base", "robinhood": "Robinhood Chain"}
+
+
+def pnl_of(h: dict) -> float:
+    """Solana hits carry PnL in SOL, EVM hits in USD."""
+    return h["pnl_sol"] if "pnl_sol" in h else h.get("pnl_usd", 0.0)
+
+
+def unit_of(chain: str) -> str:
+    return "SOL" if chain == "solana" else "USD"
 
 
 def leaderboard(wallets: dict, until_iso: str, size: int) -> list[dict]:
@@ -52,7 +64,7 @@ def leaderboard(wallets: dict, until_iso: str, size: int) -> list[dict]:
             "median_multiple": round(statistics.median(mults), 2), "best_multiple": max(mults),
             "tenx_hits": sum(m >= 10 for m in mults),
             "avg_entry_mcap": round(statistics.mean(h["avg_entry_mcap"] for h in hits)),
-            "total_pnl_sol": round(sum(h["pnl_sol"] for h in hits), 2),
+            "total_pnl": round(sum(pnl_of(h) for h in hits), 2),
             "last_hit": max(h["found_at"] for h in hits),
         })
     rows.sort(key=lambda r: (-r["hits"], -r["median_multiple"]))
@@ -85,7 +97,8 @@ def ai_summary(payload: dict, cfg: dict) -> str | None:
 
 def to_markdown(r: dict) -> str:
     s = r["stats"]
-    lines = [f"# Solana smart-wallet report — {r['date']}", ""]
+    unit = r.get("pnl_unit", "SOL")
+    lines = [f"# {CHAIN_NAMES.get(r.get('chain', 'solana'), r.get('chain'))} smart-wallet report — {r['date']}", ""]
     if r.get("ai_summary"):
         lines += [r["ai_summary"], ""]
     lines += ["## Scan stats", "",
@@ -100,19 +113,19 @@ def to_markdown(r: dict) -> str:
         lines += ["Top rejection reasons: " + ", ".join(f"{k} ({v})" for k, v in r["rejection_reasons"][:8]), ""]
     lines += ["## New qualifying wallets today", ""]
     if r["new_wallets"]:
-        lines += ["| Tier | Wallet | Token | Avg entry mcap | Multiple | PnL (SOL) | Still holding |",
+        lines += [f"| Tier | Wallet | Token | Avg entry mcap | Multiple | PnL ({unit}) | Still holding |",
                   "|---|---|---|---|---|---|---|"]
         for h in r["new_wallets"]:
             lines.append(f"| {h.get('tier', '')} | `{h['wallet']}` | {h['symbol']} | ${h['avg_entry_mcap']:,} | {h['multiple']}x | "
-                         f"{h['pnl_sol']} | {h['still_holding_pct']}% |")
+                         f"{pnl_of(h)} | {h['still_holding_pct']}% |")
     else:
         lines.append("_None today._")
     lines += ["", "## Leaderboard (campaign to date)", "",
-              "| # | Wallet | Hits | 10x+ hits | Median x | Best x | Avg entry | PnL (SOL) |",
+              f"| # | Wallet | Hits | 10x+ hits | Median x | Best x | Avg entry | PnL ({unit}) |",
               "|---|---|---|---|---|---|---|---|"]
     for i, w in enumerate(r["leaderboard"], 1):
         lines.append(f"| {i} | `{w['wallet']}` | {w['hits']} | {w.get('tenx_hits', 0)} | {w['median_multiple']} | {w['best_multiple']} | "
-                     f"${w['avg_entry_mcap']:,} | {w['total_pnl_sol']} |")
+                     f"${w['avg_entry_mcap']:,} | {w.get('total_pnl', w.get('total_pnl_sol'))} |")
     lines += ["", "_Automated on-chain analysis. Not financial advice._", ""]
     return "\n".join(lines)
 
@@ -128,10 +141,18 @@ def send_telegram(text: str) -> None:
         log.warning("Telegram send failed: %s", e)
 
 
-def build(day: str, cfg: dict) -> dict:
-    tokens = read_json(DATA / "tokens.json", {})
-    wallets = read_json(DATA / "wallets.json", {})
-    runs = [r for r in read_json(DATA / "runs.json", []) if r["at"].startswith(day)]
+def data_dir(chain: str):
+    if chain == "solana":
+        return DATA
+    from .evm_scan import chain_dir
+    return chain_dir(chain)
+
+
+def build(day: str, cfg: dict, chain: str = "solana") -> dict:
+    data = data_dir(chain)
+    tokens = read_json(data / "tokens.json", {})
+    wallets = read_json(data / "wallets.json", {})
+    runs = [r for r in read_json(data / "runs.json", []) if r["at"].startswith(day)]
     todays = [t for t in tokens.values() if t.get("checked_at", "").startswith(day)]
     rejected = [t for t in todays if t["verdict"] == "rejected"]
     analyzed = [t for t in todays if t["verdict"] == "analyzed"]
@@ -141,7 +162,7 @@ def build(day: str, cfg: dict) -> dict:
     reasons = Counter(reason_key(r) for t in rejected for r in t["reasons"])
     origins = Counter(t.get("origin", "unknown") for t in analyzed)
     report = {
-        "date": day, "generated_at": utcnow().isoformat(),
+        "date": day, "chain": chain, "pnl_unit": unit_of(chain), "generated_at": utcnow().isoformat(),
         "filters": {k: cfg["wallets"][k]
                     for k in ("max_entry_mcap_usd", "target_mcap_usd", "min_multiple", "highlight_multiple")},
         "stats": {"runs": len(runs), "discovered": sum(r["discovered"] for r in runs),
@@ -164,6 +185,7 @@ def main(argv=None) -> int:
     ap.add_argument("--date", help="UTC date, default today")
     ap.add_argument("--config")
     ap.add_argument("--force", action="store_true", help="report even outside the campaign dates")
+    ap.add_argument("--chain", default="solana", choices=list(CHAIN_NAMES))
     args = ap.parse_args(argv)
     setup_logging()
     cfg = load_config(args.config)
@@ -173,17 +195,18 @@ def main(argv=None) -> int:
     if not args.force and not (c["start_date"] <= day <= c["end_date"]):
         log.info("No report: %s is outside the campaign %s..%s", day, c["start_date"], c["end_date"])
         return 0
-    report = build(day, cfg)
+    report = build(day, cfg, args.chain)
     md = to_markdown(report)
-    out = DATA / "reports"
+    out = data_dir(args.chain) / "reports"
     write_json(out / f"{day}.json", report)
     (out / f"{day}.md").write_text(md)
     index = read_json(out / "index.json", [])
     index = [e for e in index if e["date"] != day] + [
         {"date": day, "wallets_found": report["stats"]["wallets_found"], "analyzed": report["stats"]["analyzed"]}]
     write_json(out / "index.json", sorted(index, key=lambda e: e["date"], reverse=True))
-    send_telegram(md)
-    log.info("Report written for %s: %s", day, report["stats"])
+    if report["stats"]["runs"]:  # no Telegram message for a chain that didn't scan that day
+        send_telegram(md)
+    log.info("%s report written for %s: %s", args.chain, day, report["stats"])
     return 0
 
 

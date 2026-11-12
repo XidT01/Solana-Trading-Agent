@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Smart Wallet Tracker</title>
-<meta name="description" content="Solana wallets that bought meme coins under $30K market cap that later peaked at $100K+, and made 5x or 10x.">
+<meta name="description" content="Wallets on Solana, BSC, Base and Robinhood Chain that bought meme coins under $30K market cap that later peaked at $100K+, and made 5x or 10x.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%237c4dff'/%3E%3Cpath d='M8 21l6-6 4 4 6-8' stroke='white' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 <style>
   :root {
@@ -53,6 +53,15 @@
   .progress { margin-top: 14px; display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--muted); }
   .bar { flex: 1; max-width: 260px; height: 6px; border-radius: 999px; background: var(--chip); overflow: hidden; }
   .bar > span { display: block; height: 100%; background: var(--accent); border-radius: 999px; }
+
+  /* chain switcher */
+  .chains { display: flex; gap: 8px; margin: 18px 0 0; flex-wrap: wrap; }
+  .chain { display: inline-flex; align-items: center; gap: 8px; padding: 7px 14px; border-radius: 12px; cursor: pointer;
+           border: 1px solid var(--line); background: var(--panel); font-weight: 600; font-size: 14px; color: var(--muted); }
+  .chain:hover { color: var(--text); }
+  .chain[aria-pressed="true"] { color: var(--text); border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent) inset; }
+  .chain .cdot { width: 9px; height: 9px; border-radius: 50%; }
+  .chain .count { font-weight: 550; font-size: 12px; color: var(--faint); }
 
   /* tiles */
   .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin: 22px 0 18px; }
@@ -151,7 +160,7 @@
 <main>
   <header class="top">
     <div>
-      <h1>Solana Smart Wallet Tracker</h1>
+      <h1>Smart Wallet Tracker</h1>
       <p class="sub">Wallets that got in early on meme coins that ran to $100K+, and actually made money.</p>
     </div>
     <div class="top-actions">
@@ -161,8 +170,9 @@
       </button>
     </div>
   </header>
+  <div class="chains" role="group" aria-label="Chain" id="chains"></div>
   <ul class="rules" aria-label="Filters">
-    <li>Pump.fun · Raydium · Meteora · stonk.fun</li>
+    <li id="lp-chip">Pump.fun · Raydium · Meteora · stonk.fun</li>
     <li>Coins that peaked at $100K+</li>
     <li>Honeypots, low liquidity &amp; scams removed</li>
     <li>Entry under $30K mcap</li>
@@ -224,7 +234,8 @@
   </section>
 
   <footer>
-    Tap a wallet row to see every coin it hit. Coin names and wallet addresses open on GMGN.
+    Pick a chain at the top. Tap a wallet row to see every coin it hit. Coin names and wallet addresses open on GMGN
+    (Robinhood Chain: DexScreener and Blockscout, since GMGN doesn't list it).
     Data refreshes automatically. Automated on-chain analysis: past results don't predict future ones, and this is not financial advice.
   </footer>
 </main>
@@ -257,16 +268,33 @@ const ago = (iso) => {
   if (s < 86400) return Math.round(s / 3600) + " h ago";
   return Math.round(s / 86400) + " d ago";
 };
-const gmgnToken = (mint) => `https://gmgn.ai/sol/token/${encodeURIComponent(mint)}`;
-const gmgnWallet = (a) => `https://gmgn.ai/sol/address/${encodeURIComponent(a)}`;
+// Each chain: where its data lives, how PnL is measured, and where coins / wallets / txs open.
+const CHAINS = {
+  solana:    {name: "Solana", color: "#9945ff", data: "data/", unit: "SOL", gmgn: "sol", explorer: "https://solscan.io",
+              explorerName: "Solscan", dex: "solana", launchpads: "Pump.fun · Raydium · Meteora · stonk.fun"},
+  bsc:       {name: "BSC", color: "#f0b90b", data: "data/chains/bsc/", unit: "USD", gmgn: "bsc", explorer: "https://bscscan.com",
+              explorerName: "BscScan", dex: "bsc", launchpads: "four.meme · Flap"},
+  base:      {name: "Base", color: "#0052ff", data: "data/chains/base/", unit: "USD", gmgn: "base", explorer: "https://basescan.org",
+              explorerName: "BaseScan", dex: "base", launchpads: "Clanker · Zora · Bankr"},
+  robinhood: {name: "Robinhood", color: "#b8e600", data: "data/chains/robinhood/", unit: "USD", gmgn: null,
+              explorer: "https://robinhoodchain.blockscout.com", explorerName: "Blockscout", dex: "robinhood",
+              launchpads: "Pons · Pools.trade · Long.xyz · launchpad.meme"},
+};
+const C = () => CHAINS[state.chain];
+const gmgnToken = (mint) => C().gmgn ? `https://gmgn.ai/${C().gmgn}/token/${encodeURIComponent(mint)}`
+                                      : `https://dexscreener.com/${C().dex}/${encodeURIComponent(mint)}`;
+const gmgnWallet = (a) => C().gmgn ? `https://gmgn.ai/${C().gmgn}/address/${encodeURIComponent(a)}`
+                                    : `${C().explorer}/address/${encodeURIComponent(a)}`;
 const coinLink = (mint, symbol, cls = "coin") =>
-  `<a class="${cls}" href="${gmgnToken(mint)}" target="_blank" rel="noopener" title="Open ${esc(symbol)} on GMGN">${esc(symbol || short(mint))}</a>`;
+  `<a class="${cls}" href="${gmgnToken(mint)}" target="_blank" rel="noopener" title="Open ${esc(symbol)} on ${C().gmgn ? "GMGN" : "DexScreener"}">${esc(symbol || short(mint))}</a>`;
+const pnlOf = (h) => h.pnl_sol ?? h.pnl_usd;
 const tier = (x) => x >= 10 ? `<span class="tier ten">10x+</span>` : `<span class="tier">5x+</span>`;
-const pnl = (v) => v == null ? "–" : `<span class="${v >= 0 ? "good" : "bad"}">${v >= 0 ? "+" : ""}${num(v)} SOL</span>`;
+const pnl = (v) => v == null ? "–" : `<span class="${v >= 0 ? "good" : "bad"}">${v >= 0 ? "+" : "−"}${
+  C().unit === "USD" ? money(Math.abs(v)) : num(Math.abs(v)) + " SOL"}</span>`;
 const copyIcon = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>`;
 const wallet = (a) => `<span class="addr"><a href="${gmgnWallet(a)}" target="_blank" rel="noopener" title="Open wallet on GMGN"><code>${esc(short(a))}</code></a>
   <button class="copy" data-copy="${esc(a)}" title="Copy address" aria-label="Copy wallet address">${copyIcon}</button>
-  <a class="ext hide-sm" href="https://solscan.io/account/${esc(a)}" target="_blank" rel="noopener" title="Open on Solscan">Solscan</a></span>`;
+  <a class="ext hide-sm" href="${C().explorer}/${state.chain === "solana" ? "account" : "address"}/${esc(a)}" target="_blank" rel="noopener" title="Open on ${C().explorerName}">${C().explorerName}</a></span>`;
 
 function toast(msg) {
   const t = $("#toast"); t.textContent = msg; t.classList.add("show");
@@ -291,15 +319,17 @@ $("#theme").onclick = () => {
 
 // ---------- tabs
 function showTab(name) {
+  state.tab = name;
   $$(".tab").forEach(t => t.setAttribute("aria-selected", String(t.dataset.tab === name)));
   $$("[data-panel]").forEach(p => p.hidden = p.dataset.panel !== name);
   store.set("tab", name);
-  if (location.hash !== "#" + name) history.replaceState(null, "", "#" + name);
+  const h = "#" + state.chain + "/" + name;
+  if (location.hash !== h) history.replaceState(null, "", h);
 }
 $$(".tab").forEach(t => t.onclick = () => showTab(t.dataset.tab));
 
 // ---------- data
-const state = { wallets: [], tokens: [], index: [], runs: [], cfg: null,
+const state = { chain: "solana", tab: "wallets", wallets: [], tokens: [], index: [], runs: [], cfg: null, counts: {},
                 wf: "all", wq: "", sort: {key: "hits", dir: -1}, open: new Set(), cf: "analyzed", cq: "" };
 
 async function getJSON(path, fallback) {
@@ -315,7 +345,7 @@ function buildWallets(raw) {
     return {
       addr, hits, n: hits.length, best: m[m.length - 1], median: mid, tenx: m.filter(x => x >= 10).length,
       entry: hits.reduce((a, h) => a + (h.avg_entry_mcap || 0), 0) / hits.length,
-      pnl: hits.reduce((a, h) => a + (h.pnl_sol || 0), 0),
+      pnl: hits.reduce((a, h) => a + (pnlOf(h) || 0), 0),
       last: hits.reduce((a, h) => h.found_at > a ? h.found_at : a, ""),
       text: (addr + " " + hits.map(h => clean(h.symbol) + " " + h.mint).join(" ")).toLowerCase(),
     };
@@ -350,7 +380,7 @@ function renderWallets() {
       ${c.sort ? `data-sort="${c.key}" tabindex="0"` : ""}${aria}>${c.h}${arrow}</th>`;
   }).join("")}</tr></thead>`;
   if (!rows.length) {
-    const msg = state.wallets.length ? "No wallets match this filter." : "No wallets yet. The agent adds them as coins it watches reach $100K.";
+    const msg = state.wallets.length ? "No wallets match this filter." : `No ${C().name} wallets yet. The agent adds them as coins it watches reach $100K.`;
     $("#w-table").innerHTML = head + `<tbody><tr><td colspan="${W_COLS.length}"><div class="empty"><strong>Nothing here yet</strong>${msg}</div></td></tr></tbody>`;
     return bindSort();
   }
@@ -369,12 +399,12 @@ function renderWallets() {
       <td class="muted hide-sm">${ago(w.last)}</td></tr>`;
     if (!open) return main;
     const detail = `<tr class="detail"><td colspan="${W_COLS.length}"><div class="scroll"><table>
-      <thead><tr><th>Coin</th><th class="num">Avg entry mcap</th><th class="num">Multiple</th><th class="num">SOL in</th>
+      <thead><tr><th>Coin</th><th class="num">Avg entry mcap</th><th class="num">Multiple</th><th class="num">${C().unit === "SOL" ? "SOL in" : "Cost"}</th>
       <th class="num">PnL</th><th class="num">Still holding</th><th>First buy</th></tr></thead><tbody>
       ${w.hits.map(h => `<tr><td>${coinLink(h.mint, h.symbol)}</td><td class="num">${money(h.avg_entry_mcap)}</td>
-        <td class="num">${tier(h.multiple)} ${num(h.multiple, 1)}x</td><td class="num">${num(h.sol_in, 2)}</td>
-        <td class="num">${pnl(h.pnl_sol)}</td><td class="num">${num(h.still_holding_pct, 0)}%</td>
-        <td>${h.first_buy_sig ? `<a href="https://solscan.io/tx/${esc(h.first_buy_sig)}" target="_blank" rel="noopener">${ago(h.first_buy_time)}</a>` : ago(h.first_buy_time)}</td></tr>`).join("")}
+        <td class="num">${tier(h.multiple)} ${num(h.multiple, 1)}x</td><td class="num">${C().unit === "SOL" ? num(h.sol_in, 2) : money(h.usd_in)}</td>
+        <td class="num">${pnl(pnlOf(h))}</td><td class="num">${num(h.still_holding_pct, 0)}%</td>
+        <td>${h.first_buy_sig ? `<a href="${C().explorer}/tx/${esc(h.first_buy_sig)}" target="_blank" rel="noopener">${ago(h.first_buy_time)}</a>` : ago(h.first_buy_time)}</td></tr>`).join("")}
       </tbody></table></div></td></tr>`;
     return main + detail;
   }).join("");
@@ -424,7 +454,7 @@ function renderCoins() {
   }
   $("#c-table").innerHTML = head + `<tbody>${rows.map(t => `<tr>
     <td class="sticky">${coinLink(t.mint, t.symbol)}
-      <a class="ext" href="https://dexscreener.com/solana/${esc(t.mint)}" target="_blank" rel="noopener" title="Chart on DexScreener">chart</a></td>
+      <a class="ext" href="https://dexscreener.com/${C().dex}/${esc(t.mint)}" target="_blank" rel="noopener" title="Chart on DexScreener">chart</a></td>
     <td><span class="badge">${esc(t.origin)}</span></td>
     <td class="num">${money(t.peak_mcap_usd ?? t.mcap_usd)}</td>
     <td class="num">${money(t.mcap_usd)}</td>
@@ -461,7 +491,7 @@ async function showReport(day) {
   $("#r-prev").disabled = i >= state.index.length - 1;
   $("#r-next").disabled = i <= 0;
   $("#report").innerHTML = `<div style="padding:18px"><div class="skeleton" style="width:70%"></div></div>`;
-  const r = await getJSON(`data/reports/${day}.json`, null);
+  const r = await getJSON(`${C().data}reports/${day}.json`, null);
   if (!r) { $("#report").innerHTML = `<div class="empty">Couldn't load this report.</div>`; return; }
   const s = r.stats;
   const rows = r.new_wallets || [];
@@ -473,7 +503,7 @@ async function showReport(day) {
       <th class="num">Multiple</th><th class="num">PnL</th><th class="num">Still holding</th></tr></thead><tbody>
       ${rows.map(w => `<tr><td class="sticky">${wallet(w.wallet)}</td><td>${coinLink(w.mint, w.symbol)}</td>
         <td class="num">${money(w.avg_entry_mcap)}</td><td class="num">${tier(w.multiple)} ${num(w.multiple, 1)}x</td>
-        <td class="num">${pnl(w.pnl_sol)}</td><td class="num">${num(w.still_holding_pct, 0)}%</td></tr>`).join("")}
+        <td class="num">${pnl(pnlOf(w))}</td><td class="num">${num(w.still_holding_pct, 0)}%</td></tr>`).join("")}
       </tbody></table></div>` : `<div class="empty"><strong>No new wallets this day</strong>Coins that hit $100K had no early buyers who made 5x+.</div>`}`;
 }
 $("#r-day").onchange = (e) => showReport(e.target.value);
@@ -486,7 +516,7 @@ function renderHeader() {
   const mins = last ? (Date.now() - new Date(last.at)) / 60000 : Infinity;
   const dot = mins < 50 ? "live" : mins < 180 ? "late" : "";
   $("#status").innerHTML = `<span class="dot ${dot}"></span>${last
-    ? `${mins < 50 ? "Live" : "Delayed"} · last scan ${ago(last.at)}${last.sol_usd ? ` · SOL $${num(last.sol_usd, 0)}` : ""}`
+    ? `${mins < 50 ? "Live" : "Delayed"} · ${C().name} scanned ${ago(last.at)}${last.sol_usd ? ` · SOL $${num(last.sol_usd, 0)}` : ""}`
     : "Waiting for the first scan"}`;
   const camp = state.cfg && state.cfg.campaign;
   if (camp) {
@@ -512,29 +542,60 @@ function renderHeader() {
   $("#c-coins").textContent = analysed;
 }
 
+function renderChains() {
+  $("#chains").innerHTML = Object.entries(CHAINS).map(([k, c]) =>
+    `<button class="chain" data-chain="${k}" aria-pressed="${k === state.chain}">
+      <span class="cdot" style="background:${c.color}"></span>${c.name}
+      <span class="count">${state.counts[k] ?? ""}</span></button>`).join("");
+  $$("#chains .chain").forEach(b => b.onclick = () => switchChain(b.dataset.chain));
+  $("#lp-chip").textContent = C().launchpads;
+}
+
+async function loadCounts() {  // wallets tracked per chain, for the switcher
+  const all = await Promise.all(Object.entries(CHAINS).map(async ([k, c]) =>
+    [k, Object.keys(await getJSON(c.data + "wallets.json", {})).length]));
+  state.counts = Object.fromEntries(all);
+  renderChains();
+}
+
+function switchChain(k) {
+  if (!CHAINS[k] || k === state.chain) return;
+  state.chain = k; state.open.clear(); store.set("chain", k);
+  showTab(state.tab); renderChains(); load(true);
+}
+
 async function load(first) {
+  const base = C().data, chain = state.chain;
   const [index, wallets, tokens, runs, meta] = await Promise.all([
-    getJSON("data/reports/index.json", []), getJSON("data/wallets.json", {}), getJSON("data/tokens.json", {}),
-    getJSON("data/runs.json", []), getJSON("data/meta.json", null),
+    getJSON(base + "reports/index.json", []), getJSON(base + "wallets.json", {}), getJSON(base + "tokens.json", {}),
+    getJSON(base + "runs.json", []), getJSON("data/meta.json", null),
   ]);
+  if (chain !== state.chain) return;  // the user switched chains while this was loading
   state.index = index; state.wallets = buildWallets(wallets); state.tokens = Object.values(tokens); state.runs = runs;
   state.cfg = meta;
   renderHeader(); renderWallets(); renderCoins();
+  $$("#r-prev, #r-next, #r-day").forEach(el => el.disabled = false);
   if (index.length) {
     const opts = index.map(e => `<option value="${esc(e.date)}">${esc(e.date)} · ${e.wallets_found} wallets</option>`).join("");
     const keep = $("#r-day").value;
     $("#r-day").innerHTML = opts;
-    if (first || !keep) showReport(index[0].date); else $("#r-day").value = keep;
+    if (first || !keep || !index.some(e => e.date === keep)) showReport(index[0].date); else $("#r-day").value = keep;
   } else {
     $("#report").innerHTML = `<div class="empty"><strong>No reports yet</strong>The first one is written at the end of the day (UTC).</div>`;
     $$("#r-prev, #r-next, #r-day").forEach(el => el.disabled = true);
   }
 }
 
-const initial = (location.hash || "").slice(1) || store.get("tab") || "wallets";
-showTab(["wallets", "reports", "coins"].includes(initial) ? initial : "wallets");
+// URL: #<chain>/<tab>, e.g. #bsc/wallets (old #wallets links still work)
+const [h1, h2] = (location.hash || "").slice(1).split("/");
+const hashChain = CHAINS[h1] ? h1 : null;
+state.chain = hashChain || (CHAINS[store.get("chain")] ? store.get("chain") : "solana");
+const initialTab = (hashChain ? h2 : h1) || store.get("tab") || "wallets";
+renderChains();
+showTab(["wallets", "reports", "coins"].includes(initialTab) ? initialTab : "wallets");
 load(true);
-setInterval(() => { if (!document.hidden) load(false); }, 5 * 60 * 1000);
+loadCounts();
+setInterval(() => { if (!document.hidden) { load(false); loadCounts(); } }, 5 * 60 * 1000);
 </script>
 </body>
 </html>

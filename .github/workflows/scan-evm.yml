@@ -1,0 +1,71 @@
+name: Scan EVM
+
+# BSC, Base and Robinhood Chain. Runs alongside the Solana scan (scan.yml) with the same pattern:
+# each run scans every 30 minutes for ~5 hours, then starts the next run; the cron is only a backup.
+
+on:
+  schedule:
+    - cron: "47 */3 * * *"
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "Run even outside the campaign dates"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  actions: write   # to start the website deploy and the next scan run
+
+concurrency:
+  group: agent-scan-evm
+  cancel-in-progress: false
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    env:
+      EVM_RPC_BSC: ${{ secrets.EVM_RPC_BSC }}
+      EVM_RPC_BASE: ${{ secrets.EVM_RPC_BASE }}
+      EVM_RPC_ROBINHOOD: ${{ secrets.EVM_RPC_ROBINHOOD }}
+      GH_TOKEN: ${{ github.token }}
+      FORCE: ${{ inputs.force && '--force' || '' }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Scan every 30 minutes for ~5 hours
+        run: |
+          git config user.name "wallet-agent"
+          git config user.email "wallet-agent@users.noreply.github.com"
+          stop_at=$(( $(date +%s) + 5*3600 + 20*60 ))
+          while :; do
+            started=$(date +%s)
+            python -m agent.evm_scan $FORCE || echo "::warning::scan cycle failed"
+            git add data
+            if ! git diff --cached --quiet; then
+              git commit -q -m "evm scan $(date -u +%Y-%m-%dT%H:%MZ)"
+              if git pull -q --rebase -X theirs origin "$GITHUB_REF_NAME" && git push -q; then
+                gh workflow run deploy.yml --ref "$GITHUB_REF_NAME" || echo "::warning::could not start deploy"
+              else
+                git rebase --abort 2>/dev/null || true
+                echo "::warning::push failed; retrying next cycle"
+              fi
+            fi
+            next=$(( started + 1800 ))
+            [ "$next" -ge "$stop_at" ] && break
+            wait=$(( next - $(date +%s) ))
+            [ "$wait" -gt 0 ] && sleep "$wait"
+          done
+      - name: Start the next run
+        if: always()
+        run: |
+          if python -c "import sys; from agent.common import load_config, utcnow; sys.exit(utcnow().date().isoformat() > load_config()['campaign']['end_date'])"; then
+            gh workflow run scan-evm.yml --ref "$GITHUB_REF_NAME"
+          else
+            echo "Campaign is over; not starting another run."
+          fi

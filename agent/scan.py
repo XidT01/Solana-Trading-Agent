@@ -50,12 +50,19 @@ CANDLE_SECONDS = 15 * 60
 def peak_from_candles(candles: list[list[float]], supply: float, target: float) -> tuple[float | None, int | None]:
     """(peak market cap, latest time by which the coin had reached `target`).
 
-    Candles are stamped with their START time, so the crossing happened before the END of the first
-    candle whose high reached the target. Using the start would put the target before a fast coin's launch."""
+    A single odd trade can spike one candle's high, so the coin only counts as having reached the target
+    once a candle CLOSED above it, or the high reached it in at least two candles. Candles are stamped with
+    their START time, so the crossing happened before the END of that candle."""
     if not candles or not supply:
         return None, None
-    peak = max(c[2] for c in candles) * supply
-    cross = next((int(c[0]) + CANDLE_SECONDS for c in candles if c[2] * supply >= target), None)
+    hits = [c for c in candles if c[2] * supply >= target]
+    closed = [c for c in candles if c[4] * supply >= target]
+    if len(hits) >= 2:
+        peak = max(c[2] for c in candles) * supply
+    else:
+        peak = max(c[4] for c in candles) * supply
+    firsts = [int(c[0]) for c in closed[:1]] + [int(c[0]) for c in hits[1:2]]
+    cross = min(firsts) + CANDLE_SECONDS if firsts else None
     return peak, cross
 
 

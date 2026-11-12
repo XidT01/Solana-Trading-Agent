@@ -212,9 +212,9 @@ def test_scan_end_to_end(cfg, tmp_path, monkeypatch):
 
     # MINT is at $40K now but peaked at $60K (above the $50K target) -> must still be analysed.
     # DUD peaked at $30K -> not analysed, stays on the watchlist.
-    candles = {"P" + MINT: [[1200, 0, 30000 / SUPPLY, 0, 0, 0], [1500, 0, 60000 / SUPPLY, 0, 0, 0],
-                            [1800, 0, 45000 / SUPPLY, 0, 0, 0]],
-               "PDUDpump": [[1200, 0, 30000 / SUPPLY, 0, 0, 0]]}
+    candles = {"P" + MINT: [[1200, 0, 30000 / SUPPLY, 0, 28000 / SUPPLY, 0], [1500, 0, 60000 / SUPPLY, 0, 55000 / SUPPLY, 0],
+                            [1800, 0, 45000 / SUPPLY, 0, 40000 / SUPPLY, 0]],
+               "PDUDpump": [[1200, 0, 30000 / SUPPLY, 0, 25000 / SUPPLY, 0]]}
     pairs = {MINT: [pair(MINT, "pumpswap", 30000, 40000)],
              "DUDpump": [pair("DUDpump", "pumpswap", 30000, 25000)],
              "RUG": [pair("RUG", "raydium", 30000, 90000)],
@@ -256,7 +256,7 @@ def test_scan_end_to_end(cfg, tmp_path, monkeypatch):
     hit = wallets["ALPHA"]["hits"][0]
     assert hit["tier"] == "10x+" and hit["multiple"] == pytest.approx(10.0, rel=0.01)
     # candle starting at 1500 reached $60K -> crossing by its end (2400); the chain shows it at 1600
-    assert tokens[MINT]["peak_mcap_usd"] == 60000 and tokens[MINT]["target_time"] == 1600
+    assert tokens[MINT]["peak_mcap_usd"] == 55000 and tokens[MINT]["target_time"] == 1600
     assert "DUDpump" not in tokens
     assert "DUDpump" in scan_mod.read_json(tmp_path / "watchlist.json", {})
 
@@ -328,9 +328,20 @@ def test_candle_cross_uses_candle_end():
     """Regression: a coin launched mid-candle must not get a target time before its launch."""
     from agent.scan import peak_from_candles
     launch = 1794337390  # 16:23:10, inside the candle that starts 16:15:00
-    candles = [[1794336300, 0, 2e-4, 0, 0, 0], [1794337200, 0, 3e-4, 0, 0, 0]]
+    candles = [[1794336300, 0, 2e-4, 0, 1.5e-4, 0], [1794337200, 0, 3e-4, 0, 2.8e-4, 0]]
     peak, cross = peak_from_candles(candles, 1e9, 250000)
-    assert peak == pytest.approx(300000) and cross == 1794337200 + 900 and cross > launch
+    assert peak == pytest.approx(280000) and cross == 1794337200 + 900 and cross > launch
+
+
+def test_single_spike_is_not_a_peak():
+    """Regression (USRP on Base): one odd trade spiked a 15-min high to $219K on a 7-transaction coin."""
+    from agent.scan import peak_from_candles
+    candles = [[0, 0, 30e-6, 0, 20e-6, 0], [900, 0, 219e-6, 0, 25e-6, 0], [1800, 0, 26e-6, 0, 24e-6, 0]]
+    peak, cross = peak_from_candles(candles, 1e9, 100000)
+    assert peak < 100000 and cross is None
+    candles[2][2] = 120e-6  # a second candle also trades above: a real move
+    peak, cross = peak_from_candles(candles, 1e9, 100000)
+    assert peak == pytest.approx(219000) and cross == 1800 + 900
 
 
 def test_dust_trade_does_not_fake_target_cross(cfg):
