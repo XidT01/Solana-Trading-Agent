@@ -179,6 +179,10 @@ def test_launchpad_detection(cfg):
     assert detect_launchpad("0xabc", bsc, set(), cr, R("0x" + "99" * 20, [flap]))[0] == "flap"
     assert detect_launchpad("0xdeadbeef7777", bsc, set(), cr, R("0x" + "99" * 20))[0] == "flap"
     assert detect_launchpad("0xabc", base, set(), cr, R("0x" + "99" * 20)) == ("other", "0x" + "99" * 20)
+    # o1 Launchpad (PENNY on Base): its factory is the creation tx's target
+    o1 = "0x53c59d8d335681d58f564cf62073fa3c57cf81ee"
+    assert detect_launchpad("0xeb3841d05d2ad5d941abd0defafd41a8dda19801", base, {"uniswap-v4-base"}, cr, R(o1))[0] == "o1"
+    assert detect_launchpad("0xabc", rh, {"o1-launchpad-robinhood"}, None, R(None))[0] == "o1"
 
 
 def test_evm_safety_checks(cfg):

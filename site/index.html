@@ -275,10 +275,10 @@ const CHAINS = {
   bsc:       {name: "BSC", color: "#f0b90b", data: "data/chains/bsc/", unit: "USD", gmgn: "bsc", explorer: "https://bscscan.com",
               explorerName: "BscScan", dex: "bsc", launchpads: "four.meme · Flap"},
   base:      {name: "Base", color: "#0052ff", data: "data/chains/base/", unit: "USD", gmgn: "base", explorer: "https://basescan.org",
-              explorerName: "BaseScan", dex: "base", launchpads: "Clanker · Zora · Bankr"},
+              explorerName: "BaseScan", dex: "base", launchpads: "Clanker · Zora · Bankr · o1"},
   robinhood: {name: "Robinhood", color: "#b8e600", data: "data/chains/robinhood/", unit: "USD", gmgn: null,
               explorer: "https://robinhoodchain.blockscout.com", explorerName: "Blockscout", dex: "robinhood",
-              launchpads: "Pons · Pools.trade · Long.xyz · launchpad.meme"},
+              launchpads: "Pons · Pools.trade · Long.xyz · launchpad.meme · o1"},
 };
 const C = () => CHAINS[state.chain];
 const gmgnToken = (mint) => C().gmgn ? `https://gmgn.ai/${C().gmgn}/token/${encodeURIComponent(mint)}`

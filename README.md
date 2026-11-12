@@ -59,8 +59,8 @@ Solana scan. The website has a chain switcher at the top.
 | Chain | Launchpads tracked | How the launchpad is recognised |
 |---|---|---|
 | BSC | four.meme, Flap | GeckoTerminal's `four-meme` label, the four.meme / Flap contracts, `…4444` / `…7777` / `…8888` addresses |
-| Base | Clanker, Zora, Bankr | the Clanker and Zora factory contracts, GeckoTerminal's `bankr` label |
-| Robinhood | Pons, Pools.trade, Long.xyz, launchpad.meme | GeckoTerminal's launchpad labels, the Pons contract |
+| Base | Clanker, Zora, Bankr, o1 | the Clanker, Zora and o1 factory contracts, GeckoTerminal's `bankr` / `o1-launchpad` labels |
+| Robinhood | Pons, Pools.trade, Long.xyz, launchpad.meme, o1 | GeckoTerminal's launchpad labels, the Pons contract |
 
 How it works on EVM:
 - **Trades** come from each coin's `Transfer` logs on a free public RPC (publicnode for BSC and Base,

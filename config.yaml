@@ -119,11 +119,12 @@ evm:
       log_chunk_blocks: 50000
       markets: ["0x498581ff718922c3f8e6a244956af099b2652b2b"]   # Uniswap v4 PoolManager
       launchpads:
-        allowed: [clanker, zora, bankr]
-        gt_dex: {bankr: bankr}
+        allowed: [clanker, zora, bankr, o1]
+        gt_dex: {bankr: bankr, o1-launchpad: o1}
         contracts:
           "0xe85a59c628f7d27878aceb4bf3b35733630083a9": clanker     # Clanker v4 factory
           "0x777777751622c0d3258f214f9df38e35bf45baf3": zora        # Zora coin factory
+          "0x53c59d8d335681d58f564cf62073fa3c57cf81ee": o1          # o1 tax-token factory (seen on PENNY)
         suffixes: {}
     robinhood:
       name: Robinhood
@@ -134,7 +135,7 @@ evm:
       honeypot_is: false
       log_chunk_blocks: 50000
       launchpads:
-        allowed: [pons, pools.trade, long.xyz, launchpad.meme]
+        allowed: [pons, pools.trade, long.xyz, launchpad.meme, o1]
         gt_dex:
           pons-dot-family: pons
           pons-v2: pons
@@ -144,6 +145,7 @@ evm:
           clanker-robinhood: clanker
           bankr-robinhood: bankr
           up-v3: up
+          o1-launchpad-robinhood: o1
         contracts:
           "0xe33e9e479df8802cb0866d5d05258bec4cf62948": pons        # Pons V2 (seen on pons-v2 launches)
           "0xd3f2cc1731b7fd17f28798835c2e02f0a1839a94": clanker
