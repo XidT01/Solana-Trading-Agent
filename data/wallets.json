@@ -26,6 +26,87 @@
    }
   ]
  },
+ "2jwJXsMvCixvYBUhoX4QZe7ZHQEfQRPBiQm2VMky9nSe": {
+  "hits": [
+   {
+    "avg_entry_mcap": 18074,
+    "first_buy_sig": "cSkTYS5vmfwZ6ZWRVwwbjJgmMk3EuUeqGgnTsb8QZqGJe8iUP6NwbWi2x4gXfwJMra2GeecLjiV6q7CxcJry9Kk",
+    "first_buy_time": 1794340486,
+    "first_entry_mcap": 18006,
+    "found_at": "2026-11-12T03:39:26.672774+00:00",
+    "hold_fraction_at_target": 0.0,
+    "mint": "CbmdFB7ruUfTHb1uRWC99knEni77CQKfFZL6qq2fLoat",
+    "multiple": 5.32,
+    "n_trades": 14,
+    "origin": "raydium-launchlab",
+    "pnl_sol": 5.327,
+    "qualified": true,
+    "realised_multiple": 5.32,
+    "sol_in": 1.234,
+    "sol_out": 6.561,
+    "still_holding_pct": 0.0,
+    "symbol": "AIRDROP",
+    "tier": "5x+",
+    "transferred_out": false,
+    "unrealised_sol": 0.0,
+    "wallet": "2jwJXsMvCixvYBUhoX4QZe7ZHQEfQRPBiQm2VMky9nSe"
+   }
+  ]
+ },
+ "4v3vtdjkSXvULfmjTJm3NMkeyf7mdvHxHnUPHf9gwZ1a": {
+  "hits": [
+   {
+    "avg_entry_mcap": 22818,
+    "first_buy_sig": "2gTaTgq2vfbuJJtwrzdEVF7LckaVNh8sz4NjHQKRw6bAdpdwqwB7FHFF4axwvSSEY8e1j5BibQ5VoB4BJvp1WZg8",
+    "first_buy_time": 1794340519,
+    "first_entry_mcap": 21378,
+    "found_at": "2026-11-12T03:39:26.672774+00:00",
+    "hold_fraction_at_target": 0.0,
+    "mint": "CbmdFB7ruUfTHb1uRWC99knEni77CQKfFZL6qq2fLoat",
+    "multiple": 6.78,
+    "n_trades": 11,
+    "origin": "raydium-launchlab",
+    "pnl_sol": 33.166,
+    "qualified": true,
+    "realised_multiple": 6.78,
+    "sol_in": 5.7405,
+    "sol_out": 38.9065,
+    "still_holding_pct": 0.0,
+    "symbol": "AIRDROP",
+    "tier": "5x+",
+    "transferred_out": false,
+    "unrealised_sol": 0.0,
+    "wallet": "4v3vtdjkSXvULfmjTJm3NMkeyf7mdvHxHnUPHf9gwZ1a"
+   }
+  ]
+ },
+ "84vL38o5zTQjvA2fv7f3MgwXVBm8rBs1QBVXHtranQy5": {
+  "hits": [
+   {
+    "avg_entry_mcap": 21791,
+    "first_buy_sig": "3n9H4YoAk2yzWTRhecVBDGcUrpLN3FJ5dmawhS7sgMUEiPQgeVSLHsEB4eE1kRJSsb6FjbWdQtjMgUDULa2pQKjU",
+    "first_buy_time": 1794340519,
+    "first_entry_mcap": 21791,
+    "found_at": "2026-11-12T03:39:26.672774+00:00",
+    "hold_fraction_at_target": 1.0,
+    "mint": "CbmdFB7ruUfTHb1uRWC99knEni77CQKfFZL6qq2fLoat",
+    "multiple": 7.22,
+    "n_trades": 5,
+    "origin": "raydium-launchlab",
+    "pnl_sol": 15.7278,
+    "qualified": true,
+    "realised_multiple": 7.22,
+    "sol_in": 2.5275,
+    "sol_out": 18.2553,
+    "still_holding_pct": 0.0,
+    "symbol": "AIRDROP",
+    "tier": "5x+",
+    "transferred_out": false,
+    "unrealised_sol": 0.0,
+    "wallet": "84vL38o5zTQjvA2fv7f3MgwXVBm8rBs1QBVXHtranQy5"
+   }
+  ]
+ },
  "9JQVoSiJjUuNoVrJnFKt1NF7UBmHgvTuTtWywARTRLcP": {
   "hits": [
    {
@@ -50,6 +131,114 @@
     "transferred_out": false,
     "unrealised_sol": 0.0,
     "wallet": "9JQVoSiJjUuNoVrJnFKt1NF7UBmHgvTuTtWywARTRLcP"
+   }
+  ]
+ },
+ "9Poex6774mBXqmYKipC212kMLDgdFPGWx6XoPvP4SJ2f": {
+  "hits": [
+   {
+    "avg_entry_mcap": 19209,
+    "first_buy_sig": "66Y3rt6X26zyeNpSEyQhjt5oZFjp9y5uQpjJWyPWRXuCUBNwY6VmULMop5LVYyE4jZMCNHVx7pHnXZaY28ymBsin",
+    "first_buy_time": 1794340486,
+    "first_entry_mcap": 17900,
+    "found_at": "2026-11-12T03:39:26.672774+00:00",
+    "hold_fraction_at_target": 0.089,
+    "mint": "CbmdFB7ruUfTHb1uRWC99knEni77CQKfFZL6qq2fLoat",
+    "multiple": 5.19,
+    "n_trades": 13,
+    "origin": "raydium-launchlab",
+    "pnl_sol": 10.4314,
+    "qualified": true,
+    "realised_multiple": 5.19,
+    "sol_in": 2.4902,
+    "sol_out": 12.9216,
+    "still_holding_pct": 0.0,
+    "symbol": "AIRDROP",
+    "tier": "5x+",
+    "transferred_out": false,
+    "unrealised_sol": 0.0,
+    "wallet": "9Poex6774mBXqmYKipC212kMLDgdFPGWx6XoPvP4SJ2f"
+   }
+  ]
+ },
+ "E4VGHnChPdgz9LeXm4RcT9s6hqfHeHX9tMExEggvmi4w": {
+  "hits": [
+   {
+    "avg_entry_mcap": 19140,
+    "first_buy_sig": "P3DcbKGNVyF1tgT7ki3i7TXF9Fik2T5fBHgpGHoyBXA8Mtbd8NCv3X1JpMYLLw4GHBeHpSdj89cqSHD4tRHS33i",
+    "first_buy_time": 1794340486,
+    "first_entry_mcap": 17705,
+    "found_at": "2026-11-12T03:39:26.672774+00:00",
+    "hold_fraction_at_target": 0.089,
+    "mint": "CbmdFB7ruUfTHb1uRWC99knEni77CQKfFZL6qq2fLoat",
+    "multiple": 5.19,
+    "n_trades": 13,
+    "origin": "raydium-launchlab",
+    "pnl_sol": 10.6266,
+    "qualified": true,
+    "realised_multiple": 5.19,
+    "sol_in": 2.5377,
+    "sol_out": 13.1644,
+    "still_holding_pct": 0.0,
+    "symbol": "AIRDROP",
+    "tier": "5x+",
+    "transferred_out": false,
+    "unrealised_sol": 0.0,
+    "wallet": "E4VGHnChPdgz9LeXm4RcT9s6hqfHeHX9tMExEggvmi4w"
+   }
+  ]
+ },
+ "EKVC43hYeFCJHHtagsjwpfFCpJaTRLLJC8Cf8cdiV9dM": {
+  "hits": [
+   {
+    "avg_entry_mcap": 18733,
+    "first_buy_sig": "1P3JmuZcSXCdzCqL89kHmbg344U8MRMgoj6bqDX9o1TVAR9qvwQMUcJgcXmG8QprfPRA6ZHYsgi8DwJHHB5mktM",
+    "first_buy_time": 1794340486,
+    "first_entry_mcap": 17812,
+    "found_at": "2026-11-12T03:39:26.672774+00:00",
+    "hold_fraction_at_target": 0.0,
+    "mint": "CbmdFB7ruUfTHb1uRWC99knEni77CQKfFZL6qq2fLoat",
+    "multiple": 5.11,
+    "n_trades": 15,
+    "origin": "raydium-launchlab",
+    "pnl_sol": 6.3222,
+    "qualified": true,
+    "realised_multiple": 5.11,
+    "sol_in": 1.5365,
+    "sol_out": 7.8587,
+    "still_holding_pct": 0.0,
+    "symbol": "AIRDROP",
+    "tier": "5x+",
+    "transferred_out": false,
+    "unrealised_sol": 0.0,
+    "wallet": "EKVC43hYeFCJHHtagsjwpfFCpJaTRLLJC8Cf8cdiV9dM"
+   }
+  ]
+ },
+ "GdvbFB6WGaWddun8ZSU492m6dy9pHybEgJ36B5UH7dpH": {
+  "hits": [
+   {
+    "avg_entry_mcap": 18571,
+    "first_buy_sig": "3ngaAJk4jbke2u6tNGEn4YxpdQiskxsX4UxGcjYEBEtHkcjKQTjJtGbzwZDMfx7ja1fVFyEJ7gABc8UatY6DHayQ",
+    "first_buy_time": 1794340482,
+    "first_entry_mcap": 18571,
+    "found_at": "2026-11-12T03:39:26.672774+00:00",
+    "hold_fraction_at_target": 0.0,
+    "mint": "CbmdFB7ruUfTHb1uRWC99knEni77CQKfFZL6qq2fLoat",
+    "multiple": 5.17,
+    "n_trades": 13,
+    "origin": "raydium-launchlab",
+    "pnl_sol": 3.5953,
+    "qualified": true,
+    "realised_multiple": 5.17,
+    "sol_in": 0.8615,
+    "sol_out": 4.4568,
+    "still_holding_pct": 0.0,
+    "symbol": "AIRDROP",
+    "tier": "5x+",
+    "transferred_out": false,
+    "unrealised_sol": 0.0,
+    "wallet": "GdvbFB6WGaWddun8ZSU492m6dy9pHybEgJ36B5UH7dpH"
    }
   ]
  }
