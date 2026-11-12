@@ -8,6 +8,9 @@ on:
       date:
         description: "UTC date (YYYY-MM-DD), default today"
         required: false
+  push:   # editing .github/run-report sends a report right away (lets a commit trigger it)
+    branches: [main]
+    paths: [".github/run-report"]
 
 permissions:
   contents: write
