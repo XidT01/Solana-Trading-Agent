@@ -132,6 +132,21 @@ def test_evm_wallet_analysis(cfg):
     assert addr("SNIPER") not in checked and addr("BETA") not in checked and FEE not in checked
 
 
+def test_coin_launched_above_entry_cap_is_skipped(cfg):
+    """Regression (GLDSTN on Base): a Zora coin launched at ~$1M, so no wallet could enter below $30K."""
+    flat = PriceSeries([[[T0 + 60 * i, 1e-3, 0, 0, 1e-3, 1] for i in range(30)]])
+    res = EvmAnalyzer(FakeRPC(launch()), cfg).analyze("0xtoken", {"tx": "0x0", "block": 99}, SUPPLY, DEC, flat,
+                                                      1e-3, head=10 ** 6)
+    assert res["status"] == "skipped" and res["reason"].startswith("launched_above_entry_cap")
+
+
+def test_launch_contract_is_not_a_holder(cfg):
+    """Regression (GM on BSC): GoPlus listed the Flap curve, holding 100% of supply, as a wallet."""
+    gp = {"holders": [{"address": "0x9E7Ce8434D1633aa3c23fdb18f03ceca1934375a", "percent": "1.0", "is_contract": "0"}]}
+    assert goplus_checks(gp, cfg) == ["concentrated_holders_top10_100pct"]
+    assert goplus_checks(gp, cfg, {"0x9e7ce8434d1633aa3c23fdb18f03ceca1934375a"}) == []
+
+
 def test_price_cross_ignores_single_spike():
     candles = [[T0 + 60 * i, 0, 0, 0, 1e-5, 1] for i in range(30)]
     candles[3][4] = 1e-3  # one absurd minute

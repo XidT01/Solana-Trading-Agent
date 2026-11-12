@@ -75,10 +75,12 @@ def honeypot_is_checks(hp: dict | None, cfg: dict) -> list[str]:
     return reasons
 
 
-def evm_safety(chain: dict, token: str, cfg: dict) -> tuple[list[str], str]:
-    """(reasons to reject, coverage note). Coverage is 'full', 'goplus_only' or 'basic'."""
+def evm_safety(chain: dict, token: str, cfg: dict, not_holders: set[str] = frozenset()) -> tuple[list[str], str]:
+    """(reasons to reject, coverage note). Coverage is 'full', 'goplus_only' or 'basic'.
+    `not_holders`: the coin's own launch / bonding-curve / pool contracts, which hold supply but aren't
+    holders (GoPlus sometimes labels them as wallets, e.g. Flap's curve showed as one wallet with 100%)."""
     gp = goplus(chain["chain_id"], token)
-    reasons = goplus_checks(gp, cfg)
+    reasons = goplus_checks(gp, cfg, {a.lower() for a in not_holders if a})
     hp = honeypot_is(chain["chain_id"], token) if chain.get("honeypot_is") else None
     reasons += honeypot_is_checks(hp, cfg)
     coverage = "full" if gp and hp else "goplus_only" if gp else "honeypot_is_only" if hp else "basic"

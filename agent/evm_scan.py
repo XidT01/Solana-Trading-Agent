@@ -129,13 +129,14 @@ def scan_chain(key: str, chain: dict, cfg: dict, now, ds, gt, rpc=None) -> dict:
             break
         t = rec["mint"]
         watch.pop(t, None)
-        reasons, coverage = evm_safety(chain, t, cfg)
+        not_holders = {(rec["creation"] or {}).get("minted_to"), rec["factory"], t,
+                       *(chain["launchpads"].get("contracts") or {}), *(chain.get("markets") or [])}
+        reasons, coverage = evm_safety(chain, t, cfg, not_holders)
         rec["security_scan"] = coverage
         if reasons:
             stats["safety_rejected"] += 1
             tokens[t] = {**rec, "verdict": "rejected", "stage": "safety", "reasons": reasons}
             continue
-        budget -= 1
         try:
             erc = rpc.erc20(t)
             if not erc or not rec["creation"]:
@@ -145,9 +146,12 @@ def scan_chain(key: str, chain: dict, cfg: dict, now, ds, gt, rpc=None) -> dict:
             prices = fetch_prices(gt, net, t, rec["pools"], created_ts, int(now.timestamp()))
             res = analyzer.analyze(t, rec["creation"], supply, decimals, prices, rec["price_usd"], head,
                                    rec["target_time_hint"])
+            if not res.get("reason", "").startswith("launched_above_entry_cap"):
+                budget -= 1  # only full wallet scans count against the daily budget
         except Exception as err:  # one bad token must not kill the run
             log.exception("%s analysis failed for %s", key, t)
             res = {"status": "skipped", "reason": f"error: {err}"}
+            budget -= 1
         if res["status"] != "analyzed":
             stats["skipped"] += 1
             tokens[t] = {**rec, "verdict": "skipped", "stage": "wallets", "reasons": [res["reason"]]}

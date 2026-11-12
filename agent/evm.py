@@ -298,6 +298,10 @@ class EvmAnalyzer:
                 price_now: float, head: int, target_hint: int | None = None) -> dict:
         if not prices:
             return {"status": "skipped", "reason": "no_price_history"}
+        launch_mcap = prices.op[0] * supply
+        if launch_mcap >= self.w["max_entry_mcap_usd"]:
+            # e.g. Zora coins that start at ~$1M: nobody could buy below the entry cap
+            return {"status": "skipped", "reason": f"launched_above_entry_cap (${launch_mcap:,.0f})"}
         start = max(0, creation["block"] - 5)
         logs = self.rpc.logs(token, [TRANSFER], start, head, self.e["max_transfer_logs"])
         if logs is None:
