@@ -405,3 +405,55 @@ def test_insider_network_rejected(cfg):
     rep = {"score_normalised": 1, "risks": [], "insiderNetworks": [{"size": 237}, {"size": 4}]}
     assert rugcheck_checks(rep, None, load_config()) == ["insider_network_237_wallets"]
     assert rugcheck_checks({"insiderNetworks": [{"size": 19}]}, None, load_config()) == []
+
+
+def test_peak_checks_rotate(cfg, tmp_path, monkeypatch):
+    """Regression (PENNY): peak checks always went to the biggest coins by current market cap, so a coin
+    that had peaked above the target and fallen back was never checked."""
+    import yaml
+    from agent import scan as scan_mod
+    chain = launch()
+    now_ms = datetime.now(timezone.utc).timestamp() * 1000
+
+    def pair(mint, mcap):
+        return {"baseToken": {"address": mint, "symbol": mint[:4]}, "quoteToken": {"symbol": "SOL"},
+                "dexId": "pumpswap", "pairAddress": "P" + mint, "priceUsd": str(mcap / SUPPLY),
+                "priceNative": str(price_sol_at(mcap)), "marketCap": mcap, "liquidity": {"usd": 30000},
+                "pairCreatedAt": now_ms - 3.6e6, "txns": {"h24": {"buys": 500, "sells": 50}}, "volume": {"h24": 1e5}}
+
+    pairs = {"BIGpump": [pair("BIGpump", 45000)], MINT: [pair(MINT, 30000)]}   # MINT is smaller now...
+    candles = {"PBIGpump": [[1200, 0, 46000 / SUPPLY, 0, 45000 / SUPPLY, 0]],
+               "P" + MINT: [[1500, 0, 60000 / SUPPLY, 0, 55000 / SUPPLY, 0]]}  # ...but peaked above $50K
+    checked = []
+
+    class FakeDS:
+        def latest_solana_mints(self): return list(pairs)
+        def pairs_for(self, mints): return {m: pairs.get(m, []) for m in mints}
+        def sol_usd(self): return SOL_USD
+
+    class FakeGT:
+        def new_pools(self, pages): return []
+        def ohlcv(self, pool, hours): checked.append(pool); return candles.get(pool, [])
+
+    class FakeRC:
+        def report(self, mint): return {"score_normalised": 5, "risks": []}
+
+    rpc = chain.rpc()
+    rpc.mint_info = lambda m: {"program": "x", "supply": SUPPLY, "decimals": 6,
+                               "mint_authority": None, "freeze_authority": None, "extensions": []}
+    for name, val in (("DATA", tmp_path), ("DexScreener", FakeDS), ("GeckoTerminal", FakeGT), ("RugCheck", FakeRC),
+                      ("SolanaRPC", lambda *a: rpc)):
+        monkeypatch.setattr(scan_mod, name, val)
+    monkeypatch.setenv("SOLANA_RPC_URL", "http://fake")
+    cfg["discovery"]["max_peak_checks_per_run"] = 1
+    cfg_file = tmp_path / "cfg.yaml"
+    cfg_file.write_text(yaml.safe_dump(cfg))
+
+    assert scan_mod.main(["--force", "--config", str(cfg_file)]) == 0
+    assert checked == ["PBIGpump"] and MINT not in scan_mod.read_json(tmp_path / "tokens.json", {})
+    assert scan_mod.main(["--force", "--config", str(cfg_file)]) == 0   # next scan: MINT's turn
+    assert checked[1] == "P" + MINT
+    tokens = scan_mod.read_json(tmp_path / "tokens.json", {})
+    assert tokens[MINT]["verdict"] == "analyzed" and tokens[MINT]["peak_mcap_usd"] == 55000
+    peaks = scan_mod.read_json(tmp_path / "peaks.json", {})
+    assert "BIGpump" in peaks and MINT not in peaks   # only coins still on the watchlist are remembered

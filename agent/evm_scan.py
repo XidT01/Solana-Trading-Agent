@@ -80,9 +80,14 @@ def scan_chain(key: str, chain: dict, cfg: dict, now, ds, gt, rpc=None) -> dict:
         snaps[t] = (m, age_h)
 
     head = None
+    # Peak checks are rate-limited, so rotate them: coins never checked first, then the longest-unchecked.
+    # (Ordering by current market cap starved coins that had peaked and fallen back, e.g. PENNY.)
+    # Each coin's last measured peak is remembered between scans.
+    peaks = read_json(out / "peaks.json", {})
     peak_checks = 0
     shortlist = []
-    for t, (m, age_h) in sorted(snaps.items(), key=lambda kv: -kv[1][0]["mcap_usd"]):
+    order = sorted(snaps.items(), key=lambda kv: ((peaks.get(kv[0]) or {}).get("at", ""), -kv[1][0]["mcap_usd"]))
+    for t, (m, age_h) in order:
         if m["mcap_usd"] < d["peak_check_min_mcap_usd"] and m["mcap_usd"] < target:
             stats["below_target_peak"] += 1
             continue
@@ -91,6 +96,9 @@ def scan_chain(key: str, chain: dict, cfg: dict, now, ds, gt, rpc=None) -> dict:
         if peak_checks < d["max_peak_checks_per_run"] and m["pair"]:
             peak_checks += 1
             peak, cross_t = peak_from_candles(gt.ohlcv(m["pair"], d["max_token_age_hours"] + 2, net), supply_est, target)
+            peaks[t] = {"at": now.isoformat(), "peak": round(peak or 0), "cross": cross_t}
+        elif peaks.get(t):
+            peak, cross_t = peaks[t].get("peak"), peaks[t].get("cross")
         peak = max(peak or 0, m["mcap_usd"])
         if peak < target:
             stats["below_target_peak"] += 1
@@ -180,6 +188,7 @@ def scan_chain(key: str, chain: dict, cfg: dict, now, ds, gt, rpc=None) -> dict:
     write_json(out / "wallets.json", wallets)
     write_json(out / "seen.json", seen)
     write_json(out / "watchlist.json", watch)
+    write_json(out / "peaks.json", {k: v for k, v in peaks.items() if k in watch})
     runs = read_json(out / "runs.json", [])
     runs.append({"at": now.isoformat(), "rpc_calls": rpc.calls, **stats,
                  "unknown_factories": dict(unknown_factories.most_common(5))})

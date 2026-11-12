@@ -30,7 +30,7 @@ jobs:
           mkdir -p public
           cp -r site/. public/
           cp -r data public/data
-          find public/data \( -name seen.json -o -name watchlist.json \) -delete
+          find public/data \( -name seen.json -o -name watchlist.json -o -name peaks.json \) -delete
           start=$(grep -oP 'start_date: "\K[^"]+' config.yaml); end=$(grep -oP 'end_date: "\K[^"]+' config.yaml)
           echo "{\"campaign\": {\"start\": \"$start\", \"end\": \"$end\"}}" > public/data/meta.json
       - uses: actions/configure-pages@v6
