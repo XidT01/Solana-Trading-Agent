@@ -1,4 +1,5 @@
 """Offline tests for the EVM engine: a simulated launch on a bonding curve, run through the real code."""
+import re
 import pytest
 
 from agent.common import load_config
@@ -174,3 +175,52 @@ def test_evm_safety_checks(cfg):
     assert goplus_checks({"holders": holders}, cfg) == ["concentrated_holders_top10_50pct"]
     assert honeypot_is_checks({"honeypotResult": {"isHoneypot": True}, "simulationResult": {"sellTax": 30}}, cfg) == [
         "honeypot_simulation_failed_sell", "simulated_sellTax_30pct"]
+
+
+def _report(chain, new, leaderboard=(), runs=3):
+    return {"chain": chain, "stats": {"runs": runs, "analyzed": 2, "rejected": 1, "wallets_found": len(new)},
+            "new_wallets": list(new), "leaderboard": list(leaderboard), "passed_tokens": [], "ai_summary": None}
+
+
+def test_telegram_digest(cfg, monkeypatch):
+    from html.parser import HTMLParser
+    from agent import digest
+    sol_hit = {"wallet": "2Tp9scbrD3mrzFCQexmw56QY19bZ7VtRydAqkXUB8D65", "mint": "GHtnAtTCPFz8MRTMQiEyuEob283EUgqd1d1Fysnhpump",
+               "symbol": "VE<YL>‮", "multiple": 36.12, "avg_entry_mcap": 4946, "pnl_sol": 49.81}
+    bsc_hit = {"wallet": "0x" + "ab" * 20, "mint": "0x" + "12" * 18 + "4444", "symbol": "DOG", "multiple": 6.2,
+               "avg_entry_mcap": 21000, "pnl_usd": 1234.5}
+    lb = [{"wallet": "0x" + "ab" * 20, "hits": 2, "tokens": ["DOG", "CAT"], "median_multiple": 7.0,
+           "last_hit": "2026-11-12T10:00:00+00:00"}]
+    reports = {"solana": _report("solana", [sol_hit]), "bsc": _report("bsc", [bsc_hit], lb), "base": None,
+               "robinhood": _report("robinhood", [], runs=0)}
+    msgs = digest.build_messages("2026-11-12", reports, cfg)
+    text = "\n".join(msgs)
+    assert "2 new wallets today, 1 at 10x+" in re.sub("<[^>]+>", "", text)
+    assert "https://gmgn.ai/sol/token/GHtnAtTCPFz8MRTMQiEyuEob283EUgqd1d1Fysnhpump" in text
+    assert "https://gmgn.ai/bsc/address/0x" + "ab" * 20 in text
+    assert "VE&lt;YL&gt;" in text and "‮" not in text      # escaped, bidi stripped
+    assert "+49.8 SOL" in text and "+$1.2K" in text
+    assert "Repeat winner" in text and "No scans today" in text
+
+    class Check(HTMLParser):  # Telegram only accepts a few tags, and they must be balanced
+        stack, bad = [], []
+        def handle_starttag(self, tag, attrs):
+            (self.stack.append(tag) if tag in ("b", "i", "a") else self.bad.append(tag))
+        def handle_endtag(self, tag):
+            assert self.stack.pop() == tag
+    for m in msgs:
+        p = Check(); p.feed(m)
+        assert not p.stack and not p.bad and len(m) <= 4096
+
+    sent = []
+
+    class Resp:
+        def __init__(self, ok): self.ok, self.status_code, self.text = ok, 200 if ok else 400, "can't parse entities"
+    def fake_post(url, json, timeout):
+        sent.append(json)
+        return Resp(len(sent) > 1)  # first (HTML) attempt fails -> plain-text fallback
+    monkeypatch.setattr(digest.requests, "post", fake_post)
+    monkeypatch.setenv("TELEGRAM_BOT_TOKEN", "x"); monkeypatch.setenv("TELEGRAM_CHAT_ID", "1")
+    assert digest.send(["<b>hi</b> &amp; bye"], "https://example.org/")
+    assert sent[0]["parse_mode"] == "HTML" and sent[0]["reply_markup"]["inline_keyboard"][0][0]["url"] == "https://example.org/"
+    assert "parse_mode" not in sent[1] and sent[1]["text"] == "hi & bye"

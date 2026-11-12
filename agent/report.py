@@ -1,7 +1,7 @@
 """Daily report: stats for the day + cumulative wallet leaderboard + AI analyst summary.
 
 Run:  python -m agent.report [--date YYYY-MM-DD]
-Optional env: ANTHROPIC_API_KEY (AI summary), TELEGRAM_BOT_TOKEN + TELEGRAM_CHAT_ID (push).
+Optional env: ANTHROPIC_API_KEY (AI summary). The Telegram digest is sent by agent.digest.
 """
 from __future__ import annotations
 
@@ -14,7 +14,6 @@ import sys
 from collections import Counter
 from datetime import timedelta
 
-import requests
 
 from .common import DATA, load_config, log, read_json, setup_logging, utcnow, write_json
 
@@ -130,17 +129,6 @@ def to_markdown(r: dict) -> str:
     return "\n".join(lines)
 
 
-def send_telegram(text: str) -> None:
-    token, chat = os.environ.get("TELEGRAM_BOT_TOKEN"), os.environ.get("TELEGRAM_CHAT_ID")
-    if not (token and chat):
-        return
-    try:
-        requests.post(f"https://api.telegram.org/bot{token}/sendMessage",
-                      json={"chat_id": chat, "text": text[:4000], "disable_web_page_preview": True}, timeout=20)
-    except requests.RequestException as e:
-        log.warning("Telegram send failed: %s", e)
-
-
 def data_dir(chain: str):
     if chain == "solana":
         return DATA
@@ -172,7 +160,8 @@ def build(day: str, cfg: dict, chain: str = "solana") -> dict:
         "rejection_reasons": reasons.most_common(),
         "analyzed_by_launchpad": origins.most_common(),
         "passed_tokens": [{k: t.get(k) for k in ("mint", "symbol", "origin", "mcap_usd", "liquidity_usd",
-                                                  "early_buyers_checked", "url")} for t in analyzed],
+                                                  "early_buyers_checked", "url")}
+                          | {"wallets_found": len(t.get("wallets") or [])} for t in analyzed],
         "new_wallets": new_wallets,
         "leaderboard": leaderboard(wallets, day + "T23:59:59.999999+00:00", cfg["report"]["leaderboard_size"]),
     }
@@ -204,8 +193,6 @@ def main(argv=None) -> int:
     index = [e for e in index if e["date"] != day] + [
         {"date": day, "wallets_found": report["stats"]["wallets_found"], "analyzed": report["stats"]["analyzed"]}]
     write_json(out / "index.json", sorted(index, key=lambda e: e["date"], reverse=True))
-    if report["stats"]["runs"]:  # no Telegram message for a chain that didn't scan that day
-        send_telegram(md)
     log.info("%s report written for %s: %s", args.chain, day, report["stats"])
     return 0
 

@@ -79,6 +79,7 @@ report:
   ai_summary: true                  # needs ANTHROPIC_API_KEY
   model: claude-opus-5-5
   leaderboard_size: 25
+  dashboard_url: https://xidt01.github.io/Solana-Trading-Agent/   # "Open dashboard" button in Telegram
 
 # ---------------------------------------------------------------- EVM chains
 # Same coin and wallet rules as Solana (the `wallets:` section above). Trades are read from each token's
