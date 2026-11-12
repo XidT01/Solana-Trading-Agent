@@ -1,58 +1,61 @@
 {
  "ai_summary": null,
- "analyzed_by_launchpad": [
-  [
-   "pumpfun",
-   1
-  ],
-  [
-   "raydium-launchlab",
-   1
-  ]
- ],
+ "analyzed_by_launchpad": [],
  "date": "2026-11-11",
  "filters": {
   "highlight_multiple": 10,
-  "max_entry_mcap_usd": 10000,
+  "max_entry_mcap_usd": 30000,
   "min_multiple": 5,
   "target_mcap_usd": 100000
  },
- "generated_at": "2026-11-11T03:10:40.316114+00:00",
- "leaderboard": [],
- "new_wallets": [],
- "passed_tokens": [
+ "generated_at": "2026-11-12T04:23:59.234403+00:00",
+ "leaderboard": [
   {
-   "early_buyers_checked": 0,
-   "liquidity_usd": 109079.7,
-   "mcap_usd": 1897986,
-   "mint": "5tBXkPVh716zSXHNZSr8i1PX7e6Uuj46JnBLdYchpump",
-   "origin": "pumpfun",
-   "symbol": "DACITY",
-   "url": "https://dexscreener.com/solana/89rsdzz3wncebojfruvi6omxbdytnrelfvqcvq1ophnq"
+   "avg_entry_mcap": 4946,
+   "best_multiple": 36.12,
+   "hits": 1,
+   "last_hit": "2026-11-11T08:48:25.656382+00:00",
+   "median_multiple": 36.12,
+   "tenx_hits": 1,
+   "tokens": [
+    "VEYL"
+   ],
+   "total_pnl_sol": 49.81,
+   "wallet": "2Tp9scbrD3mrzFCQexmw56QY19bZ7VtRydAqkXUB8D65"
   },
   {
-   "early_buyers_checked": 0,
-   "liquidity_usd": 43277.42,
-   "mcap_usd": 64903,
-   "mint": "6bFAqDnEQhwiZaoT4VFbwAGfFtg23DrB3bNKjPFji2QU",
-   "origin": "raydium-launchlab",
-   "symbol": "BABYMINHAO",
-   "url": "https://dexscreener.com/solana/5pyde3jewwrtwvojzitrmhtq2omc7bdmvnhz4pcpgrwd"
+   "avg_entry_mcap": 3417,
+   "best_multiple": 5.48,
+   "hits": 1,
+   "last_hit": "2026-11-11T04:35:18.444738+00:00",
+   "median_multiple": 5.48,
+   "tenx_hits": 0,
+   "tokens": [
+    "If"
+   ],
+   "total_pnl_sol": 4.54,
+   "wallet": "9JQVoSiJjUuNoVrJnFKt1NF7UBmHgvTuTtWywARTRLcP"
   }
  ],
+ "new_wallets": [],
+ "passed_tokens": [],
  "rejection_reasons": [
+  [
+   "low_liquidity",
+   3
+  ],
   [
    "thin_liquidity_vs_mcap",
    1
   ]
  ],
  "stats": {
-  "analyzed": 2,
-  "discovered": 141,
-  "rejected": 1,
-  "runs": 1,
-  "skipped": 0,
-  "tokens_checked": 3,
+  "analyzed": 0,
+  "discovered": 559,
+  "rejected": 4,
+  "runs": 4,
+  "skipped": 2,
+  "tokens_checked": 6,
   "wallets_10x": 0,
   "wallets_found": 0
  }
