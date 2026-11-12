@@ -2,11 +2,11 @@
  "5PvBRrFPvFPiMtphrmvrbL7uDzPZZRxWPLmVrySksoU1": {
   "hits": [
    {
-    "avg_entry_mcap": 2659,
+    "avg_entry_mcap": 2632,
     "first_buy_sig": "36hcTAzaHzAj2k5xmHSbRuczdAvVUSjGDUyar95ToDod9J3Yd6u181WsgFXkFXZK4gTr98pFkJoXyq1UgFmRtnyK",
     "first_buy_time": 1794472331,
-    "first_entry_mcap": 2331,
-    "found_at": "2026-11-12T12:51:12.581771+00:00",
+    "first_entry_mcap": 2306,
+    "found_at": "2026-11-12T20:27:32.458178+00:00",
     "hold_fraction_at_target": 0.0,
     "mint": "8p7GCo3fWJ55LFQbhkBd8hCpw3ACk98PgK7Lsd6Upump",
     "multiple": 6.27,
@@ -20,6 +20,7 @@
     "still_holding_pct": 0.0,
     "symbol": "Shitcoin",
     "tier": "5x+",
+    "total_multiple": 6.27,
     "transferred_out": false,
     "unrealised_sol": 0.0,
     "wallet": "5PvBRrFPvFPiMtphrmvrbL7uDzPZZRxWPLmVrySksoU1"
@@ -56,11 +57,11 @@
  "Fq6r8qHvg1Crp6EmJsLRrH49JYs2zh7e8fhBhChKpuET": {
   "hits": [
    {
-    "avg_entry_mcap": 2627,
+    "avg_entry_mcap": 2599,
     "first_buy_sig": "4NtXZJYzU5vBChnX6aSnPr8jcsNT9SDMjQYP24tQnZW3EochWJaCd8JsLM8y6A7xGVm59fSzH2NGJDkEyMuJSpNj",
     "first_buy_time": 1794472331,
-    "first_entry_mcap": 2627,
-    "found_at": "2026-11-12T12:51:12.581771+00:00",
+    "first_entry_mcap": 2599,
+    "found_at": "2026-11-12T20:27:32.458178+00:00",
     "hold_fraction_at_target": 0.0,
     "mint": "8p7GCo3fWJ55LFQbhkBd8hCpw3ACk98PgK7Lsd6Upump",
     "multiple": 6.45,
@@ -74,6 +75,7 @@
     "still_holding_pct": 0.0,
     "symbol": "Shitcoin",
     "tier": "5x+",
+    "total_multiple": 6.45,
     "transferred_out": false,
     "unrealised_sol": 0.0,
     "wallet": "Fq6r8qHvg1Crp6EmJsLRrH49JYs2zh7e8fhBhChKpuET"
