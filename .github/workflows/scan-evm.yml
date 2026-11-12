@@ -12,6 +12,9 @@ on:
         description: "Run even outside the campaign dates"
         type: boolean
         default: false
+  push:   # editing .github/run-evm-scan starts the chain right away (lets a commit start it)
+    branches: [main]
+    paths: [".github/run-evm-scan"]
 
 permissions:
   contents: write
