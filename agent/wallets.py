@@ -14,6 +14,7 @@ DUST = 1e-9
 # Trades smaller than this are ignored for pricing: network fees and account rent (~0.002 SOL)
 # dominate them, e.g. a 25-token "buy" costing 0.002 SOL would imply a $5M market cap.
 MIN_PRICED_SOL = 0.02
+WINDOW = 5  # trades per median when deciding when a coin reached the target
 
 
 @dataclass
@@ -92,19 +93,35 @@ class TokenAnalyzer:
     def mcap(self, price_sol: float | None) -> float | None:
         return price_sol * self.sol_usd * self.supply if price_sol else None
 
+    def _robust_cross(self, trades: list[Trade]) -> int | None:
+        """Time the market cap first reached the target, judged by the median of 5 consecutive priced
+        trades. Single trades can't be trusted: launch transactions (setup fees + a tiny dev buy) and
+        bundles (one wallet paying for several) imply absurd prices."""
+        priced = [(t.time, m) for t in trades if (t.is_buy or t.is_sell) and (m := self.mcap(t.price_sol()))]
+        k = WINDOW
+        for i in range(len(priced) - k + 1):
+            window = sorted(m for _, m in priced[i:i + k])
+            if window[k // 2] >= self.w["target_mcap_usd"]:
+                return priced[i + k // 2][0]
+        return None
+
     def _mcap_at_index(self, sigs: list[dict], i: int) -> float | None:
-        for j in range(i, min(i + 4, len(sigs))):
+        """Median market cap of the first few priced trades at or after signature index i."""
+        mcaps = []
+        for j in range(i, min(i + 12, len(sigs))):
             t = signer_trade(sigs[j]["signature"], self.rpc.get_transaction(sigs[j]["signature"]), self.mint,
                              self.quotes)
-            if t and (t.is_buy or t.is_sell):
-                return self.mcap(t.price_sol())
-        return None
+            if t and (t.is_buy or t.is_sell) and (m := self.mcap(t.price_sol())):
+                mcaps.append(m)
+                if len(mcaps) == WINDOW:
+                    break
+        return sorted(mcaps)[len(mcaps) // 2] if mcaps else None
 
     def _find_target_time(self, sigs: list[dict], early: list[Trade]) -> int | None:
         target = self.w["target_mcap_usd"]
-        for t in early:
-            if (t.is_buy or t.is_sell) and (self.mcap(t.price_sol()) or 0) >= target:
-                return t.time
+        cross = self._robust_cross(early)
+        if cross is not None:
+            return cross
         start = min(self.early_count, len(sigs))
         if start >= len(sigs):
             return None
@@ -156,9 +173,8 @@ class TokenAnalyzer:
         launch_slot = sigs[0].get("slot")
 
         if target_time_hint:
-            early_cross = [t.time for t in early if (t.is_buy or t.is_sell)
-                           and (self.mcap(t.price_sol()) or 0) >= self.w["target_mcap_usd"]]
-            t_target = min([target_time_hint] + early_cross)
+            early_cross = self._robust_cross(early)
+            t_target = min(target_time_hint, early_cross) if early_cross else target_time_hint
             if sigs[0].get("blockTime") and t_target < sigs[0]["blockTime"]:
                 return {"status": "skipped", "reason": "target_time_before_launch", "creator": creator}
         else:

@@ -4,187 +4,537 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Smart Wallet Tracker</title>
-<meta name="description" content="Daily on-chain report of Solana wallets that bought meme coins under $30K market cap that later peaked at $100K+, and made 5x or 10x.">
+<meta name="description" content="Solana wallets that bought meme coins under $30K market cap that later peaked at $100K+, and made 5x or 10x.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%237c4dff'/%3E%3Cpath d='M8 21l6-6 4 4 6-8' stroke='white' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 <style>
   :root {
-    --bg: #f6f7f9; --panel: #ffffff; --text: #14171c; --muted: #5d6673; --line: #e3e6eb;
-    --accent: #7c4dff; --good: #0f8a5f; --bad: #c2373a; --chip: #eef0f4;
+    --bg: #f5f6f8; --panel: #ffffff; --panel-2: #f9fafb; --text: #12151a; --muted: #5b6472; --faint: #8a93a1;
+    --line: #e4e7ec; --accent: #6d3df5; --accent-soft: #efe9ff; --good: #0b7a52; --good-soft: #e3f5ec;
+    --bad: #c0352f; --warn: #a15c00; --warn-soft: #fdf1df; --chip: #eef0f4; --shadow: 0 1px 2px rgba(16,24,40,.05);
+  }
+  :root[data-theme="dark"] {
+    --bg: #0b0d11; --panel: #14181e; --panel-2: #181d24; --text: #e7eaef; --muted: #9aa3b0; --faint: #6d7684;
+    --line: #252b34; --accent: #a78bfa; --accent-soft: #241c3d; --good: #3ccf8e; --good-soft: #10291f;
+    --bad: #ff6b66; --warn: #f0b04a; --warn-soft: #2d2212; --chip: #1e242c; --shadow: none;
   }
   @media (prefers-color-scheme: dark) {
-    :root { --bg: #0d0f13; --panel: #161a20; --text: #e8eaee; --muted: #9aa3b1; --line: #262c35;
-            --accent: #a98bff; --good: #3ccf91; --bad: #ff6b6e; --chip: #20252d; }
+    :root:not([data-theme="light"]) {
+      --bg: #0b0d11; --panel: #14181e; --panel-2: #181d24; --text: #e7eaef; --muted: #9aa3b0; --faint: #6d7684;
+      --line: #252b34; --accent: #a78bfa; --accent-soft: #241c3d; --good: #3ccf8e; --good-soft: #10291f;
+      --bad: #ff6b66; --warn: #f0b04a; --warn-soft: #2d2212; --chip: #1e242c; --shadow: none;
+    }
   }
   * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
   body { margin: 0; background: var(--bg); color: var(--text);
-         font: 15px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
-  main { max-width: 1120px; margin: 0 auto; padding: 28px 16px 64px; }
-  header h1 { margin: 0; font-size: 26px; letter-spacing: -0.01em; }
-  header p { margin: 6px 0 0; color: var(--muted); }
-  .rules { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 0; padding: 0; list-style: none; }
-  .rules li { background: var(--chip); border-radius: 999px; padding: 4px 12px; font-size: 13px; color: var(--muted); }
-  .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin: 24px 0; }
-  .tile { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; }
-  .tile .k { color: var(--muted); font-size: 13px; }
-  .tile .v { font-size: 26px; font-weight: 650; font-variant-numeric: tabular-nums; margin-top: 2px; }
-  section { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 18px; margin-top: 18px; }
-  section h2 { margin: 0 0 12px; font-size: 18px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
-  .scroll { overflow-x: auto; }
-  table { width: 100%; border-collapse: collapse; font-size: 14px; }
-  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); white-space: nowrap; }
-  th { color: var(--muted); font-weight: 550; font-size: 12px; text-transform: uppercase; letter-spacing: .04em; }
-  td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+         font: 15px/1.5 Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
   a { color: var(--accent); text-decoration: none; }
   a:hover { text-decoration: underline; }
-  code { font: 13px ui-monospace, SFMono-Regular, Menlo, monospace; }
-  .tier { display: inline-block; border-radius: 6px; padding: 1px 7px; font-size: 12px; font-weight: 600;
+  button { font: inherit; color: inherit; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 6px; }
+  code, .mono { font: 13px/1.4 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+  main { max-width: 1180px; margin: 0 auto; padding: 24px 16px 72px; }
+
+  /* header */
+  .top { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  h1 { margin: 0; font-size: 24px; letter-spacing: -.015em; }
+  .sub { margin: 4px 0 0; color: var(--muted); }
+  .top-actions { display: flex; gap: 8px; align-items: center; }
+  .pill { display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 999px;
+          background: var(--panel); border: 1px solid var(--line); font-size: 13px; color: var(--muted); white-space: nowrap; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--faint); flex: none; }
+  .dot.live { background: var(--good); box-shadow: 0 0 0 3px var(--good-soft); }
+  .dot.late { background: var(--warn); box-shadow: 0 0 0 3px var(--warn-soft); }
+  .icon-btn { background: var(--panel); border: 1px solid var(--line); border-radius: 999px; width: 34px; height: 34px;
+              display: inline-grid; place-items: center; cursor: pointer; }
+  .icon-btn:hover { background: var(--panel-2); }
+  .rules { display: flex; flex-wrap: wrap; gap: 6px; margin: 14px 0 0; padding: 0; list-style: none; }
+  .rules li { background: var(--chip); border-radius: 999px; padding: 3px 11px; font-size: 13px; color: var(--muted); }
+  .progress { margin-top: 14px; display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--muted); }
+  .bar { flex: 1; max-width: 260px; height: 6px; border-radius: 999px; background: var(--chip); overflow: hidden; }
+  .bar > span { display: block; height: 100%; background: var(--accent); border-radius: 999px; }
+
+  /* tiles */
+  .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin: 22px 0 18px; }
+  .tile { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; box-shadow: var(--shadow); }
+  .tile .k { color: var(--muted); font-size: 13px; }
+  .tile .v { font-size: 28px; font-weight: 650; letter-spacing: -.02em; font-variant-numeric: tabular-nums; margin-top: 2px; }
+  .tile .h { color: var(--faint); font-size: 12px; margin-top: 2px; }
+
+  /* tabs */
+  .tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--line); margin-bottom: 16px; overflow-x: auto; }
+  .tab { background: none; border: 0; padding: 10px 14px; cursor: pointer; color: var(--muted); font-weight: 550;
+         border-bottom: 2px solid transparent; margin-bottom: -1px; white-space: nowrap; }
+  .tab[aria-selected="true"] { color: var(--text); border-bottom-color: var(--accent); }
+  .tab .count { display: inline-block; min-width: 20px; padding: 0 6px; margin-left: 6px; border-radius: 999px;
+                background: var(--chip); color: var(--muted); font-size: 12px; text-align: center; }
+  .panel { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; box-shadow: var(--shadow); }
+  .panel-head { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; padding: 14px 16px; border-bottom: 1px solid var(--line); }
+  .panel-head h2 { margin: 0 auto 0 0; font-size: 16px; }
+
+  /* controls */
+  .search { flex: 1 1 220px; max-width: 320px; position: relative; }
+  .search input { width: 100%; padding: 7px 10px 7px 32px; border-radius: 10px; border: 1px solid var(--line);
+                  background: var(--panel-2); color: var(--text); font: inherit; font-size: 14px; }
+  .search svg { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: var(--faint); }
+  .seg { display: inline-flex; background: var(--chip); border-radius: 10px; padding: 3px; }
+  .seg button { border: 0; background: none; padding: 4px 10px; border-radius: 8px; cursor: pointer; font-size: 13px; color: var(--muted); }
+  .seg button[aria-pressed="true"] { background: var(--panel); color: var(--text); box-shadow: var(--shadow); font-weight: 550; }
+  select { font: inherit; font-size: 14px; padding: 6px 8px; border-radius: 10px; border: 1px solid var(--line);
+           background: var(--panel-2); color: var(--text); }
+  .nav-btn { border: 1px solid var(--line); background: var(--panel-2); border-radius: 10px; padding: 5px 10px; cursor: pointer; }
+  .nav-btn:disabled { opacity: .4; cursor: default; }
+
+  /* tables */
+  .scroll { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); white-space: nowrap; vertical-align: middle; }
+  tbody tr:last-child > td { border-bottom: 0; }
+  th { color: var(--muted); font-weight: 550; font-size: 12px; text-transform: uppercase; letter-spacing: .04em; background: var(--panel-2); }
+  th.sortable { cursor: pointer; user-select: none; }
+  th.sortable:hover { color: var(--text); }
+  th .arrow { opacity: .35; margin-left: 2px; }
+  th[aria-sort] .arrow { opacity: 1; color: var(--accent); }
+  .num { text-align: right; font-variant-numeric: tabular-nums; }
+  tr.row { cursor: pointer; }
+  tr.row:hover > td { background: var(--panel-2); }
+  tr.detail > td { background: var(--panel-2); padding: 0 12px 14px 44px; }
+  .caret { display: inline-block; width: 14px; color: var(--faint); transition: transform .15s; }
+  tr.open .caret { transform: rotate(90deg); }
+  td.sticky, th.sticky { position: sticky; left: 0; z-index: 1; }
+  td.sticky { background: var(--panel); }
+  tr.row:hover td.sticky { background: var(--panel-2); }
+  th.sticky { background: var(--panel-2); }
+
+  .addr { display: inline-flex; align-items: center; gap: 6px; }
+  .copy { border: 0; background: none; cursor: pointer; color: var(--faint); padding: 2px; border-radius: 4px; line-height: 0; }
+  .copy:hover { color: var(--text); }
+  .ext { color: var(--faint); font-size: 12px; }
+  .coin { font-weight: 600; }
+  .chips { display: flex; gap: 4px; flex-wrap: nowrap; }
+  .chip { display: inline-block; padding: 1px 8px; border-radius: 6px; background: var(--chip); color: var(--text);
+          font-size: 12.5px; font-weight: 550; }
+  a.chip:hover { background: var(--accent-soft); color: var(--accent); text-decoration: none; }
+  .tier { display: inline-block; padding: 1px 7px; border-radius: 6px; font-size: 12px; font-weight: 650;
           background: var(--chip); color: var(--muted); }
-  .tier.ten { background: var(--accent); color: var(--panel); }
-  .good { color: var(--good); } .bad { color: var(--bad); } .muted { color: var(--muted); }
-  select { font: inherit; padding: 4px 8px; border-radius: 8px; border: 1px solid var(--line); background: var(--bg); color: var(--text); }
-  .summary { line-height: 1.6; } .summary h3 { font-size: 15px; margin: 16px 0 4px; }
-  .summary ul { margin: 4px 0; padding-left: 20px; }
-  .empty { color: var(--muted); padding: 12px 0; }
-  footer { color: var(--muted); font-size: 13px; margin-top: 28px; }
+  .tier.ten { background: var(--accent); color: #fff; }
+  .badge { display: inline-block; padding: 1px 7px; border-radius: 6px; font-size: 12px; background: var(--chip); color: var(--muted); }
+  .good { color: var(--good); } .bad { color: var(--bad); } .muted { color: var(--muted); } .faint { color: var(--faint); }
+  .empty { color: var(--muted); padding: 28px 16px; text-align: center; }
+  .empty strong { display: block; color: var(--text); margin-bottom: 4px; }
+
+  .summary { padding: 16px 18px; line-height: 1.65; border-bottom: 1px solid var(--line); }
+  .summary h3 { font-size: 14px; margin: 14px 0 4px; } .summary h3:first-child { margin-top: 0; }
+  .summary p { margin: 4px 0; } .summary ul { margin: 4px 0; padding-left: 20px; }
+  .stats-line { padding: 12px 18px; color: var(--muted); font-size: 14px; border-bottom: 1px solid var(--line); }
+  .stats-line strong { color: var(--text); }
+
+  .toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%) translateY(20px); opacity: 0;
+           background: var(--text); color: var(--bg); padding: 8px 14px; border-radius: 10px; font-size: 13px;
+           transition: all .2s; pointer-events: none; }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+  footer { color: var(--faint); font-size: 13px; margin-top: 28px; line-height: 1.6; }
+  .skeleton { height: 14px; border-radius: 6px; background: linear-gradient(90deg, var(--chip), var(--panel-2), var(--chip));
+              background-size: 200% 100%; animation: sh 1.2s infinite; }
+  @keyframes sh { to { background-position: -200% 0; } }
+  [hidden] { display: none !important; }
+  @media (max-width: 640px) {
+    h1 { font-size: 20px; }
+    .tile .v { font-size: 22px; }
+    th, td { padding: 9px 10px; }
+    tr.detail > td { padding-left: 12px; }
+    .hide-sm { display: none; }
+  }
 </style>
 </head>
 <body>
 <main>
-  <header>
-    <h1>Solana Smart Wallet Tracker</h1>
-    <p id="status">Loading…</p>
-    <ul class="rules">
-      <li>Launches: Pump.fun · Raydium · Meteora · Stonk</li>
-      <li>Coins that peaked at $100K+ mcap</li>
-      <li>Honeypots, low liquidity &amp; scams removed</li>
-      <li>Entry &lt; $30K mcap</li>
-      <li>5x+ from entry · 10x+ highlighted</li>
-    </ul>
+  <header class="top">
+    <div>
+      <h1>Solana Smart Wallet Tracker</h1>
+      <p class="sub">Wallets that got in early on meme coins that ran to $100K+, and actually made money.</p>
+    </div>
+    <div class="top-actions">
+      <span class="pill" id="status"><span class="dot"></span>Loading…</span>
+      <button class="icon-btn" id="theme" title="Toggle light / dark" aria-label="Toggle light or dark theme">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+    </div>
   </header>
+  <ul class="rules" aria-label="Filters">
+    <li>Pump.fun · Raydium · Meteora · stonk.fun</li>
+    <li>Coins that peaked at $100K+</li>
+    <li>Honeypots, low liquidity &amp; scams removed</li>
+    <li>Entry under $30K mcap</li>
+    <li>5x+ from entry · 10x+ highlighted</li>
+  </ul>
+  <div class="progress" id="progress" hidden><div class="bar"><span></span></div><span class="label"></span></div>
 
-  <div class="tiles" id="tiles"></div>
-
-  <section>
-    <h2>Daily report <select id="day" aria-label="Report date"></select></h2>
-    <div id="report"><p class="empty">No reports yet — the first one is written after today's peak window closes.</p></div>
+  <section class="tiles" id="tiles" aria-label="Summary">
+    <div class="tile"><div class="skeleton" style="width:60%"></div><div class="skeleton" style="width:40%;height:24px;margin-top:8px"></div></div>
+    <div class="tile"><div class="skeleton" style="width:60%"></div><div class="skeleton" style="width:40%;height:24px;margin-top:8px"></div></div>
+    <div class="tile"><div class="skeleton" style="width:60%"></div><div class="skeleton" style="width:40%;height:24px;margin-top:8px"></div></div>
+    <div class="tile"><div class="skeleton" style="width:60%"></div><div class="skeleton" style="width:40%;height:24px;margin-top:8px"></div></div>
   </section>
 
-  <section>
-    <h2>Wallet leaderboard</h2>
-    <div class="scroll" id="leaderboard"></div>
+  <nav class="tabs" role="tablist" aria-label="Sections">
+    <button class="tab" role="tab" data-tab="wallets" aria-selected="true">Wallets <span class="count" id="c-wallets">0</span></button>
+    <button class="tab" role="tab" data-tab="reports" aria-selected="false">Daily reports <span class="count" id="c-reports">0</span></button>
+    <button class="tab" role="tab" data-tab="coins" aria-selected="false">Coins <span class="count" id="c-coins">0</span></button>
+  </nav>
+
+  <!-- Wallets -->
+  <section class="panel" data-panel="wallets">
+    <div class="panel-head">
+      <h2>Wallet leaderboard</h2>
+      <label class="search"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="w-search" type="search" placeholder="Search wallet or coin" aria-label="Search wallet or coin"></label>
+      <div class="seg" role="group" aria-label="Filter wallets">
+        <button data-wf="all" aria-pressed="true">All</button>
+        <button data-wf="ten" aria-pressed="false">10x+</button>
+        <button data-wf="repeat" aria-pressed="false">2+ coins</button>
+      </div>
+    </div>
+    <div class="scroll"><table id="w-table"></table></div>
   </section>
 
-  <section>
-    <h2>Recently analysed tokens</h2>
-    <div class="scroll" id="tokens"></div>
+  <!-- Reports -->
+  <section class="panel" data-panel="reports" hidden>
+    <div class="panel-head">
+      <h2>Daily report</h2>
+      <button class="nav-btn" id="r-prev" aria-label="Previous day">‹</button>
+      <select id="r-day" aria-label="Report date"></select>
+      <button class="nav-btn" id="r-next" aria-label="Next day">›</button>
+    </div>
+    <div id="report"></div>
   </section>
 
-  <footer>Automated on-chain analysis. Wallet history does not predict future results. Not financial advice.</footer>
+  <!-- Coins -->
+  <section class="panel" data-panel="coins" hidden>
+    <div class="panel-head">
+      <h2>Coins checked</h2>
+      <label class="search"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="c-search" type="search" placeholder="Search coin" aria-label="Search coin"></label>
+      <div class="seg" role="group" aria-label="Filter coins">
+        <button data-cf="analyzed" aria-pressed="true">Analysed</button>
+        <button data-cf="rejected" aria-pressed="false">Removed as unsafe</button>
+      </div>
+    </div>
+    <div class="scroll"><table id="c-table"></table></div>
+  </section>
+
+  <footer>
+    Tap a wallet row to see every coin it hit. Coin names and wallet addresses open on GMGN.
+    Data refreshes automatically. Automated on-chain analysis: past results don't predict future ones, and this is not financial advice.
+  </footer>
 </main>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
 <script>
-const $ = (id) => document.getElementById(id);
-const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const $ = (s, el = document) => el.querySelector(s);
+const $$ = (s, el = document) => [...el.querySelectorAll(s)];
+const store = {
+  get(k) { try { return localStorage.getItem(k); } catch { return null; } },
+  set(k, v) { try { localStorage.setItem(k, v); } catch {} },
+};
+// Strip bidi control characters (some coin names contain U+202E to flip text) and HTML-escape.
+const clean = (s) => String(s ?? "").replace(/[‎‏‪-‮⁦-⁩]/g, "");
+const esc = (s) => clean(s).replace(/[&<>"']/g, (c) => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const short = (a) => a ? `${a.slice(0, 4)}…${a.slice(-4)}` : "";
-const usd = (n) => n == null ? "–" : "$" + Math.round(n).toLocaleString();
+const money = (n) => {
+  if (n == null || isNaN(n)) return "–";
+  const a = Math.abs(n);
+  if (a >= 1e6) return "$" + (n / 1e6).toFixed(a >= 1e7 ? 1 : 2).replace(/\.0+$/, "") + "M";
+  if (a >= 1e3) return "$" + (n / 1e3).toFixed(a >= 1e5 ? 0 : 1).replace(/\.0$/, "") + "K";
+  return "$" + Math.round(n);
+};
 const num = (n, d = 2) => n == null ? "–" : Number(n).toLocaleString(undefined, {maximumFractionDigits: d});
-const walletLink = (a) => `<a href="https://solscan.io/account/${esc(a)}" target="_blank" rel="noopener"><code>${esc(short(a))}</code></a>
-  <a class="muted" href="https://gmgn.ai/sol/address/${esc(a)}" target="_blank" rel="noopener" title="Open on GMGN">↗</a>`;
-const tokenLink = (t) => `<a href="https://dexscreener.com/solana/${esc(t.mint)}" target="_blank" rel="noopener">${esc(t.symbol || short(t.mint))}</a>`;
-const tier = (x) => `<span class="tier ${x >= 10 ? "ten" : ""}">${x >= 10 ? "10x+" : "5x+"}</span>`;
-const pnl = (v) => `<span class="${v >= 0 ? "good" : "bad"}">${v >= 0 ? "+" : ""}${num(v)}</span>`;
+const ago = (iso) => {
+  if (!iso) return "–";
+  const s = (Date.now() - new Date(typeof iso === "number" ? iso * 1000 : iso)) / 1000;
+  if (s < 60) return "just now";
+  if (s < 3600) return Math.round(s / 60) + " min ago";
+  if (s < 86400) return Math.round(s / 3600) + " h ago";
+  return Math.round(s / 86400) + " d ago";
+};
+const gmgnToken = (mint) => `https://gmgn.ai/sol/token/${encodeURIComponent(mint)}`;
+const gmgnWallet = (a) => `https://gmgn.ai/sol/address/${encodeURIComponent(a)}`;
+const coinLink = (mint, symbol, cls = "coin") =>
+  `<a class="${cls}" href="${gmgnToken(mint)}" target="_blank" rel="noopener" title="Open ${esc(symbol)} on GMGN">${esc(symbol || short(mint))}</a>`;
+const tier = (x) => x >= 10 ? `<span class="tier ten">10x+</span>` : `<span class="tier">5x+</span>`;
+const pnl = (v) => v == null ? "–" : `<span class="${v >= 0 ? "good" : "bad"}">${v >= 0 ? "+" : ""}${num(v)} SOL</span>`;
+const copyIcon = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>`;
+const wallet = (a) => `<span class="addr"><a href="${gmgnWallet(a)}" target="_blank" rel="noopener" title="Open wallet on GMGN"><code>${esc(short(a))}</code></a>
+  <button class="copy" data-copy="${esc(a)}" title="Copy address" aria-label="Copy wallet address">${copyIcon}</button>
+  <a class="ext hide-sm" href="https://solscan.io/account/${esc(a)}" target="_blank" rel="noopener" title="Open on Solscan">Solscan</a></span>`;
+
+function toast(msg) {
+  const t = $("#toast"); t.textContent = msg; t.classList.add("show");
+  clearTimeout(toast.t); toast.t = setTimeout(() => t.classList.remove("show"), 1600);
+}
+document.addEventListener("click", async (e) => {
+  const b = e.target.closest("[data-copy]");
+  if (!b) return;
+  e.stopPropagation();
+  try { await navigator.clipboard.writeText(b.dataset.copy); toast("Wallet address copied"); }
+  catch { toast("Couldn't copy, select it manually"); }
+});
+
+// ---------- theme
+const applyTheme = (t) => { if (t) document.documentElement.dataset.theme = t; else delete document.documentElement.dataset.theme; };
+applyTheme(store.get("theme"));
+$("#theme").onclick = () => {
+  const dark = document.documentElement.dataset.theme
+    ? document.documentElement.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+  const next = dark ? "light" : "dark"; applyTheme(next); store.set("theme", next);
+};
+
+// ---------- tabs
+function showTab(name) {
+  $$(".tab").forEach(t => t.setAttribute("aria-selected", String(t.dataset.tab === name)));
+  $$("[data-panel]").forEach(p => p.hidden = p.dataset.panel !== name);
+  store.set("tab", name);
+  if (location.hash !== "#" + name) history.replaceState(null, "", "#" + name);
+}
+$$(".tab").forEach(t => t.onclick = () => showTab(t.dataset.tab));
+
+// ---------- data
+const state = { wallets: [], tokens: [], index: [], runs: [], cfg: null,
+                wf: "all", wq: "", sort: {key: "hits", dir: -1}, open: new Set(), cf: "analyzed", cq: "" };
 
 async function getJSON(path, fallback) {
-  try { const r = await fetch(path, {cache: "no-store"}); return r.ok ? await r.json() : fallback; }
+  try { const r = await fetch(path + "?t=" + Date.now(), {cache: "no-store"}); return r.ok ? await r.json() : fallback; }
   catch { return fallback; }
 }
 
-function md(text) {  // tiny, safe Markdown subset for the AI summary
+function buildWallets(raw) {
+  return Object.entries(raw).map(([addr, w]) => {
+    const hits = [...w.hits].sort((a, b) => b.multiple - a.multiple);
+    const m = hits.map(h => h.multiple).sort((a, b) => a - b);
+    const mid = m.length % 2 ? m[(m.length - 1) / 2] : (m[m.length / 2 - 1] + m[m.length / 2]) / 2;
+    return {
+      addr, hits, n: hits.length, best: m[m.length - 1], median: mid, tenx: m.filter(x => x >= 10).length,
+      entry: hits.reduce((a, h) => a + (h.avg_entry_mcap || 0), 0) / hits.length,
+      pnl: hits.reduce((a, h) => a + (h.pnl_sol || 0), 0),
+      last: hits.reduce((a, h) => h.found_at > a ? h.found_at : a, ""),
+      text: (addr + " " + hits.map(h => clean(h.symbol) + " " + h.mint).join(" ")).toLowerCase(),
+    };
+  });
+}
+
+// ---------- wallets table
+const W_COLS = [
+  {key: "addr", h: "Wallet", sticky: true},
+  {key: "best", h: "Best", num: true, sort: w => w.best},
+  {key: "pnl", h: "Total PnL", num: true, sort: w => w.pnl},
+  {key: "coins", h: "Coins"},
+  {key: "hits", h: "Hits", num: true, sort: w => w.n, cls: "hide-sm"},
+  {key: "entry", h: "Avg entry", num: true, sort: w => w.entry},
+  {key: "median", h: "Median", num: true, sort: w => w.median, cls: "hide-sm"},
+  {key: "last", h: "Last hit", sort: w => w.last, cls: "hide-sm"},
+];
+function renderWallets() {
+  const q = state.wq.trim().toLowerCase();
+  let rows = state.wallets.filter(w =>
+    (state.wf === "all" || (state.wf === "ten" && w.tenx > 0) || (state.wf === "repeat" && w.n > 1)) && (!q || w.text.includes(q)));
+  const col = W_COLS.find(c => c.key === state.sort.key);
+  rows.sort((a, b) => {
+    const va = col.sort(a), vb = col.sort(b);
+    return (va < vb ? -1 : va > vb ? 1 : 0) * state.sort.dir || b.best - a.best;
+  });
+  const head = `<thead><tr>${W_COLS.map(c => {
+    const sorted = state.sort.key === c.key;
+    const aria = sorted ? ` aria-sort="${state.sort.dir > 0 ? "ascending" : "descending"}"` : "";
+    const arrow = c.sort ? `<span class="arrow">${sorted && state.sort.dir > 0 ? "▲" : "▼"}</span>` : "";
+    return `<th class="${[c.num && "num", c.sort && "sortable", c.sticky && "sticky", c.cls].filter(Boolean).join(" ")}"
+      ${c.sort ? `data-sort="${c.key}" tabindex="0"` : ""}${aria}>${c.h}${arrow}</th>`;
+  }).join("")}</tr></thead>`;
+  if (!rows.length) {
+    const msg = state.wallets.length ? "No wallets match this filter." : "No wallets yet. The agent adds them as coins it watches reach $100K.";
+    $("#w-table").innerHTML = head + `<tbody><tr><td colspan="${W_COLS.length}"><div class="empty"><strong>Nothing here yet</strong>${msg}</div></td></tr></tbody>`;
+    return bindSort();
+  }
+  const body = rows.map(w => {
+    const open = state.open.has(w.addr);
+    const coins = `<div class="chips">${w.hits.slice(0, 3).map(h => coinLink(h.mint, h.symbol, "chip")).join("")}${
+      w.hits.length > 3 ? `<span class="chip faint">+${w.hits.length - 3}</span>` : ""}</div>`;
+    const main = `<tr class="row${open ? " open" : ""}" data-addr="${esc(w.addr)}" tabindex="0" aria-expanded="${open}">
+      <td class="sticky"><span class="caret">›</span>${wallet(w.addr)}</td>
+      <td class="num">${tier(w.best)} <strong>${num(w.best, 1)}x</strong></td>
+      <td class="num">${pnl(w.pnl)}</td>
+      <td>${coins}</td>
+      <td class="num hide-sm"><strong>${w.n}</strong></td>
+      <td class="num">${money(w.entry)}</td>
+      <td class="num hide-sm">${num(w.median, 1)}x</td>
+      <td class="muted hide-sm">${ago(w.last)}</td></tr>`;
+    if (!open) return main;
+    const detail = `<tr class="detail"><td colspan="${W_COLS.length}"><div class="scroll"><table>
+      <thead><tr><th>Coin</th><th class="num">Avg entry mcap</th><th class="num">Multiple</th><th class="num">SOL in</th>
+      <th class="num">PnL</th><th class="num">Still holding</th><th>First buy</th></tr></thead><tbody>
+      ${w.hits.map(h => `<tr><td>${coinLink(h.mint, h.symbol)}</td><td class="num">${money(h.avg_entry_mcap)}</td>
+        <td class="num">${tier(h.multiple)} ${num(h.multiple, 1)}x</td><td class="num">${num(h.sol_in, 2)}</td>
+        <td class="num">${pnl(h.pnl_sol)}</td><td class="num">${num(h.still_holding_pct, 0)}%</td>
+        <td>${h.first_buy_sig ? `<a href="https://solscan.io/tx/${esc(h.first_buy_sig)}" target="_blank" rel="noopener">${ago(h.first_buy_time)}</a>` : ago(h.first_buy_time)}</td></tr>`).join("")}
+      </tbody></table></div></td></tr>`;
+    return main + detail;
+  }).join("");
+  $("#w-table").innerHTML = head + `<tbody>${body}</tbody>`;
+  bindSort();
+  $$("#w-table tr.row").forEach(tr => {
+    const toggle = (e) => {
+      if (e.target.closest("a, button")) return;
+      const a = tr.dataset.addr;
+      state.open.has(a) ? state.open.delete(a) : state.open.add(a);
+      renderWallets();
+    };
+    tr.onclick = toggle;
+    tr.onkeydown = (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(e); } };
+  });
+}
+function bindSort() {
+  $$("#w-table th[data-sort]").forEach(th => {
+    const go = () => {
+      const k = th.dataset.sort;
+      state.sort = {key: k, dir: state.sort.key === k ? -state.sort.dir : -1};
+      renderWallets();
+    };
+    th.onclick = go;
+    th.onkeydown = (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); go(); } };
+  });
+}
+$("#w-search").oninput = (e) => { state.wq = e.target.value; renderWallets(); };
+$$("[data-wf]").forEach(b => b.onclick = () => {
+  state.wf = b.dataset.wf; $$("[data-wf]").forEach(x => x.setAttribute("aria-pressed", String(x === b))); renderWallets();
+});
+
+// ---------- coins table
+function renderCoins() {
+  const q = state.cq.trim().toLowerCase();
+  const rows = state.tokens.filter(t => t.verdict === state.cf &&
+    (!q || (clean(t.symbol) + " " + clean(t.name) + " " + t.mint).toLowerCase().includes(q)))
+    .sort((a, b) => (b.checked_at || "").localeCompare(a.checked_at || "")).slice(0, 200);
+  const analysed = state.cf === "analyzed";
+  const head = `<thead><tr><th class="sticky">Coin</th><th>Launch</th><th class="num">Peak mcap</th><th class="num">Mcap now</th>
+    <th class="num">Liquidity</th>${analysed ? `<th class="num">Early buyers</th><th class="num">Wallets found</th>` : `<th>Why removed</th>`}
+    <th class="hide-sm">Checked</th></tr></thead>`;
+  if (!rows.length) {
+    $("#c-table").innerHTML = head + `<tbody><tr><td colspan="8"><div class="empty"><strong>Nothing here yet</strong>
+      ${state.tokens.length ? "No coins match." : "Coins appear here once they peak at $100K+."}</div></td></tr></tbody>`;
+    return;
+  }
+  $("#c-table").innerHTML = head + `<tbody>${rows.map(t => `<tr>
+    <td class="sticky">${coinLink(t.mint, t.symbol)}
+      <a class="ext" href="https://dexscreener.com/solana/${esc(t.mint)}" target="_blank" rel="noopener" title="Chart on DexScreener">chart</a></td>
+    <td><span class="badge">${esc(t.origin)}</span></td>
+    <td class="num">${money(t.peak_mcap_usd ?? t.mcap_usd)}</td>
+    <td class="num">${money(t.mcap_usd)}</td>
+    <td class="num">${money(t.liquidity_usd)}</td>
+    ${analysed ? `<td class="num">${t.early_buyers_checked ?? "–"}</td>
+      <td class="num">${(t.wallets || []).length ? `<strong>${t.wallets.length}</strong>` : `<span class="faint">0</span>`}</td>`
+      : `<td class="muted">${esc((t.reasons || []).join(", ").replace(/_/g, " "))}</td>`}
+    <td class="muted hide-sm">${ago(t.checked_at)}</td></tr>`).join("")}</tbody>`;
+}
+$("#c-search").oninput = (e) => { state.cq = e.target.value; renderCoins(); };
+$$("[data-cf]").forEach(b => b.onclick = () => {
+  state.cf = b.dataset.cf; $$("[data-cf]").forEach(x => x.setAttribute("aria-pressed", String(x === b))); renderCoins();
+});
+
+// ---------- reports
+function md(text) {  // small, safe Markdown subset for the AI summary
   const out = []; let list = false;
   for (const raw of esc(text).split("\n")) {
-    let line = raw.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>").replace(/`(.+?)`/g, "<code>$1</code>");
+    const line = raw.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>").replace(/`(.+?)`/g, "<code>$1</code>");
     const bullet = /^\s*[-*]\s+/.test(line);
     if (bullet && !list) { out.push("<ul>"); list = true; }
     if (!bullet && list) { out.push("</ul>"); list = false; }
     if (bullet) out.push("<li>" + line.replace(/^\s*[-*]\s+/, "") + "</li>");
     else if (/^#{1,6}\s/.test(line)) out.push("<h3>" + line.replace(/^#+\s/, "") + "</h3>");
+    else if (/^<strong>[^<]+<\/strong>$/.test(line.trim())) out.push("<h3>" + line + "</h3>");
     else if (line.trim()) out.push("<p>" + line + "</p>");
   }
   if (list) out.push("</ul>");
   return out.join("");
 }
-
-function table(cols, rows) {
-  if (!rows.length) return `<p class="empty">Nothing yet.</p>`;
-  return `<table><thead><tr>${cols.map(c => `<th class="${c.num ? "num" : ""}">${c.h}</th>`).join("")}</tr></thead>
-    <tbody>${rows.map(r => `<tr>${cols.map(c => `<td class="${c.num ? "num" : ""}">${c.f(r)}</td>`).join("")}</tr>`).join("")}</tbody></table>`;
-}
-
 async function showReport(day) {
+  const i = state.index.findIndex(e => e.date === day);
+  $("#r-day").value = day;
+  $("#r-prev").disabled = i >= state.index.length - 1;
+  $("#r-next").disabled = i <= 0;
+  $("#report").innerHTML = `<div style="padding:18px"><div class="skeleton" style="width:70%"></div></div>`;
   const r = await getJSON(`data/reports/${day}.json`, null);
-  if (!r) return;
+  if (!r) { $("#report").innerHTML = `<div class="empty">Couldn't load this report.</div>`; return; }
   const s = r.stats;
-  $("report").innerHTML = `
+  const rows = r.new_wallets || [];
+  $("#report").innerHTML = `
     ${r.ai_summary ? `<div class="summary">${md(r.ai_summary)}</div>` : ""}
-    <p class="muted">${s.runs} scans · ${s.tokens_checked} tokens checked · ${s.rejected} rejected as unsafe ·
-      ${s.analyzed} fully analysed · <strong>${s.wallets_found}</strong> qualifying wallets
-      (<strong>${s.wallets_10x ?? 0}</strong> at 10x+)</p>
-    <div class="scroll">${table([
-      {h: "Tier", f: w => tier(w.multiple)}, {h: "Wallet", f: w => walletLink(w.wallet)}, {h: "Token", f: tokenLink},
-      {h: "Avg entry", num: 1, f: w => usd(w.avg_entry_mcap)}, {h: "Multiple", num: 1, f: w => num(w.multiple) + "x"},
-      {h: "PnL (SOL)", num: 1, f: w => pnl(w.pnl_sol)}, {h: "Still holding", num: 1, f: w => num(w.still_holding_pct, 0) + "%"},
-    ], r.new_wallets)}</div>`;
+    <div class="stats-line"><strong>${s.wallets_found}</strong> qualifying wallets (<strong>${s.wallets_10x ?? 0}</strong> at 10x+) ·
+      ${s.analyzed} coins analysed · ${s.rejected} removed as unsafe · ${s.runs} scans</div>
+    ${rows.length ? `<div class="scroll"><table><thead><tr><th class="sticky">Wallet</th><th>Coin</th><th class="num">Avg entry</th>
+      <th class="num">Multiple</th><th class="num">PnL</th><th class="num">Still holding</th></tr></thead><tbody>
+      ${rows.map(w => `<tr><td class="sticky">${wallet(w.wallet)}</td><td>${coinLink(w.mint, w.symbol)}</td>
+        <td class="num">${money(w.avg_entry_mcap)}</td><td class="num">${tier(w.multiple)} ${num(w.multiple, 1)}x</td>
+        <td class="num">${pnl(w.pnl_sol)}</td><td class="num">${num(w.still_holding_pct, 0)}%</td></tr>`).join("")}
+      </tbody></table></div>` : `<div class="empty"><strong>No new wallets this day</strong>Coins that hit $100K had no early buyers who made 5x+.</div>`}`;
+}
+$("#r-day").onchange = (e) => showReport(e.target.value);
+$("#r-prev").onclick = () => { const i = state.index.findIndex(e => e.date === $("#r-day").value); if (state.index[i + 1]) showReport(state.index[i + 1].date); };
+$("#r-next").onclick = () => { const i = state.index.findIndex(e => e.date === $("#r-day").value); if (i > 0) showReport(state.index[i - 1].date); };
+
+// ---------- header + tiles
+function renderHeader() {
+  const last = state.runs[state.runs.length - 1];
+  const mins = last ? (Date.now() - new Date(last.at)) / 60000 : Infinity;
+  const dot = mins < 50 ? "live" : mins < 180 ? "late" : "";
+  $("#status").innerHTML = `<span class="dot ${dot}"></span>${last
+    ? `${mins < 50 ? "Live" : "Delayed"} · last scan ${ago(last.at)}${last.sol_usd ? ` · SOL $${num(last.sol_usd, 0)}` : ""}`
+    : "Waiting for the first scan"}`;
+  const camp = state.cfg && state.cfg.campaign;
+  if (camp) {
+    const start = new Date(camp.start + "T00:00:00Z"), end = new Date(camp.end + "T23:59:59Z");
+    const total = Math.round((end - start) / 86400000), day = Math.min(total, Math.max(1, Math.ceil((Date.now() - start) / 86400000)));
+    $("#progress").hidden = false;
+    $("#progress .bar span").style.width = Math.min(100, (100 * day) / total) + "%";
+    $("#progress .label").textContent = Date.now() > end ? "Campaign finished" : `Day ${day} of ${total}`;
+  }
+  const analysed = state.tokens.filter(t => t.verdict === "analyzed").length;
+  const removed = state.tokens.filter(t => t.verdict === "rejected").length;
+  const tiles = [
+    ["Wallets tracked", state.wallets.length, "5x+ from an early entry"],
+    ["10x+ wallets", state.wallets.filter(w => w.tenx).length, "at least one 10x"],
+    ["Repeat winners", state.wallets.filter(w => w.n > 1).length, "hit on 2+ coins"],
+    ["Coins analysed", analysed, "peaked at $100K+"],
+    ["Removed as unsafe", removed, "honeypot, liquidity, scam"],
+  ];
+  $("#tiles").innerHTML = tiles.map(([k, v, h]) =>
+    `<div class="tile"><div class="k">${k}</div><div class="v">${Number(v).toLocaleString()}</div><div class="h">${h}</div></div>`).join("");
+  $("#c-wallets").textContent = state.wallets.length;
+  $("#c-reports").textContent = state.index.length;
+  $("#c-coins").textContent = analysed;
 }
 
-(async () => {
-  const [index, wallets, tokens, runs] = await Promise.all([
-    getJSON("data/reports/index.json", []), getJSON("data/wallets.json", {}),
-    getJSON("data/tokens.json", {}), getJSON("data/runs.json", []),
+async function load(first) {
+  const [index, wallets, tokens, runs, meta] = await Promise.all([
+    getJSON("data/reports/index.json", []), getJSON("data/wallets.json", {}), getJSON("data/tokens.json", {}),
+    getJSON("data/runs.json", []), getJSON("data/meta.json", null),
   ]);
-  const last = runs[runs.length - 1];
-  $("status").textContent = last ? `Last scan ${new Date(last.at).toLocaleString()} · SOL $${num(last.sol_usd)}`
-                                 : "Waiting for the first scan.";
-
-  const tok = Object.values(tokens);
-  const lb = Object.entries(wallets).map(([wallet, w]) => {
-    const m = w.hits.map(h => h.multiple).sort((a, b) => a - b);
-    return {wallet, hits: w.hits.length, tokens: w.hits.map(h => h.symbol), tenx: m.filter(x => x >= 10).length,
-            median: m[Math.floor((m.length - 1) / 2)], best: m[m.length - 1],
-            entry: w.hits.reduce((a, h) => a + h.avg_entry_mcap, 0) / w.hits.length,
-            pnl: w.hits.reduce((a, h) => a + h.pnl_sol, 0)};
-  }).sort((a, b) => b.hits - a.hits || b.median - a.median);
-
-  $("tiles").innerHTML = [
-    ["Tokens analysed", tok.filter(t => t.verdict === "analyzed").length],
-    ["Rejected as unsafe", tok.filter(t => t.verdict === "rejected").length],
-    ["Wallets tracked", lb.length],
-    ["10x+ wallets", lb.filter(w => w.tenx > 0).length],
-    ["Repeat winners (2+ coins)", lb.filter(w => w.hits > 1).length],
-  ].map(([k, v]) => `<div class="tile"><div class="k">${k}</div><div class="v">${v.toLocaleString()}</div></div>`).join("");
-
-  $("leaderboard").innerHTML = table([
-    {h: "#", f: w => lb.indexOf(w) + 1}, {h: "Wallet", f: w => walletLink(w.wallet)},
-    {h: "Hits", num: 1, f: w => w.hits}, {h: "10x+ hits", num: 1, f: w => w.tenx},
-    {h: "Coins", f: w => esc(w.tokens.slice(-4).join(", "))},
-    {h: "Median x", num: 1, f: w => num(w.median) + "x"}, {h: "Best x", num: 1, f: w => num(w.best) + "x"},
-    {h: "Avg entry", num: 1, f: w => usd(w.entry)}, {h: "PnL (SOL)", num: 1, f: w => pnl(w.pnl)},
-  ], lb.slice(0, 50));
-
-  $("tokens").innerHTML = table([
-    {h: "Token", f: tokenLink}, {h: "Launch", f: t => esc(t.origin)},
-    {h: "Peak mcap", num: 1, f: t => usd(t.peak_mcap_usd ?? t.mcap_usd)}, {h: "Mcap now", num: 1, f: t => usd(t.mcap_usd)},
-    {h: "Liquidity", num: 1, f: t => usd(t.liquidity_usd)},
-    {h: "Early buyers", num: 1, f: t => t.early_buyers_checked ?? "–"},
-    {h: "Qualifying wallets", num: 1, f: t => (t.wallets || []).length},
-    {h: "Checked", f: t => esc(new Date(t.checked_at).toLocaleString())},
-  ], tok.filter(t => t.verdict === "analyzed").sort((a, b) => b.checked_at.localeCompare(a.checked_at)).slice(0, 30));
-
+  state.index = index; state.wallets = buildWallets(wallets); state.tokens = Object.values(tokens); state.runs = runs;
+  state.cfg = meta;
+  renderHeader(); renderWallets(); renderCoins();
   if (index.length) {
-    $("day").innerHTML = index.map(e => `<option value="${esc(e.date)}">${esc(e.date)} · ${e.wallets_found} wallets</option>`).join("");
-    $("day").onchange = (e) => showReport(e.target.value);
-    showReport(index[0].date);
+    const opts = index.map(e => `<option value="${esc(e.date)}">${esc(e.date)} · ${e.wallets_found} wallets</option>`).join("");
+    const keep = $("#r-day").value;
+    $("#r-day").innerHTML = opts;
+    if (first || !keep) showReport(index[0].date); else $("#r-day").value = keep;
   } else {
-    $("day").hidden = true;
+    $("#report").innerHTML = `<div class="empty"><strong>No reports yet</strong>The first one is written at the end of the day (UTC).</div>`;
+    $$("#r-prev, #r-next, #r-day").forEach(el => el.disabled = true);
   }
-})();
+}
+
+const initial = (location.hash || "").slice(1) || store.get("tab") || "wallets";
+showTab(["wallets", "reports", "coins"].includes(initial) ? initial : "wallets");
+load(true);
+setInterval(() => { if (!document.hidden) load(false); }, 5 * 60 * 1000);
 </script>
 </body>
 </html>
