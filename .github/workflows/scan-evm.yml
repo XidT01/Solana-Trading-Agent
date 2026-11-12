@@ -59,6 +59,7 @@ jobs:
                 echo "::warning::push failed; retrying next cycle"
               fi
             fi
+            bash .github/keepalive.sh scan.yml || true
             next=$(( started + 1800 ))
             [ "$next" -ge "$stop_at" ] && break
             wait=$(( next - $(date +%s) ))
