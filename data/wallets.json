@@ -1,4 +1,32 @@
 {
+ "2wXm7aQWUzhbt6BmyJWZyZyBVxAUxcik8vtdAuB3qoru": {
+  "hits": [
+   {
+    "avg_entry_mcap": 7477,
+    "first_buy_sig": "2ian3EuESHRahgUDyJihvbWhrT9HSLYrWLYtKqfZEU6KzLYSSHi4gTTAMwKxaLK5w7WUhgHibyEgRtFmS85e5Xr4",
+    "first_buy_time": 1794521800,
+    "first_entry_mcap": 7477,
+    "found_at": "2026-11-13T07:18:07.714078+00:00",
+    "hold_fraction_at_target": 1.0,
+    "mint": "D7MyAD7k3AqJpg4uxjUcmL51EDHrEsJxkjUynsxcpump",
+    "multiple": 12.32,
+    "n_trades": 23,
+    "origin": "pumpfun",
+    "pnl_sol": 38.8673,
+    "qualified": true,
+    "realised_multiple": 12.32,
+    "sol_in": 2.2048,
+    "sol_out": 27.1576,
+    "still_holding_pct": 34.9,
+    "symbol": "Christmax",
+    "tier": "10x+",
+    "total_multiple": 18.63,
+    "transferred_out": false,
+    "unrealised_sol": 13.9146,
+    "wallet": "2wXm7aQWUzhbt6BmyJWZyZyBVxAUxcik8vtdAuB3qoru"
+   }
+  ]
+ },
  "35dLhRujmtWVEVX3m6tVddwsDhds8w8yfcwP8dkGgixQ": {
   "hits": [
    {
@@ -107,6 +135,34 @@
     "transferred_out": false,
     "unrealised_sol": 0.0,
     "wallet": "BVV41MGoMVC7gcbuFjTxJZG4F2avbKvuPGJcvTLNZPEH"
+   }
+  ]
+ },
+ "DXDMXoZSAuNrNLVRqzSjvNGUcVbkyqSA8FkiBTTMwkdY": {
+  "hits": [
+   {
+    "avg_entry_mcap": 6907,
+    "first_buy_sig": "3DKyqjgA2PCHBiEYGRmtTMPH9vjuvPsDv4eH2kHgjWStYstCNcszkoGsgkNgaEqACiThh9ZV5A13MxE6CRjys3p8",
+    "first_buy_time": 1794521854,
+    "first_entry_mcap": 6907,
+    "found_at": "2026-11-13T07:18:07.714078+00:00",
+    "hold_fraction_at_target": 0.41,
+    "mint": "D7MyAD7k3AqJpg4uxjUcmL51EDHrEsJxkjUynsxcpump",
+    "multiple": 12.99,
+    "n_trades": 28,
+    "origin": "pumpfun",
+    "pnl_sol": 40.8111,
+    "qualified": true,
+    "realised_multiple": 12.99,
+    "sol_in": 3.4035,
+    "sol_out": 44.2146,
+    "still_holding_pct": 0.0,
+    "symbol": "Christmax",
+    "tier": "10x+",
+    "total_multiple": 12.99,
+    "transferred_out": false,
+    "unrealised_sol": 0.0,
+    "wallet": "DXDMXoZSAuNrNLVRqzSjvNGUcVbkyqSA8FkiBTTMwkdY"
    }
   ]
  },
