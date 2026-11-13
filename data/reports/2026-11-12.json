@@ -3,11 +3,7 @@
  "analyzed_by_launchpad": [
   [
    "pumpfun",
-   6
-  ],
-  [
-   "raydium-launchlab",
-   1
+   17
   ]
  ],
  "chain": "solana",
@@ -18,124 +14,98 @@
   "min_multiple": 5,
   "target_mcap_usd": 100000
  },
- "generated_at": "2026-11-12T08:02:18.841751+00:00",
+ "generated_at": "2026-11-13T03:40:07.253413+00:00",
  "leaderboard": [
   {
-   "avg_entry_mcap": 2445,
-   "best_multiple": 38.01,
+   "avg_entry_mcap": 8094,
+   "best_multiple": 15.11,
    "hits": 1,
-   "last_hit": "2026-11-12T07:15:18.090744+00:00",
-   "median_multiple": 38.01,
+   "last_hit": "2026-11-12T22:34:21.859769+00:00",
+   "median_multiple": 15.11,
    "tenx_hits": 1,
    "tokens": [
-    "mihao"
+    "plumber"
    ],
-   "total_pnl": 3.79,
-   "wallet": "D9iWZeD1uKVLJQWzvYKYfsWguH2S5NijRF5LevK2YY3C"
+   "total_pnl": 21.24,
+   "wallet": "BVV41MGoMVC7gcbuFjTxJZG4F2avbKvuPGJcvTLNZPEH"
   },
   {
-   "avg_entry_mcap": 4946,
-   "best_multiple": 36.12,
+   "avg_entry_mcap": 10008,
+   "best_multiple": 10.14,
    "hits": 1,
-   "last_hit": "2026-11-11T08:48:25.656382+00:00",
-   "median_multiple": 36.12,
+   "last_hit": "2026-11-12T22:34:21.859769+00:00",
+   "median_multiple": 10.14,
    "tenx_hits": 1,
    "tokens": [
-    "VEYL"
+    "plumber"
    ],
-   "total_pnl": 49.81,
-   "wallet": "2Tp9scbrD3mrzFCQexmw56QY19bZ7VtRydAqkXUB8D65"
+   "total_pnl": 2.15,
+   "wallet": "efAkDpEbv5Fjqx58go9f8utbg61SMgoAkqFMD4WuzGn"
   },
   {
-   "avg_entry_mcap": 2429,
-   "best_multiple": 34.62,
+   "avg_entry_mcap": 10854,
+   "best_multiple": 9.84,
    "hits": 1,
-   "last_hit": "2026-11-12T07:15:18.090744+00:00",
-   "median_multiple": 34.62,
-   "tenx_hits": 1,
-   "tokens": [
-    "mihao"
-   ],
-   "total_pnl": 3.45,
-   "wallet": "2DXfbne3ebTEHPaWUM8v6WGzNhZk6E8VtXmVxYLQDWTK"
-  },
-  {
-   "avg_entry_mcap": 2514,
-   "best_multiple": 33.43,
-   "hits": 1,
-   "last_hit": "2026-11-12T07:15:18.090744+00:00",
-   "median_multiple": 33.43,
-   "tenx_hits": 1,
-   "tokens": [
-    "mihao"
-   ],
-   "total_pnl": 6.55,
-   "wallet": "D1Y4Wa9zHScitWy5yTT5LGdgEaasxPHdeJ22gKe25dp5"
-  },
-  {
-   "avg_entry_mcap": 2951,
-   "best_multiple": 29.94,
-   "hits": 1,
-   "last_hit": "2026-11-12T07:15:18.090744+00:00",
-   "median_multiple": 29.94,
-   "tenx_hits": 1,
-   "tokens": [
-    "mihao"
-   ],
-   "total_pnl": 2.97,
-   "wallet": "CRyB8TyorJECvwjS713zQVf1e8b2iJyzkBUucD87CZhq"
-  },
-  {
-   "avg_entry_mcap": 4260,
-   "best_multiple": 21.46,
-   "hits": 1,
-   "last_hit": "2026-11-12T07:15:18.090744+00:00",
-   "median_multiple": 21.46,
-   "tenx_hits": 1,
-   "tokens": [
-    "mihao"
-   ],
-   "total_pnl": 5.17,
-   "wallet": "FrbZ92LBMsqPXmNiMXcsycpEaq5Lt6i4mx9LV8yuhhZu"
-  },
-  {
-   "avg_entry_mcap": 21791,
-   "best_multiple": 7.22,
-   "hits": 1,
-   "last_hit": "2026-11-12T03:39:26.672774+00:00",
-   "median_multiple": 7.22,
+   "last_hit": "2026-11-12T22:34:21.859769+00:00",
+   "median_multiple": 9.84,
    "tenx_hits": 0,
    "tokens": [
-    "AIRDROP"
+    "plumber"
    ],
-   "total_pnl": 15.73,
-   "wallet": "84vL38o5zTQjvA2fv7f3MgwXVBm8rBs1QBVXHtranQy5"
+   "total_pnl": 32.47,
+   "wallet": "G67wdkxeWWtNKYCA1wtQB1h1bEeRjN4Hd7V7ykd9mSmU"
   },
   {
-   "avg_entry_mcap": 22818,
-   "best_multiple": 6.78,
+   "avg_entry_mcap": 12350,
+   "best_multiple": 7.51,
    "hits": 1,
-   "last_hit": "2026-11-12T03:39:26.672774+00:00",
-   "median_multiple": 6.78,
+   "last_hit": "2026-11-12T22:34:21.859769+00:00",
+   "median_multiple": 7.51,
    "tenx_hits": 0,
    "tokens": [
-    "AIRDROP"
+    "plumber"
    ],
-   "total_pnl": 33.17,
-   "wallet": "4v3vtdjkSXvULfmjTJm3NMkeyf7mdvHxHnUPHf9gwZ1a"
+   "total_pnl": 16.45,
+   "wallet": "35dLhRujmtWVEVX3m6tVddwsDhds8w8yfcwP8dkGgixQ"
   },
   {
-   "avg_entry_mcap": 10303,
-   "best_multiple": 6.71,
+   "avg_entry_mcap": 2599,
+   "best_multiple": 6.45,
    "hits": 1,
-   "last_hit": "2026-11-12T07:15:18.090744+00:00",
-   "median_multiple": 6.71,
+   "last_hit": "2026-11-12T20:27:32.458178+00:00",
+   "median_multiple": 6.45,
    "tenx_hits": 0,
    "tokens": [
-    "ape hao"
+    "Shitcoin"
    ],
-   "total_pnl": 399.5,
-   "wallet": "BzAHmkQ2d2LwM6sevFZUaGokk7uvTchC1uMF46U5iJVF"
+   "total_pnl": 2.82,
+   "wallet": "Fq6r8qHvg1Crp6EmJsLRrH49JYs2zh7e8fhBhChKpuET"
+  },
+  {
+   "avg_entry_mcap": 2632,
+   "best_multiple": 6.27,
+   "hits": 1,
+   "last_hit": "2026-11-12T20:27:32.458178+00:00",
+   "median_multiple": 6.27,
+   "tenx_hits": 0,
+   "tokens": [
+    "Shitcoin"
+   ],
+   "total_pnl": 6.03,
+   "wallet": "5PvBRrFPvFPiMtphrmvrbL7uDzPZZRxWPLmVrySksoU1"
+  },
+  {
+   "avg_entry_mcap": 9791,
+   "best_multiple": 6.17,
+   "hits": 1,
+   "last_hit": "2026-11-12T22:34:21.859769+00:00",
+   "median_multiple": 6.17,
+   "tenx_hits": 0,
+   "tokens": [
+    "plumber"
+   ],
+   "total_pnl": 56.19,
+   "wallet": "J9TYAsWWidbrcZybmLSfrLzryANf4CgJBLdvwdGuC8MB"
   },
   {
    "avg_entry_mcap": 3417,
@@ -151,385 +121,272 @@
    "wallet": "9JQVoSiJjUuNoVrJnFKt1NF7UBmHgvTuTtWywARTRLcP"
   },
   {
-   "avg_entry_mcap": 18074,
-   "best_multiple": 5.32,
+   "avg_entry_mcap": 5076,
+   "best_multiple": 5.39,
    "hits": 1,
-   "last_hit": "2026-11-12T03:39:26.672774+00:00",
-   "median_multiple": 5.32,
+   "last_hit": "2026-11-12T22:34:21.859769+00:00",
+   "median_multiple": 5.39,
    "tenx_hits": 0,
    "tokens": [
-    "AIRDROP"
+    "plumber"
    ],
-   "total_pnl": 5.33,
-   "wallet": "2jwJXsMvCixvYBUhoX4QZe7ZHQEfQRPBiQm2VMky9nSe"
-  },
-  {
-   "avg_entry_mcap": 13713,
-   "best_multiple": 5.21,
-   "hits": 1,
-   "last_hit": "2026-11-12T07:15:18.090744+00:00",
-   "median_multiple": 5.21,
-   "tenx_hits": 0,
-   "tokens": [
-    "mihao"
-   ],
-   "total_pnl": 611.15,
-   "wallet": "DkD44QCgo3cxFkoqVBQ4vvy4aa3gzDWq8vVySHHy7RU9"
-  },
-  {
-   "avg_entry_mcap": 19209,
-   "best_multiple": 5.19,
-   "hits": 1,
-   "last_hit": "2026-11-12T03:39:26.672774+00:00",
-   "median_multiple": 5.19,
-   "tenx_hits": 0,
-   "tokens": [
-    "AIRDROP"
-   ],
-   "total_pnl": 10.43,
-   "wallet": "9Poex6774mBXqmYKipC212kMLDgdFPGWx6XoPvP4SJ2f"
-  },
-  {
-   "avg_entry_mcap": 19140,
-   "best_multiple": 5.19,
-   "hits": 1,
-   "last_hit": "2026-11-12T03:39:26.672774+00:00",
-   "median_multiple": 5.19,
-   "tenx_hits": 0,
-   "tokens": [
-    "AIRDROP"
-   ],
-   "total_pnl": 10.63,
-   "wallet": "E4VGHnChPdgz9LeXm4RcT9s6hqfHeHX9tMExEggvmi4w"
-  },
-  {
-   "avg_entry_mcap": 18571,
-   "best_multiple": 5.17,
-   "hits": 1,
-   "last_hit": "2026-11-12T03:39:26.672774+00:00",
-   "median_multiple": 5.17,
-   "tenx_hits": 0,
-   "tokens": [
-    "AIRDROP"
-   ],
-   "total_pnl": 3.6,
-   "wallet": "GdvbFB6WGaWddun8ZSU492m6dy9pHybEgJ36B5UH7dpH"
-  },
-  {
-   "avg_entry_mcap": 18733,
-   "best_multiple": 5.11,
-   "hits": 1,
-   "last_hit": "2026-11-12T03:39:26.672774+00:00",
-   "median_multiple": 5.11,
-   "tenx_hits": 0,
-   "tokens": [
-    "AIRDROP"
-   ],
-   "total_pnl": 6.32,
-   "wallet": "EKVC43hYeFCJHHtagsjwpfFCpJaTRLLJC8Cf8cdiV9dM"
+   "total_pnl": 6.37,
+   "wallet": "Gote3bZpr2Ks2tHYD9TewDVfxkf1jgGLjwyQLZkrxhd8"
   }
  ],
  "new_wallets": [
   {
-   "avg_entry_mcap": 2445,
-   "first_buy_sig": "5Ng67MX4BDEgebHYizZku9Q5rtteTXhiWjKxx4Momr3Hd6X62bLJdq2eZmtpQbfbH7LJcG7TvH1oz2gcCpSbhuC1",
-   "first_buy_time": 1794414885,
-   "first_entry_mcap": 2445,
-   "hold_fraction_at_target": 0.0,
-   "mint": "Z5ijNneoDubKBEhzTumUgfm18m6PjUDred4gp7Xpump",
-   "multiple": 38.01,
-   "n_trades": 2,
-   "pnl_sol": 3.7949,
+   "avg_entry_mcap": 8094,
+   "first_buy_sig": "3EQ2byJzWjMFv6bfVXxFByZR14Uk8xJ1GCfRujYr1QVZewTuoWiHn29Z65z6nA71SP3UgmfFUGYLRw27B7ZhCr2n",
+   "first_buy_time": 1794520531,
+   "first_entry_mcap": 6285,
+   "hold_fraction_at_target": 0.102,
+   "mint": "9a13W5HdqE95g3YE8Dk9wCHPucrCH33h6BTfdFvRpump",
+   "multiple": 15.11,
+   "n_trades": 17,
+   "pnl_sol": 21.2415,
    "qualified": true,
-   "realised_multiple": 38.01,
-   "sol_in": 0.1025,
-   "sol_out": 3.8974,
+   "realised_multiple": 15.11,
+   "sol_in": 1.5053,
+   "sol_out": 22.7468,
    "still_holding_pct": 0.0,
-   "symbol": "mihao",
+   "symbol": "plumber",
    "tier": "10x+",
+   "total_multiple": 15.11,
    "transferred_out": false,
    "unrealised_sol": 0.0,
-   "wallet": "D9iWZeD1uKVLJQWzvYKYfsWguH2S5NijRF5LevK2YY3C"
+   "wallet": "BVV41MGoMVC7gcbuFjTxJZG4F2avbKvuPGJcvTLNZPEH"
   },
   {
-   "avg_entry_mcap": 2429,
-   "first_buy_sig": "3xgz5HgnAktzGDdaw6gzT3LT1z3kuQBfnvv6ZyzxkxZTyMCBAxzVkpzCTk5nF5jRnrnXtcS5swscr2MZJD8kK5h9",
-   "first_buy_time": 1794414878,
-   "first_entry_mcap": 2429,
-   "hold_fraction_at_target": 0.0,
-   "mint": "Z5ijNneoDubKBEhzTumUgfm18m6PjUDred4gp7Xpump",
-   "multiple": 34.62,
-   "n_trades": 2,
-   "pnl_sol": 3.447,
-   "qualified": true,
-   "realised_multiple": 34.62,
-   "sol_in": 0.1025,
-   "sol_out": 3.5495,
-   "still_holding_pct": 0.0,
-   "symbol": "mihao",
-   "tier": "10x+",
-   "transferred_out": false,
-   "unrealised_sol": 0.0,
-   "wallet": "2DXfbne3ebTEHPaWUM8v6WGzNhZk6E8VtXmVxYLQDWTK"
-  },
-  {
-   "avg_entry_mcap": 2514,
-   "first_buy_sig": "5scCvnueidEwzBUFLabK58AWFMRczZSvVmCmf1UQ4fG4Wj5aTL1EMhr654ckgWwnDdinWoeyAijXUSL1HzUpaPto",
-   "first_buy_time": 1794415092,
-   "first_entry_mcap": 2514,
-   "hold_fraction_at_target": 0.0,
-   "mint": "Z5ijNneoDubKBEhzTumUgfm18m6PjUDred4gp7Xpump",
-   "multiple": 33.43,
-   "n_trades": 2,
-   "pnl_sol": 6.5513,
-   "qualified": true,
-   "realised_multiple": 33.43,
-   "sol_in": 0.202,
-   "sol_out": 6.7533,
-   "still_holding_pct": 0.0,
-   "symbol": "mihao",
-   "tier": "10x+",
-   "transferred_out": false,
-   "unrealised_sol": 0.0,
-   "wallet": "D1Y4Wa9zHScitWy5yTT5LGdgEaasxPHdeJ22gKe25dp5"
-  },
-  {
-   "avg_entry_mcap": 2951,
-   "first_buy_sig": "53dKZNKGwXhVrEoJTJyggYRZJ1qdWvDNDpvjYty6TaDn2xNXpvvN5szCdPp9wJVcTCYuRgt97C95i4B38ZUDtRsx",
-   "first_buy_time": 1794414869,
-   "first_entry_mcap": 2951,
-   "hold_fraction_at_target": 0.0,
-   "mint": "Z5ijNneoDubKBEhzTumUgfm18m6PjUDred4gp7Xpump",
-   "multiple": 29.94,
-   "n_trades": 2,
-   "pnl_sol": 2.9672,
-   "qualified": true,
-   "realised_multiple": 29.94,
-   "sol_in": 0.1025,
-   "sol_out": 3.0697,
-   "still_holding_pct": 0.0,
-   "symbol": "mihao",
-   "tier": "10x+",
-   "transferred_out": false,
-   "unrealised_sol": 0.0,
-   "wallet": "CRyB8TyorJECvwjS713zQVf1e8b2iJyzkBUucD87CZhq"
-  },
-  {
-   "avg_entry_mcap": 4260,
-   "first_buy_sig": "4tZe4TgQP8e68ZhPRkPdmyGtJhMPke6Kmu5dwdTb8PUAatLcTaRf2KjWRBJUHjjQnuhrxLRhk6zScjWtCPHEv9Hk",
-   "first_buy_time": 1794414829,
-   "first_entry_mcap": 4260,
-   "hold_fraction_at_target": 1.0,
-   "mint": "Z5ijNneoDubKBEhzTumUgfm18m6PjUDred4gp7Xpump",
-   "multiple": 21.46,
-   "n_trades": 2,
-   "pnl_sol": 5.1671,
-   "qualified": true,
-   "realised_multiple": 21.46,
-   "sol_in": 0.2525,
-   "sol_out": 5.4196,
-   "still_holding_pct": 0.0,
-   "symbol": "mihao",
-   "tier": "10x+",
-   "transferred_out": false,
-   "unrealised_sol": 0.0,
-   "wallet": "FrbZ92LBMsqPXmNiMXcsycpEaq5Lt6i4mx9LV8yuhhZu"
-  },
-  {
-   "avg_entry_mcap": 21791,
-   "first_buy_sig": "3n9H4YoAk2yzWTRhecVBDGcUrpLN3FJ5dmawhS7sgMUEiPQgeVSLHsEB4eE1kRJSsb6FjbWdQtjMgUDULa2pQKjU",
-   "first_buy_time": 1794340519,
-   "first_entry_mcap": 21791,
-   "hold_fraction_at_target": 1.0,
-   "mint": "CbmdFB7ruUfTHb1uRWC99knEni77CQKfFZL6qq2fLoat",
-   "multiple": 7.22,
-   "n_trades": 5,
-   "pnl_sol": 15.7278,
-   "qualified": true,
-   "realised_multiple": 7.22,
-   "sol_in": 2.5275,
-   "sol_out": 18.2553,
-   "still_holding_pct": 0.0,
-   "symbol": "AIRDROP",
-   "tier": "5x+",
-   "transferred_out": false,
-   "unrealised_sol": 0.0,
-   "wallet": "84vL38o5zTQjvA2fv7f3MgwXVBm8rBs1QBVXHtranQy5"
-  },
-  {
-   "avg_entry_mcap": 22818,
-   "first_buy_sig": "2gTaTgq2vfbuJJtwrzdEVF7LckaVNh8sz4NjHQKRw6bAdpdwqwB7FHFF4axwvSSEY8e1j5BibQ5VoB4BJvp1WZg8",
-   "first_buy_time": 1794340519,
-   "first_entry_mcap": 21378,
-   "hold_fraction_at_target": 0.0,
-   "mint": "CbmdFB7ruUfTHb1uRWC99knEni77CQKfFZL6qq2fLoat",
-   "multiple": 6.78,
-   "n_trades": 11,
-   "pnl_sol": 33.166,
-   "qualified": true,
-   "realised_multiple": 6.78,
-   "sol_in": 5.7405,
-   "sol_out": 38.9065,
-   "still_holding_pct": 0.0,
-   "symbol": "AIRDROP",
-   "tier": "5x+",
-   "transferred_out": false,
-   "unrealised_sol": 0.0,
-   "wallet": "4v3vtdjkSXvULfmjTJm3NMkeyf7mdvHxHnUPHf9gwZ1a"
-  },
-  {
-   "avg_entry_mcap": 10303,
-   "first_buy_sig": "wXLVDDTTU3n2EpvipFFB5FU4afHgMDQRknDcV6xVstRnnpkCEuazN87RQtwfg4oCZs8GtRwN153a2vUnbbrbJXz",
-   "first_buy_time": 1794402541,
-   "first_entry_mcap": 4701,
-   "hold_fraction_at_target": 0.987,
-   "mint": "Fkc9FKhK1K8FSPtKkcjfGkpeb4waa3DspRXHmwvvpump",
-   "multiple": 6.71,
-   "n_trades": 60,
-   "pnl_sol": 399.4969,
-   "qualified": true,
-   "realised_multiple": 0.28,
-   "sol_in": 70.01,
-   "sol_out": 19.7943,
-   "still_holding_pct": 98.7,
-   "symbol": "ape hao",
-   "tier": "5x+",
-   "transferred_out": false,
-   "unrealised_sol": 449.7126,
-   "wallet": "BzAHmkQ2d2LwM6sevFZUaGokk7uvTchC1uMF46U5iJVF"
-  },
-  {
-   "avg_entry_mcap": 18074,
-   "first_buy_sig": "cSkTYS5vmfwZ6ZWRVwwbjJgmMk3EuUeqGgnTsb8QZqGJe8iUP6NwbWi2x4gXfwJMra2GeecLjiV6q7CxcJry9Kk",
-   "first_buy_time": 1794340486,
-   "first_entry_mcap": 18006,
-   "hold_fraction_at_target": 0.0,
-   "mint": "CbmdFB7ruUfTHb1uRWC99knEni77CQKfFZL6qq2fLoat",
-   "multiple": 5.32,
-   "n_trades": 14,
-   "pnl_sol": 5.327,
-   "qualified": true,
-   "realised_multiple": 5.32,
-   "sol_in": 1.234,
-   "sol_out": 6.561,
-   "still_holding_pct": 0.0,
-   "symbol": "AIRDROP",
-   "tier": "5x+",
-   "transferred_out": false,
-   "unrealised_sol": 0.0,
-   "wallet": "2jwJXsMvCixvYBUhoX4QZe7ZHQEfQRPBiQm2VMky9nSe"
-  },
-  {
-   "avg_entry_mcap": 13713,
-   "first_buy_sig": "5b7hTeigxYPyNdX2Zt4WzyggK7NBoUyC3DdskfGCfaFLWrbnRxDdyq4rw7nvsKD7BSPUcnPr7gMn2soXBDgb5XpG",
-   "first_buy_time": 1794415002,
-   "first_entry_mcap": 2424,
-   "hold_fraction_at_target": 0.903,
-   "mint": "Z5ijNneoDubKBEhzTumUgfm18m6PjUDred4gp7Xpump",
-   "multiple": 5.21,
-   "n_trades": 60,
-   "pnl_sol": 611.1473,
-   "qualified": true,
-   "realised_multiple": 0.07,
-   "sol_in": 145.2024,
-   "sol_out": 10.865,
-   "still_holding_pct": 90.3,
-   "symbol": "mihao",
-   "tier": "5x+",
-   "transferred_out": true,
-   "unrealised_sol": 745.4847,
-   "wallet": "DkD44QCgo3cxFkoqVBQ4vvy4aa3gzDWq8vVySHHy7RU9"
-  },
-  {
-   "avg_entry_mcap": 19140,
-   "first_buy_sig": "P3DcbKGNVyF1tgT7ki3i7TXF9Fik2T5fBHgpGHoyBXA8Mtbd8NCv3X1JpMYLLw4GHBeHpSdj89cqSHD4tRHS33i",
-   "first_buy_time": 1794340486,
-   "first_entry_mcap": 17705,
-   "hold_fraction_at_target": 0.089,
-   "mint": "CbmdFB7ruUfTHb1uRWC99knEni77CQKfFZL6qq2fLoat",
-   "multiple": 5.19,
-   "n_trades": 13,
-   "pnl_sol": 10.6266,
-   "qualified": true,
-   "realised_multiple": 5.19,
-   "sol_in": 2.5377,
-   "sol_out": 13.1644,
-   "still_holding_pct": 0.0,
-   "symbol": "AIRDROP",
-   "tier": "5x+",
-   "transferred_out": false,
-   "unrealised_sol": 0.0,
-   "wallet": "E4VGHnChPdgz9LeXm4RcT9s6hqfHeHX9tMExEggvmi4w"
-  },
-  {
-   "avg_entry_mcap": 19209,
-   "first_buy_sig": "66Y3rt6X26zyeNpSEyQhjt5oZFjp9y5uQpjJWyPWRXuCUBNwY6VmULMop5LVYyE4jZMCNHVx7pHnXZaY28ymBsin",
-   "first_buy_time": 1794340486,
-   "first_entry_mcap": 17900,
-   "hold_fraction_at_target": 0.089,
-   "mint": "CbmdFB7ruUfTHb1uRWC99knEni77CQKfFZL6qq2fLoat",
-   "multiple": 5.19,
-   "n_trades": 13,
-   "pnl_sol": 10.4314,
-   "qualified": true,
-   "realised_multiple": 5.19,
-   "sol_in": 2.4902,
-   "sol_out": 12.9216,
-   "still_holding_pct": 0.0,
-   "symbol": "AIRDROP",
-   "tier": "5x+",
-   "transferred_out": false,
-   "unrealised_sol": 0.0,
-   "wallet": "9Poex6774mBXqmYKipC212kMLDgdFPGWx6XoPvP4SJ2f"
-  },
-  {
-   "avg_entry_mcap": 18571,
-   "first_buy_sig": "3ngaAJk4jbke2u6tNGEn4YxpdQiskxsX4UxGcjYEBEtHkcjKQTjJtGbzwZDMfx7ja1fVFyEJ7gABc8UatY6DHayQ",
-   "first_buy_time": 1794340482,
-   "first_entry_mcap": 18571,
-   "hold_fraction_at_target": 0.0,
-   "mint": "CbmdFB7ruUfTHb1uRWC99knEni77CQKfFZL6qq2fLoat",
-   "multiple": 5.17,
-   "n_trades": 13,
-   "pnl_sol": 3.5953,
-   "qualified": true,
-   "realised_multiple": 5.17,
-   "sol_in": 0.8615,
-   "sol_out": 4.4568,
-   "still_holding_pct": 0.0,
-   "symbol": "AIRDROP",
-   "tier": "5x+",
-   "transferred_out": false,
-   "unrealised_sol": 0.0,
-   "wallet": "GdvbFB6WGaWddun8ZSU492m6dy9pHybEgJ36B5UH7dpH"
-  },
-  {
-   "avg_entry_mcap": 18733,
-   "first_buy_sig": "1P3JmuZcSXCdzCqL89kHmbg344U8MRMgoj6bqDX9o1TVAR9qvwQMUcJgcXmG8QprfPRA6ZHYsgi8DwJHHB5mktM",
-   "first_buy_time": 1794340486,
-   "first_entry_mcap": 17812,
-   "hold_fraction_at_target": 0.0,
-   "mint": "CbmdFB7ruUfTHb1uRWC99knEni77CQKfFZL6qq2fLoat",
-   "multiple": 5.11,
+   "avg_entry_mcap": 10008,
+   "first_buy_sig": "4RBP7Abns6RBjEYxK1yWgCUnmUYZBbcTDzL2WnzLNAXecxpCA4uFL8iRTMEqLsBGDRSQF6e8EMXZ6P3fTRXn3u98",
+   "first_buy_time": 1794520588,
+   "first_entry_mcap": 10008,
+   "hold_fraction_at_target": 0.095,
+   "mint": "9a13W5HdqE95g3YE8Dk9wCHPucrCH33h6BTfdFvRpump",
+   "multiple": 10.14,
    "n_trades": 15,
-   "pnl_sol": 6.3222,
+   "pnl_sol": 2.1481,
    "qualified": true,
-   "realised_multiple": 5.11,
-   "sol_in": 1.5365,
-   "sol_out": 7.8587,
-   "still_holding_pct": 0.0,
-   "symbol": "AIRDROP",
+   "realised_multiple": 10.14,
+   "sol_in": 0.2061,
+   "sol_out": 2.089,
+   "still_holding_pct": 7.7,
+   "symbol": "plumber",
+   "tier": "10x+",
+   "total_multiple": 11.42,
+   "transferred_out": false,
+   "unrealised_sol": 0.2651,
+   "wallet": "efAkDpEbv5Fjqx58go9f8utbg61SMgoAkqFMD4WuzGn"
+  },
+  {
+   "avg_entry_mcap": 10854,
+   "first_buy_sig": "51mcx2QZwutvMSTvmquHVq3EJzvbSmy64Whqq1Z7civ9C2kduLET5NNZ7no7AiY8GE5iiAPRngU9jB22ZiEi49Lk",
+   "first_buy_time": 1794520522,
+   "first_entry_mcap": 3943,
+   "hold_fraction_at_target": 0.252,
+   "mint": "9a13W5HdqE95g3YE8Dk9wCHPucrCH33h6BTfdFvRpump",
+   "multiple": 9.84,
+   "n_trades": 24,
+   "pnl_sol": 32.465,
+   "qualified": true,
+   "realised_multiple": 9.84,
+   "sol_in": 3.0115,
+   "sol_out": 29.642,
+   "still_holding_pct": 13.7,
+   "symbol": "plumber",
    "tier": "5x+",
+   "total_multiple": 11.78,
+   "transferred_out": false,
+   "unrealised_sol": 5.8346,
+   "wallet": "G67wdkxeWWtNKYCA1wtQB1h1bEeRjN4Hd7V7ykd9mSmU"
+  },
+  {
+   "avg_entry_mcap": 12350,
+   "first_buy_sig": "36V441jK8pdsB94vFA95VHi8QjwWTWQYveRxgEQT3Qu61k1593bhpN6pD9c7PX612DFKG4QKS5eCge86pkxoGass",
+   "first_buy_time": 1794520594,
+   "first_entry_mcap": 12350,
+   "hold_fraction_at_target": 0.0,
+   "mint": "9a13W5HdqE95g3YE8Dk9wCHPucrCH33h6BTfdFvRpump",
+   "multiple": 7.51,
+   "n_trades": 7,
+   "pnl_sol": 16.4543,
+   "qualified": true,
+   "realised_multiple": 7.51,
+   "sol_in": 2.5275,
+   "sol_out": 18.9818,
+   "still_holding_pct": 0.0,
+   "symbol": "plumber",
+   "tier": "5x+",
+   "total_multiple": 7.51,
    "transferred_out": false,
    "unrealised_sol": 0.0,
-   "wallet": "EKVC43hYeFCJHHtagsjwpfFCpJaTRLLJC8Cf8cdiV9dM"
+   "wallet": "35dLhRujmtWVEVX3m6tVddwsDhds8w8yfcwP8dkGgixQ"
+  },
+  {
+   "avg_entry_mcap": 2599,
+   "first_buy_sig": "4NtXZJYzU5vBChnX6aSnPr8jcsNT9SDMjQYP24tQnZW3EochWJaCd8JsLM8y6A7xGVm59fSzH2NGJDkEyMuJSpNj",
+   "first_buy_time": 1794472331,
+   "first_entry_mcap": 2599,
+   "hold_fraction_at_target": 0.0,
+   "mint": "8p7GCo3fWJ55LFQbhkBd8hCpw3ACk98PgK7Lsd6Upump",
+   "multiple": 6.45,
+   "n_trades": 2,
+   "pnl_sol": 2.8176,
+   "qualified": true,
+   "realised_multiple": 6.45,
+   "sol_in": 0.5174,
+   "sol_out": 3.3349,
+   "still_holding_pct": 0.0,
+   "symbol": "Shitcoin",
+   "tier": "5x+",
+   "total_multiple": 6.45,
+   "transferred_out": false,
+   "unrealised_sol": 0.0,
+   "wallet": "Fq6r8qHvg1Crp6EmJsLRrH49JYs2zh7e8fhBhChKpuET"
+  },
+  {
+   "avg_entry_mcap": 2632,
+   "first_buy_sig": "36hcTAzaHzAj2k5xmHSbRuczdAvVUSjGDUyar95ToDod9J3Yd6u181WsgFXkFXZK4gTr98pFkJoXyq1UgFmRtnyK",
+   "first_buy_time": 1794472331,
+   "first_entry_mcap": 2306,
+   "hold_fraction_at_target": 0.0,
+   "mint": "8p7GCo3fWJ55LFQbhkBd8hCpw3ACk98PgK7Lsd6Upump",
+   "multiple": 6.27,
+   "n_trades": 11,
+   "pnl_sol": 6.0277,
+   "qualified": true,
+   "realised_multiple": 6.27,
+   "sol_in": 1.143,
+   "sol_out": 7.1707,
+   "still_holding_pct": 0.0,
+   "symbol": "Shitcoin",
+   "tier": "5x+",
+   "total_multiple": 6.27,
+   "transferred_out": false,
+   "unrealised_sol": 0.0,
+   "wallet": "5PvBRrFPvFPiMtphrmvrbL7uDzPZZRxWPLmVrySksoU1"
+  },
+  {
+   "avg_entry_mcap": 9791,
+   "first_buy_sig": "3dAqKayHgDZ5nBikNFhJ9QcYQbtjJTzqMwdtsR6mPjNkcv2kQV6VRQtaReJfNwCqBAG1dVcBFgSmACkoZm3HFzCL",
+   "first_buy_time": 1794520588,
+   "first_entry_mcap": 6909,
+   "hold_fraction_at_target": 0.381,
+   "mint": "9a13W5HdqE95g3YE8Dk9wCHPucrCH33h6BTfdFvRpump",
+   "multiple": 6.17,
+   "n_trades": 29,
+   "pnl_sol": 56.1904,
+   "qualified": true,
+   "realised_multiple": 6.17,
+   "sol_in": 5.2555,
+   "sol_out": 32.4232,
+   "still_holding_pct": 34.3,
+   "symbol": "plumber",
+   "tier": "5x+",
+   "total_multiple": 11.69,
+   "transferred_out": false,
+   "unrealised_sol": 29.0228,
+   "wallet": "J9TYAsWWidbrcZybmLSfrLzryANf4CgJBLdvwdGuC8MB"
+  },
+  {
+   "avg_entry_mcap": 5076,
+   "first_buy_sig": "JQqxDQ7jjVeGWnnjb39iAYtWKnP3r7BTbEWJoNNzFLuucbiAH5xzLx7cAkoQ75TNMhWpQJQCsPZPpX1LhJt8SEi",
+   "first_buy_time": 1794520526,
+   "first_entry_mcap": 4815,
+   "hold_fraction_at_target": 0.0,
+   "mint": "9a13W5HdqE95g3YE8Dk9wCHPucrCH33h6BTfdFvRpump",
+   "multiple": 5.39,
+   "n_trades": 3,
+   "pnl_sol": 6.3684,
+   "qualified": true,
+   "realised_multiple": 5.39,
+   "sol_in": 1.4519,
+   "sol_out": 7.8203,
+   "still_holding_pct": 0.0,
+   "symbol": "plumber",
+   "tier": "5x+",
+   "total_multiple": 5.39,
+   "transferred_out": false,
+   "unrealised_sol": 0.0,
+   "wallet": "Gote3bZpr2Ks2tHYD9TewDVfxkf1jgGLjwyQLZkrxhd8"
   }
  ],
  "passed_tokens": [
   {
    "early_buyers_checked": 0,
-   "liquidity_usd": 102074.97,
-   "mcap_usd": 1583440,
+   "liquidity_usd": 36049.24,
+   "mcap_usd": 237431,
+   "mint": "2FbqgFEWTwTRqZCemnf4AaP9tmhHKha3oqMjCNmcpump",
+   "origin": "pumpfun",
+   "symbol": "CSI",
+   "url": "https://dexscreener.com/solana/enjuyaqsjkqpuzpc9egjfvcdpegc4wgfmnaxg5hbvybb",
+   "wallets_found": 0
+  },
+  {
+   "early_buyers_checked": 0,
+   "liquidity_usd": 22465.57,
+   "mcap_usd": 95138,
+   "mint": "2s9kHmkeHU3oKwuJYV1VTiBTsZwUWUbMUVtBgoJFpump",
+   "origin": "pumpfun",
+   "symbol": "AI",
+   "url": "https://dexscreener.com/solana/bvm1huqybfg55vjsxjmmmhecbg8th3motyg3wfo8riac",
+   "wallets_found": 0
+  },
+  {
+   "early_buyers_checked": 0,
+   "liquidity_usd": 26458.11,
+   "mcap_usd": 133961,
+   "mint": "5QdFH15aJgz8XWXVMK9boRyARzaTjWGNhh2zQ9y4pump",
+   "origin": "pumpfun",
+   "symbol": "SI",
+   "url": "https://dexscreener.com/solana/bzdcm1cx3nvrbby2pxsu8bcfhkqatffhjab48psgvtec",
+   "wallets_found": 0
+  },
+  {
+   "early_buyers_checked": 0,
+   "liquidity_usd": 28327.88,
+   "mcap_usd": 143828,
+   "mint": "5ba8HwNgio5t86aFdWJ81w5pNHjbqAKPKejTsVoDpump",
+   "origin": "pumpfun",
+   "symbol": "MaxWif",
+   "url": "https://dexscreener.com/solana/agxryb1vnskuu9gfrbymiejvjwztkf38wdcbbcxgsj4b",
+   "wallets_found": 0
+  },
+  {
+   "early_buyers_checked": 0,
+   "liquidity_usd": 32306.69,
+   "mcap_usd": 191043,
+   "mint": "5u6Bpbz5kJiYgR3dtRQsdKvUKNmJN2pxGojdsYMDpump",
+   "origin": "pumpfun",
+   "symbol": "1JENSEN",
+   "url": "https://dexscreener.com/solana/feq7hqtbqkeh6dedadga6jrajqfxb7pypl7b3gzqzpz6",
+   "wallets_found": 0
+  },
+  {
+   "early_buyers_checked": 0,
+   "liquidity_usd": 28041.48,
+   "mcap_usd": 141240,
+   "mint": "73UpjVFTWj3ZpkiRxz8GKfYSX5xg8UXtWzxUSg9apump",
+   "origin": "pumpfun",
+   "symbol": "GTA",
+   "url": "https://dexscreener.com/solana/3ktr4wufbveklrcezwg4vgvrqasagzqxodck3evkd792",
+   "wallets_found": 0
+  },
+  {
+   "early_buyers_checked": 0,
+   "liquidity_usd": 24240.71,
+   "mcap_usd": 115085,
+   "mint": "7CkNkME8Mbq6jg7ozHcRFEc16V8q5FPDRAd3C3gmpump",
+   "origin": "pumpfun",
+   "symbol": "Robinhood",
+   "url": "https://dexscreener.com/solana/ckknfpufrcwmactbmsdrankeqibehpeopxrjvcfsx2uz",
+   "wallets_found": 0
+  },
+  {
+   "early_buyers_checked": 0,
+   "liquidity_usd": 73364.49,
+   "mcap_usd": 796561,
    "mint": "8AAVuQpJcqpvCuutxyBTVvgBEXZJSkZoNv1sExpBpump",
    "origin": "pumpfun",
    "symbol": "NOBUSHIBA",
@@ -537,93 +394,175 @@
    "wallets_found": 0
   },
   {
-   "early_buyers_checked": 0,
-   "liquidity_usd": 55661.55,
-   "mcap_usd": 493287,
-   "mint": "AJFnmpiF4VTKeqEWtwBUarib5zKKbXcs594UyrMHpump",
+   "early_buyers_checked": 50,
+   "liquidity_usd": 19858.72,
+   "mcap_usd": 69743,
+   "mint": "8p7GCo3fWJ55LFQbhkBd8hCpw3ACk98PgK7Lsd6Upump",
    "origin": "pumpfun",
-   "symbol": "AIB",
-   "url": "https://dexscreener.com/solana/5jn7yxkhncgwi3njp5z8m6yybkkuhl7p2axllg2dagk3",
+   "symbol": "Shitcoin",
+   "url": "https://dexscreener.com/solana/9ovadmtnzr164fjvbpypehiq9a5fzmlacattaprm8xxj",
+   "wallets_found": 2
+  },
+  {
+   "early_buyers_checked": 0,
+   "liquidity_usd": 31640.62,
+   "mcap_usd": 182791,
+   "mint": "9QtxNyxsS4aM6kNecXfNoRQd36hvnEk4vjzzGoAppump",
+   "origin": "pumpfun",
+   "symbol": "JensenHao",
+   "url": "https://dexscreener.com/solana/e1dvpewmqdke65keerqcvp2nm2ez9dhdyphytzhpbeqh",
    "wallets_found": 0
   },
   {
    "early_buyers_checked": 50,
-   "liquidity_usd": 43267.72,
-   "mcap_usd": 53129,
-   "mint": "CbmdFB7ruUfTHb1uRWC99knEni77CQKfFZL6qq2fLoat",
-   "origin": "raydium-launchlab",
-   "symbol": "AIRDROP",
-   "url": "https://dexscreener.com/solana/9rhvka33kn6gauqt99gjpcoungvu8dkz189rbkph9axd",
-   "wallets_found": 7
-  },
-  {
-   "early_buyers_checked": 0,
-   "liquidity_usd": 58983.97,
-   "mcap_usd": 592534,
-   "mint": "Eh5zz6vrPK66MHzhBLrzEFHvATE7Z1SqoALzcNu4pump",
+   "liquidity_usd": 35946.41,
+   "mcap_usd": 172452,
+   "mint": "9a13W5HdqE95g3YE8Dk9wCHPucrCH33h6BTfdFvRpump",
    "origin": "pumpfun",
-   "symbol": "BITCOINU",
-   "url": "https://dexscreener.com/solana/frx1wvbmjqzb7vejmg1fz4zefmle9wfc4b6cpxs8fzzv",
-   "wallets_found": 0
-  },
-  {
-   "early_buyers_checked": 50,
-   "liquidity_usd": 20716.64,
-   "mcap_usd": 77906,
-   "mint": "Fkc9FKhK1K8FSPtKkcjfGkpeb4waa3DspRXHmwvvpump",
-   "origin": "pumpfun",
-   "symbol": "ape hao",
-   "url": "https://dexscreener.com/solana/5aqrycwfck8etdkhpy3xju5wgu33jtbghyiy3ybpsyyw",
-   "wallets_found": 1
-  },
-  {
-   "early_buyers_checked": 0,
-   "liquidity_usd": 47223.61,
-   "mcap_usd": 338870,
-   "mint": "Hg3w7GdPViZ5URuCNnK6EwXLzSTmVwX6UXLeD6Pbpump",
-   "origin": "pumpfun",
-   "symbol": "\u54aa\u597d",
-   "url": "https://dexscreener.com/solana/gsucfcjdqx8pshmyr2kokoabjuhjq6ivvafkmi5a8ksb",
-   "wallets_found": 0
-  },
-  {
-   "early_buyers_checked": 23,
-   "liquidity_usd": 20625.06,
-   "mcap_usd": 78542,
-   "mint": "Z5ijNneoDubKBEhzTumUgfm18m6PjUDred4gp7Xpump",
-   "origin": "pumpfun",
-   "symbol": "mihao",
-   "url": "https://dexscreener.com/solana/2pe2urny4aosizg89trqyuzqwmzwc1fqa2xcbxoozdlc",
+   "symbol": "plumber",
+   "url": "https://dexscreener.com/solana/hqyxyl1kgkijyfswbkr8tntd1gx1azbhfwrf3kjaqeq9",
    "wallets_found": 6
+  },
+  {
+   "early_buyers_checked": 0,
+   "liquidity_usd": 31669.77,
+   "mcap_usd": 189064,
+   "mint": "9rSaajQRUzmo1wZBeRKzof1CiBiw2FSDcQE8aiUSpump",
+   "origin": "pumpfun",
+   "symbol": "DID",
+   "url": "https://dexscreener.com/solana/c9t2uinzg1lxfyxfuwcpqt4segkayy61yga4cvc4ptoe",
+   "wallets_found": 0
+  },
+  {
+   "early_buyers_checked": 50,
+   "liquidity_usd": 30382.12,
+   "mcap_usd": 118867,
+   "mint": "Aw8LQXFq7kvQa5ePEk8QBsCEAmVUoJS9CyWbAUrHpump",
+   "origin": "pumpfun",
+   "symbol": "IMG",
+   "url": "https://dexscreener.com/solana/3cwxuzcyf8vmkaual195rnh3geupr3zobnwnwbbnbjiv",
+   "wallets_found": 0
+  },
+  {
+   "early_buyers_checked": 0,
+   "liquidity_usd": 54596.29,
+   "mcap_usd": 512349,
+   "mint": "F3fEfTxGhAfhkbAaxtiErdcDEMZdTrqssXbfMVKbpump",
+   "origin": "pumpfun",
+   "symbol": "JENSEN",
+   "url": "https://dexscreener.com/solana/bsobfkjjqb5vge2yy8wyhe4mryg7jf2mvqbfn6mzke2j",
+   "wallets_found": 0
+  },
+  {
+   "early_buyers_checked": 50,
+   "liquidity_usd": 23922.3,
+   "mcap_usd": 101367,
+   "mint": "FTu55MyigXns96jz4nTCDDiTCjYJjyrHSceCgG9Upump",
+   "origin": "pumpfun",
+   "symbol": "FOOD",
+   "url": "https://dexscreener.com/solana/2xhqqp1vdvxtaa21bpsekqf5gjts9euqrpsz6urs41qk",
+   "wallets_found": 0
+  },
+  {
+   "early_buyers_checked": 0,
+   "liquidity_usd": 39652.94,
+   "mcap_usd": 280440,
+   "mint": "a9zoLRHvqn12KiGxERC298Gr2rS8YQxuMuN9VFMpump",
+   "origin": "pumpfun",
+   "symbol": "FANDEMON",
+   "url": "https://dexscreener.com/solana/a5kzq3m2zdhwtxjmavdr1cmvavg79yfej4x4u88zkueg",
+   "wallets_found": 0
+  },
+  {
+   "early_buyers_checked": 0,
+   "liquidity_usd": 29832.72,
+   "mcap_usd": 159995,
+   "mint": "ttwocSxKgj4NpQEUzBaFzLxEFzVdLytUbLsnnjGew9v",
+   "origin": "pumpfun",
+   "symbol": "SHARKBUX",
+   "url": "https://dexscreener.com/solana/gcapljm8avitumexsypcvmgk6rer9kg7gun4l9ykp394",
+   "wallets_found": 0
   }
  ],
  "pnl_unit": "SOL",
  "rejection_reasons": [
   [
    "low_liquidity",
-   15
+   31
   ],
   [
    "thin_liquidity_vs_mcap",
-   3
+   7
   ],
   [
    "rugcheck_score",
-   1
+   7
   ],
   [
    "rugcheck:Large Amount of LP Unlocked",
+   6
+  ],
+  [
+   "rugcheck:Low Liquidity",
+   5
+  ],
+  [
+   "concentrated_holders_top10",
+   4
+  ],
+  [
+   "bundled_launch",
+   2
+  ],
+  [
+   "rugcheck:Creator history of rugged tokens",
+   1
+  ],
+  [
+   "rugcheck:Known scammer top token holder",
+   1
+  ],
+  [
+   "rugcheck:Top 10 holders high ownership",
+   1
+  ],
+  [
+   "rugcheck:Single holder ownership",
+   1
+  ],
+  [
+   "rugcheck:High ownership",
+   1
+  ],
+  [
+   "insider_network_62_wallets",
+   1
+  ],
+  [
+   "insider_network_2259_wallets",
+   1
+  ],
+  [
+   "insider_network_31_wallets",
+   1
+  ],
+  [
+   "insider_network_237_wallets",
+   1
+  ],
+  [
+   "insider_network_14710_wallets",
    1
   ]
  ],
  "stats": {
-  "analyzed": 7,
-  "discovered": 2000,
-  "rejected": 19,
-  "runs": 16,
-  "skipped": 2,
-  "tokens_checked": 28,
-  "wallets_10x": 5,
-  "wallets_found": 14
+  "analyzed": 17,
+  "discovered": 6135,
+  "rejected": 54,
+  "runs": 50,
+  "skipped": 7,
+  "tokens_checked": 78,
+  "wallets_10x": 2,
+  "wallets_found": 8
  }
 }

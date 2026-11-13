@@ -1,6 +1,11 @@
 {
  "ai_summary": null,
- "analyzed_by_launchpad": [],
+ "analyzed_by_launchpad": [
+  [
+   "flap",
+   1
+  ]
+ ],
  "chain": "bsc",
  "date": "2026-11-12",
  "filters": {
@@ -9,20 +14,85 @@
   "min_multiple": 5,
   "target_mcap_usd": 100000
  },
- "generated_at": "2026-11-12T08:02:19.053348+00:00",
- "leaderboard": [],
- "new_wallets": [],
- "passed_tokens": [],
+ "generated_at": "2026-11-13T03:40:07.441152+00:00",
+ "leaderboard": [
+  {
+   "avg_entry_mcap": 21985,
+   "best_multiple": 12.01,
+   "hits": 1,
+   "last_hit": "2026-11-12T22:09:46.172751+00:00",
+   "median_multiple": 12.01,
+   "tenx_hits": 1,
+   "tokens": [
+    "\u9ed1\u5929\u9e45"
+   ],
+   "total_pnl": 286.13,
+   "wallet": "0x0343b800b8a2df8a016aabd623294ddcff850024"
+  }
+ ],
+ "new_wallets": [
+  {
+   "avg_entry_mcap": 21985,
+   "first_buy_sig": "0x0e15580689e564fbf5e1c175b624e21886d21519664f56ff36448fe30c855c38",
+   "first_buy_time": 1794462268,
+   "first_entry_mcap": 21985,
+   "hold_fraction_at_target": 1.0,
+   "mint": "0x980a7821a17669259984b248934546de3fcf7777",
+   "multiple": 12.01,
+   "n_trades": 3,
+   "pnl_usd": 286.13,
+   "qualified": true,
+   "realised_multiple": 12.01,
+   "still_holding_pct": 0.0,
+   "symbol": "\u9ed1\u5929\u9e45",
+   "tier": "10x+",
+   "total_multiple": 12.01,
+   "transferred_out": false,
+   "unrealised_usd": 0.0,
+   "usd_in": 25.99,
+   "usd_out": 312.12,
+   "wallet": "0x0343b800b8a2df8a016aabd623294ddcff850024"
+  }
+ ],
+ "passed_tokens": [
+  {
+   "early_buyers_checked": 50,
+   "liquidity_usd": 41084.35,
+   "mcap_usd": 200080,
+   "mint": "0x980a7821a17669259984b248934546de3fcf7777",
+   "origin": "flap",
+   "symbol": "\u9ed1\u5929\u9e45",
+   "url": "https://dexscreener.com/bsc/0xfe73221dde14e6ae9c902d8c9435609012002280",
+   "wallets_found": 1
+  }
+ ],
  "pnl_unit": "USD",
- "rejection_reasons": [],
+ "rejection_reasons": [
+  [
+   "low_liquidity",
+   4
+  ],
+  [
+   "thin_liquidity_vs_mcap",
+   1
+  ],
+  [
+   "bundled_launch",
+   1
+  ],
+  [
+   "mintable_by_owner",
+   1
+  ]
+ ],
  "stats": {
-  "analyzed": 0,
-  "discovered": 0,
-  "rejected": 0,
-  "runs": 0,
-  "skipped": 0,
-  "tokens_checked": 0,
-  "wallets_10x": 0,
-  "wallets_found": 0
+  "analyzed": 1,
+  "discovered": 1520,
+  "rejected": 7,
+  "runs": 16,
+  "skipped": 1,
+  "tokens_checked": 9,
+  "wallets_10x": 1,
+  "wallets_found": 1
  }
 }
