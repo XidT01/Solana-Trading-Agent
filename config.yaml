@@ -81,6 +81,13 @@ wallets:
 rpc:
   requests_per_second: 8            # Helius free tier allows ~10
 
+# Wallet credibility (Solana): win rate across every coin a tracked wallet traded recently.
+profiles:
+  lookback_days: 30
+  max_txs: 500                      # most recent transactions read per wallet (~500 RPC credits)
+  refresh_hours: 24                 # re-profile each wallet at most once a day
+  max_wallets_per_run: 3            # per 30-min scan cycle
+
 report:
   ai_summary: true                  # needs ANTHROPIC_API_KEY
   model: claude-opus-5-5

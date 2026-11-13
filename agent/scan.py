@@ -246,6 +246,11 @@ def main(argv=None) -> int:
     runs.append({"at": now.isoformat(), "rpc_calls": rpc.calls, "sol_usd": sol_usd, **stats})
     write_json(DATA / "runs.json", runs[-3000:])
     log.info("Run done: %s (rpc calls: %d)", stats, rpc.calls)
+    try:  # wallet credibility: refresh a few tracked wallets' win rates each cycle
+        from .profile import refresh_profiles
+        refresh_profiles(rpc, ds, cfg, DATA, sol_usd)
+    except Exception:
+        log.exception("wallet profiling failed")
     return 0
 
 

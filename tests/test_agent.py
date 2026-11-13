@@ -261,6 +261,8 @@ def test_scan_end_to_end(cfg, tmp_path, monkeypatch):
     assert tokens[MINT]["peak_mcap_usd"] == 55000 and tokens[MINT]["target_time"] == 1600
     assert "DUDpump" not in tokens
     assert "DUDpump" in scan_mod.read_json(tmp_path / "watchlist.json", {})
+    profiles = scan_mod.read_json(tmp_path / "wallet_profiles.json", {})  # profiler ran inside the scan
+    assert set(profiles) == {"ALPHA"} and "profiled_at" in profiles["ALPHA"]
 
 
 LAUNCHLAB = "LanMV9sAd7wArD4vJFi2qDdfnVhFxYSUg6eADduJ3uj"
@@ -466,3 +468,34 @@ def test_single_sided_pool_rejected(cfg):
     assert market_checks(zora, cfg) == ["never_pumped (liquidity ≈ market cap: supply still unsold in the pool)"]
     penny = {"liquidity_usd": 28843, "mcap_usd": 67824, "buys_24h": 50, "sells_24h": 20}
     assert market_checks(penny, cfg) == []
+
+
+def test_wallet_profile_win_rate():
+    """Win rate across every coin a wallet traded: sold + still-held value vs SOL spent."""
+    from agent.profile import profile_from_txs
+    W = "TRADER"
+
+    def tx(t, sol, mint, pre, post, other_mint=None):
+        bal = lambda amt, m: {"accountIndex": 1, "mint": m, "owner": W, "uiTokenAmount": {"uiAmountString": repr(amt)}}
+        pre_b, post_b = [bal(pre, mint)], [bal(post, mint)]
+        if other_mint:  # a second token moving in the same tx -> multi-token swap, ignored
+            pre_b.append(bal(0, other_mint)); post_b.append(bal(5, other_mint))
+        return {"blockTime": t, "transaction": {"message": {"accountKeys": [{"pubkey": W}, {"pubkey": "ata"}]}},
+                "meta": {"err": None, "fee": 5000, "preBalances": [10 ** 11, 0],
+                         "postBalances": [10 ** 11 + int(sol * 1e9) - 5000, 0],
+                         "preTokenBalances": pre_b, "postTokenBalances": post_b}}
+
+    txs = [
+        tx(1000, -1.0, "WIN", 0, 1000), tx(2000, 3.0, "WIN", 1000, 0),          # 3x, sold
+        tx(1100, -2.0, "LOSS", 0, 500), tx(2100, 0.5, "LOSS", 500, 0),          # -75%, sold
+        tx(1200, -1.0, "HELD", 0, 100),                                         # still held, now 0.02 SOL each -> 2x
+        tx(1300, -1.0, "DEAD", 0, 100),                                         # held, no price (dead) -> loss
+        tx(1400, -0.005, "DUST", 0, 1),                                         # dust: ignored
+        tx(1500, -1.0, "MULTI", 0, 10, other_mint="X"),                         # multi-token swap: ignored
+        tx(1600, 0.0, "AIRDROP", 0, 50),                                        # received for free: not traded
+    ]
+    p = profile_from_txs(W, txs, {"HELD": 0.02}, sol_usd=200)
+    assert p["coins_traded"] == 4 and p["wins"] == 2 and p["win_rate"] == 0.5
+    assert p["big_wins"] == 2 and p["realised_pnl_sol"] == pytest.approx(2.0 - 1.5 - 1.0 - 1.0)
+    assert p["pnl_sol"] == pytest.approx(2.0 - 1.5 + 1.0 - 1.0)
+    assert p["median_roi"] == pytest.approx((0.25 + 2.0) / 2, abs=0.01)  # stored to 2 decimals

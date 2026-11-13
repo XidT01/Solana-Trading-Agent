@@ -214,13 +214,14 @@ def test_telegram_digest(cfg, monkeypatch):
            "last_hit": "2026-11-12T10:00:00+00:00"}]
     reports = {"solana": _report("solana", [sol_hit]), "bsc": _report("bsc", [bsc_hit], lb), "base": None,
                "robinhood": _report("robinhood", [], runs=0)}
-    msgs = digest.build_messages("2026-11-12", reports, cfg)
+    msgs = digest.build_messages("2026-11-12", reports, cfg,
+                                 {sol_hit["wallet"]: {"coins_traded": 29, "win_rate": 0.241, "wins": 7}})
     text = "\n".join(msgs)
     assert "2 new wallets today, 1 at 10x+" in re.sub("<[^>]+>", "", text)
     assert "https://gmgn.ai/sol/token/GHtnAtTCPFz8MRTMQiEyuEob283EUgqd1d1Fysnhpump" in text
     assert "https://gmgn.ai/bsc/address/0x" + "ab" * 20 in text
     assert "VE&lt;YL&gt;" in text and "‮" not in text      # escaped, bidi stripped
-    assert "+49.8 SOL" in text and "+$1.2K" in text
+    assert "+49.8 SOL · WR 24% (29)" in text and "+$1.2K" in text
     assert "Repeat winner" in text and "No scans today" in text
 
     class Check(HTMLParser):  # Telegram only accepts a few tags, and they must be balanced

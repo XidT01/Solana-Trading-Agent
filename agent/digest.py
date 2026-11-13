@@ -77,7 +77,15 @@ def plain_note(md: str, limit: int = 320) -> str:
     return (cut[:end + 1] if end > limit // 2 else cut.rstrip() + "…")
 
 
-def chain_section(chain: str, r: dict | None, day: str) -> str:
+def win_rate_text(profiles: dict, wallet: str) -> str:
+    p = profiles.get(wallet) or {}
+    if not p.get("coins_traded"):
+        return ""
+    return f" · WR {round(p['win_rate'] * 100)}% ({p['coins_traded']})"
+
+
+def chain_section(chain: str, r: dict | None, day: str, profiles: dict | None = None) -> str:
+    profiles = profiles or {}
     c = CHAINS[chain]
     head = f"{c['icon']} <b>{c['name']}</b>"
     if not r or not r["stats"].get("runs"):
@@ -93,7 +101,7 @@ def chain_section(chain: str, r: dict | None, day: str) -> str:
             star = "🔥 " if h["multiple"] >= 10 else ""
             lines.append(f"{i}. {star}{wallet_link(chain, h['wallet'])} <b>{h['multiple']:.1f}x</b> on "
                          f"{coin_link(chain, h['mint'], h['symbol'])} · entry {money(h['avg_entry_mcap'])} · "
-                         f"{pnl_text(h, c['unit'])}")
+                         f"{pnl_text(h, c['unit'])}{win_rate_text(profiles, h['wallet'])}")
         if len(new) > TOP_WALLETS:
             lines.append(f"<i>+{len(new) - TOP_WALLETS} more on the dashboard</i>")
     else:
@@ -102,7 +110,7 @@ def chain_section(chain: str, r: dict | None, day: str) -> str:
     for w in repeat[:3]:
         coins = ", ".join(esc(t) for t in w["tokens"][-4:])
         lines.append(f"🔁 Repeat winner {wallet_link(chain, w['wallet'])}: <b>{w['hits']} coins</b> ({coins}), "
-                     f"median {w['median_multiple']:.1f}x")
+                     f"median {w['median_multiple']:.1f}x{win_rate_text(profiles, w['wallet'])}")
     best = max(r.get("passed_tokens") or [], key=lambda t: t.get("wallets_found", 0), default=None)
     if best and best.get("wallets_found", 0) >= 2:
         lines.append(f"🎯 Most winners: {coin_link(chain, best['mint'], best['symbol'])} "
@@ -112,7 +120,7 @@ def chain_section(chain: str, r: dict | None, day: str) -> str:
     return "\n".join(lines)
 
 
-def build_messages(day: str, reports: dict[str, dict | None], cfg: dict) -> list[str]:
+def build_messages(day: str, reports: dict[str, dict | None], cfg: dict, profiles: dict | None = None) -> list[str]:
     w = cfg["wallets"]
     nice = date.fromisoformat(day).strftime("%a %d %b")
     total = sum(len((r or {}).get("new_wallets") or []) for r in reports.values())
@@ -121,8 +129,8 @@ def build_messages(day: str, reports: dict[str, dict | None], cfg: dict) -> list
               f"<b>{total}</b> new wallet{'s' if total != 1 else ''} today"
               + (f", <b>{tens}</b> at 10x+" if tens else "") + "\n"
               f"<i>Coins that peaked at {money(w['target_mcap_usd'])}+ · entry under {money(w['max_entry_mcap_usd'])}"
-              f" · {w['min_multiple']:g}x+</i>")
-    sections = [chain_section(k, reports.get(k), day) for k in CHAINS]
+              f" · {w['min_multiple']:g}x+ · WR = win rate across all coins traded recently</i>")
+    sections = [chain_section(k, reports.get(k), day, profiles if k == "solana" else None) for k in CHAINS]
     footer = "<i>Automated on-chain analysis. Not financial advice.</i>"
     messages, current = [], header
     for sec in sections:  # split between chains if the message gets too long
@@ -174,7 +182,8 @@ def main(argv=None) -> int:
     if not any(r and r["stats"].get("runs") for r in reports.values()):
         log.info("No scans on %s; no digest", day)
         return 0
-    messages = build_messages(day, reports, cfg)
+    profiles = read_json(data_dir("solana") / "wallet_profiles.json", {})
+    messages = build_messages(day, reports, cfg, profiles)
     if args.dry_run:
         print("\n\n----- next message -----\n\n".join(messages))
         return 0

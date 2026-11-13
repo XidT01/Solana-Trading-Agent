@@ -124,6 +124,8 @@
   .chip { display: inline-block; padding: 1px 8px; border-radius: 6px; background: var(--chip); color: var(--text);
           font-size: 12.5px; font-weight: 550; }
   a.chip:hover { background: var(--accent-soft); color: var(--accent); text-decoration: none; }
+  .cred { padding: 10px 0 8px; color: var(--muted); font-size: 13.5px; white-space: normal; }
+  .cred strong { color: var(--text); }
   .tier { display: inline-block; padding: 1px 7px; border-radius: 6px; font-size: 12px; font-weight: 650;
           background: var(--chip); color: var(--muted); }
   .tier.ten { background: var(--accent); color: #fff; }
@@ -288,6 +290,22 @@ const gmgnWallet = (a) => C().gmgn ? `https://gmgn.ai/${C().gmgn}/address/${enco
 const coinLink = (mint, symbol, cls = "coin") =>
   `<a class="${cls}" href="${gmgnToken(mint)}" target="_blank" rel="noopener" title="Open ${esc(symbol)} on ${C().gmgn ? "GMGN" : "DexScreener"}">${esc(symbol || short(mint))}</a>`;
 const pnlOf = (h) => h.pnl_sol ?? h.pnl_usd;
+// Win rate across every coin the wallet traded recently (Solana): the credibility signal.
+const winRate = (w) => {
+  if (state.chain !== "solana") return `<span class="faint" title="Not available on EVM chains yet: open the wallet on GMGN">n/a</span>`;
+  const p = w.prof;
+  if (!p) return `<span class="faint" title="Profiled within a day of being tracked">pending</span>`;
+  if (!p.coins_traded) return `<span class="faint">no trades</span>`;
+  const pct = Math.round(p.win_rate * 100), cls = pct >= 50 ? "good" : pct < 35 ? "bad" : "";
+  return `<span class="${cls}" title="${p.wins} of ${p.coins_traded} coins traded at a profit (last ${p.days_covered} days of activity)"><strong>${pct}%</strong></span> <span class="faint">${p.wins}/${p.coins_traded}</span>`;
+};
+const credibility = (w) => {
+  const p = w.prof;
+  if (state.chain !== "solana" || !p || !p.coins_traded) return "";
+  return `<div class="cred">Track record (last ${num(p.days_covered, 1)} days of trading): <strong>${p.coins_traded}</strong> coins traded,
+    <strong>${p.wins}</strong> won (${Math.round(p.win_rate * 100)}%), ${p.big_wins} at 2x+, median return ${num(p.median_roi, 2)}x,
+    overall ${pnl(p.pnl_sol)}.</div>`;
+};
 const tier = (x) => x >= 10 ? `<span class="tier ten">10x+</span>` : `<span class="tier">5x+</span>`;
 const pnl = (v) => v == null ? "–" : `<span class="${v >= 0 ? "good" : "bad"}">${v >= 0 ? "+" : "−"}${
   C().unit === "USD" ? money(Math.abs(v)) : num(Math.abs(v)) + " SOL"}</span>`;
@@ -337,8 +355,9 @@ async function getJSON(path, fallback) {
   catch { return fallback; }
 }
 
-function buildWallets(raw) {
+function buildWallets(raw, profiles = {}) {
   return Object.entries(raw).map(([addr, w]) => {
+    const prof = profiles[addr];
     const hits = [...w.hits].sort((a, b) => b.multiple - a.multiple);
     const m = hits.map(h => h.multiple).sort((a, b) => a - b);
     const mid = m.length % 2 ? m[(m.length - 1) / 2] : (m[m.length / 2 - 1] + m[m.length / 2]) / 2;
@@ -348,6 +367,7 @@ function buildWallets(raw) {
       pnl: hits.reduce((a, h) => a + (pnlOf(h) || 0), 0),
       last: hits.reduce((a, h) => h.found_at > a ? h.found_at : a, ""),
       text: (addr + " " + hits.map(h => clean(h.symbol) + " " + h.mint).join(" ")).toLowerCase(),
+      prof, wr: prof && prof.win_rate != null ? prof.win_rate : -1,
     };
   });
 }
@@ -357,6 +377,7 @@ const W_COLS = [
   {key: "addr", h: "Wallet", sticky: true},
   {key: "best", h: "Best", num: true, sort: w => w.best},
   {key: "pnl", h: "Total PnL", num: true, sort: w => w.pnl},
+  {key: "wr", h: "Win rate", num: true, sort: w => w.wr},
   {key: "coins", h: "Coins"},
   {key: "hits", h: "Hits", num: true, sort: w => w.n, cls: "hide-sm"},
   {key: "entry", h: "Avg entry", num: true, sort: w => w.entry},
@@ -392,13 +413,14 @@ function renderWallets() {
       <td class="sticky"><span class="caret">›</span>${wallet(w.addr)}</td>
       <td class="num">${tier(w.best)} <strong>${num(w.best, 1)}x</strong></td>
       <td class="num">${pnl(w.pnl)}</td>
+      <td class="num">${winRate(w)}</td>
       <td>${coins}</td>
       <td class="num hide-sm"><strong>${w.n}</strong></td>
       <td class="num">${money(w.entry)}</td>
       <td class="num hide-sm">${num(w.median, 1)}x</td>
       <td class="muted hide-sm">${ago(w.last)}</td></tr>`;
     if (!open) return main;
-    const detail = `<tr class="detail"><td colspan="${W_COLS.length}"><div class="scroll"><table>
+    const detail = `<tr class="detail"><td colspan="${W_COLS.length}">${credibility(w)}<div class="scroll"><table>
       <thead><tr><th>Coin</th><th class="num">Avg entry mcap</th><th class="num">Multiple</th><th class="num">${C().unit === "SOL" ? "SOL in" : "Cost"}</th>
       <th class="num">PnL</th><th class="num">Still holding</th><th>First buy</th></tr></thead><tbody>
       ${w.hits.map(h => `<tr><td>${coinLink(h.mint, h.symbol)}</td><td class="num">${money(h.avg_entry_mcap)}</td>
@@ -566,12 +588,13 @@ function switchChain(k) {
 
 async function load(first) {
   const base = C().data, chain = state.chain;
-  const [index, wallets, tokens, runs, meta] = await Promise.all([
+  const [index, wallets, tokens, runs, meta, profiles] = await Promise.all([
     getJSON(base + "reports/index.json", []), getJSON(base + "wallets.json", {}), getJSON(base + "tokens.json", {}),
     getJSON(base + "runs.json", []), getJSON("data/meta.json", null),
+    chain === "solana" ? getJSON(base + "wallet_profiles.json", {}) : Promise.resolve({}),
   ]);
   if (chain !== state.chain) return;  // the user switched chains while this was loading
-  state.index = index; state.wallets = buildWallets(wallets); state.tokens = Object.values(tokens); state.runs = runs;
+  state.index = index; state.wallets = buildWallets(wallets, profiles); state.tokens = Object.values(tokens); state.runs = runs;
   state.cfg = meta;
   renderHeader(); renderWallets(); renderCoins();
   $$("#r-prev, #r-next, #r-day").forEach(el => el.disabled = false);
