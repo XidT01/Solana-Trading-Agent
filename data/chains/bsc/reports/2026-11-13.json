@@ -1,0 +1,105 @@
+{
+ "ai_summary": null,
+ "analyzed_by_launchpad": [
+  [
+   "flap",
+   4
+  ]
+ ],
+ "chain": "bsc",
+ "date": "2026-11-13",
+ "filters": {
+  "highlight_multiple": 10,
+  "max_entry_mcap_usd": 30000,
+  "min_multiple": 5,
+  "target_mcap_usd": 100000
+ },
+ "generated_at": "2026-11-14T03:39:02.458060+00:00",
+ "leaderboard": [
+  {
+   "avg_entry_mcap": 21985,
+   "best_multiple": 12.01,
+   "hits": 1,
+   "last_hit": "2026-11-12T22:09:46.172751+00:00",
+   "median_multiple": 12.01,
+   "tenx_hits": 1,
+   "tokens": [
+    "\u9ed1\u5929\u9e45"
+   ],
+   "total_pnl": 286.13,
+   "wallet": "0x0343b800b8a2df8a016aabd623294ddcff850024"
+  }
+ ],
+ "new_wallets": [],
+ "passed_tokens": [
+  {
+   "early_buyers_checked": 50,
+   "liquidity_usd": 22828.64,
+   "mcap_usd": 75956,
+   "mint": "0x2b76670e3cc30ff6e29b692f93d773f3cb177777",
+   "origin": "flap",
+   "symbol": "\u5e01\u5b89\u94fe\u6e38",
+   "url": "https://dexscreener.com/bsc/0xac89574346b457031661e0b377062cb4f1bcc863",
+   "wallets_found": 0
+  },
+  {
+   "early_buyers_checked": 50,
+   "liquidity_usd": 74138.99,
+   "mcap_usd": 134342,
+   "mint": "0x41a0fc794d70dd0805014cf67ebd788f73da7777",
+   "origin": "flap",
+   "symbol": "Jacket",
+   "url": "https://dexscreener.com/bsc/0x859c50152323baa3c8cfb59bcd3b4b6be6857e25",
+   "wallets_found": 0
+  },
+  {
+   "early_buyers_checked": 50,
+   "liquidity_usd": 34334.05,
+   "mcap_usd": 164638,
+   "mint": "0x5e8c3bda24c74ca43ee0b86becfebab956bb7777",
+   "origin": "flap",
+   "symbol": "CRO",
+   "url": "https://dexscreener.com/bsc/0x830eb88f7643735ef0ab2d163dceb17459651829",
+   "wallets_found": 0
+  },
+  {
+   "early_buyers_checked": 0,
+   "liquidity_usd": 21949.96,
+   "mcap_usd": 163482,
+   "mint": "0x90d0a55e3428b003885263ea5295125aea257777",
+   "origin": "flap",
+   "symbol": "\u6bd4\u7279\u5e01",
+   "url": "https://dexscreener.com/bsc/0x5a3835f05cbee9b2dada969e55e92b54d203d1b0",
+   "wallets_found": 0
+  }
+ ],
+ "pnl_unit": "USD",
+ "rejection_reasons": [
+  [
+   "low_liquidity",
+   12
+  ],
+  [
+   "concentrated_holders_top10",
+   2
+  ],
+  [
+   "never_pumped",
+   1
+  ],
+  [
+   "thin_liquidity_vs_mcap",
+   1
+  ]
+ ],
+ "stats": {
+  "analyzed": 4,
+  "discovered": 4628,
+  "rejected": 16,
+  "runs": 49,
+  "skipped": 8,
+  "tokens_checked": 28,
+  "wallets_10x": 0,
+  "wallets_found": 0
+ }
+}

@@ -1,0 +1,28 @@
+{
+ "ai_summary": null,
+ "analyzed_by_launchpad": [],
+ "chain": "robinhood",
+ "date": "2026-11-13",
+ "filters": {
+  "highlight_multiple": 10,
+  "max_entry_mcap_usd": 30000,
+  "min_multiple": 5,
+  "target_mcap_usd": 100000
+ },
+ "generated_at": "2026-11-14T03:39:02.719106+00:00",
+ "leaderboard": [],
+ "new_wallets": [],
+ "passed_tokens": [],
+ "pnl_unit": "USD",
+ "rejection_reasons": [],
+ "stats": {
+  "analyzed": 0,
+  "discovered": 4642,
+  "rejected": 0,
+  "runs": 49,
+  "skipped": 2,
+  "tokens_checked": 2,
+  "wallets_10x": 0,
+  "wallets_found": 0
+ }
+}

@@ -1,0 +1,102 @@
+{
+ "ai_summary": null,
+ "analyzed_by_launchpad": [],
+ "chain": "base",
+ "date": "2026-11-13",
+ "filters": {
+  "highlight_multiple": 10,
+  "max_entry_mcap_usd": 30000,
+  "min_multiple": 5,
+  "target_mcap_usd": 100000
+ },
+ "generated_at": "2026-11-14T03:39:02.592510+00:00",
+ "leaderboard": [
+  {
+   "avg_entry_mcap": 6396,
+   "best_multiple": 7.63,
+   "hits": 1,
+   "last_hit": "2026-11-12T19:19:27.532345+00:00",
+   "median_multiple": 7.63,
+   "tenx_hits": 0,
+   "tokens": [
+    "PENNY"
+   ],
+   "total_pnl": 2042.44,
+   "wallet": "0x9295321db9fce6d1fcf33b84ea41d440e4b9659b"
+  },
+  {
+   "avg_entry_mcap": 7244,
+   "best_multiple": 7.54,
+   "hits": 1,
+   "last_hit": "2026-11-12T19:19:27.532345+00:00",
+   "median_multiple": 7.54,
+   "tenx_hits": 0,
+   "tokens": [
+    "PENNY"
+   ],
+   "total_pnl": 368.98,
+   "wallet": "0x82efd7b96e36688b391f25a1a2de38469bbc2420"
+  },
+  {
+   "avg_entry_mcap": 4323,
+   "best_multiple": 7.43,
+   "hits": 1,
+   "last_hit": "2026-11-12T19:19:27.532345+00:00",
+   "median_multiple": 7.43,
+   "tenx_hits": 0,
+   "tokens": [
+    "PENNY"
+   ],
+   "total_pnl": 1700.47,
+   "wallet": "0xce04388107acbea0a7d108bdc2ca3360bb797431"
+  },
+  {
+   "avg_entry_mcap": 4323,
+   "best_multiple": 5.25,
+   "hits": 1,
+   "last_hit": "2026-11-12T19:19:27.532345+00:00",
+   "median_multiple": 5.25,
+   "tenx_hits": 0,
+   "tokens": [
+    "PENNY"
+   ],
+   "total_pnl": 1183.83,
+   "wallet": "0x3c15baca26235742f42f5d34141d8d5ffd176d9e"
+  }
+ ],
+ "new_wallets": [],
+ "passed_tokens": [],
+ "pnl_unit": "USD",
+ "rejection_reasons": [
+  [
+   "never_pumped",
+   50
+  ],
+  [
+   "low_liquidity",
+   8
+  ],
+  [
+   "honeypot_simulation_failed_sell",
+   3
+  ],
+  [
+   "simulated_sellTax",
+   3
+  ],
+  [
+   "thin_liquidity_vs_mcap",
+   1
+  ]
+ ],
+ "stats": {
+  "analyzed": 0,
+  "discovered": 4823,
+  "rejected": 62,
+  "runs": 49,
+  "skipped": 1,
+  "tokens_checked": 63,
+  "wallets_10x": 0,
+  "wallets_found": 0
+ }
+}
