@@ -35,6 +35,8 @@ discovery:
   # Watchlist: young coins are re-checked every run until they reach the target or fizzle out.
   watch_drop_after_hours: 3         # ...stop watching a coin still under this mcap after 3h
   watch_drop_below_mcap_usd: 8000
+  watch_drop_no_progress_hours: 6   # ...and stop watching coins whose estimated peak stayed under the
+                                    # peak-check minimum for this long (keeps watchlists small)
   watchlist_max: 5000
   # Peak market cap comes from 15-min price candles (GeckoTerminal), so coins that hit $100K and
   # then dumped still count.
@@ -108,6 +110,8 @@ evm:
   max_tokens_per_day: 15            # per chain
   max_transfer_logs: 150000         # coins with a longer history are skipped
   min_buy_usd: 10                   # ignore dust buys
+  curve_price_points: 40            # bonding-curve phase (before price candles exist): sample this many early
+                                    # buys and price them from the BNB/ETH the buyer paid
   safety:
     max_tax_pct: 10
     require_security_scan: false    # Robinhood Chain has no honeypot scanner yet: rely on liquidity + sells checks
@@ -115,7 +119,11 @@ evm:
     bsc:
       name: BSC
       chain_id: 56
-      rpc: https://bsc-rpc.publicnode.com           # override with the EVM_RPC_BSC secret
+      rpc: https://bsc-rpc.publicnode.com           # override with the EVM_RPC_BSC secret (recommended:
+                                                    # this free node often returns older history as empty)
+      empty_log_retries: 8
+      native_price: {chain: bsc, address: "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c"}    # WBNB
+      stablecoins: ["0x55d398326f99059ff775485246999027b3197955", "0x8ac76a51cc950d9822d68b83fe1ad97b32cd580d"]  # USDT, USDC
       geckoterminal: bsc
       dexscreener: bsc
       honeypot_is: true
@@ -132,6 +140,8 @@ evm:
       name: Base
       chain_id: 8453
       rpc: https://base-rpc.publicnode.com          # override with the EVM_RPC_BASE secret
+      native_price: {chain: base, address: "0x4200000000000000000000000000000000000006"}   # WETH
+      stablecoins: ["0x833589fcd6edb6e08f4c7c32d4f71b54bda02913"]                           # USDC
       geckoterminal: base
       dexscreener: base
       honeypot_is: true
@@ -149,6 +159,7 @@ evm:
       name: Robinhood
       chain_id: 4663
       rpc: https://rpc.mainnet.chain.robinhood.com  # override with the EVM_RPC_ROBINHOOD secret
+      native_price: {chain: base, address: "0x4200000000000000000000000000000000000006"}   # ETH (priced via Base WETH)
       geckoterminal: robinhood
       dexscreener: robinhood
       honeypot_is: false

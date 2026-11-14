@@ -135,7 +135,9 @@ def main(argv=None) -> int:
             seen[mint] = today
             watch.pop(mint, None)
             continue
-        if age_h > d["watch_drop_after_hours"] and m["mcap_usd"] < d["watch_drop_below_mcap_usd"]:
+        never_got_going = (age_h > d["watch_drop_no_progress_hours"]
+                           and max(m["mcap_usd"], m["est_peak_mcap"]) < d["peak_check_min_mcap_usd"])
+        if never_got_going or (age_h > d["watch_drop_after_hours"] and m["mcap_usd"] < d["watch_drop_below_mcap_usd"]):
             seen[mint] = today  # never took off: stop watching
             watch.pop(mint, None)
             continue
@@ -148,9 +150,10 @@ def main(argv=None) -> int:
     peaks = read_json(DATA / "peaks.json", {})
     peak_checks = 0
     shortlist = []
-    order = sorted(snaps.items(), key=lambda kv: ((peaks.get(kv[0]) or {}).get("at", ""), -kv[1][0]["mcap_usd"]))
+    # ...and among those, the likeliest runners (highest estimated peak) first.
+    order = sorted(snaps.items(), key=lambda kv: ((peaks.get(kv[0]) or {}).get("at", ""), -kv[1][0]["est_peak_mcap"]))
     for mint, (m, age_h) in order:
-        if m["mcap_usd"] < d["peak_check_min_mcap_usd"] and m["mcap_usd"] < target:
+        if max(m["mcap_usd"], m["est_peak_mcap"]) < d["peak_check_min_mcap_usd"]:
             stats["below_target_peak"] += 1
             continue
         supply_est = m["mcap_usd"] / m["price_usd"] if m["price_usd"] else 0

@@ -9,6 +9,7 @@ from agent.evm_safety import goplus_checks, honeypot_is_checks
 
 T0 = 1_800_000_000  # launch time (block 100); 1 block per second
 SUPPLY, DEC = 1_000_000_000, 18
+NATIVE_USD = 600.0  # BNB price in the simulation
 BOND, ROUTER, FEE = "0x" + "b0" * 20, "0x" + "70" * 20, "0x" + "fe" * 20
 
 
@@ -48,9 +49,12 @@ class Chain:
         tokens = usd / price_at(t)
         b = 100 + (t - T0)
         if via_router:
-            return self.tx(who, (BOND, ROUTER, tokens), (ROUTER, who, tokens), block=b)
-        moves = [(BOND, who, tokens)] + ([(BOND, FEE, tokens * fee)] if fee else [])
-        return self.tx(who, *moves, block=b)
+            h = self.tx(who, (BOND, ROUTER, tokens), (ROUTER, who, tokens), block=b)
+        else:
+            moves = [(BOND, who, tokens)] + ([(BOND, FEE, tokens * fee)] if fee else [])
+            h = self.tx(who, *moves, block=b)
+        self.txs[h]["value"] = hex(int(usd / NATIVE_USD * 1e18))  # paid in BNB
+        return h
 
     def sell(self, who, tokens, t):
         return self.tx(who, (who, BOND, tokens), block=100 + (t - T0))
@@ -265,3 +269,51 @@ def test_evm_realised_mode_and_transfer_out(cfg):
     assert q[addr("ALPHA")]["multiple"] == q[addr("ALPHA")]["realised_multiple"]
     near = {w["wallet"]: w for w in res["near_misses"]}
     assert near[addr("OMEGA")]["transferred_out"] and near[addr("DELTA")]["realised_multiple"] == 0
+
+
+def test_curve_phase_priced_from_native_paid(cfg):
+    """Regression (Flap on BSC): GeckoTerminal doesn't track the bonding curve, so candles only start at
+    graduation (~$34-50K). Early buys must be priced from the BNB the buyer paid, not the first candle."""
+    late = [[t, price_at(t), 0, 0, price_at(t + 60), 1000] for t in range(T0 + 600, T0 + 3600, 60)]
+    c = launch()
+    blind = EvmAnalyzer(FakeRPC(c), cfg).analyze(
+        "0xtoken", {"tx": "0x" + "%064x" % 0, "block": 99}, SUPPLY, DEC, PriceSeries([late]), price_at(T0 + 3000),
+        head=10 ** 6)
+    assert blind["status"] == "skipped" and blind["reason"].startswith("launched_above_entry_cap")
+    res = EvmAnalyzer(FakeRPC(c), cfg, native_usd=NATIVE_USD).analyze(
+        "0xtoken", {"tx": "0x" + "%064x" % 0, "block": 99}, SUPPLY, DEC, PriceSeries([late]), price_at(T0 + 3000),
+        head=10 ** 6)
+    q = {w["wallet"]: w for w in res["wallets"]}
+    assert set(q) == {addr("ALPHA"), addr("DELTA")}
+    assert q[addr("ALPHA")]["avg_entry_mcap"] == pytest.approx(mcap_at(T0 + 60), rel=0.05)
+    assert q[addr("DELTA")]["avg_entry_mcap"] == pytest.approx(mcap_at(T0 + 90), rel=0.05)
+
+
+def test_estimated_peak_from_price_changes():
+    from agent.safety import estimated_peak
+    # $40K now, up 100% in 1h, down 75% over 6h (so $160K 6h ago), no 24h data
+    pair = {"marketCap": 40000, "priceChange": {"h1": 100, "h6": -75}}
+    assert estimated_peak(pair) == pytest.approx(160000)
+    assert estimated_peak({"marketCap": 40000, "priceChange": {"h24": -100}}) == 40000  # ignore -100%
+
+
+def test_incomplete_history_is_not_analysed(cfg):
+    """Regression (Jacket on BSC): the public node returned no logs for the first hours, so the agent analysed
+    only the coin's later life (first 'buy' 15h after launch, at $328K)."""
+    c = launch()
+
+    class Pruned(FakeRPC):
+        def logs(self, address, topics, start, end, max_logs=10 ** 9):
+            return [lg for lg in super().logs(address, topics, start, end) if int(lg["blockNumber"], 16) > 400]
+    res = EvmAnalyzer(Pruned(c), cfg).analyze("0xtoken", {"tx": "0x" + "%064x" % 0, "block": 99}, SUPPLY, DEC,
+                                                prices(), price_at(T0 + 3000), head=10 ** 6)
+    assert res == {"status": "skipped", "reason": "incomplete_history_from_rpc"}
+
+
+def test_empty_log_chunks_are_retried():
+    from agent.evm import EvmRPC
+    rpc = EvmRPC("http://fake", rps=0, chunk=100, empty_retries=3)
+    answers = iter([[], [], [{"blockNumber": "0x5"}]])
+    rpc.call = lambda m, p: next(answers) if m == "eth_getLogs" else None
+    rpc.block_ts = lambda n: 0
+    assert rpc.logs("0xt", [], 0, 50) == [{"blockNumber": "0x5"}]

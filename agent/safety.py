@@ -85,7 +85,20 @@ def market_snapshot(pairs: list[dict]) -> dict:
         "buys_24h": sum(x.get("buys", 0) for x in h24),
         "sells_24h": sum(x.get("sells", 0) for x in h24),
         "volume_24h": sum((p.get("volume") or {}).get("h24") or 0 for p in pairs),
+        "est_peak_mcap": estimated_peak(best),
     }
+
+
+def estimated_peak(pair: dict) -> float:
+    """Cheap lower bound on a coin's peak market cap from DexScreener's price changes: the market cap 1h, 6h
+    and 24h ago (and now). Used only to decide which coins get the detailed (rate-limited) peak check first."""
+    mcap = pair.get("marketCap") or pair.get("fdv") or 0
+    past = [mcap]
+    for k in ("h1", "h6", "h24"):
+        pc = (pair.get("priceChange") or {}).get(k)
+        if pc is not None and pc > -99.9:
+            past.append(mcap / (1 + pc / 100))
+    return max(past)
 
 
 def market_checks(m: dict, cfg: dict) -> list[str]:

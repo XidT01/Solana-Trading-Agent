@@ -42,7 +42,9 @@ def scan_chain(key: str, chain: dict, cfg: dict, now, ds, gt, rpc=None) -> dict:
                      if r.get("verdict") == "analyzed" and r.get("checked_at", "").startswith(today))
     paced = math.ceil(e["max_tokens_per_day"] * (now.hour + 1) / 24)
     budget = max(0, min(e["max_tokens_per_run"], paced - done_today))
-    rpc = rpc or EvmRPC(os.environ.get(f"EVM_RPC_{key.upper()}") or chain["rpc"], 8, chain["log_chunk_blocks"])
+    own_rpc = os.environ.get(f"EVM_RPC_{key.upper()}")
+    rpc = rpc or EvmRPC(own_rpc or chain["rpc"], 8, chain["log_chunk_blocks"],
+                        0 if own_rpc else chain.get("empty_log_retries", 0))
     net = chain["geckoterminal"]
 
     found = [t.lower() for t, _ in gt.new_pools(d["geckoterminal_new_pool_pages"], net)]
@@ -73,7 +75,9 @@ def scan_chain(key: str, chain: dict, cfg: dict, now, ds, gt, rpc=None) -> dict:
             seen[t] = today
             watch.pop(t, None)
             continue
-        if age_h > d["watch_drop_after_hours"] and m["mcap_usd"] < d["watch_drop_below_mcap_usd"]:
+        never_got_going = (age_h > d["watch_drop_no_progress_hours"]
+                           and max(m["mcap_usd"], m["est_peak_mcap"]) < d["peak_check_min_mcap_usd"])
+        if never_got_going or (age_h > d["watch_drop_after_hours"] and m["mcap_usd"] < d["watch_drop_below_mcap_usd"]):
             seen[t] = today
             watch.pop(t, None)
             continue
@@ -86,9 +90,10 @@ def scan_chain(key: str, chain: dict, cfg: dict, now, ds, gt, rpc=None) -> dict:
     peaks = read_json(out / "peaks.json", {})
     peak_checks = 0
     shortlist = []
-    order = sorted(snaps.items(), key=lambda kv: ((peaks.get(kv[0]) or {}).get("at", ""), -kv[1][0]["mcap_usd"]))
+    # ...and among those, the likeliest runners (highest estimated peak) first.
+    order = sorted(snaps.items(), key=lambda kv: ((peaks.get(kv[0]) or {}).get("at", ""), -kv[1][0]["est_peak_mcap"]))
     for t, (m, age_h) in order:
-        if m["mcap_usd"] < d["peak_check_min_mcap_usd"] and m["mcap_usd"] < target:
+        if max(m["mcap_usd"], m["est_peak_mcap"]) < d["peak_check_min_mcap_usd"]:
             stats["below_target_peak"] += 1
             continue
         supply_est = m["mcap_usd"] / m["price_usd"] if m["price_usd"] else 0
@@ -131,7 +136,25 @@ def scan_chain(key: str, chain: dict, cfg: dict, now, ds, gt, rpc=None) -> dict:
         shortlist.append(rec)
 
     shortlist.sort(key=lambda r: -r["volume_24h"])
-    analyzer = EvmAnalyzer(rpc, cfg, chain.get("markets") or [])
+    np_ = chain.get("native_price") or {}
+    native_usd = ds.price_usd(np_["address"], np_["chain"]) if np_ else None
+    stables = {a.lower() for a in chain.get("stablecoins") or []}
+    quote_cache: dict[str, tuple[float | None, int]] = {}
+
+    def token_usd(addr: str) -> tuple[float | None, int]:
+        """USD price and decimals of a token a buyer paid with (USDT, tokenized stocks, WBNB / WETH...)."""
+        if addr not in quote_cache:
+            dec = 18
+            try:
+                d_hex = rpc.eth_call(addr, "0x313ce567")
+                dec = int(d_hex, 16) if d_hex and d_hex != "0x" else 18
+            except ValueError:
+                pass
+            quote_cache[addr] = (1.0 if addr in stables else ds.price_usd(addr, chain["dexscreener"]), dec)
+        return quote_cache[addr]
+
+    known = [*(chain.get("markets") or []), *(chain["launchpads"].get("contracts") or {})]
+    analyzer = EvmAnalyzer(rpc, cfg, known, native_usd, token_usd)
     for rec in shortlist:
         if budget <= 0:
             break
@@ -154,7 +177,7 @@ def scan_chain(key: str, chain: dict, cfg: dict, now, ds, gt, rpc=None) -> dict:
             prices = fetch_prices(gt, net, t, rec["pools"], created_ts, int(now.timestamp()))
             res = analyzer.analyze(t, rec["creation"], supply, decimals, prices, rec["price_usd"], head,
                                    rec["target_time_hint"])
-            if not res.get("reason", "").startswith("launched_above_entry_cap"):
+            if not (res.get("reason") or "").startswith("launched_above_entry_cap"):
                 budget -= 1  # only full wallet scans count against the daily budget
         except Exception as err:  # one bad token must not kill the run
             log.exception("%s analysis failed for %s", key, t)

@@ -34,10 +34,10 @@ class DexScreener:
                     out[base].append(p)
         return out
 
-    def price_usd(self, mint: str) -> float | None:
-        """USD price of any token (used for non-SOL quote assets, e.g. stonk.fun's tokenized stocks)."""
-        pairs = [p for p in self.http.get(f"{self.BASE}/tokens/v1/solana/{mint}") or []
-                 if (p.get("baseToken") or {}).get("address") == mint and p.get("priceUsd")]
+    def price_usd(self, mint: str, chain: str = "solana") -> float | None:
+        """USD price of any token (non-SOL quote assets, e.g. stonk.fun's tokenized stocks; WBNB / WETH)."""
+        pairs = [p for p in self.http.get(f"{self.BASE}/tokens/v1/{chain}/{mint}") or []
+                 if (p.get("baseToken") or {}).get("address", "").lower() == mint.lower() and p.get("priceUsd")]
         if not pairs:
             return None
         best = max(pairs, key=lambda p: (p.get("liquidity") or {}).get("usd") or 0)

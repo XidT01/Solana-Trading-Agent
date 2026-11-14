@@ -24,8 +24,11 @@ def topic_addr(t: str) -> str:
 
 
 class EvmRPC:
-    def __init__(self, url: str, rps: float = 8, chunk: int = 50000):
+    def __init__(self, url: str, rps: float = 8, chunk: int = 50000, empty_retries: int = 0):
         self.url = url
+        # Some public nodes (BSC publicnode) sit behind load balancers where most nodes don't keep older logs
+        # and answer with an empty list instead of an error. Retry empty chunks this many times.
+        self.empty_retries = empty_retries
         self.http = Http(rps=rps, timeout=40)
         self.chunk = chunk
         self.calls = 0
@@ -87,6 +90,11 @@ class EvmRPC:
                 continue
             if got is None:
                 return None
+            for _ in range(self.empty_retries if not got else 0):
+                got = self.call("eth_getLogs", [{"address": address, "topics": topics,
+                                                 "fromBlock": hex(b), "toBlock": hex(e)}]) or []
+                if got:
+                    break
             out.extend(got)
             if len(out) > max_logs:
                 return None
@@ -169,14 +177,34 @@ class PriceSeries:
         self.ts = sorted(best)
         self.op = [best[t][0] for t in self.ts]
         self.px = [best[t][1] for t in self.ts]
+        self.pts: list[tuple[int, float]] = []   # (time, price) from trades before the first candle
+
+    def add_points(self, points: list[tuple[int, float]]) -> None:
+        """Prices measured from individual trades (bonding-curve phase, which GeckoTerminal may not track)."""
+        first = self.ts[0] if self.ts else None
+        self.pts = sorted(p for p in points if p[1] > 0 and (first is None or p[0] < first))
+
+    def first_price(self) -> float | None:
+        return self.pts[0][1] if self.pts else (self.op[0] if self.ts else None)
 
     def __bool__(self):
-        return bool(self.ts)
+        return bool(self.ts or self.pts)
 
     def at(self, t: int) -> float | None:
         """Price at time t: interpolated between the open and close of the minute containing t (so a buy
         early in a fast-rising minute isn't charged the minute's close). Outside known minutes, the
         nearest earlier close (or the first open)."""
+        if self.pts and (not self.ts or t < self.ts[0]):
+            j = bisect.bisect_right([p[0] for p in self.pts], t) - 1
+            if j < 0:
+                return self.pts[0][1]
+            if j + 1 < len(self.pts):  # linear between the surrounding trade prices
+                (t0, p0), (t1, p1) = self.pts[j], self.pts[j + 1]
+                return p0 + (p1 - p0) * ((t - t0) / (t1 - t0) if t1 > t0 else 0)
+            if not self.ts:
+                return self.pts[j][1]
+            (t0, p0), (t1, p1) = self.pts[j], (self.ts[0], self.op[0])
+            return p0 + (p1 - p0) * ((t - t0) / (t1 - t0) if t1 > t0 else 0)
         if not self.ts:
             return None
         i = bisect.bisect_right(self.ts, t) - 1
@@ -244,17 +272,22 @@ def parse_transfers(logs: list[dict], decimals: int) -> list[tuple]:
     return out
 
 
-def detect_markets(transfers: list[tuple], known: set[str] = frozenset(), min_counterparties: int = 5) -> set[str]:
+def detect_markets(transfers: list[tuple], known: set[str] = frozenset(), min_counterparties: int = 8,
+                   is_contract=None) -> set[str]:
     """Contracts that trade with many different addresses: bonding curves, pools, the v4 PoolManager.
-    `known` market contracts (e.g. the chain's Uniswap v4 PoolManager) always count, even on quiet coins."""
+    `known` market contracts (the chain's v4 PoolManager, launchpad contracts) always count, even on quiet coins.
+    A fixed counterparty threshold (not a share of all transactions) so a busy coin's bonding curve still counts
+    next to its later DEX pool (Jacket: the Flap curve was missed and 15h of early buys with it);
+    `is_contract` filters out ordinary wallets that happen to trade with many addresses."""
     peers: dict[str, set] = defaultdict(set)
     for _b, _i, _tx, frm, to, _v in transfers:
         if frm not in DEAD and to not in DEAD:
             peers[frm].add(to)
             peers[to].add(frm)
-    n_tx = len({t[2] for t in transfers})
-    need = max(min_counterparties, int(0.03 * n_tx))
-    return {a for a, p in peers.items() if len(p) >= need} | {k.lower() for k in known}
+    cands = {a for a, p in peers.items() if len(p) >= min_counterparties}
+    if is_contract:
+        cands = {a for a in cands if is_contract(a)}
+    return cands | {k.lower() for k in known}
 
 
 def extract_trades(transfers: list[tuple], markets: set[str], ts_of) -> list[EvmTrade]:
@@ -289,21 +322,46 @@ def extract_trades(transfers: list[tuple], markets: set[str], ts_of) -> list[Evm
 # ---------------------------------------------------------------- analysis
 
 class EvmAnalyzer:
-    def __init__(self, rpc: EvmRPC, cfg: dict, known_markets: list[str] = ()):
+    def __init__(self, rpc: EvmRPC, cfg: dict, known_markets: list[str] = (), native_usd: float | None = None,
+                 token_usd=None):
         self.rpc = rpc
+        self.native_usd = native_usd
+        self.token_usd = token_usd  # callable: token address -> USD price (for payments in USDT, stocks, ...)
+        self._code: dict[str, bool] = {}
         self.cfg = cfg
         self.known_markets = [m.lower() for m in known_markets]
         self.w = cfg["wallets"]
         self.e = cfg["evm"]
 
+    def _is_contract(self, addr: str) -> bool:
+        if addr not in self._code:
+            try:
+                code = self.rpc.call("eth_getCode", [addr, "latest"]) if hasattr(self.rpc, "call") else "0x1"
+            except RuntimeError:
+                code = "0x1"  # unknown: keep it
+            self._code[addr] = (code or "0x") not in ("0x", "0x0")
+        return self._code[addr]
+
+    def _paid_usd(self, trade: "EvmTrade", token: str) -> float:
+        """USD the buyer paid in this transaction: native coin (tx value) plus any other token it sent."""
+        usd = 0.0
+        tx = self.rpc.tx(trade.tx) or {}
+        if self.native_usd:
+            usd += int(tx.get("value") or "0x0", 16) / 1e18 * self.native_usd
+        if self.token_usd:
+            for lg in (self.rpc.receipt(trade.tx) or {}).get("logs") or []:
+                tp = lg.get("topics") or []
+                addr = (lg.get("address") or "").lower()
+                if len(tp) >= 3 and tp[0] == TRANSFER and addr != token and topic_addr(tp[1]) == trade.wallet:
+                    price, dec = self.token_usd(addr)
+                    if price:
+                        usd += int(lg.get("data") or "0x0", 16) / 10 ** dec * price
+        return usd
+
     def analyze(self, token: str, creation: dict, supply: float, decimals: int, prices: PriceSeries,
                 price_now: float, head: int, target_hint: int | None = None) -> dict:
         if not prices:
             return {"status": "skipped", "reason": "no_price_history"}
-        launch_mcap = prices.op[0] * supply
-        if launch_mcap >= self.w["max_entry_mcap_usd"]:
-            # e.g. Zora coins that start at ~$1M: nobody could buy below the entry cap
-            return {"status": "skipped", "reason": f"launched_above_entry_cap (${launch_mcap:,.0f})"}
         start = max(0, creation["block"] - 5)
         logs = self.rpc.logs(token, [TRANSFER], start, head, self.e["max_transfer_logs"])
         if logs is None:
@@ -311,7 +369,10 @@ class EvmAnalyzer:
         transfers = parse_transfers(logs, decimals)
         if not transfers:
             return {"status": "skipped", "reason": "no_transfers"}
-        markets = detect_markets(transfers, set(self.known_markets))
+        if transfers[0][0] > creation["block"] + 2:
+            # the launch itself is missing: the node returned incomplete history; don't analyse half a coin
+            return {"status": "skipped", "reason": "incomplete_history_from_rpc"}
+        markets = detect_markets(transfers, set(self.known_markets), is_contract=self._is_contract)
         trades = extract_trades(transfers, markets, self.rpc.ts_of)
         creator = None
         try:
@@ -322,6 +383,25 @@ class EvmAnalyzer:
         if not buys:
             return {"status": "skipped", "reason": "no_buys_detected", "markets": sorted(markets)}
         launch_block = buys[0].block
+
+        # Bonding-curve phase: GeckoTerminal doesn't track every curve (e.g. Flap), so candles may only start
+        # at graduation (~$30-50K). Price the early buys from the BNB/ETH each buyer actually paid.
+        if self.native_usd or self.token_usd:
+            first_c = prices.ts[0] if prices.ts else None
+            pre = [t for t in buys if first_c is None or t.time < first_c]
+            n = self.e["curve_price_points"]
+            pts = []
+            for t in pre[::max(1, len(pre) // n)][:n]:
+                try:
+                    usd = self._paid_usd(t, token)
+                except (RuntimeError, ValueError):
+                    continue
+                if usd > 0 and t.tokens > 0:
+                    pts.append((t.time, usd / t.tokens))
+            prices.add_points(pts)
+        launch_mcap = (prices.first_price() or 0) * supply
+        if launch_mcap >= self.w["max_entry_mcap_usd"]:
+            return {"status": "skipped", "reason": f"launched_above_entry_cap (${launch_mcap:,.0f})"}
 
         target_px = self.w["target_mcap_usd"] / supply
         cross = prices.cross_time(target_px)
