@@ -726,5 +726,18 @@
   "txs_read": 321,
   "win_rate": 0.212,
   "wins": 11
+ },
+ "winQcSPxum9ZUDkfxsyH7Z6gTYuQr38ACvm9uw7LDQy": {
+  "big_wins": 9,
+  "coins_traded": 203,
+  "days_covered": 1.2,
+  "losses": 165,
+  "median_roi": 0.84,
+  "pnl_sol": 0.48,
+  "profiled_at": "2026-11-15T18:37:58.555439+00:00",
+  "realised_pnl_sol": 0.48,
+  "txs_read": 500,
+  "win_rate": 0.187,
+  "wins": 38
  }
 }
