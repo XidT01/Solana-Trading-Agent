@@ -1,0 +1,67 @@
+{
+ "ai_summary": null,
+ "analyzed_by_launchpad": [
+  [
+   "flap",
+   1
+  ]
+ ],
+ "chain": "bsc",
+ "date": "2026-11-14",
+ "filters": {
+  "highlight_multiple": 10,
+  "max_entry_mcap_usd": 30000,
+  "min_multiple": 5,
+  "target_mcap_usd": 100000
+ },
+ "generated_at": "2026-11-15T03:12:05.739755+00:00",
+ "leaderboard": [
+  {
+   "avg_entry_mcap": 21985,
+   "best_multiple": 12.01,
+   "hits": 1,
+   "last_hit": "2026-11-12T22:09:46.172751+00:00",
+   "median_multiple": 12.01,
+   "tenx_hits": 1,
+   "tokens": [
+    "\u9ed1\u5929\u9e45"
+   ],
+   "total_pnl": 286.13,
+   "wallet": "0x0343b800b8a2df8a016aabd623294ddcff850024"
+  }
+ ],
+ "new_wallets": [],
+ "passed_tokens": [
+  {
+   "early_buyers_checked": 50,
+   "liquidity_usd": 75529.79,
+   "mcap_usd": 137335,
+   "mint": "0x4fc21e10da141e8b7d7c9945cbec2ec3ffba7777",
+   "origin": "flap",
+   "symbol": "\u725b\u903c",
+   "url": "https://dexscreener.com/bsc/0x3b3c4548154c7b07b4dbb0a620f2b44c56340347",
+   "wallets_found": 0
+  }
+ ],
+ "pnl_unit": "USD",
+ "rejection_reasons": [
+  [
+   "low_liquidity",
+   8
+  ],
+  [
+   "concentrated_holders_top10",
+   3
+  ]
+ ],
+ "stats": {
+  "analyzed": 1,
+  "discovered": 4598,
+  "rejected": 11,
+  "runs": 49,
+  "skipped": 4,
+  "tokens_checked": 16,
+  "wallets_10x": 0,
+  "wallets_found": 0
+ }
+}
