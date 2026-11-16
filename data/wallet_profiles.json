@@ -754,16 +754,16 @@
   "wins": 9
  },
  "winQcSPxum9ZUDkfxsyH7Z6gTYuQr38ACvm9uw7LDQy": {
-  "big_wins": 9,
-  "coins_traded": 203,
-  "days_covered": 1.2,
-  "losses": 165,
+  "big_wins": 11,
+  "coins_traded": 202,
+  "days_covered": 1.3,
+  "losses": 150,
   "median_roi": 0.84,
-  "pnl_sol": 0.48,
-  "profiled_at": "2026-11-15T18:37:58.555439+00:00",
-  "realised_pnl_sol": 0.48,
+  "pnl_sol": -0.37,
+  "profiled_at": "2026-11-16T18:53:42.603935+00:00",
+  "realised_pnl_sol": -0.37,
   "txs_read": 500,
-  "win_rate": 0.187,
-  "wins": 38
+  "win_rate": 0.257,
+  "wins": 52
  }
 }
