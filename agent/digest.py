@@ -14,7 +14,7 @@ from datetime import date, timedelta
 
 import requests
 
-from .common import load_config, log, read_json, setup_logging, utcnow
+from .common import load_config, read_json, setup_logging, utcnow
 from .report import data_dir
 
 CHAINS = {
@@ -145,9 +145,10 @@ def build_messages(day: str, reports: dict[str, dict | None], cfg: dict, profile
 
 
 def send(messages: list[str], dashboard: str | None) -> bool:
-    token, chat = os.environ.get("TELEGRAM_BOT_TOKEN"), os.environ.get("TELEGRAM_CHAT_ID")
+    token, chat = (os.environ.get("TELEGRAM_BOT_TOKEN") or "").strip(), (os.environ.get("TELEGRAM_CHAT_ID") or "").strip()
     if not (token and chat):
-        log.info("Telegram not configured; not sending")
+        missing = [n for n, v in (("TELEGRAM_BOT_TOKEN", token), ("TELEGRAM_CHAT_ID", chat)) if not v]
+        print(f"::warning::Telegram not sent: secret(s) missing or empty: {', '.join(missing)}")
         return False
     url = f"https://api.telegram.org/bot{token}/sendMessage"
     ok = True
@@ -158,15 +159,27 @@ def send(messages: list[str], dashboard: str | None) -> bool:
         try:
             r = requests.post(url, json=body, timeout=20)
             if not r.ok:  # e.g. a formatting problem: fall back to plain text so the report still arrives
-                log.warning("Telegram HTML send failed (%s): %s", r.status_code, r.text[:200])
+                print(f"::warning::Telegram rejected the formatted message: {_tg_error(r)}; retrying as plain text")
                 plain = re.sub(r"<[^>]+>", "", text)
                 r = requests.post(url, json={"chat_id": chat, "text": html.unescape(plain),
                                              "link_preview_options": {"is_disabled": True}}, timeout=20)
+            if not r.ok:
+                print(f"::error::Telegram did not deliver the report: {_tg_error(r)}")
             ok &= r.ok
         except requests.RequestException as e:
-            log.warning("Telegram send failed: %s", e)
+            print(f"::error::Telegram could not be reached: {type(e).__name__}")
             ok = False
+    if ok:
+        print(f"::notice::Telegram report delivered ({len(messages)} message{'s' if len(messages) != 1 else ''})")
     return ok
+
+
+def _tg_error(r) -> str:
+    """Telegram's own error text (never includes the bot token)."""
+    try:
+        return f"HTTP {r.status_code} {r.json().get('description', '')}"
+    except (ValueError, AttributeError):
+        return f"HTTP {r.status_code}"
 
 
 def main(argv=None) -> int:
@@ -180,15 +193,14 @@ def main(argv=None) -> int:
     day = args.date or (utcnow() - timedelta(hours=6)).date().isoformat()
     reports = {k: read_json(data_dir(k) / "reports" / f"{day}.json", None) for k in CHAINS}
     if not any(r and r["stats"].get("runs") for r in reports.values()):
-        log.info("No scans on %s; no digest", day)
+        print(f"::warning::No scans recorded on {day}; no Telegram report sent")
         return 0
     profiles = read_json(data_dir("solana") / "wallet_profiles.json", {})
     messages = build_messages(day, reports, cfg, profiles)
     if args.dry_run:
         print("\n\n----- next message -----\n\n".join(messages))
         return 0
-    send(messages, cfg["report"].get("dashboard_url"))
-    return 0
+    return 0 if send(messages, cfg["report"].get("dashboard_url")) else 1
 
 
 if __name__ == "__main__":
