@@ -1062,6 +1062,34 @@
    }
   ]
  },
+ "DPHgMJPRP6iUtdTwvjUJm6b5MaWqWQHPH9P5gLsTYUkm": {
+  "hits": [
+   {
+    "avg_entry_mcap": 5270,
+    "first_buy_sig": "5uSSnr2ff6NX6pB3Noye9abaS9hQvQQfnqAEbsu3r7bpTAocrDyEyJ6gu1uYmcUZ3UAed1mCvGCunJfhZZ1ggZ18",
+    "first_buy_time": 1794806544,
+    "first_entry_mcap": 4992,
+    "found_at": "2026-11-16T19:15:57.782876+00:00",
+    "hold_fraction_at_target": 0.0,
+    "mint": "ANPikG3a5qKJjHeeNjDmjZvDPPVtQ8B1ii6unvg3pump",
+    "multiple": 10.97,
+    "n_trades": 17,
+    "origin": "pumpfun",
+    "pnl_sol": 14.6902,
+    "qualified": true,
+    "realised_multiple": 10.97,
+    "sol_in": 1.4729,
+    "sol_out": 16.1632,
+    "still_holding_pct": 0.0,
+    "symbol": "capytrade",
+    "tier": "10x+",
+    "total_multiple": 10.97,
+    "transferred_out": false,
+    "unrealised_sol": 0.0,
+    "wallet": "DPHgMJPRP6iUtdTwvjUJm6b5MaWqWQHPH9P5gLsTYUkm"
+   }
+  ]
+ },
  "DXDMXoZSAuNrNLVRqzSjvNGUcVbkyqSA8FkiBTTMwkdY": {
   "hits": [
    {
@@ -1143,6 +1171,34 @@
     "transferred_out": false,
     "unrealised_sol": 0.0,
     "wallet": "Dnww9owvEskGTPXMhVAKFtQwwyzLbW4o7yxCGbbJhWWY"
+   }
+  ]
+ },
+ "EXGvmSxq26Uq7Ee4fGMRnKResvNQFgD4ezMShjQWsvbc": {
+  "hits": [
+   {
+    "avg_entry_mcap": 7182,
+    "first_buy_sig": "7RbK9wBJu2f2fxJQe1ZNKcY1v1TL8oB9wCAEC8sfegLtrJUiCeHAb7T6CBp96VALdJJTjdg96jj6SZbRyGpGnqs",
+    "first_buy_time": 1794806524,
+    "first_entry_mcap": 5321,
+    "found_at": "2026-11-16T19:15:57.782876+00:00",
+    "hold_fraction_at_target": 0.001,
+    "mint": "ANPikG3a5qKJjHeeNjDmjZvDPPVtQ8B1ii6unvg3pump",
+    "multiple": 5.12,
+    "n_trades": 30,
+    "origin": "pumpfun",
+    "pnl_sol": 12.0991,
+    "qualified": true,
+    "realised_multiple": 5.12,
+    "sol_in": 2.9367,
+    "sol_out": 15.0358,
+    "still_holding_pct": 0.0,
+    "symbol": "capytrade",
+    "tier": "5x+",
+    "total_multiple": 5.12,
+    "transferred_out": false,
+    "unrealised_sol": 0.0,
+    "wallet": "EXGvmSxq26Uq7Ee4fGMRnKResvNQFgD4ezMShjQWsvbc"
    }
   ]
  },
@@ -1367,6 +1423,34 @@
     "transferred_out": false,
     "unrealised_sol": 0.2891,
     "wallet": "FZU56d9iPqohXM5XBrYYBZLi2UoUnZT4V5Qf2631tEzb"
+   }
+  ]
+ },
+ "FaNaUysvKBbfoRAhu7P7R5wPfHe7PaCXs9xy5LgLj3gu": {
+  "hits": [
+   {
+    "avg_entry_mcap": 7350,
+    "first_buy_sig": "3SfQRk1bXB6d29jeEXd2rCWyMbeGUScrQ5oHJqGNNw8L4FtAbEBpYaEiM2y4ioiQqMAH1SwPWLdZHwKb64CqFjkJ",
+    "first_buy_time": 1794806524,
+    "first_entry_mcap": 5015,
+    "found_at": "2026-11-16T19:15:57.782876+00:00",
+    "hold_fraction_at_target": 0.447,
+    "mint": "ANPikG3a5qKJjHeeNjDmjZvDPPVtQ8B1ii6unvg3pump",
+    "multiple": 10.04,
+    "n_trades": 40,
+    "origin": "pumpfun",
+    "pnl_sol": 38.5063,
+    "qualified": true,
+    "realised_multiple": 10.04,
+    "sol_in": 4.258,
+    "sol_out": 42.7643,
+    "still_holding_pct": 0.0,
+    "symbol": "capytrade",
+    "tier": "10x+",
+    "total_multiple": 10.04,
+    "transferred_out": false,
+    "unrealised_sol": 0.0,
+    "wallet": "FaNaUysvKBbfoRAhu7P7R5wPfHe7PaCXs9xy5LgLj3gu"
    }
   ]
  },
@@ -1619,6 +1703,34 @@
     "transferred_out": false,
     "unrealised_sol": 0.2651,
     "wallet": "efAkDpEbv5Fjqx58go9f8utbg61SMgoAkqFMD4WuzGn"
+   }
+  ]
+ },
+ "oFp6Lk8DXebWSGLqP9SCSMMhFNyEamL8atzpQJkWcEG": {
+  "hits": [
+   {
+    "avg_entry_mcap": 5552,
+    "first_buy_sig": "4AAK5oDzZbgmfgJEerFvaCKM5ava4S5mqwH4ZrJWwSfE2VUC6oapbKRhzCcncCxywmMtCZ1AUtyY4sJKbuBdAVKW",
+    "first_buy_time": 1794806544,
+    "first_entry_mcap": 5203,
+    "found_at": "2026-11-16T19:15:57.782876+00:00",
+    "hold_fraction_at_target": 0.0,
+    "mint": "ANPikG3a5qKJjHeeNjDmjZvDPPVtQ8B1ii6unvg3pump",
+    "multiple": 10.27,
+    "n_trades": 17,
+    "origin": "pumpfun",
+    "pnl_sol": 12.0077,
+    "qualified": true,
+    "realised_multiple": 10.27,
+    "sol_in": 1.295,
+    "sol_out": 13.3027,
+    "still_holding_pct": 0.0,
+    "symbol": "capytrade",
+    "tier": "10x+",
+    "total_multiple": 10.27,
+    "transferred_out": false,
+    "unrealised_sol": 0.0,
+    "wallet": "oFp6Lk8DXebWSGLqP9SCSMMhFNyEamL8atzpQJkWcEG"
    }
   ]
  },
