@@ -1,0 +1,115 @@
+{
+ "ai_summary": null,
+ "analyzed_by_launchpad": [
+  [
+   "flap",
+   1
+  ]
+ ],
+ "chain": "bsc",
+ "date": "2026-11-15",
+ "filters": {
+  "highlight_multiple": 10,
+  "max_entry_mcap_usd": 30000,
+  "min_multiple": 5,
+  "target_mcap_usd": 100000
+ },
+ "generated_at": "2026-11-16T03:13:17.604051+00:00",
+ "leaderboard": [
+  {
+   "avg_entry_mcap": 21985,
+   "best_multiple": 12.01,
+   "hits": 1,
+   "last_hit": "2026-11-12T22:09:46.172751+00:00",
+   "median_multiple": 12.01,
+   "tenx_hits": 1,
+   "tokens": [
+    "\u9ed1\u5929\u9e45"
+   ],
+   "total_pnl": 286.13,
+   "wallet": "0x0343b800b8a2df8a016aabd623294ddcff850024"
+  },
+  {
+   "avg_entry_mcap": 5348,
+   "best_multiple": 6.97,
+   "hits": 1,
+   "last_hit": "2026-11-15T14:12:51.583007+00:00",
+   "median_multiple": 6.97,
+   "tenx_hits": 0,
+   "tokens": [
+    "\u5c79\u7acb\u4e0d\u5012"
+   ],
+   "total_pnl": 1191.09,
+   "wallet": "0x6b2be95dd77eca4969af5d51627eb076c1ec3fcd"
+  }
+ ],
+ "new_wallets": [
+  {
+   "avg_entry_mcap": 5348,
+   "first_buy_sig": "0xa47f6540b9606fae46ba632cecc8536a1ee43c3bf10e5fb03a867a1b53eeb688",
+   "first_buy_time": 1794749800,
+   "first_entry_mcap": 5348,
+   "hold_fraction_at_target": 0.0,
+   "mint": "0x11156085985d298e67679419cc94f87268a67777",
+   "multiple": 6.97,
+   "n_trades": 2,
+   "pnl_usd": 1191.09,
+   "qualified": true,
+   "realised_multiple": 6.97,
+   "still_holding_pct": 0.0,
+   "symbol": "\u5c79\u7acb\u4e0d\u5012",
+   "tier": "5x+",
+   "total_multiple": 6.97,
+   "transferred_out": false,
+   "unrealised_usd": 0.0,
+   "usd_in": 199.55,
+   "usd_out": 1390.64,
+   "wallet": "0x6b2be95dd77eca4969af5d51627eb076c1ec3fcd"
+  }
+ ],
+ "passed_tokens": [
+  {
+   "early_buyers_checked": 50,
+   "liquidity_usd": 40230.16,
+   "mcap_usd": 187346,
+   "mint": "0x11156085985d298e67679419cc94f87268a67777",
+   "origin": "flap",
+   "symbol": "\u5c79\u7acb\u4e0d\u5012",
+   "url": "https://dexscreener.com/bsc/0x00d321084992a5ab0e20679b1c9c3b98df17360e",
+   "wallets_found": 1
+  }
+ ],
+ "pnl_unit": "USD",
+ "rejection_reasons": [
+  [
+   "low_liquidity",
+   24
+  ],
+  [
+   "concentrated_holders_top10",
+   2
+  ],
+  [
+   "never_pumped",
+   2
+  ],
+  [
+   "thin_liquidity_vs_mcap",
+   1
+  ],
+  [
+   "bundled_launch",
+   1
+  ]
+ ],
+ "stats": {
+  "analyzed": 1,
+  "discovered": 4798,
+  "rejected": 30,
+  "runs": 50,
+  "skipped": 4,
+  "tokens_checked": 35,
+  "wallets_10x": 0,
+  "wallets_found": 1
+ }
+}
