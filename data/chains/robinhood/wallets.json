@@ -1,1 +1,30 @@
-{}
+{
+ "0x6f27659bbe3577607f9690031a6a571eeabc84bc": {
+  "hits": [
+   {
+    "avg_entry_mcap": 10070,
+    "first_buy_sig": "0x7a71ddd19c7cd6405e7b37fbdd74fadd0fb0ce289c6b6f729d242c702742b79b",
+    "first_buy_time": 1794755660,
+    "first_entry_mcap": 10070,
+    "found_at": "2026-11-16T07:45:36.679453+00:00",
+    "hold_fraction_at_target": 0.0,
+    "mint": "0xa8ceeeb747fcf136947c35c5de6187ee90d6bfed",
+    "multiple": 6.09,
+    "n_trades": 2,
+    "origin": "pons",
+    "pnl_usd": 117.81,
+    "qualified": true,
+    "realised_multiple": 6.09,
+    "still_holding_pct": 0.0,
+    "symbol": "RUSHR",
+    "tier": "5x+",
+    "total_multiple": 6.09,
+    "transferred_out": false,
+    "unrealised_usd": 0.0,
+    "usd_in": 23.14,
+    "usd_out": 140.95,
+    "wallet": "0x6f27659bbe3577607f9690031a6a571eeabc84bc"
+   }
+  ]
+ }
+}
