@@ -260,17 +260,17 @@
   "wins": 50
  },
  "5QQ5Xi9iyY29th4bt5q9GEA1QFSVprMDk6FRadupE7Aj": {
-  "big_wins": 3,
-  "coins_traded": 71,
-  "days_covered": 1.0,
-  "losses": 49,
-  "median_roi": 0.86,
-  "pnl_sol": 12.46,
-  "profiled_at": "2026-11-16T22:54:56.717939+00:00",
-  "realised_pnl_sol": 12.46,
+  "big_wins": 5,
+  "coins_traded": 61,
+  "days_covered": 1.5,
+  "losses": 42,
+  "median_roi": 0.92,
+  "pnl_sol": 13.57,
+  "profiled_at": "2026-11-17T23:15:55.684691+00:00",
+  "realised_pnl_sol": 13.57,
   "txs_read": 500,
-  "win_rate": 0.31,
-  "wins": 22
+  "win_rate": 0.311,
+  "wins": 19
  },
  "5QzSFwLihkiz7RjXywrcDsAZAaheKRc7ioNPoz2iwkrP": {
   "big_wins": 8,
