@@ -866,6 +866,34 @@
    }
   ]
  },
+ "ANQDy2sKKq7cKjhxBeP39Ppy3JeXaEokU75rPXc9wAo7": {
+  "hits": [
+   {
+    "avg_entry_mcap": 23389,
+    "first_buy_sig": "5Roq2csnNW6apNpbbs9VbFvWjMJ6ZQFykAGZye9Y6165NVY2waZBZcfK4GanEr9KwBG5Yww876Tsv9MuQRKT2ozR",
+    "first_buy_time": 1794882872,
+    "first_entry_mcap": 23389,
+    "found_at": "2026-11-17T03:55:16.336802+00:00",
+    "hold_fraction_at_target": 1.0,
+    "mint": "Dys6SYbjUsy8kksaqrXqo5L2GzgCYDiguGGcS8B5rkrv",
+    "multiple": 5.94,
+    "n_trades": 3,
+    "origin": "raydium-launchlab",
+    "pnl_sol": 0.5116,
+    "qualified": true,
+    "realised_multiple": 5.94,
+    "sol_in": 0.1035,
+    "sol_out": 0.6151,
+    "still_holding_pct": 0.0,
+    "symbol": "bul",
+    "tier": "5x+",
+    "total_multiple": 5.94,
+    "transferred_out": false,
+    "unrealised_sol": 0.0,
+    "wallet": "ANQDy2sKKq7cKjhxBeP39Ppy3JeXaEokU75rPXc9wAo7"
+   }
+  ]
+ },
  "AYJWv7nnkGLNgW8ZXYbFAH3oKU9MxtstqwwyXBZY5rJh": {
   "hits": [
    {
