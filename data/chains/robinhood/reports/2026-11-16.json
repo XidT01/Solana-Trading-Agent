@@ -1,0 +1,86 @@
+{
+ "ai_summary": null,
+ "analyzed_by_launchpad": [
+  [
+   "pons",
+   1
+  ]
+ ],
+ "chain": "robinhood",
+ "date": "2026-11-16",
+ "filters": {
+  "highlight_multiple": 10,
+  "max_entry_mcap_usd": 30000,
+  "min_multiple": 5,
+  "target_mcap_usd": 100000
+ },
+ "generated_at": "2026-11-17T05:17:09.233748+00:00",
+ "leaderboard": [
+  {
+   "avg_entry_mcap": 10070,
+   "best_multiple": 6.09,
+   "hits": 1,
+   "last_hit": "2026-11-16T07:45:36.679453+00:00",
+   "median_multiple": 6.09,
+   "tenx_hits": 0,
+   "tokens": [
+    "RUSHR"
+   ],
+   "total_pnl": 117.81,
+   "wallet": "0x6f27659bbe3577607f9690031a6a571eeabc84bc"
+  }
+ ],
+ "new_wallets": [
+  {
+   "avg_entry_mcap": 10070,
+   "first_buy_sig": "0x7a71ddd19c7cd6405e7b37fbdd74fadd0fb0ce289c6b6f729d242c702742b79b",
+   "first_buy_time": 1794755660,
+   "first_entry_mcap": 10070,
+   "hold_fraction_at_target": 0.0,
+   "mint": "0xa8ceeeb747fcf136947c35c5de6187ee90d6bfed",
+   "multiple": 6.09,
+   "n_trades": 2,
+   "pnl_usd": 117.81,
+   "qualified": true,
+   "realised_multiple": 6.09,
+   "still_holding_pct": 0.0,
+   "symbol": "RUSHR",
+   "tier": "5x+",
+   "total_multiple": 6.09,
+   "transferred_out": false,
+   "unrealised_usd": 0.0,
+   "usd_in": 23.14,
+   "usd_out": 140.95,
+   "wallet": "0x6f27659bbe3577607f9690031a6a571eeabc84bc"
+  }
+ ],
+ "passed_tokens": [
+  {
+   "early_buyers_checked": 50,
+   "liquidity_usd": 26001.46,
+   "mcap_usd": 97401,
+   "mint": "0xa8ceeeb747fcf136947c35c5de6187ee90d6bfed",
+   "origin": "pons",
+   "symbol": "RUSHR",
+   "url": "https://dexscreener.com/robinhood/0x1013c35e6cef89e84afa58e2409d675afa2c634511d984d1c0161a8ee8ec5f8a",
+   "wallets_found": 1
+  }
+ ],
+ "pnl_unit": "USD",
+ "rejection_reasons": [
+  [
+   "never_pumped",
+   1
+  ]
+ ],
+ "stats": {
+  "analyzed": 1,
+  "discovered": 4842,
+  "rejected": 1,
+  "runs": 49,
+  "skipped": 0,
+  "tokens_checked": 2,
+  "wallets_10x": 0,
+  "wallets_found": 1
+ }
+}
