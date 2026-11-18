@@ -27,6 +27,62 @@
    }
   ]
  },
+ "0x074e84898a4c2badaafc3cca68260c8b7f53b860": {
+  "hits": [
+   {
+    "avg_entry_mcap": 3664,
+    "first_buy_sig": "0xf95efce88ba1e694c02d0a28c43c062f225da2ec7ba30eb3fc5b216790652959",
+    "first_buy_time": 1794991218,
+    "first_entry_mcap": 3664,
+    "found_at": "2026-11-18T09:27:09.772757+00:00",
+    "hold_fraction_at_target": 0.0,
+    "mint": "0x5b30d8ec99a42b2e6f69f4258721a56d2bc37777",
+    "multiple": 14.79,
+    "n_trades": 2,
+    "origin": "flap",
+    "pnl_usd": 816.39,
+    "qualified": true,
+    "realised_multiple": 14.79,
+    "still_holding_pct": 0.0,
+    "symbol": "IDRENT",
+    "tier": "10x+",
+    "total_multiple": 14.79,
+    "transferred_out": false,
+    "unrealised_usd": 0.0,
+    "usd_in": 59.18,
+    "usd_out": 875.58,
+    "wallet": "0x074e84898a4c2badaafc3cca68260c8b7f53b860"
+   }
+  ]
+ },
+ "0x1af638b7b5c56bd89f10ece77cce51ab5faac16d": {
+  "hits": [
+   {
+    "avg_entry_mcap": 6255,
+    "first_buy_sig": "0x86b62a66d8689e185dec5e820f58aa05a8c1ec02d95d569c95026e387f0f8761",
+    "first_buy_time": 1794991251,
+    "first_entry_mcap": 6255,
+    "found_at": "2026-11-18T09:27:09.772757+00:00",
+    "hold_fraction_at_target": 0.0,
+    "mint": "0x5b30d8ec99a42b2e6f69f4258721a56d2bc37777",
+    "multiple": 5.02,
+    "n_trades": 4,
+    "origin": "flap",
+    "pnl_usd": 61.79,
+    "qualified": true,
+    "realised_multiple": 5.02,
+    "still_holding_pct": 0.0,
+    "symbol": "IDRENT",
+    "tier": "5x+",
+    "total_multiple": 5.02,
+    "transferred_out": false,
+    "unrealised_usd": 0.0,
+    "usd_in": 15.39,
+    "usd_out": 77.17,
+    "wallet": "0x1af638b7b5c56bd89f10ece77cce51ab5faac16d"
+   }
+  ]
+ },
  "0x57825f68fc7b32eaaa1e90db1fd6cd997b5a4035": {
   "hits": [
    {
@@ -111,6 +167,34 @@
    }
   ]
  },
+ "0x7e26098a323df2c45bff405befa6fa04951777c9": {
+  "hits": [
+   {
+    "avg_entry_mcap": 10599,
+    "first_buy_sig": "0xedde3880740f7b6059a3ff63e8affc75e8aaa1fb066a465ddfaa924859827bb8",
+    "first_buy_time": 1794991368,
+    "first_entry_mcap": 10599,
+    "found_at": "2026-11-18T09:27:09.772757+00:00",
+    "hold_fraction_at_target": 0.0,
+    "mint": "0x5b30d8ec99a42b2e6f69f4258721a56d2bc37777",
+    "multiple": 8.07,
+    "n_trades": 2,
+    "origin": "flap",
+    "pnl_usd": 164.42,
+    "qualified": true,
+    "realised_multiple": 8.07,
+    "still_holding_pct": 0.0,
+    "symbol": "IDRENT",
+    "tier": "5x+",
+    "total_multiple": 8.07,
+    "transferred_out": false,
+    "unrealised_usd": 0.0,
+    "usd_in": 23.25,
+    "usd_out": 187.68,
+    "wallet": "0x7e26098a323df2c45bff405befa6fa04951777c9"
+   }
+  ]
+ },
  "0x90905f1046c6ba91b79fe262a1cad30b55fc3bb0": {
   "hits": [
    {
@@ -136,6 +220,90 @@
     "usd_in": 52.82,
     "usd_out": 300.97,
     "wallet": "0x90905f1046c6ba91b79fe262a1cad30b55fc3bb0"
+   }
+  ]
+ },
+ "0xb750f03e86980a3dffdfad269a88f008bb78ea51": {
+  "hits": [
+   {
+    "avg_entry_mcap": 6656,
+    "first_buy_sig": "0x2e3642cf9ce25463d56ded1184e0ec768f76cef0f9bf6c037121b9526b75a9ef",
+    "first_buy_time": 1794991289,
+    "first_entry_mcap": 6656,
+    "found_at": "2026-11-18T09:27:09.772757+00:00",
+    "hold_fraction_at_target": 0.0,
+    "mint": "0x5b30d8ec99a42b2e6f69f4258721a56d2bc37777",
+    "multiple": 6.69,
+    "n_trades": 22,
+    "origin": "flap",
+    "pnl_usd": 697.32,
+    "qualified": true,
+    "realised_multiple": 6.69,
+    "still_holding_pct": 0.0,
+    "symbol": "IDRENT",
+    "tier": "5x+",
+    "total_multiple": 6.69,
+    "transferred_out": false,
+    "unrealised_usd": 0.0,
+    "usd_in": 122.49,
+    "usd_out": 819.81,
+    "wallet": "0xb750f03e86980a3dffdfad269a88f008bb78ea51"
+   }
+  ]
+ },
+ "0xc4c70c7172b8ad4360f789766783275b3fc8deee": {
+  "hits": [
+   {
+    "avg_entry_mcap": 6878,
+    "first_buy_sig": "0xc438096af0c869dc737adcbdd14089aac55aee77ccf0457dff769b5de2a6ef9c",
+    "first_buy_time": 1794991270,
+    "first_entry_mcap": 6878,
+    "found_at": "2026-11-18T09:27:09.772757+00:00",
+    "hold_fraction_at_target": 0.0,
+    "mint": "0x5b30d8ec99a42b2e6f69f4258721a56d2bc37777",
+    "multiple": 6.41,
+    "n_trades": 5,
+    "origin": "flap",
+    "pnl_usd": 63.69,
+    "qualified": true,
+    "realised_multiple": 6.41,
+    "still_holding_pct": 0.0,
+    "symbol": "IDRENT",
+    "tier": "5x+",
+    "total_multiple": 6.41,
+    "transferred_out": false,
+    "unrealised_usd": 0.0,
+    "usd_in": 11.78,
+    "usd_out": 75.47,
+    "wallet": "0xc4c70c7172b8ad4360f789766783275b3fc8deee"
+   }
+  ]
+ },
+ "0xcfa8f426fd42b559e5493906bcd64742d2857de9": {
+  "hits": [
+   {
+    "avg_entry_mcap": 6255,
+    "first_buy_sig": "0xa56cec34ad807de05810482ad8165d457b855509069b3d5144595b536099aba5",
+    "first_buy_time": 1794991251,
+    "first_entry_mcap": 6255,
+    "found_at": "2026-11-18T09:27:09.772757+00:00",
+    "hold_fraction_at_target": 0.281,
+    "mint": "0x5b30d8ec99a42b2e6f69f4258721a56d2bc37777",
+    "multiple": 9.76,
+    "n_trades": 5,
+    "origin": "flap",
+    "pnl_usd": 134.04,
+    "qualified": true,
+    "realised_multiple": 9.76,
+    "still_holding_pct": 0.0,
+    "symbol": "IDRENT",
+    "tier": "5x+",
+    "total_multiple": 9.76,
+    "transferred_out": false,
+    "unrealised_usd": 0.0,
+    "usd_in": 15.3,
+    "usd_out": 149.33,
+    "wallet": "0xcfa8f426fd42b559e5493906bcd64742d2857de9"
    }
   ]
  },
