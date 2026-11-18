@@ -1167,6 +1167,34 @@
    }
   ]
  },
+ "8ktuuVvC1H8Xjyr2zRAjtPQqqRGvTQEVxTQSwcTUYtgQ": {
+  "hits": [
+   {
+    "avg_entry_mcap": 12258,
+    "first_buy_sig": "21bPH1JmYQUtC5sCoVz4hwqKrif7XQzYPkUvbmpJ36vaZ8HkrgS89vMrjFDARFZPCT43hQ813yHo8d2Vge6L6jB5",
+    "first_buy_time": 1795017458,
+    "first_entry_mcap": 12258,
+    "found_at": "2026-11-18T19:12:27.938105+00:00",
+    "hold_fraction_at_target": 0.75,
+    "mint": "7fZK84wYShNUXKJnBkfXkeu5h2edduNkZV3p2B2LBCgC",
+    "multiple": 5.15,
+    "n_trades": 5,
+    "origin": "pumpfun",
+    "pnl_sol": 12.4971,
+    "qualified": true,
+    "realised_multiple": 5.15,
+    "sol_in": 3.0138,
+    "sol_out": 15.5109,
+    "still_holding_pct": 0.0,
+    "symbol": "APCY",
+    "tier": "5x+",
+    "total_multiple": 5.15,
+    "transferred_out": false,
+    "unrealised_sol": 0.0,
+    "wallet": "8ktuuVvC1H8Xjyr2zRAjtPQqqRGvTQEVxTQSwcTUYtgQ"
+   }
+  ]
+ },
  "9999huSCf6QpepPHQVFLZ9smhsbwkV4XWPLboiy9qqRj": {
   "hits": [
    {
