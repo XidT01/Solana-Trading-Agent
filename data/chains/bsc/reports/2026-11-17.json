@@ -1,0 +1,120 @@
+{
+ "ai_summary": null,
+ "analyzed_by_launchpad": [],
+ "chain": "bsc",
+ "date": "2026-11-17",
+ "filters": {
+  "highlight_multiple": 10,
+  "max_entry_mcap_usd": 30000,
+  "min_multiple": 5,
+  "target_mcap_usd": 100000
+ },
+ "generated_at": "2026-11-18T04:44:50.228072+00:00",
+ "leaderboard": [
+  {
+   "avg_entry_mcap": 21985,
+   "best_multiple": 12.01,
+   "hits": 1,
+   "last_hit": "2026-11-12T22:09:46.172751+00:00",
+   "median_multiple": 12.01,
+   "tenx_hits": 1,
+   "tokens": [
+    "\u9ed1\u5929\u9e45"
+   ],
+   "total_pnl": 286.13,
+   "wallet": "0x0343b800b8a2df8a016aabd623294ddcff850024"
+  },
+  {
+   "avg_entry_mcap": 8485,
+   "best_multiple": 8.86,
+   "hits": 1,
+   "last_hit": "2026-11-16T23:51:06.855648+00:00",
+   "median_multiple": 8.86,
+   "tenx_hits": 0,
+   "tokens": [
+    "\u6c34"
+   ],
+   "total_pnl": 1377.64,
+   "wallet": "0xdfb6c7adb4d4e383e2d06a9f745513acb8e7358e"
+  },
+  {
+   "avg_entry_mcap": 5348,
+   "best_multiple": 6.97,
+   "hits": 1,
+   "last_hit": "2026-11-15T14:12:51.583007+00:00",
+   "median_multiple": 6.97,
+   "tenx_hits": 0,
+   "tokens": [
+    "\u5c79\u7acb\u4e0d\u5012"
+   ],
+   "total_pnl": 1191.09,
+   "wallet": "0x6b2be95dd77eca4969af5d51627eb076c1ec3fcd"
+  },
+  {
+   "avg_entry_mcap": 7728,
+   "best_multiple": 5.81,
+   "hits": 1,
+   "last_hit": "2026-11-16T23:51:06.855648+00:00",
+   "median_multiple": 5.81,
+   "tenx_hits": 0,
+   "tokens": [
+    "\u6c34"
+   ],
+   "total_pnl": 240.35,
+   "wallet": "0x62c4cb25e4aba2fa98d4a7738b107c52759fe80f"
+  },
+  {
+   "avg_entry_mcap": 7728,
+   "best_multiple": 5.79,
+   "hits": 1,
+   "last_hit": "2026-11-16T23:51:06.855648+00:00",
+   "median_multiple": 5.79,
+   "tenx_hits": 0,
+   "tokens": [
+    "\u6c34"
+   ],
+   "total_pnl": 262.5,
+   "wallet": "0x57825f68fc7b32eaaa1e90db1fd6cd997b5a4035"
+  },
+  {
+   "avg_entry_mcap": 7728,
+   "best_multiple": 5.7,
+   "hits": 1,
+   "last_hit": "2026-11-16T23:51:06.855648+00:00",
+   "median_multiple": 5.7,
+   "tenx_hits": 0,
+   "tokens": [
+    "\u6c34"
+   ],
+   "total_pnl": 248.16,
+   "wallet": "0x90905f1046c6ba91b79fe262a1cad30b55fc3bb0"
+  }
+ ],
+ "new_wallets": [],
+ "passed_tokens": [],
+ "pnl_unit": "USD",
+ "rejection_reasons": [
+  [
+   "low_liquidity",
+   32
+  ],
+  [
+   "thin_liquidity_vs_mcap",
+   2
+  ],
+  [
+   "bundled_launch",
+   1
+  ]
+ ],
+ "stats": {
+  "analyzed": 0,
+  "discovered": 4657,
+  "rejected": 35,
+  "runs": 49,
+  "skipped": 2,
+  "tokens_checked": 37,
+  "wallets_10x": 0,
+  "wallets_found": 0
+ }
+}

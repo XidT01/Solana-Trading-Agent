@@ -1,0 +1,47 @@
+{
+ "ai_summary": null,
+ "analyzed_by_launchpad": [],
+ "chain": "robinhood",
+ "date": "2026-11-17",
+ "filters": {
+  "highlight_multiple": 10,
+  "max_entry_mcap_usd": 30000,
+  "min_multiple": 5,
+  "target_mcap_usd": 100000
+ },
+ "generated_at": "2026-11-18T04:44:50.599569+00:00",
+ "leaderboard": [
+  {
+   "avg_entry_mcap": 10070,
+   "best_multiple": 6.09,
+   "hits": 1,
+   "last_hit": "2026-11-16T07:45:36.679453+00:00",
+   "median_multiple": 6.09,
+   "tenx_hits": 0,
+   "tokens": [
+    "RUSHR"
+   ],
+   "total_pnl": 117.81,
+   "wallet": "0x6f27659bbe3577607f9690031a6a571eeabc84bc"
+  }
+ ],
+ "new_wallets": [],
+ "passed_tokens": [],
+ "pnl_unit": "USD",
+ "rejection_reasons": [
+  [
+   "low_liquidity",
+   1
+  ]
+ ],
+ "stats": {
+  "analyzed": 0,
+  "discovered": 4888,
+  "rejected": 1,
+  "runs": 49,
+  "skipped": 0,
+  "tokens_checked": 1,
+  "wallets_10x": 0,
+  "wallets_found": 0
+ }
+}
