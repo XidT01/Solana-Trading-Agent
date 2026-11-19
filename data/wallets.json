@@ -1199,6 +1199,34 @@
    }
   ]
  },
+ "76VnVYPUJUDEY4aqHVCvLLGbrWC1L1fxqiSUeKgnHEiv": {
+  "hits": [
+   {
+    "avg_entry_mcap": 4823,
+    "first_buy_sig": "5cx975XZmukwqyMqQg6TTW9nnhspGndVgmvDtwvhDyjYa6oEXwZnLJnU7ZhCrKucgvJvUrPXJqyX9vXCsNRX5bee",
+    "first_buy_time": 1795033274,
+    "first_entry_mcap": 4823,
+    "found_at": "2026-11-19T14:08:06.014887+00:00",
+    "hold_fraction_at_target": 0.0,
+    "mint": "8ryYEFySsfXfQskxYmykyyA6pbNKjB4s9CfcffpQpump",
+    "multiple": 6.21,
+    "n_trades": 2,
+    "origin": "pumpfun",
+    "pnl_sol": 1.0217,
+    "qualified": true,
+    "realised_multiple": 6.21,
+    "sol_in": 0.1961,
+    "sol_out": 1.2178,
+    "still_holding_pct": 0.0,
+    "symbol": "Buncoin",
+    "tier": "5x+",
+    "total_multiple": 6.21,
+    "transferred_out": false,
+    "unrealised_sol": 0.0,
+    "wallet": "76VnVYPUJUDEY4aqHVCvLLGbrWC1L1fxqiSUeKgnHEiv"
+   }
+  ]
+ },
  "7nLRnEdaYpMrDV7vbDVNAZU83owahuBLykXxrZBk8Vs9": {
   "hits": [
    {
