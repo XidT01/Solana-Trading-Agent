@@ -1,0 +1,355 @@
+{
+ "ai_summary": null,
+ "analyzed_by_launchpad": [
+  [
+   "flap",
+   1
+  ]
+ ],
+ "chain": "bsc",
+ "date": "2026-11-18",
+ "filters": {
+  "highlight_multiple": 10,
+  "max_entry_mcap_usd": 30000,
+  "min_multiple": 5,
+  "target_mcap_usd": 100000
+ },
+ "generated_at": "2026-11-19T04:35:26.495743+00:00",
+ "leaderboard": [
+  {
+   "avg_entry_mcap": 3664,
+   "best_multiple": 14.79,
+   "hits": 1,
+   "last_hit": "2026-11-18T09:27:09.772757+00:00",
+   "median_multiple": 14.79,
+   "tenx_hits": 1,
+   "tokens": [
+    "IDRENT"
+   ],
+   "total_pnl": 816.39,
+   "wallet": "0x074e84898a4c2badaafc3cca68260c8b7f53b860"
+  },
+  {
+   "avg_entry_mcap": 21985,
+   "best_multiple": 12.01,
+   "hits": 1,
+   "last_hit": "2026-11-12T22:09:46.172751+00:00",
+   "median_multiple": 12.01,
+   "tenx_hits": 1,
+   "tokens": [
+    "\u9ed1\u5929\u9e45"
+   ],
+   "total_pnl": 286.13,
+   "wallet": "0x0343b800b8a2df8a016aabd623294ddcff850024"
+  },
+  {
+   "avg_entry_mcap": 6255,
+   "best_multiple": 9.76,
+   "hits": 1,
+   "last_hit": "2026-11-18T09:27:09.772757+00:00",
+   "median_multiple": 9.76,
+   "tenx_hits": 0,
+   "tokens": [
+    "IDRENT"
+   ],
+   "total_pnl": 134.04,
+   "wallet": "0xcfa8f426fd42b559e5493906bcd64742d2857de9"
+  },
+  {
+   "avg_entry_mcap": 8485,
+   "best_multiple": 8.86,
+   "hits": 1,
+   "last_hit": "2026-11-16T23:51:06.855648+00:00",
+   "median_multiple": 8.86,
+   "tenx_hits": 0,
+   "tokens": [
+    "\u6c34"
+   ],
+   "total_pnl": 1377.64,
+   "wallet": "0xdfb6c7adb4d4e383e2d06a9f745513acb8e7358e"
+  },
+  {
+   "avg_entry_mcap": 10599,
+   "best_multiple": 8.07,
+   "hits": 1,
+   "last_hit": "2026-11-18T09:27:09.772757+00:00",
+   "median_multiple": 8.07,
+   "tenx_hits": 0,
+   "tokens": [
+    "IDRENT"
+   ],
+   "total_pnl": 164.42,
+   "wallet": "0x7e26098a323df2c45bff405befa6fa04951777c9"
+  },
+  {
+   "avg_entry_mcap": 5348,
+   "best_multiple": 6.97,
+   "hits": 1,
+   "last_hit": "2026-11-15T14:12:51.583007+00:00",
+   "median_multiple": 6.97,
+   "tenx_hits": 0,
+   "tokens": [
+    "\u5c79\u7acb\u4e0d\u5012"
+   ],
+   "total_pnl": 1191.09,
+   "wallet": "0x6b2be95dd77eca4969af5d51627eb076c1ec3fcd"
+  },
+  {
+   "avg_entry_mcap": 6656,
+   "best_multiple": 6.69,
+   "hits": 1,
+   "last_hit": "2026-11-18T09:27:09.772757+00:00",
+   "median_multiple": 6.69,
+   "tenx_hits": 0,
+   "tokens": [
+    "IDRENT"
+   ],
+   "total_pnl": 697.32,
+   "wallet": "0xb750f03e86980a3dffdfad269a88f008bb78ea51"
+  },
+  {
+   "avg_entry_mcap": 6878,
+   "best_multiple": 6.41,
+   "hits": 1,
+   "last_hit": "2026-11-18T09:27:09.772757+00:00",
+   "median_multiple": 6.41,
+   "tenx_hits": 0,
+   "tokens": [
+    "IDRENT"
+   ],
+   "total_pnl": 63.69,
+   "wallet": "0xc4c70c7172b8ad4360f789766783275b3fc8deee"
+  },
+  {
+   "avg_entry_mcap": 7728,
+   "best_multiple": 5.81,
+   "hits": 1,
+   "last_hit": "2026-11-16T23:51:06.855648+00:00",
+   "median_multiple": 5.81,
+   "tenx_hits": 0,
+   "tokens": [
+    "\u6c34"
+   ],
+   "total_pnl": 240.35,
+   "wallet": "0x62c4cb25e4aba2fa98d4a7738b107c52759fe80f"
+  },
+  {
+   "avg_entry_mcap": 7728,
+   "best_multiple": 5.79,
+   "hits": 1,
+   "last_hit": "2026-11-16T23:51:06.855648+00:00",
+   "median_multiple": 5.79,
+   "tenx_hits": 0,
+   "tokens": [
+    "\u6c34"
+   ],
+   "total_pnl": 262.5,
+   "wallet": "0x57825f68fc7b32eaaa1e90db1fd6cd997b5a4035"
+  },
+  {
+   "avg_entry_mcap": 7728,
+   "best_multiple": 5.7,
+   "hits": 1,
+   "last_hit": "2026-11-16T23:51:06.855648+00:00",
+   "median_multiple": 5.7,
+   "tenx_hits": 0,
+   "tokens": [
+    "\u6c34"
+   ],
+   "total_pnl": 248.16,
+   "wallet": "0x90905f1046c6ba91b79fe262a1cad30b55fc3bb0"
+  },
+  {
+   "avg_entry_mcap": 6255,
+   "best_multiple": 5.02,
+   "hits": 1,
+   "last_hit": "2026-11-18T09:27:09.772757+00:00",
+   "median_multiple": 5.02,
+   "tenx_hits": 0,
+   "tokens": [
+    "IDRENT"
+   ],
+   "total_pnl": 61.79,
+   "wallet": "0x1af638b7b5c56bd89f10ece77cce51ab5faac16d"
+  }
+ ],
+ "new_wallets": [
+  {
+   "avg_entry_mcap": 3664,
+   "first_buy_sig": "0xf95efce88ba1e694c02d0a28c43c062f225da2ec7ba30eb3fc5b216790652959",
+   "first_buy_time": 1794991218,
+   "first_entry_mcap": 3664,
+   "hold_fraction_at_target": 0.0,
+   "mint": "0x5b30d8ec99a42b2e6f69f4258721a56d2bc37777",
+   "multiple": 14.79,
+   "n_trades": 2,
+   "pnl_usd": 816.39,
+   "qualified": true,
+   "realised_multiple": 14.79,
+   "still_holding_pct": 0.0,
+   "symbol": "IDRENT",
+   "tier": "10x+",
+   "total_multiple": 14.79,
+   "transferred_out": false,
+   "unrealised_usd": 0.0,
+   "usd_in": 59.18,
+   "usd_out": 875.58,
+   "wallet": "0x074e84898a4c2badaafc3cca68260c8b7f53b860"
+  },
+  {
+   "avg_entry_mcap": 6255,
+   "first_buy_sig": "0xa56cec34ad807de05810482ad8165d457b855509069b3d5144595b536099aba5",
+   "first_buy_time": 1794991251,
+   "first_entry_mcap": 6255,
+   "hold_fraction_at_target": 0.281,
+   "mint": "0x5b30d8ec99a42b2e6f69f4258721a56d2bc37777",
+   "multiple": 9.76,
+   "n_trades": 5,
+   "pnl_usd": 134.04,
+   "qualified": true,
+   "realised_multiple": 9.76,
+   "still_holding_pct": 0.0,
+   "symbol": "IDRENT",
+   "tier": "5x+",
+   "total_multiple": 9.76,
+   "transferred_out": false,
+   "unrealised_usd": 0.0,
+   "usd_in": 15.3,
+   "usd_out": 149.33,
+   "wallet": "0xcfa8f426fd42b559e5493906bcd64742d2857de9"
+  },
+  {
+   "avg_entry_mcap": 10599,
+   "first_buy_sig": "0xedde3880740f7b6059a3ff63e8affc75e8aaa1fb066a465ddfaa924859827bb8",
+   "first_buy_time": 1794991368,
+   "first_entry_mcap": 10599,
+   "hold_fraction_at_target": 0.0,
+   "mint": "0x5b30d8ec99a42b2e6f69f4258721a56d2bc37777",
+   "multiple": 8.07,
+   "n_trades": 2,
+   "pnl_usd": 164.42,
+   "qualified": true,
+   "realised_multiple": 8.07,
+   "still_holding_pct": 0.0,
+   "symbol": "IDRENT",
+   "tier": "5x+",
+   "total_multiple": 8.07,
+   "transferred_out": false,
+   "unrealised_usd": 0.0,
+   "usd_in": 23.25,
+   "usd_out": 187.68,
+   "wallet": "0x7e26098a323df2c45bff405befa6fa04951777c9"
+  },
+  {
+   "avg_entry_mcap": 6656,
+   "first_buy_sig": "0x2e3642cf9ce25463d56ded1184e0ec768f76cef0f9bf6c037121b9526b75a9ef",
+   "first_buy_time": 1794991289,
+   "first_entry_mcap": 6656,
+   "hold_fraction_at_target": 0.0,
+   "mint": "0x5b30d8ec99a42b2e6f69f4258721a56d2bc37777",
+   "multiple": 6.69,
+   "n_trades": 22,
+   "pnl_usd": 697.32,
+   "qualified": true,
+   "realised_multiple": 6.69,
+   "still_holding_pct": 0.0,
+   "symbol": "IDRENT",
+   "tier": "5x+",
+   "total_multiple": 6.69,
+   "transferred_out": false,
+   "unrealised_usd": 0.0,
+   "usd_in": 122.49,
+   "usd_out": 819.81,
+   "wallet": "0xb750f03e86980a3dffdfad269a88f008bb78ea51"
+  },
+  {
+   "avg_entry_mcap": 6878,
+   "first_buy_sig": "0xc438096af0c869dc737adcbdd14089aac55aee77ccf0457dff769b5de2a6ef9c",
+   "first_buy_time": 1794991270,
+   "first_entry_mcap": 6878,
+   "hold_fraction_at_target": 0.0,
+   "mint": "0x5b30d8ec99a42b2e6f69f4258721a56d2bc37777",
+   "multiple": 6.41,
+   "n_trades": 5,
+   "pnl_usd": 63.69,
+   "qualified": true,
+   "realised_multiple": 6.41,
+   "still_holding_pct": 0.0,
+   "symbol": "IDRENT",
+   "tier": "5x+",
+   "total_multiple": 6.41,
+   "transferred_out": false,
+   "unrealised_usd": 0.0,
+   "usd_in": 11.78,
+   "usd_out": 75.47,
+   "wallet": "0xc4c70c7172b8ad4360f789766783275b3fc8deee"
+  },
+  {
+   "avg_entry_mcap": 6255,
+   "first_buy_sig": "0x86b62a66d8689e185dec5e820f58aa05a8c1ec02d95d569c95026e387f0f8761",
+   "first_buy_time": 1794991251,
+   "first_entry_mcap": 6255,
+   "hold_fraction_at_target": 0.0,
+   "mint": "0x5b30d8ec99a42b2e6f69f4258721a56d2bc37777",
+   "multiple": 5.02,
+   "n_trades": 4,
+   "pnl_usd": 61.79,
+   "qualified": true,
+   "realised_multiple": 5.02,
+   "still_holding_pct": 0.0,
+   "symbol": "IDRENT",
+   "tier": "5x+",
+   "total_multiple": 5.02,
+   "transferred_out": false,
+   "unrealised_usd": 0.0,
+   "usd_in": 15.39,
+   "usd_out": 77.17,
+   "wallet": "0x1af638b7b5c56bd89f10ece77cce51ab5faac16d"
+  }
+ ],
+ "passed_tokens": [
+  {
+   "early_buyers_checked": 50,
+   "liquidity_usd": 36786.06,
+   "mcap_usd": 167623,
+   "mint": "0x5b30d8ec99a42b2e6f69f4258721a56d2bc37777",
+   "origin": "flap",
+   "symbol": "IDRENT",
+   "url": "https://dexscreener.com/bsc/0xd9c0c251cd34239ebaa53f1c69109e6e392afda3",
+   "wallets_found": 6
+  }
+ ],
+ "pnl_unit": "USD",
+ "rejection_reasons": [
+  [
+   "low_liquidity",
+   5
+  ],
+  [
+   "concentrated_holders_top10",
+   2
+  ],
+  [
+   "creator_made_honeypots_before",
+   1
+  ],
+  [
+   "thin_liquidity_vs_mcap",
+   1
+  ],
+  [
+   "bundled_launch",
+   1
+  ]
+ ],
+ "stats": {
+  "analyzed": 1,
+  "discovered": 4607,
+  "rejected": 9,
+  "runs": 48,
+  "skipped": 2,
+  "tokens_checked": 12,
+  "wallets_10x": 1,
+  "wallets_found": 6
+ }
+}
