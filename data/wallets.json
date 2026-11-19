@@ -471,6 +471,34 @@
    }
   ]
  },
+ "4aJhvXdYSGXaUNcTHdtLtuNZCC7iaRoYbBaMHRRqrVRk": {
+  "hits": [
+   {
+    "avg_entry_mcap": 4006,
+    "first_buy_sig": "5RBzyrPqqqzwDJB1sDKDksPBDwB1cVnWgRxwYjgMJCUrVwp7RsCjXrjNpUkfitiZZDAi3tmALVikHHU7rwWghCWP",
+    "first_buy_time": 1794976357,
+    "first_entry_mcap": 4006,
+    "found_at": "2026-11-19T08:01:53.793943+00:00",
+    "hold_fraction_at_target": 0.244,
+    "mint": "8qHpNFu6o6JDx8rmdjik6k3si8QRLBgMuuRmGQ21pump",
+    "multiple": 13.39,
+    "n_trades": 16,
+    "origin": "pumpfun",
+    "pnl_sol": 24.9282,
+    "qualified": true,
+    "realised_multiple": 13.39,
+    "sol_in": 2.0122,
+    "sol_out": 26.9404,
+    "still_holding_pct": 0.0,
+    "symbol": "67coin",
+    "tier": "10x+",
+    "total_multiple": 13.39,
+    "transferred_out": false,
+    "unrealised_sol": 0.0,
+    "wallet": "4aJhvXdYSGXaUNcTHdtLtuNZCC7iaRoYbBaMHRRqrVRk"
+   }
+  ]
+ },
  "4aygipF796FWiwT6GHcuCM4JZiCPajL6dNpWcJoQMZSF": {
   "hits": [
    {
