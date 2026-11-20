@@ -1,4 +1,32 @@
 {
+ "0x1220c623d6aaabe58f41e9376308d613781ea0d1": {
+  "hits": [
+   {
+    "avg_entry_mcap": 5466,
+    "first_buy_sig": "0xcad49eb24814ad43d98a68e0f18bc91cf089a7498cc1e59b5f31e09585abf1e5",
+    "first_buy_time": 1795110821,
+    "first_entry_mcap": 5466,
+    "found_at": "2026-11-20T03:22:02.860280+00:00",
+    "hold_fraction_at_target": 0.0,
+    "mint": "0x7d578ac588917519f339c70bdd991bf3aa9c0620",
+    "multiple": 5.42,
+    "n_trades": 2,
+    "origin": "pons",
+    "pnl_usd": 71.11,
+    "qualified": true,
+    "realised_multiple": 5.42,
+    "still_holding_pct": 0.0,
+    "symbol": "NVDAc",
+    "tier": "5x+",
+    "total_multiple": 5.42,
+    "transferred_out": false,
+    "unrealised_usd": 0.0,
+    "usd_in": 16.09,
+    "usd_out": 87.21,
+    "wallet": "0x1220c623d6aaabe58f41e9376308d613781ea0d1"
+   }
+  ]
+ },
  "0x6f27659bbe3577607f9690031a6a571eeabc84bc": {
   "hits": [
    {
@@ -111,6 +139,34 @@
    }
   ]
  },
+ "0xd481cebeec9e947b47ea5dbe8585dfff58c1f497": {
+  "hits": [
+   {
+    "avg_entry_mcap": 5541,
+    "first_buy_sig": "0xfc9a16480e61e68069d8ce907a4046006d962eb3665bb86fb238470d75302c35",
+    "first_buy_time": 1795111050,
+    "first_entry_mcap": 5541,
+    "found_at": "2026-11-20T03:22:02.860280+00:00",
+    "hold_fraction_at_target": 0.0,
+    "mint": "0x7d578ac588917519f339c70bdd991bf3aa9c0620",
+    "multiple": 6.56,
+    "n_trades": 2,
+    "origin": "pons",
+    "pnl_usd": 369.85,
+    "qualified": true,
+    "realised_multiple": 6.56,
+    "still_holding_pct": 0.0,
+    "symbol": "NVDAc",
+    "tier": "5x+",
+    "total_multiple": 6.56,
+    "transferred_out": false,
+    "unrealised_usd": 0.0,
+    "usd_in": 66.53,
+    "usd_out": 436.37,
+    "wallet": "0xd481cebeec9e947b47ea5dbe8585dfff58c1f497"
+   }
+  ]
+ },
  "0xda6d7201bfe8accc433dab6e705d647fb2c407a6": {
   "hits": [
    {
@@ -164,6 +220,34 @@
     "usd_in": 225.67,
     "usd_out": 1600.89,
     "wallet": "0xde791bbc12b7356abe8875ebcf6baea545a5e651"
+   }
+  ]
+ },
+ "0xe0e13cbda53bbbdad22c0bff7d1e15f20ec81090": {
+  "hits": [
+   {
+    "avg_entry_mcap": 2745,
+    "first_buy_sig": "0x11bbc8821228ceebcbe1d7cc8cd846759c6257a374f5e0ad04ab00abf217155d",
+    "first_buy_time": 1795102484,
+    "first_entry_mcap": 2745,
+    "found_at": "2026-11-20T03:22:02.860280+00:00",
+    "hold_fraction_at_target": 1.0,
+    "mint": "0x7d578ac588917519f339c70bdd991bf3aa9c0620",
+    "multiple": 40.09,
+    "n_trades": 9,
+    "origin": "pons",
+    "pnl_usd": 2233.98,
+    "qualified": true,
+    "realised_multiple": 40.09,
+    "still_holding_pct": 11.0,
+    "symbol": "NVDAc",
+    "tier": "10x+",
+    "total_multiple": 46.69,
+    "transferred_out": false,
+    "unrealised_usd": 322.65,
+    "usd_in": 48.89,
+    "usd_out": 1960.23,
+    "wallet": "0xe0e13cbda53bbbdad22c0bff7d1e15f20ec81090"
    }
   ]
  }
