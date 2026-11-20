@@ -819,16 +819,16 @@
   "wins": 29
  },
  "ANQDy2sKKq7cKjhxBeP39Ppy3JeXaEokU75rPXc9wAo7": {
-  "big_wins": 5,
-  "coins_traded": 86,
-  "days_covered": 4.8,
-  "losses": 73,
+  "big_wins": 2,
+  "coins_traded": 92,
+  "days_covered": 4.2,
+  "losses": 79,
   "median_roi": 0.8,
-  "pnl_sol": -1.35,
-  "profiled_at": "2026-11-19T04:17:18.530843+00:00",
-  "realised_pnl_sol": -1.35,
+  "pnl_sol": -1.95,
+  "profiled_at": "2026-11-20T05:07:10.269683+00:00",
+  "realised_pnl_sol": -1.95,
   "txs_read": 500,
-  "win_rate": 0.151,
+  "win_rate": 0.141,
   "wins": 13
  },
  "AQdBYZNy3BZ1vouGUjA1w9Ay7aq7kH5UQSuh4LQWKotY": {
@@ -1039,6 +1039,19 @@
   "win_rate": 0.25,
   "wins": 1
  },
+ "CjZ2b8muxgmcqacvEhQ8o2TWZhkiZe9JWQRqcC63wDPg": {
+  "big_wins": 11,
+  "coins_traded": 82,
+  "days_covered": 29.0,
+  "losses": 65,
+  "median_roi": 0.2,
+  "pnl_sol": -10.22,
+  "profiled_at": "2026-11-20T05:04:16.799000+00:00",
+  "realised_pnl_sol": -10.23,
+  "txs_read": 395,
+  "win_rate": 0.207,
+  "wins": 17
+ },
  "CqTqoWfCYGagARWE2B5ooqqqwqzcWrNMyjN4311uG5sD": {
   "big_wins": 2,
   "coins_traded": 72,
@@ -1051,6 +1064,19 @@
   "txs_read": 500,
   "win_rate": 0.278,
   "wins": 20
+ },
+ "CtEva4Si8XiYQQJK2vPuZDbLvPoFfmHcAnPX2vK6cJiL": {
+  "big_wins": 14,
+  "coins_traded": 76,
+  "days_covered": 29.0,
+  "losses": 60,
+  "median_roi": 0.22,
+  "pnl_sol": 7.67,
+  "profiled_at": "2026-11-20T05:05:28.981602+00:00",
+  "realised_pnl_sol": 7.67,
+  "txs_read": 371,
+  "win_rate": 0.211,
+  "wins": 16
  },
  "CwXFrKbMbGLRNdfktQusCmALAzQa4RAHhLHqGLEppYY6": {
   "big_wins": 1,
