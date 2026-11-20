@@ -835,6 +835,34 @@
    }
   ]
  },
+ "5BFpe4dumhGjeCU59MtgsxhudmtBhMhtf1ppEoTp3iJQ": {
+  "hits": [
+   {
+    "avg_entry_mcap": 5092,
+    "first_buy_sig": "3542h1pksBUi8RJkpnd9n2kNczWRd5Wxrx5GjEP1DyuoFFb4TTZsYhbmZiMqj1ekkpeYYA3RJZHT1qaRnQxJinMT",
+    "first_buy_time": 1795162064,
+    "first_entry_mcap": 5075,
+    "found_at": "2026-11-20T10:07:30.285301+00:00",
+    "hold_fraction_at_target": 0.121,
+    "mint": "J7bLsZcpkfky92ir8k36Munz91nHKtcDNhDy8d3Qpump",
+    "multiple": 6.39,
+    "n_trades": 25,
+    "origin": "pumpfun",
+    "pnl_sol": 6.5387,
+    "qualified": true,
+    "realised_multiple": 6.39,
+    "sol_in": 1.2137,
+    "sol_out": 7.7524,
+    "still_holding_pct": 0.0,
+    "symbol": "AMC ",
+    "tier": "5x+",
+    "total_multiple": 6.39,
+    "transferred_out": false,
+    "unrealised_sol": 0.0,
+    "wallet": "5BFpe4dumhGjeCU59MtgsxhudmtBhMhtf1ppEoTp3iJQ"
+   }
+  ]
+ },
  "5BzBjwiKz7tBn5sYA7KzqvwqCjYWdQKdFSirqFhNYJ3Q": {
   "hits": [
    {
@@ -2787,6 +2815,34 @@
     "transferred_out": false,
     "unrealised_sol": 0.0,
     "wallet": "DPHgMJPRP6iUtdTwvjUJm6b5MaWqWQHPH9P5gLsTYUkm"
+   }
+  ]
+ },
+ "DVxREzTfTtzjrPt2uxgNnWRfLKrTSxEjeKpoYh2QG5Ud": {
+  "hits": [
+   {
+    "avg_entry_mcap": 7345,
+    "first_buy_sig": "2Lpm1JyPgEUoWs24cseRGb4GvTszdbVW2WuVTJTga4o3FKKmVZhgYS17vJ1RvwqjeLvrW59jhmGdoFjVyLgQw1mK",
+    "first_buy_time": 1795162119,
+    "first_entry_mcap": 7345,
+    "found_at": "2026-11-20T10:07:30.285301+00:00",
+    "hold_fraction_at_target": 0.395,
+    "mint": "J7bLsZcpkfky92ir8k36Munz91nHKtcDNhDy8d3Qpump",
+    "multiple": 6.33,
+    "n_trades": 6,
+    "origin": "pumpfun",
+    "pnl_sol": 6.3995,
+    "qualified": true,
+    "realised_multiple": 6.33,
+    "sol_in": 0.6896,
+    "sol_out": 4.3618,
+    "still_holding_pct": 22.2,
+    "symbol": "AMC ",
+    "tier": "5x+",
+    "total_multiple": 10.28,
+    "transferred_out": false,
+    "unrealised_sol": 2.7273,
+    "wallet": "DVxREzTfTtzjrPt2uxgNnWRfLKrTSxEjeKpoYh2QG5Ud"
    }
   ]
  },
