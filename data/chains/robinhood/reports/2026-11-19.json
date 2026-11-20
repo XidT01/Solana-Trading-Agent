@@ -1,0 +1,253 @@
+{
+ "ai_summary": null,
+ "analyzed_by_launchpad": [
+  [
+   "pons",
+   2
+  ]
+ ],
+ "chain": "robinhood",
+ "date": "2026-11-19",
+ "filters": {
+  "highlight_multiple": 10,
+  "max_entry_mcap_usd": 30000,
+  "min_multiple": 5,
+  "target_mcap_usd": 100000
+ },
+ "generated_at": "2026-11-20T04:24:48.054080+00:00",
+ "leaderboard": [
+  {
+   "avg_entry_mcap": 7533,
+   "best_multiple": 9.39,
+   "hits": 1,
+   "last_hit": "2026-11-19T16:40:34.554495+00:00",
+   "median_multiple": 9.39,
+   "tenx_hits": 0,
+   "tokens": [
+    "CATMARIO"
+   ],
+   "total_pnl": 2397.84,
+   "wallet": "0x9c389fb3ca7c3c39d92a566410b976ccf58120c7"
+  },
+  {
+   "avg_entry_mcap": 9645,
+   "best_multiple": 7.92,
+   "hits": 1,
+   "last_hit": "2026-11-19T16:40:34.554495+00:00",
+   "median_multiple": 7.92,
+   "tenx_hits": 0,
+   "tokens": [
+    "CATMARIO"
+   ],
+   "total_pnl": 2069.25,
+   "wallet": "0x7381852bec088d46d70aab79098afaaaa45d3882"
+  },
+  {
+   "avg_entry_mcap": 12463,
+   "best_multiple": 7.09,
+   "hits": 1,
+   "last_hit": "2026-11-19T04:09:45.868227+00:00",
+   "median_multiple": 7.09,
+   "tenx_hits": 0,
+   "tokens": [
+    "can"
+   ],
+   "total_pnl": 1419.67,
+   "wallet": "0xde791bbc12b7356abe8875ebcf6baea545a5e651"
+  },
+  {
+   "avg_entry_mcap": 12417,
+   "best_multiple": 6.41,
+   "hits": 1,
+   "last_hit": "2026-11-19T04:09:45.868227+00:00",
+   "median_multiple": 6.41,
+   "tenx_hits": 0,
+   "tokens": [
+    "can"
+   ],
+   "total_pnl": 88.22,
+   "wallet": "0xda6d7201bfe8accc433dab6e705d647fb2c407a6"
+  },
+  {
+   "avg_entry_mcap": 10070,
+   "best_multiple": 6.09,
+   "hits": 1,
+   "last_hit": "2026-11-16T07:45:36.679453+00:00",
+   "median_multiple": 6.09,
+   "tenx_hits": 0,
+   "tokens": [
+    "RUSHR"
+   ],
+   "total_pnl": 117.81,
+   "wallet": "0x6f27659bbe3577607f9690031a6a571eeabc84bc"
+  },
+  {
+   "avg_entry_mcap": 11304,
+   "best_multiple": 5.5,
+   "hits": 1,
+   "last_hit": "2026-11-19T04:09:45.868227+00:00",
+   "median_multiple": 5.5,
+   "tenx_hits": 0,
+   "tokens": [
+    "can"
+   ],
+   "total_pnl": 172.6,
+   "wallet": "0x75f178a365df618aa0e5e0055ade2d6282d6b753"
+  }
+ ],
+ "new_wallets": [
+  {
+   "avg_entry_mcap": 7533,
+   "first_buy_sig": "0xbcd68d715c0151ace035cd0aa492033ab2f20c2908d7302670bb6240f6939276",
+   "first_buy_time": 1795105854,
+   "first_entry_mcap": 7533,
+   "hold_fraction_at_target": 0.0,
+   "mint": "0x5c275f84ae7b58f75e68709f60241bbac4a1ad52",
+   "multiple": 9.39,
+   "n_trades": 5,
+   "pnl_usd": 2397.84,
+   "qualified": true,
+   "realised_multiple": 9.39,
+   "still_holding_pct": 0.0,
+   "symbol": "CATMARIO",
+   "tier": "5x+",
+   "total_multiple": 9.39,
+   "transferred_out": false,
+   "unrealised_usd": 0.0,
+   "usd_in": 285.67,
+   "usd_out": 2683.51,
+   "wallet": "0x9c389fb3ca7c3c39d92a566410b976ccf58120c7"
+  },
+  {
+   "avg_entry_mcap": 9645,
+   "first_buy_sig": "0x48870c713e5c51cfa7cbfbe09e392bd1b6f362a59b5d6428a21a2bdb8ff0b43b",
+   "first_buy_time": 1795105853,
+   "first_entry_mcap": 9645,
+   "hold_fraction_at_target": 0.25,
+   "mint": "0x5c275f84ae7b58f75e68709f60241bbac4a1ad52",
+   "multiple": 7.92,
+   "n_trades": 10,
+   "pnl_usd": 2069.25,
+   "qualified": true,
+   "realised_multiple": 7.92,
+   "still_holding_pct": 4.4,
+   "symbol": "CATMARIO",
+   "tier": "5x+",
+   "total_multiple": 9.03,
+   "transferred_out": false,
+   "unrealised_usd": 284.45,
+   "usd_in": 257.78,
+   "usd_out": 2042.58,
+   "wallet": "0x7381852bec088d46d70aab79098afaaaa45d3882"
+  },
+  {
+   "avg_entry_mcap": 12463,
+   "first_buy_sig": "0xae4093f18d37af2989707296baa353351975a33b730688b98aaa3bbff32dd883",
+   "first_buy_time": 1795060349,
+   "first_entry_mcap": 12132,
+   "hold_fraction_at_target": 0.25,
+   "mint": "0xe0bcf5d80435781aae7f6dcde202bb1ccb9c7d89",
+   "multiple": 7.09,
+   "n_trades": 9,
+   "pnl_usd": 1419.67,
+   "qualified": true,
+   "realised_multiple": 7.09,
+   "still_holding_pct": 1.8,
+   "symbol": "can",
+   "tier": "5x+",
+   "total_multiple": 7.29,
+   "transferred_out": false,
+   "unrealised_usd": 44.45,
+   "usd_in": 225.67,
+   "usd_out": 1600.89,
+   "wallet": "0xde791bbc12b7356abe8875ebcf6baea545a5e651"
+  },
+  {
+   "avg_entry_mcap": 12417,
+   "first_buy_sig": "0xb338bc8c966f7d33e1ef8aeb53f1a648942bf5e200894f35a5ec9cf404f64ca1",
+   "first_buy_time": 1795060352,
+   "first_entry_mcap": 12417,
+   "hold_fraction_at_target": 0.125,
+   "mint": "0xe0bcf5d80435781aae7f6dcde202bb1ccb9c7d89",
+   "multiple": 6.41,
+   "n_trades": 5,
+   "pnl_usd": 88.22,
+   "qualified": true,
+   "realised_multiple": 6.41,
+   "still_holding_pct": 0.0,
+   "symbol": "can",
+   "tier": "5x+",
+   "total_multiple": 6.41,
+   "transferred_out": false,
+   "unrealised_usd": 0.0,
+   "usd_in": 16.31,
+   "usd_out": 104.53,
+   "wallet": "0xda6d7201bfe8accc433dab6e705d647fb2c407a6"
+  },
+  {
+   "avg_entry_mcap": 11304,
+   "first_buy_sig": "0x967a66cf64452ee8ba4b79bbbba7e6b2e2aea3806c8eec5379f5bde5626b816a",
+   "first_buy_time": 1795060349,
+   "first_entry_mcap": 12132,
+   "hold_fraction_at_target": 0.211,
+   "mint": "0xe0bcf5d80435781aae7f6dcde202bb1ccb9c7d89",
+   "multiple": 5.5,
+   "n_trades": 8,
+   "pnl_usd": 172.6,
+   "qualified": true,
+   "realised_multiple": 5.5,
+   "still_holding_pct": 11.9,
+   "symbol": "can",
+   "tier": "5x+",
+   "total_multiple": 7.43,
+   "transferred_out": false,
+   "unrealised_usd": 51.8,
+   "usd_in": 26.85,
+   "usd_out": 147.66,
+   "wallet": "0x75f178a365df618aa0e5e0055ade2d6282d6b753"
+  }
+ ],
+ "passed_tokens": [
+  {
+   "early_buyers_checked": 50,
+   "liquidity_usd": 44415.35,
+   "mcap_usd": 243095,
+   "mint": "0x5c275f84ae7b58f75e68709f60241bbac4a1ad52",
+   "origin": "pons",
+   "symbol": "CATMARIO",
+   "url": "https://dexscreener.com/robinhood/0x0482439dba9fe2c1dc606ce88939764ac6489d291c62f66780aa8fd8597cb2ca",
+   "wallets_found": 2
+  },
+  {
+   "early_buyers_checked": 50,
+   "liquidity_usd": 34847.2,
+   "mcap_usd": 183869,
+   "mint": "0xe0bcf5d80435781aae7f6dcde202bb1ccb9c7d89",
+   "origin": "pons",
+   "symbol": "can",
+   "url": "https://dexscreener.com/robinhood/0x8ed7d3215e54f6d65c85d43c010179f90400c2562f34d82d666ae068d7adccae",
+   "wallets_found": 3
+  }
+ ],
+ "pnl_unit": "USD",
+ "rejection_reasons": [
+  [
+   "never_pumped",
+   2
+  ],
+  [
+   "transfers_pausable",
+   1
+  ]
+ ],
+ "stats": {
+  "analyzed": 2,
+  "discovered": 4927,
+  "rejected": 3,
+  "runs": 49,
+  "skipped": 0,
+  "tokens_checked": 5,
+  "wallets_10x": 0,
+  "wallets_found": 5
+ }
+}
