@@ -4330,6 +4330,34 @@
    }
   ]
  },
+ "ardinRsN1mNYVeoJWTBsWeYeXvuR9UUDGMsCDKpb6AT": {
+  "hits": [
+   {
+    "avg_entry_mcap": 4806,
+    "first_buy_sig": "22wC4KvtgquXrXUX1chtXCHKN3PZbmgMqv6hmL2HMqAqFnKyBv4LQ7n2NznvBqHDsUvQoH8AobUmG1PhVEFVCN89",
+    "first_buy_time": 1795295743,
+    "first_entry_mcap": 4287,
+    "found_at": "2026-11-21T21:55:35.156748+00:00",
+    "hold_fraction_at_target": 1.0,
+    "mint": "2G5b75jm9HtJmAccjxpzdWGs5r7XXeMYLTANoEcvpump",
+    "multiple": 6.49,
+    "n_trades": 20,
+    "origin": "pumpfun",
+    "pnl_sol": 14.3596,
+    "qualified": true,
+    "realised_multiple": 6.49,
+    "sol_in": 2.616,
+    "sol_out": 16.9756,
+    "still_holding_pct": 0.0,
+    "symbol": "BTC",
+    "tier": "5x+",
+    "total_multiple": 6.49,
+    "transferred_out": false,
+    "unrealised_sol": 0.0,
+    "wallet": "ardinRsN1mNYVeoJWTBsWeYeXvuR9UUDGMsCDKpb6AT"
+   }
+  ]
+ },
  "efAkDpEbv5Fjqx58go9f8utbg61SMgoAkqFMD4WuzGn": {
   "hits": [
    {
