@@ -7484,5 +7484,23 @@
   },
   "wallets_found": 0,
   "watchlist": 368
+ },
+ {
+  "analyzed": 0,
+  "at": "2026-11-21T12:45:08.288091+00:00",
+  "below_target_peak": 266,
+  "discovered": 96,
+  "integrity_rejected": 0,
+  "launchpad_rejected": 23,
+  "market_rejected": 3,
+  "rpc_calls": 128,
+  "safety_rejected": 0,
+  "skipped": 0,
+  "too_old": 4,
+  "unknown_factories": {
+   "0xacef838f17fa95e14d568f7f7e4b05658fa54eda": 22
+  },
+  "wallets_found": 0,
+  "watchlist": 381
  }
 ]
