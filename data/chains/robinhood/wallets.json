@@ -27,6 +27,62 @@
    }
   ]
  },
+ "0x1d2bfec0994308b88ef9c92e71bafe87c5e39513": {
+  "hits": [
+   {
+    "avg_entry_mcap": 6145,
+    "first_buy_sig": "0xb9d7dfdc2a7d091005bbbd43e57eb303f60598975dd2411684c85b4a85b5f9d4",
+    "first_buy_time": 1794860641,
+    "first_entry_mcap": 5774,
+    "found_at": "2026-11-21T10:48:06.542109+00:00",
+    "hold_fraction_at_target": 0.325,
+    "mint": "0x3ed7e776d6b6a87d486a369c24b340dc7266e31d",
+    "multiple": 6.51,
+    "n_trades": 17,
+    "origin": "pons",
+    "pnl_usd": 1171.58,
+    "qualified": true,
+    "realised_multiple": 6.51,
+    "still_holding_pct": 30.2,
+    "symbol": "HALBROOK",
+    "tier": "5x+",
+    "total_multiple": 12.08,
+    "transferred_out": false,
+    "unrealised_usd": 588.67,
+    "usd_in": 105.78,
+    "usd_out": 688.69,
+    "wallet": "0x1d2bfec0994308b88ef9c92e71bafe87c5e39513"
+   }
+  ]
+ },
+ "0x4cae41c6199219617dfa73343360d6bf4ebf9981": {
+  "hits": [
+   {
+    "avg_entry_mcap": 6175,
+    "first_buy_sig": "0xaa470cacf5be370e38cf67426b87bc2750214762f56f3abdf8b4161b2d5e8e05",
+    "first_buy_time": 1794860641,
+    "first_entry_mcap": 5774,
+    "found_at": "2026-11-21T10:48:06.542109+00:00",
+    "hold_fraction_at_target": 0.325,
+    "mint": "0x3ed7e776d6b6a87d486a369c24b340dc7266e31d",
+    "multiple": 6.48,
+    "n_trades": 17,
+    "origin": "pons",
+    "pnl_usd": 1136.19,
+    "qualified": true,
+    "realised_multiple": 6.48,
+    "still_holding_pct": 30.2,
+    "symbol": "HALBROOK",
+    "tier": "5x+",
+    "total_multiple": 12.02,
+    "transferred_out": false,
+    "unrealised_usd": 571.14,
+    "usd_in": 103.12,
+    "usd_out": 668.18,
+    "wallet": "0x4cae41c6199219617dfa73343360d6bf4ebf9981"
+   }
+  ]
+ },
  "0x6f27659bbe3577607f9690031a6a571eeabc84bc": {
   "hits": [
    {
@@ -111,6 +167,90 @@
    }
   ]
  },
+ "0x860fcbebe0cf5963cef892c6c472ae105b77711b": {
+  "hits": [
+   {
+    "avg_entry_mcap": 4164,
+    "first_buy_sig": "0xee8895a0740120fd00f382841a0a1c37ce9ee20320b810b3b21e987c46cf22ad",
+    "first_buy_time": 1794860568,
+    "first_entry_mcap": 4012,
+    "found_at": "2026-11-21T10:48:06.542109+00:00",
+    "hold_fraction_at_target": 0.0,
+    "mint": "0x3ed7e776d6b6a87d486a369c24b340dc7266e31d",
+    "multiple": 5.43,
+    "n_trades": 4,
+    "origin": "pons",
+    "pnl_usd": 295.43,
+    "qualified": true,
+    "realised_multiple": 5.43,
+    "still_holding_pct": 0.0,
+    "symbol": "HALBROOK",
+    "tier": "5x+",
+    "total_multiple": 5.43,
+    "transferred_out": false,
+    "unrealised_usd": 0.0,
+    "usd_in": 66.69,
+    "usd_out": 362.13,
+    "wallet": "0x860fcbebe0cf5963cef892c6c472ae105b77711b"
+   }
+  ]
+ },
+ "0x8b12f1448c5503ea1fc246374d103a675e5a0905": {
+  "hits": [
+   {
+    "avg_entry_mcap": 9202,
+    "first_buy_sig": "0xf38085ebfb58c5e986722e8c32023850d1d9f29255dc8d19a57439b4451f1e37",
+    "first_buy_time": 1794860665,
+    "first_entry_mcap": 9171,
+    "found_at": "2026-11-21T10:48:06.542109+00:00",
+    "hold_fraction_at_target": 0.956,
+    "mint": "0x3ed7e776d6b6a87d486a369c24b340dc7266e31d",
+    "multiple": 11.03,
+    "n_trades": 4,
+    "origin": "pons",
+    "pnl_usd": 346.41,
+    "qualified": true,
+    "realised_multiple": 11.03,
+    "still_holding_pct": 0.0,
+    "symbol": "HALBROOK",
+    "tier": "10x+",
+    "total_multiple": 11.03,
+    "transferred_out": false,
+    "unrealised_usd": 0.0,
+    "usd_in": 34.52,
+    "usd_out": 380.93,
+    "wallet": "0x8b12f1448c5503ea1fc246374d103a675e5a0905"
+   }
+  ]
+ },
+ "0x90b59bf886c64998c5d897b5f2b1382912b9c6ea": {
+  "hits": [
+   {
+    "avg_entry_mcap": 5964,
+    "first_buy_sig": "0xc6685dc21d71667edd827abdb8c8b24e2d072ff24e9fd85e81874dfd1995f16c",
+    "first_buy_time": 1794860633,
+    "first_entry_mcap": 5062,
+    "found_at": "2026-11-21T10:48:06.542109+00:00",
+    "hold_fraction_at_target": 0.0,
+    "mint": "0x3ed7e776d6b6a87d486a369c24b340dc7266e31d",
+    "multiple": 11.64,
+    "n_trades": 17,
+    "origin": "pons",
+    "pnl_usd": 1562.76,
+    "qualified": true,
+    "realised_multiple": 11.64,
+    "still_holding_pct": 0.0,
+    "symbol": "HALBROOK",
+    "tier": "10x+",
+    "total_multiple": 11.64,
+    "transferred_out": false,
+    "unrealised_usd": 0.0,
+    "usd_in": 146.81,
+    "usd_out": 1709.57,
+    "wallet": "0x90b59bf886c64998c5d897b5f2b1382912b9c6ea"
+   }
+  ]
+ },
  "0x9c389fb3ca7c3c39d92a566410b976ccf58120c7": {
   "hits": [
    {
@@ -139,6 +279,62 @@
    }
   ]
  },
+ "0xa18238311a6d75befbd4a3df45de9e57211ebe8c": {
+  "hits": [
+   {
+    "avg_entry_mcap": 6141,
+    "first_buy_sig": "0x8d3300e069659f71f6f0d3e5fe1ade48de5dfdef886b93dd0038c160fbfe2ae6",
+    "first_buy_time": 1794860641,
+    "first_entry_mcap": 5774,
+    "found_at": "2026-11-21T10:48:06.542109+00:00",
+    "hold_fraction_at_target": 0.325,
+    "mint": "0x3ed7e776d6b6a87d486a369c24b340dc7266e31d",
+    "multiple": 6.52,
+    "n_trades": 17,
+    "origin": "pons",
+    "pnl_usd": 1131.92,
+    "qualified": true,
+    "realised_multiple": 6.52,
+    "still_holding_pct": 30.2,
+    "symbol": "HALBROOK",
+    "tier": "5x+",
+    "total_multiple": 12.08,
+    "transferred_out": false,
+    "unrealised_usd": 568.71,
+    "usd_in": 102.12,
+    "usd_out": 665.33,
+    "wallet": "0xa18238311a6d75befbd4a3df45de9e57211ebe8c"
+   }
+  ]
+ },
+ "0xcc2d952e885a0a5a823b5b26838b6833d12df248": {
+  "hits": [
+   {
+    "avg_entry_mcap": 6155,
+    "first_buy_sig": "0x439a10144fba4818d27b388670512dcbee676a6c506d337f64b4f505de9d5d59",
+    "first_buy_time": 1794860641,
+    "first_entry_mcap": 5774,
+    "found_at": "2026-11-21T10:48:06.542109+00:00",
+    "hold_fraction_at_target": 0.325,
+    "mint": "0x3ed7e776d6b6a87d486a369c24b340dc7266e31d",
+    "multiple": 6.5,
+    "n_trades": 17,
+    "origin": "pons",
+    "pnl_usd": 1113.2,
+    "qualified": true,
+    "realised_multiple": 6.5,
+    "still_holding_pct": 30.2,
+    "symbol": "HALBROOK",
+    "tier": "5x+",
+    "total_multiple": 12.06,
+    "transferred_out": false,
+    "unrealised_usd": 559.42,
+    "usd_in": 100.69,
+    "usd_out": 654.47,
+    "wallet": "0xcc2d952e885a0a5a823b5b26838b6833d12df248"
+   }
+  ]
+ },
  "0xd481cebeec9e947b47ea5dbe8585dfff58c1f497": {
   "hits": [
    {
@@ -164,6 +360,34 @@
     "usd_in": 66.53,
     "usd_out": 436.37,
     "wallet": "0xd481cebeec9e947b47ea5dbe8585dfff58c1f497"
+   }
+  ]
+ },
+ "0xd6a0dcce2e5a04a63288c29e3ac82c42afbba267": {
+  "hits": [
+   {
+    "avg_entry_mcap": 6160,
+    "first_buy_sig": "0x5f38882683187ba2f89dde76ed34c5848e0f4253e67843bf00c5b441c2d7d978",
+    "first_buy_time": 1794860641,
+    "first_entry_mcap": 5774,
+    "found_at": "2026-11-21T10:48:06.542109+00:00",
+    "hold_fraction_at_target": 0.325,
+    "mint": "0x3ed7e776d6b6a87d486a369c24b340dc7266e31d",
+    "multiple": 6.49,
+    "n_trades": 17,
+    "origin": "pons",
+    "pnl_usd": 1152.33,
+    "qualified": true,
+    "realised_multiple": 6.49,
+    "still_holding_pct": 30.2,
+    "symbol": "HALBROOK",
+    "tier": "5x+",
+    "total_multiple": 12.04,
+    "transferred_out": false,
+    "unrealised_usd": 579.23,
+    "usd_in": 104.33,
+    "usd_out": 677.44,
+    "wallet": "0xd6a0dcce2e5a04a63288c29e3ac82c42afbba267"
    }
   ]
  },
