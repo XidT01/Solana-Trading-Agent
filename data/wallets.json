@@ -2034,6 +2034,34 @@
    }
   ]
  },
+ "9Ydv8M82m17QgFLvUyFqtrmDhjQorisCqzDvASMBGnF6": {
+  "hits": [
+   {
+    "avg_entry_mcap": 5743,
+    "first_buy_sig": "32rDRYdMnx8hkWiUdC9SbaWbNw2hoDUjQz2K2wFGoZs7wb7zx9p4e8yq8xNEx33pftvS2FDMK2PMWGAxH5dqU1Up",
+    "first_buy_time": 1795234444,
+    "first_entry_mcap": 5743,
+    "found_at": "2026-11-21T06:23:22.546660+00:00",
+    "hold_fraction_at_target": 0.08,
+    "mint": "FQNz7BKQejsQR3aFyCY746Km2smesUS9DWYsU9nopump",
+    "multiple": 5.31,
+    "n_trades": 60,
+    "origin": "pumpfun",
+    "pnl_sol": 281.0443,
+    "qualified": true,
+    "realised_multiple": 5.31,
+    "sol_in": 47.1617,
+    "sol_out": 250.3723,
+    "still_holding_pct": 8.0,
+    "symbol": "VAREXON",
+    "tier": "5x+",
+    "total_multiple": 6.96,
+    "transferred_out": false,
+    "unrealised_sol": 77.8337,
+    "wallet": "9Ydv8M82m17QgFLvUyFqtrmDhjQorisCqzDvASMBGnF6"
+   }
+  ]
+ },
  "9kdQiUwgPvsSkdsEaXYomtQdFaGDTexuhxHpC1Cm1y4X": {
   "hits": [
    {
