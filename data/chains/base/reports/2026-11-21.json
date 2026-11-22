@@ -1,0 +1,211 @@
+{
+ "ai_summary": null,
+ "analyzed_by_launchpad": [],
+ "chain": "base",
+ "date": "2026-11-21",
+ "filters": {
+  "highlight_multiple": 10,
+  "max_entry_mcap_usd": 30000,
+  "min_multiple": 5,
+  "target_mcap_usd": 100000
+ },
+ "generated_at": "2026-11-22T03:32:26.084034+00:00",
+ "leaderboard": [
+  {
+   "avg_entry_mcap": 8214,
+   "best_multiple": 10.51,
+   "hits": 1,
+   "last_hit": "2026-11-17T18:49:15.283275+00:00",
+   "median_multiple": 10.51,
+   "tenx_hits": 1,
+   "tokens": [
+    "BASE"
+   ],
+   "total_pnl": 1513.03,
+   "wallet": "0xfae9e5a545bea1f90e715165b002150d04a28c41"
+  },
+  {
+   "avg_entry_mcap": 5720,
+   "best_multiple": 10.48,
+   "hits": 1,
+   "last_hit": "2026-11-17T18:49:15.283275+00:00",
+   "median_multiple": 10.48,
+   "tenx_hits": 1,
+   "tokens": [
+    "BASE"
+   ],
+   "total_pnl": 2849.17,
+   "wallet": "0x2f268190f9c97b14f3c81842c5daf10e694dee69"
+  },
+  {
+   "avg_entry_mcap": 10593,
+   "best_multiple": 8.49,
+   "hits": 1,
+   "last_hit": "2026-11-17T18:49:15.283275+00:00",
+   "median_multiple": 8.49,
+   "tenx_hits": 0,
+   "tokens": [
+    "BASE"
+   ],
+   "total_pnl": 1465.12,
+   "wallet": "0xdb5c8b2ea50d9c49b84a58e5abe523109d4d167f"
+  },
+  {
+   "avg_entry_mcap": 10890,
+   "best_multiple": 8.25,
+   "hits": 1,
+   "last_hit": "2026-11-17T18:49:15.283275+00:00",
+   "median_multiple": 8.25,
+   "tenx_hits": 0,
+   "tokens": [
+    "BASE"
+   ],
+   "total_pnl": 1385.92,
+   "wallet": "0x31903817736130538a8805ff9dcdea22a6c7ef79"
+  },
+  {
+   "avg_entry_mcap": 6396,
+   "best_multiple": 7.63,
+   "hits": 1,
+   "last_hit": "2026-11-12T19:19:27.532345+00:00",
+   "median_multiple": 7.63,
+   "tenx_hits": 0,
+   "tokens": [
+    "PENNY"
+   ],
+   "total_pnl": 2042.44,
+   "wallet": "0x9295321db9fce6d1fcf33b84ea41d440e4b9659b"
+  },
+  {
+   "avg_entry_mcap": 7244,
+   "best_multiple": 7.54,
+   "hits": 1,
+   "last_hit": "2026-11-12T19:19:27.532345+00:00",
+   "median_multiple": 7.54,
+   "tenx_hits": 0,
+   "tokens": [
+    "PENNY"
+   ],
+   "total_pnl": 368.98,
+   "wallet": "0x82efd7b96e36688b391f25a1a2de38469bbc2420"
+  },
+  {
+   "avg_entry_mcap": 4323,
+   "best_multiple": 7.43,
+   "hits": 1,
+   "last_hit": "2026-11-12T19:19:27.532345+00:00",
+   "median_multiple": 7.43,
+   "tenx_hits": 0,
+   "tokens": [
+    "PENNY"
+   ],
+   "total_pnl": 1700.47,
+   "wallet": "0xce04388107acbea0a7d108bdc2ca3360bb797431"
+  },
+  {
+   "avg_entry_mcap": 10890,
+   "best_multiple": 6.66,
+   "hits": 1,
+   "last_hit": "2026-11-17T18:49:15.283275+00:00",
+   "median_multiple": 6.66,
+   "tenx_hits": 0,
+   "tokens": [
+    "BASE"
+   ],
+   "total_pnl": 174.48,
+   "wallet": "0x8489ef662f3d488a7ae8e98e465733cdbd6d88c9"
+  },
+  {
+   "avg_entry_mcap": 10890,
+   "best_multiple": 5.94,
+   "hits": 1,
+   "last_hit": "2026-11-17T18:49:15.283275+00:00",
+   "median_multiple": 5.94,
+   "tenx_hits": 0,
+   "tokens": [
+    "BASE"
+   ],
+   "total_pnl": 169.26,
+   "wallet": "0x643af72dd514f5cd648e4fda750e218d4131e02e"
+  },
+  {
+   "avg_entry_mcap": 10890,
+   "best_multiple": 5.89,
+   "hits": 1,
+   "last_hit": "2026-11-17T18:49:15.283275+00:00",
+   "median_multiple": 5.89,
+   "tenx_hits": 0,
+   "tokens": [
+    "BASE"
+   ],
+   "total_pnl": 174.09,
+   "wallet": "0xd67489b89278282954a646f4c3ea4ecc24c6bfe6"
+  },
+  {
+   "avg_entry_mcap": 4323,
+   "best_multiple": 5.25,
+   "hits": 1,
+   "last_hit": "2026-11-12T19:19:27.532345+00:00",
+   "median_multiple": 5.25,
+   "tenx_hits": 0,
+   "tokens": [
+    "PENNY"
+   ],
+   "total_pnl": 1183.83,
+   "wallet": "0x3c15baca26235742f42f5d34141d8d5ffd176d9e"
+  },
+  {
+   "avg_entry_mcap": 24088,
+   "best_multiple": 5.21,
+   "hits": 1,
+   "last_hit": "2026-11-17T18:49:15.283275+00:00",
+   "median_multiple": 5.21,
+   "tenx_hits": 0,
+   "tokens": [
+    "BASE"
+   ],
+   "total_pnl": 93.88,
+   "wallet": "0x93ee59b236fd1af89619b3b420e4f96718efe1fa"
+  },
+  {
+   "avg_entry_mcap": 11117,
+   "best_multiple": 5.14,
+   "hits": 1,
+   "last_hit": "2026-11-17T18:49:15.283275+00:00",
+   "median_multiple": 5.14,
+   "tenx_hits": 0,
+   "tokens": [
+    "BASE"
+   ],
+   "total_pnl": 2194.11,
+   "wallet": "0x33ba61b4530f36befc324b211eacaa877dbe7801"
+  }
+ ],
+ "new_wallets": [],
+ "passed_tokens": [],
+ "pnl_unit": "USD",
+ "rejection_reasons": [
+  [
+   "never_pumped",
+   49
+  ],
+  [
+   "low_liquidity",
+   12
+  ],
+  [
+   "no_sells_possible_honeypot",
+   4
+  ]
+ ],
+ "stats": {
+  "analyzed": 0,
+  "discovered": 4843,
+  "rejected": 61,
+  "runs": 50,
+  "skipped": 0,
+  "tokens_checked": 61,
+  "wallets_10x": 0,
+  "wallets_found": 0
+ }
+}
