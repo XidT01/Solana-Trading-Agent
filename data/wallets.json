@@ -191,6 +191,34 @@
    }
   ]
  },
+ "2ktGXV3KJnMXGsvdZS4BiMznoEptWqwiyKzeHMYRv5rw": {
+  "hits": [
+   {
+    "avg_entry_mcap": 6162,
+    "first_buy_sig": "2uqGcDi36LUAruHthfdeko4SwSHp5dawRLNFBPiYKhELUxBa8e2KWPWXJpqXgnE3fiEtCz8dpwBn6xB6s1NNcVPm",
+    "first_buy_time": 1795346005,
+    "first_entry_mcap": 6162,
+    "found_at": "2026-11-22T11:51:17.644283+00:00",
+    "hold_fraction_at_target": 0.0,
+    "mint": "Az92PKWfK8ZYoAdH4nJ86riBS8HwfWgD32iPiwropump",
+    "multiple": 9.44,
+    "n_trades": 4,
+    "origin": "pumpfun",
+    "pnl_sol": 0.8661,
+    "qualified": true,
+    "realised_multiple": 9.44,
+    "sol_in": 0.1027,
+    "sol_out": 0.9688,
+    "still_holding_pct": 0.0,
+    "symbol": "CLAUDIA",
+    "tier": "5x+",
+    "total_multiple": 9.44,
+    "transferred_out": false,
+    "unrealised_sol": 0.0,
+    "wallet": "2ktGXV3KJnMXGsvdZS4BiMznoEptWqwiyKzeHMYRv5rw"
+   }
+  ]
+ },
  "2o7SkFjnsCfydMzrVegzizwVtrEaw9GZ9RbP8q8LQHFA": {
   "hits": [
    {
