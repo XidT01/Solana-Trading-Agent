@@ -3154,6 +3154,34 @@
    }
   ]
  },
+ "DPzuZ7N19QGmC1yb4Aw6w445m5XcQ1GVbixdtq95jUMM": {
+  "hits": [
+   {
+    "avg_entry_mcap": 3182,
+    "first_buy_sig": "4sjBeZTvKAeSeQPKE61zHJJYWarELTZuKkzRcGoJRWPvVDBADwjzcSWfdGxYfpMm9iShgxbMdn68MkUguyvG5YqZ",
+    "first_buy_time": 1795307241,
+    "first_entry_mcap": 2944,
+    "found_at": "2026-11-23T00:32:58.665383+00:00",
+    "hold_fraction_at_target": 0.0,
+    "mint": "FryQiSLqU7NfPvpQJRiYrVuvRRW66uB4FLorrKmjpump",
+    "multiple": 5.28,
+    "n_trades": 5,
+    "origin": "pumpfun",
+    "pnl_sol": 5.3568,
+    "qualified": true,
+    "realised_multiple": 5.28,
+    "sol_in": 1.2512,
+    "sol_out": 6.608,
+    "still_holding_pct": 0.0,
+    "symbol": "earball",
+    "tier": "5x+",
+    "total_multiple": 5.28,
+    "transferred_out": false,
+    "unrealised_sol": 0.0,
+    "wallet": "DPzuZ7N19QGmC1yb4Aw6w445m5XcQ1GVbixdtq95jUMM"
+   }
+  ]
+ },
  "DVxREzTfTtzjrPt2uxgNnWRfLKrTSxEjeKpoYh2QG5Ud": {
   "hits": [
    {
