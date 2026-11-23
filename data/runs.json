@@ -9459,5 +9459,21 @@
   "too_old": 3,
   "wallets_found": 0,
   "watchlist": 974
+ },
+ {
+  "analyzed": 1,
+  "at": "2026-11-23T15:25:18.873758+00:00",
+  "below_target_peak": 611,
+  "discovered": 122,
+  "integrity_rejected": 0,
+  "launchpad_rejected": 0,
+  "market_rejected": 1,
+  "rpc_calls": 134,
+  "safety_rejected": 0,
+  "skipped": 0,
+  "sol_usd": 76.49,
+  "too_old": 6,
+  "wallets_found": 0,
+  "watchlist": 987
  }
 ]
