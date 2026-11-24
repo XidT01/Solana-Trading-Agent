@@ -9407,5 +9407,23 @@
   "unknown_factories": {},
   "wallets_found": 0,
   "watchlist": 500
+ },
+ {
+  "analyzed": 0,
+  "at": "2026-11-24T01:56:00.034061+00:00",
+  "below_target_peak": 418,
+  "discovered": 95,
+  "integrity_rejected": 0,
+  "launchpad_rejected": 2,
+  "market_rejected": 1,
+  "rpc_calls": 14,
+  "safety_rejected": 0,
+  "skipped": 0,
+  "too_old": 1,
+  "unknown_factories": {
+   "0x262a0b28c4342c52e510b0d966d16ce74304c5cb": 1
+  },
+  "wallets_found": 0,
+  "watchlist": 504
  }
 ]
