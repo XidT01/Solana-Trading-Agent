@@ -695,6 +695,34 @@
    }
   ]
  },
+ "3voxjLmeTPaw5ysmTjtTY6KWm8CUWv1hhawh6qS5qTCm": {
+  "hits": [
+   {
+    "avg_entry_mcap": 28843,
+    "first_buy_sig": "56T9xr6zCPvLDAXWwi3oWNXtzbWijzvgP8K3WrUr5LUxfbP4bh4zCUG7LSXxJGgTMc8mN7TT6uBBc5NBgfPYSwyd",
+    "first_buy_time": 1795445516,
+    "first_entry_mcap": 28843,
+    "found_at": "2026-11-24T04:26:58.082975+00:00",
+    "hold_fraction_at_target": 0.562,
+    "mint": "A5euULARiF254xqxSqZ1bdC8zCGiKW2FRh2zYstWZWZs",
+    "multiple": 6.59,
+    "n_trades": 6,
+    "origin": "raydium",
+    "pnl_sol": 33.5204,
+    "qualified": true,
+    "realised_multiple": 6.59,
+    "sol_in": 6.0015,
+    "sol_out": 39.5219,
+    "still_holding_pct": 0.0,
+    "symbol": "hamster",
+    "tier": "5x+",
+    "total_multiple": 6.59,
+    "transferred_out": false,
+    "unrealised_sol": 0.0,
+    "wallet": "3voxjLmeTPaw5ysmTjtTY6KWm8CUWv1hhawh6qS5qTCm"
+   }
+  ]
+ },
  "3w8N7ay9pvNaXxYUu7gFeZQ2zHg6FECSgwGWxcWwb8C8": {
   "hits": [
    {
