@@ -1,6 +1,11 @@
 {
  "ai_summary": null,
- "analyzed_by_launchpad": [],
+ "analyzed_by_launchpad": [
+  [
+   "flap",
+   1
+  ]
+ ],
  "chain": "bsc",
  "date": "2026-11-24",
  "filters": {
@@ -9,7 +14,7 @@
   "min_multiple": 5,
   "target_mcap_usd": 100000
  },
- "generated_at": "2026-11-24T07:08:02.714161+00:00",
+ "generated_at": "2026-11-25T05:43:29.944078+00:00",
  "leaderboard": [
   {
    "avg_entry_mcap": 7334,
@@ -338,21 +343,48 @@
   }
  ],
  "new_wallets": [],
- "passed_tokens": [],
+ "passed_tokens": [
+  {
+   "early_buyers_checked": 50,
+   "liquidity_usd": 43310.58,
+   "mcap_usd": 267335,
+   "mint": "0x790c2ec9689c97e2a8b7eb446cbee4a7a3487777",
+   "origin": "flap",
+   "symbol": "Scamsem",
+   "url": "https://dexscreener.com/bsc/0x637d218b6986630e6335b5547969d526e5f286cf",
+   "wallets_found": 0
+  }
+ ],
  "pnl_unit": "USD",
  "rejection_reasons": [
   [
    "low_liquidity",
-   4
+   15
+  ],
+  [
+   "thin_liquidity_vs_mcap",
+   3
+  ],
+  [
+   "concentrated_holders_top10",
+   2
+  ],
+  [
+   "bundled_launch",
+   1
+  ],
+  [
+   "never_pumped",
+   1
   ]
  ],
  "stats": {
-  "analyzed": 0,
-  "discovered": 1229,
-  "rejected": 4,
-  "runs": 13,
-  "skipped": 0,
-  "tokens_checked": 4,
+  "analyzed": 1,
+  "discovered": 4640,
+  "rejected": 22,
+  "runs": 48,
+  "skipped": 3,
+  "tokens_checked": 26,
   "wallets_10x": 0,
   "wallets_found": 0
  }

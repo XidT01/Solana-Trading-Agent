@@ -9,7 +9,7 @@
   "min_multiple": 5,
   "target_mcap_usd": 100000
  },
- "generated_at": "2026-11-24T07:08:03.067070+00:00",
+ "generated_at": "2026-11-25T05:43:30.295188+00:00",
  "leaderboard": [
   {
    "avg_entry_mcap": 2745,
@@ -236,14 +236,19 @@
  "new_wallets": [],
  "passed_tokens": [],
  "pnl_unit": "USD",
- "rejection_reasons": [],
+ "rejection_reasons": [
+  [
+   "low_liquidity",
+   2
+  ]
+ ],
  "stats": {
   "analyzed": 0,
-  "discovered": 1308,
-  "rejected": 0,
-  "runs": 13,
+  "discovered": 4800,
+  "rejected": 2,
+  "runs": 48,
   "skipped": 0,
-  "tokens_checked": 0,
+  "tokens_checked": 2,
   "wallets_10x": 0,
   "wallets_found": 0
  }
