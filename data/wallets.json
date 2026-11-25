@@ -891,6 +891,34 @@
    }
   ]
  },
+ "4CoQYYsKnWgo5nj25G6kWrcgYZyTkRTaVYkWWVoAhYYe": {
+  "hits": [
+   {
+    "avg_entry_mcap": 3879,
+    "first_buy_sig": "57KkxeSLFDiVgKLo44g1DH1FdRpWZXheZ2Us24qSN6TgE2hKqWAiiBhyLG7pxPqPM8gxsgLZRjyCFVMjmxWivNe2",
+    "first_buy_time": 1795607747,
+    "first_entry_mcap": 3879,
+    "found_at": "2026-11-25T12:27:22.999525+00:00",
+    "hold_fraction_at_target": 1.0,
+    "mint": "38EDdUxnJvrnDsJyB45E2W3pK26qLEjmWTvsEmMuG9ZR",
+    "multiple": 12.44,
+    "n_trades": 2,
+    "origin": "raydium-launchlab",
+    "pnl_sol": 10.9695,
+    "qualified": true,
+    "realised_multiple": 12.44,
+    "sol_in": 0.9591,
+    "sol_out": 11.9286,
+    "still_holding_pct": 0.0,
+    "symbol": "OUROBOROS",
+    "tier": "10x+",
+    "total_multiple": 12.44,
+    "transferred_out": false,
+    "unrealised_sol": 0.0,
+    "wallet": "4CoQYYsKnWgo5nj25G6kWrcgYZyTkRTaVYkWWVoAhYYe"
+   }
+  ]
+ },
  "4Mxoq7sLfp5brVduwVvCWtj3qYF1CDMrB4eFckzDJ2oB": {
   "hits": [
    {
@@ -2368,6 +2396,34 @@
     "transferred_out": false,
     "unrealised_sol": 0.0,
     "wallet": "814g5NDkNMPcMFCugzG3jtqEn8cKBNc2VQLnavW4RzEL"
+   }
+  ]
+ },
+ "81BkfkRXTz9jC5T9FhroPFVzaXaUQyMhbd5Yif5pY3Cb": {
+  "hits": [
+   {
+    "avg_entry_mcap": 2453,
+    "first_buy_sig": "3E2h2n4pkaXzAjre69pmKm1YPsBhcVG8yYXEQ3qVSNbLiYt6Ux9DX51NLahU395nztNcWNyv6XdvhLkeBJDh1iJh",
+    "first_buy_time": 1795607715,
+    "first_entry_mcap": 2453,
+    "found_at": "2026-11-25T12:27:22.999525+00:00",
+    "hold_fraction_at_target": 0.342,
+    "mint": "38EDdUxnJvrnDsJyB45E2W3pK26qLEjmWTvsEmMuG9ZR",
+    "multiple": 7.24,
+    "n_trades": 9,
+    "origin": "raydium-launchlab",
+    "pnl_sol": 1.7832,
+    "qualified": true,
+    "realised_multiple": 7.24,
+    "sol_in": 0.2025,
+    "sol_out": 1.4655,
+    "still_holding_pct": 13.8,
+    "symbol": "OUROBOROS",
+    "tier": "5x+",
+    "total_multiple": 9.81,
+    "transferred_out": false,
+    "unrealised_sol": 0.5201,
+    "wallet": "81BkfkRXTz9jC5T9FhroPFVzaXaUQyMhbd5Yif5pY3Cb"
    }
   ]
  },
