@@ -1,9 +1,4 @@
 {
- "127ETRq9pubsSXjgfW8YPcv2iNhfMV5BzgWyXMtngWaM": {
-  "at": "2026-11-24T08:38:08.324852+00:00",
-  "cross": null,
-  "peak": 54314
- },
  "21WpsyrUofKUPoN7hTLFkCJD5DnaUsLaw36ZiKwadcah": {
   "at": "2026-11-24T23:41:05.064151+00:00",
   "cross": null,
@@ -84,11 +79,6 @@
   "cross": null,
   "peak": 47341
  },
- "2quw9e8VYEqvkybMsyMSWhtvWKZTkjxH8p5E8a6Fpump": {
-  "at": "2026-11-25T10:27:22.941057+00:00",
-  "cross": null,
-  "peak": 6471
- },
  "31vKsvMx7aexwxt1iEysLcdqny7TsYFDMSwuzQdWTLhD": {
   "at": "2026-11-25T06:51:17.415259+00:00",
   "cross": null,
@@ -160,9 +150,14 @@
   "peak": 99488
  },
  "3UU3xbnTPdzKjUigZAxbfUuKYRMP44hwG7WNQT4iKSUT": {
-  "at": "2026-11-25T07:51:17.459754+00:00",
+  "at": "2026-11-25T13:27:22.739875+00:00",
   "cross": null,
-  "peak": 22279
+  "peak": 22733
+ },
+ "3Wne1SmKE4qiFXz6FpBXn4XaunUtyxKTPg1d2XL6FGg8": {
+  "at": "2026-11-25T13:27:22.739875+00:00",
+  "cross": null,
+  "peak": 21287
  },
  "3WpsdBZehJBpgqPcK2koeSvMH1uGeL7KXB4pZgTfpump": {
   "at": "2026-11-25T09:21:17.720655+00:00",
@@ -409,11 +404,6 @@
   "cross": null,
   "peak": 47304
  },
- "5BX4LiBheGbrPd7rCxdpbdE14hEgm542Wdpt1zs65fAo": {
-  "at": "2026-11-25T10:27:22.941057+00:00",
-  "cross": null,
-  "peak": 6933
- },
  "5BgdFx1cp7K9E5T1geBEXHt4EebHWgej9Rb8N8Au7g5R": {
   "at": "2026-11-25T09:57:22.280237+00:00",
   "cross": null,
@@ -465,7 +455,7 @@
   "peak": 30719
  },
  "5dTmp9AJezK1GgCmE8agjLZtFyrPWjfauQt2TeMa4efb": {
-  "at": "2026-11-25T07:51:17.459754+00:00",
+  "at": "2026-11-25T13:27:22.739875+00:00",
   "cross": null,
   "peak": 20301
  },
@@ -498,6 +488,11 @@
   "at": "2026-11-25T12:57:23.026398+00:00",
   "cross": null,
   "peak": 27610
+ },
+ "5qfijY4AeP14kjRTLmFhV9DCZJDiTgXp4nAu6UGoqjhw": {
+  "at": "2026-11-25T13:27:22.739875+00:00",
+  "cross": null,
+  "peak": 22676
  },
  "5sBFqpZNJXbDp9VarjTF3RgpFyCn9DFR1vJyBgtHKkZQ": {
   "at": "2026-11-24T23:41:05.064151+00:00",
@@ -549,6 +544,11 @@
   "cross": null,
   "peak": 32863
  },
+ "6Jt3Ht5ZTxoRQ8bgRry888GCiLXUKZa62iNp9ZJmyYX4": {
+  "at": "2026-11-25T13:27:22.739875+00:00",
+  "cross": null,
+  "peak": 36402
+ },
  "6QnjMr2MqYNWqUKPz1qgA8dvZknGB3qVwyoMCWR7Esc3": {
   "at": "2026-11-25T09:21:17.720655+00:00",
   "cross": null,
@@ -590,7 +590,7 @@
   "peak": 28020
  },
  "6jnRkbUZnkJ4wvKBc8hAVMP873FrjcB5zKre69SKoxGx": {
-  "at": "2026-11-25T08:21:17.668222+00:00",
+  "at": "2026-11-25T13:27:22.739875+00:00",
   "cross": null,
   "peak": 92534
  },
@@ -628,11 +628,6 @@
   "at": "2026-11-24T14:20:53.569893+00:00",
   "cross": null,
   "peak": 21186
- },
- "6woMBVpn4QwQVYeLysGKB2JiBSUCxkENmbemj5eE9Zz3": {
-  "at": "2026-11-25T10:27:22.941057+00:00",
-  "cross": null,
-  "peak": 44910
  },
  "6xN1eaigYXUM2Vr5kGmsorva5A5oeC3s3r5XFnGyGZgP": {
   "at": "2026-11-25T12:27:22.999525+00:00",
@@ -689,6 +684,11 @@
   "cross": null,
   "peak": 20206
  },
+ "7aPzeBHdFBnsTC9opwGGWjDFRwhxMw3W4rQjQb6W6c7U": {
+  "at": "2026-11-25T13:27:22.739875+00:00",
+  "cross": null,
+  "peak": 57977
+ },
  "7cTsBzHkjiB7AyejEQufp6N6FHY25AttV882H7m6wJT7": {
   "at": "2026-11-25T03:11:53.210611+00:00",
   "cross": null,
@@ -739,6 +739,11 @@
   "cross": null,
   "peak": 28344
  },
+ "7yunZaPbCsWuXXJ5Yc9SXw4ALNoGrFqgVtNuUfLXbvKM": {
+  "at": "2026-11-25T13:27:22.739875+00:00",
+  "cross": null,
+  "peak": 27218
+ },
  "81F3a7CihhMQEsk4TnEs34XVQgRr8QcbghBjNAZnpump": {
   "at": "2026-11-25T09:57:22.280237+00:00",
   "cross": null,
@@ -754,10 +759,20 @@
   "cross": null,
   "peak": 25211
  },
+ "86WmeTA5XtGVovwxZJnRsK1dTetsw4ZUeda7HYcECXRW": {
+  "at": "2026-11-25T13:27:22.739875+00:00",
+  "cross": null,
+  "peak": 27606
+ },
  "8ArRsCwf3FqiMTY4wHqPmViWGJyJWQqQ6YucgTrhpump": {
   "at": "2026-11-25T12:27:22.999525+00:00",
   "cross": null,
   "peak": 20809
+ },
+ "8CmvUbUoW5WioiuJC4tfVKuUgUu5HyXeXgaMNoMtLy9h": {
+  "at": "2026-11-25T13:27:22.739875+00:00",
+  "cross": null,
+  "peak": 37918
  },
  "8Dc3VTPfVJwXghZ127NWECnErsUd467ZexEwmj15sdmL": {
   "at": "2026-11-25T11:27:22.916153+00:00",
@@ -773,6 +788,11 @@
   "at": "2026-11-25T08:21:17.668222+00:00",
   "cross": null,
   "peak": 40698
+ },
+ "8YCWEDT1VAuC3EqisJCgoZK2xqXVESMTgvhs73hQUCt8": {
+  "at": "2026-11-25T13:27:22.739875+00:00",
+  "cross": null,
+  "peak": 48778
  },
  "8is7mrp91caZQUWCci1YK8xc74ukiRWfMy3Qg2rpbonk": {
   "at": "2026-11-25T10:57:23.101080+00:00",
@@ -1009,11 +1029,6 @@
   "cross": null,
   "peak": 49118
  },
- "Aj4Eoc8eB4LpYbXvKSrxTLwRXmBESBkB5DxC24d28Fbm": {
-  "at": "2026-11-24T08:38:08.324852+00:00",
-  "cross": null,
-  "peak": 31808
- },
  "AmE68gx19aKKKKDoBg41yNcRMud8FXsRRYeoJXM29UNR": {
   "at": "2026-11-24T11:08:09.072339+00:00",
   "cross": null,
@@ -1103,6 +1118,11 @@
   "at": "2026-11-25T09:57:22.280237+00:00",
   "cross": null,
   "peak": 28387
+ },
+ "BSHqm76YL2MH1xSzLn2PyXz7hY8wjyw1REBJHCepbonk": {
+  "at": "2026-11-25T13:27:22.739875+00:00",
+  "cross": null,
+  "peak": 53119
  },
  "BTKBMp13fsFdBd5F2tSYdDGMjZ19fTNSZeqCC2CN7mDk": {
   "at": "2026-11-25T08:21:17.668222+00:00",
@@ -1245,7 +1265,7 @@
   "peak": 27259
  },
  "CxUFoQTFhnJZ4s6LqktLkd8bmkQX2WMp2w6MfiCBmoon": {
-  "at": "2026-11-25T08:21:17.668222+00:00",
+  "at": "2026-11-25T13:27:22.739875+00:00",
   "cross": null,
   "peak": 62675
  },
@@ -1268,11 +1288,6 @@
   "at": "2026-11-25T07:21:17.403914+00:00",
   "cross": null,
   "peak": 26034
- },
- "DDvvrb6JU3yhWd2CYanRqfsyh87wnvQvnsBa5ENMp7Wa": {
-  "at": "2026-11-25T08:21:17.668222+00:00",
-  "cross": null,
-  "peak": 28187
  },
  "DV8N5zx9gqTSmLZgkdQjBnMqMH7XMS59T5HwwJjaedFa": {
   "at": "2026-11-25T04:11:53.887948+00:00",
@@ -1330,7 +1345,7 @@
   "peak": 45696
  },
  "DrQ2fxK7gxW8R8ARZu8ZMcQdAPzcDu1gt26nuaRnxfmK": {
-  "at": "2026-11-25T07:51:17.459754+00:00",
+  "at": "2026-11-25T13:27:22.739875+00:00",
   "cross": null,
   "peak": 20167
  },
@@ -1434,11 +1449,6 @@
   "cross": null,
   "peak": 0
  },
- "F4ryhaeW8KD6bE9A6EhAi2CfsUE1hgirdzTBHNXk63AK": {
-  "at": "2026-11-24T09:38:08.683184+00:00",
-  "cross": null,
-  "peak": 20550
- },
  "F884x4D6Ffs4ekp7eRSdSf8nfNpP6fD4qoQ3vpJW7umr": {
   "at": "2026-11-25T08:21:17.668222+00:00",
   "cross": null,
@@ -1460,7 +1470,7 @@
   "peak": 30644
  },
  "FG3UjRzfCi4S8gozqK446KxdxxaaVAzdGgyJZpiwPS1K": {
-  "at": "2026-11-25T07:51:17.459754+00:00",
+  "at": "2026-11-25T13:27:22.739875+00:00",
   "cross": null,
   "peak": 20479
  },
@@ -1468,6 +1478,11 @@
   "at": "2026-11-25T08:51:17.691326+00:00",
   "cross": null,
   "peak": 26392
+ },
+ "FK7bc3fR8UL8uogN2u8J9yEpEbQJKR7yKsp3G8rvpump": {
+  "at": "2026-11-25T13:27:22.739875+00:00",
+  "cross": null,
+  "peak": 21676
  },
  "FSj4m5cneHXfKdVAnbdXc7Nht2AyguZiV6pxdYhj5bYD": {
   "at": "2026-11-25T09:21:17.720655+00:00",
@@ -1493,6 +1508,11 @@
   "at": "2026-11-25T12:57:23.026398+00:00",
   "cross": null,
   "peak": 39458
+ },
+ "FXY7wYo5N5BhXFsJ8izNgiScQatuUgHHbdgbvLfppump": {
+  "at": "2026-11-25T13:27:22.739875+00:00",
+  "cross": null,
+  "peak": 35868
  },
  "FYMPPmTp3FKGE6gQ64qXJLg91pNDGTv9xP6AeMnBmoon": {
   "at": "2026-11-25T12:27:22.999525+00:00",
@@ -1540,7 +1560,7 @@
   "peak": 26013
  },
  "Fm1oNM19t6hyrU1hfCqZ39vwBYD7jVmLLgcxjHig6hwM": {
-  "at": "2026-11-25T08:21:17.668222+00:00",
+  "at": "2026-11-25T13:27:22.739875+00:00",
   "cross": null,
   "peak": 99295
  },
@@ -1555,7 +1575,7 @@
   "peak": 85620
  },
  "Fx9kSdNyHQpLfubsFXeW8EhXaBQw4tKF8SFuDqB9ZjdL": {
-  "at": "2026-11-25T07:51:17.459754+00:00",
+  "at": "2026-11-25T13:27:22.739875+00:00",
   "cross": null,
   "peak": 20509
  },
@@ -1593,11 +1613,6 @@
   "at": "2026-11-25T09:57:22.280237+00:00",
   "cross": null,
   "peak": 20580
- },
- "GDfSjt1qV1sFdLj3LwtS5vygv5gRkyx7U9i2bC24T4q4": {
-  "at": "2026-11-24T09:08:08.592336+00:00",
-  "cross": null,
-  "peak": 25304
  },
  "GDxSZNfye2V912VBQFXG4GFnb5PVWYF7GScMCre8e42": {
   "at": "2026-11-25T09:27:22.212053+00:00",
@@ -1660,7 +1675,7 @@
   "peak": 33750
  },
  "GfKRrnDRLUV6X2m63xHTa1suEaEpB3ALtz2NK8QJCQJE": {
-  "at": "2026-11-25T08:21:17.668222+00:00",
+  "at": "2026-11-25T13:27:22.739875+00:00",
   "cross": null,
   "peak": 86676
  },
@@ -1725,7 +1740,7 @@
   "peak": 22524
  },
  "HFZmm81NyTvmR8AQCfdfEuwR62ZQwLASKbqWsWNKWLHw": {
-  "at": "2026-11-25T08:21:17.668222+00:00",
+  "at": "2026-11-25T13:27:22.739875+00:00",
   "cross": null,
   "peak": 66846
  },
@@ -1770,7 +1785,7 @@
   "peak": 20413
  },
  "HvCgBGifGa7y28yw2KL384eJzKNwiRtD1yVyDcwrKTD9": {
-  "at": "2026-11-25T07:51:17.459754+00:00",
+  "at": "2026-11-25T13:27:22.739875+00:00",
   "cross": null,
   "peak": 20747
  },
@@ -1785,7 +1800,7 @@
   "peak": 29123
  },
  "HynXLqAxunN2kiBMsKMR713LQ38vE4q6kWkfcsdyr61g": {
-  "at": "2026-11-25T07:51:17.459754+00:00",
+  "at": "2026-11-25T13:27:22.739875+00:00",
   "cross": null,
   "peak": 22428
  },
@@ -1800,7 +1815,7 @@
   "peak": 20916
  },
  "J48CvbgcoEZQZQF3JTmWqFhQ3kSPPbjah4EZXCjrEoEb": {
-  "at": "2026-11-25T08:21:17.668222+00:00",
+  "at": "2026-11-25T13:27:22.739875+00:00",
   "cross": null,
   "peak": 56258
  },
@@ -1885,7 +1900,7 @@
   "peak": 24778
  },
  "ufmTSzrM5bxLYx3hC8hxvMV4jh9aGuWyore6PP6nWtt": {
-  "at": "2026-11-25T07:51:17.459754+00:00",
+  "at": "2026-11-25T13:27:22.739875+00:00",
   "cross": null,
   "peak": 27684
  },
