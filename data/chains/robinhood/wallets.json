@@ -27,6 +27,34 @@
    }
   ]
  },
+ "0x175e1a414505b56a6ab93316f60b8e9852ed2c8d": {
+  "hits": [
+   {
+    "avg_entry_mcap": 6279,
+    "first_buy_sig": "0xa78d1538d92ecc760c4149e44bf6fb4df7bd345967560035f77aa82fce904425",
+    "first_buy_time": 1795624311,
+    "first_entry_mcap": 6279,
+    "found_at": "2026-11-26T15:02:39.284052+00:00",
+    "hold_fraction_at_target": 0.0,
+    "mint": "0x9f564bbcc8ffac3781dfa0025759e54bd5991698",
+    "multiple": 6.63,
+    "n_trades": 2,
+    "origin": "pons",
+    "pnl_usd": 321.25,
+    "qualified": true,
+    "realised_multiple": 6.63,
+    "still_holding_pct": 0.0,
+    "symbol": "GREM",
+    "tier": "5x+",
+    "total_multiple": 6.63,
+    "transferred_out": false,
+    "unrealised_usd": 0.0,
+    "usd_in": 57.08,
+    "usd_out": 378.33,
+    "wallet": "0x175e1a414505b56a6ab93316f60b8e9852ed2c8d"
+   }
+  ]
+ },
  "0x1d2bfec0994308b88ef9c92e71bafe87c5e39513": {
   "hits": [
    {
@@ -307,6 +335,62 @@
    }
   ]
  },
+ "0xa9088d92c8095cb5c494d2b62859106d66aa2df4": {
+  "hits": [
+   {
+    "avg_entry_mcap": 5507,
+    "first_buy_sig": "0xdaf208ec45b58704a6802864bc28098103b4ab69a1e1b040eca05c3b4f33db6e",
+    "first_buy_time": 1795624262,
+    "first_entry_mcap": 5507,
+    "found_at": "2026-11-26T15:02:39.284052+00:00",
+    "hold_fraction_at_target": 0.0,
+    "mint": "0x9f564bbcc8ffac3781dfa0025759e54bd5991698",
+    "multiple": 8.04,
+    "n_trades": 6,
+    "origin": "pons",
+    "pnl_usd": 1489.56,
+    "qualified": true,
+    "realised_multiple": 8.04,
+    "still_holding_pct": 0.0,
+    "symbol": "GREM",
+    "tier": "5x+",
+    "total_multiple": 8.04,
+    "transferred_out": false,
+    "unrealised_usd": 0.0,
+    "usd_in": 211.46,
+    "usd_out": 1701.02,
+    "wallet": "0xa9088d92c8095cb5c494d2b62859106d66aa2df4"
+   }
+  ]
+ },
+ "0xcb245403f6282163e9e010c7e86541b8eaec44fd": {
+  "hits": [
+   {
+    "avg_entry_mcap": 5896,
+    "first_buy_sig": "0x754817eee2937c078c11023b95741f3c93b50ecf90c6ca3c7cf74f05a918be21",
+    "first_buy_time": 1795624294,
+    "first_entry_mcap": 5896,
+    "found_at": "2026-11-26T15:02:39.284052+00:00",
+    "hold_fraction_at_target": 0.649,
+    "mint": "0x9f564bbcc8ffac3781dfa0025759e54bd5991698",
+    "multiple": 5.24,
+    "n_trades": 7,
+    "origin": "pons",
+    "pnl_usd": 1193.74,
+    "qualified": true,
+    "realised_multiple": 5.24,
+    "still_holding_pct": 56.1,
+    "symbol": "GREM",
+    "tier": "5x+",
+    "total_multiple": 18.34,
+    "transferred_out": false,
+    "unrealised_usd": 901.9,
+    "usd_in": 68.83,
+    "usd_out": 360.66,
+    "wallet": "0xcb245403f6282163e9e010c7e86541b8eaec44fd"
+   }
+  ]
+ },
  "0xcc2d952e885a0a5a823b5b26838b6833d12df248": {
   "hits": [
    {
@@ -419,6 +503,34 @@
    }
   ]
  },
+ "0xde4a35f54c2658bef1d09b62ae388650e0334537": {
+  "hits": [
+   {
+    "avg_entry_mcap": 5145,
+    "first_buy_sig": "0x445ad144172be3bfcf63613a30730cca456121b265a8dd4f4e77efd15173f074",
+    "first_buy_time": 1795624208,
+    "first_entry_mcap": 5145,
+    "found_at": "2026-11-26T15:02:39.284052+00:00",
+    "hold_fraction_at_target": 0.0,
+    "mint": "0x9f564bbcc8ffac3781dfa0025759e54bd5991698",
+    "multiple": 5.62,
+    "n_trades": 2,
+    "origin": "pons",
+    "pnl_usd": 226.29,
+    "qualified": true,
+    "realised_multiple": 5.62,
+    "still_holding_pct": 0.0,
+    "symbol": "GREM",
+    "tier": "5x+",
+    "total_multiple": 5.62,
+    "transferred_out": false,
+    "unrealised_usd": 0.0,
+    "usd_in": 49.0,
+    "usd_out": 275.28,
+    "wallet": "0xde4a35f54c2658bef1d09b62ae388650e0334537"
+   }
+  ]
+ },
  "0xde791bbc12b7356abe8875ebcf6baea545a5e651": {
   "hits": [
    {
@@ -472,6 +584,34 @@
     "usd_in": 48.89,
     "usd_out": 1960.23,
     "wallet": "0xe0e13cbda53bbbdad22c0bff7d1e15f20ec81090"
+   }
+  ]
+ },
+ "0xebc537d1eaf14d7a9d6c4618ff41ee6d98a6427d": {
+  "hits": [
+   {
+    "avg_entry_mcap": 6279,
+    "first_buy_sig": "0x4360a482787f3dfd84c107402337ff0c65331e1bb6409711ea12e5f65a39b3e9",
+    "first_buy_time": 1795624311,
+    "first_entry_mcap": 6279,
+    "found_at": "2026-11-26T15:02:39.284052+00:00",
+    "hold_fraction_at_target": 0.0,
+    "mint": "0x9f564bbcc8ffac3781dfa0025759e54bd5991698",
+    "multiple": 6.92,
+    "n_trades": 2,
+    "origin": "pons",
+    "pnl_usd": 347.18,
+    "qualified": true,
+    "realised_multiple": 6.92,
+    "still_holding_pct": 0.0,
+    "symbol": "GREM",
+    "tier": "5x+",
+    "total_multiple": 6.92,
+    "transferred_out": false,
+    "unrealised_usd": 0.0,
+    "usd_in": 58.63,
+    "usd_out": 405.82,
+    "wallet": "0xebc537d1eaf14d7a9d6c4618ff41ee6d98a6427d"
    }
   ]
  }
