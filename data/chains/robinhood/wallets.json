@@ -223,6 +223,34 @@
    }
   ]
  },
+ "0x88476846df96e2c0743f43cc62b08bd0e5470ff8": {
+  "hits": [
+   {
+    "avg_entry_mcap": 10093,
+    "first_buy_sig": "0xed0d9acb75f33961cef85f8d02f48aa84361339822e9d5adb5293dc4ce9c02de",
+    "first_buy_time": 1795719216,
+    "first_entry_mcap": 10093,
+    "found_at": "2026-11-26T22:23:15.876172+00:00",
+    "hold_fraction_at_target": 0.0,
+    "mint": "0xc4b58f6ba53926ee7bf3c10dd4c6bd73a6e593f5",
+    "multiple": 8.61,
+    "n_trades": 6,
+    "origin": "pons",
+    "pnl_usd": 263.16,
+    "qualified": true,
+    "realised_multiple": 8.61,
+    "still_holding_pct": 0.0,
+    "symbol": "RIG",
+    "tier": "5x+",
+    "total_multiple": 8.61,
+    "transferred_out": false,
+    "unrealised_usd": 0.0,
+    "usd_in": 34.56,
+    "usd_out": 297.72,
+    "wallet": "0x88476846df96e2c0743f43cc62b08bd0e5470ff8"
+   }
+  ]
+ },
  "0x8b12f1448c5503ea1fc246374d103a675e5a0905": {
   "hits": [
    {
@@ -360,6 +388,90 @@
     "usd_in": 211.46,
     "usd_out": 1701.02,
     "wallet": "0xa9088d92c8095cb5c494d2b62859106d66aa2df4"
+   }
+  ]
+ },
+ "0xaabd07fa2c179081a7f33098ab9dd6485552239d": {
+  "hits": [
+   {
+    "avg_entry_mcap": 9968,
+    "first_buy_sig": "0x0e5f66c7ab2de9adbdccaf3e7e3d7c23b55556940586ede575209933622280c1",
+    "first_buy_time": 1795717921,
+    "first_entry_mcap": 9581,
+    "found_at": "2026-11-26T22:23:15.876172+00:00",
+    "hold_fraction_at_target": 0.0,
+    "mint": "0xc4b58f6ba53926ee7bf3c10dd4c6bd73a6e593f5",
+    "multiple": 5.54,
+    "n_trades": 7,
+    "origin": "pons",
+    "pnl_usd": 201.29,
+    "qualified": true,
+    "realised_multiple": 5.54,
+    "still_holding_pct": 0.0,
+    "symbol": "RIG",
+    "tier": "5x+",
+    "total_multiple": 5.54,
+    "transferred_out": false,
+    "unrealised_usd": 0.0,
+    "usd_in": 44.31,
+    "usd_out": 245.6,
+    "wallet": "0xaabd07fa2c179081a7f33098ab9dd6485552239d"
+   }
+  ]
+ },
+ "0xabbac6c6957c1c96e8623d669184a637df5fcd17": {
+  "hits": [
+   {
+    "avg_entry_mcap": 9820,
+    "first_buy_sig": "0xef71f26006b39a41933f2f46d89ce1ce75b6857779c5f83fcb9fa83ff3631a07",
+    "first_buy_time": 1795717685,
+    "first_entry_mcap": 9700,
+    "found_at": "2026-11-26T22:23:15.876172+00:00",
+    "hold_fraction_at_target": 0.0,
+    "mint": "0xc4b58f6ba53926ee7bf3c10dd4c6bd73a6e593f5",
+    "multiple": 5.98,
+    "n_trades": 5,
+    "origin": "pons",
+    "pnl_usd": 676.32,
+    "qualified": true,
+    "realised_multiple": 5.98,
+    "still_holding_pct": 0.0,
+    "symbol": "RIG",
+    "tier": "5x+",
+    "total_multiple": 5.98,
+    "transferred_out": false,
+    "unrealised_usd": 0.0,
+    "usd_in": 135.81,
+    "usd_out": 812.13,
+    "wallet": "0xabbac6c6957c1c96e8623d669184a637df5fcd17"
+   }
+  ]
+ },
+ "0xbdd23a21e05f6b408ba4ff8485e8a66edd4f1164": {
+  "hits": [
+   {
+    "avg_entry_mcap": 6798,
+    "first_buy_sig": "0x9877d140cac9c7618a731db3adb5ef9ca71b07c9a4700169527f55e3ca7c4867",
+    "first_buy_time": 1795717467,
+    "first_entry_mcap": 6798,
+    "found_at": "2026-11-26T22:23:15.876172+00:00",
+    "hold_fraction_at_target": 0.607,
+    "mint": "0xc4b58f6ba53926ee7bf3c10dd4c6bd73a6e593f5",
+    "multiple": 6.72,
+    "n_trades": 5,
+    "origin": "pons",
+    "pnl_usd": 2495.85,
+    "qualified": true,
+    "realised_multiple": 6.72,
+    "still_holding_pct": 40.7,
+    "symbol": "RIG",
+    "tier": "5x+",
+    "total_multiple": 15.55,
+    "transferred_out": false,
+    "unrealised_usd": 1514.35,
+    "usd_in": 171.48,
+    "usd_out": 1152.98,
+    "wallet": "0xbdd23a21e05f6b408ba4ff8485e8a66edd4f1164"
    }
   ]
  },
