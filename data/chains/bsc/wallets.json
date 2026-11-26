@@ -307,6 +307,34 @@
    }
   ]
  },
+ "0x3be4ddc6e67c88de7ef78ac208fb997906dfbb7a": {
+  "hits": [
+   {
+    "avg_entry_mcap": 5772,
+    "first_buy_sig": "0xff7c912f63148a5f6e5556d656d1b1c5fd63ad688e576b9bab250d2ab52c6fca",
+    "first_buy_time": 1795664876,
+    "first_entry_mcap": 5772,
+    "found_at": "2026-11-26T04:03:59.779955+00:00",
+    "hold_fraction_at_target": 1.0,
+    "mint": "0xfb8b99ff90a33a6d81b0212f0ac80e9339e17777",
+    "multiple": 13.7,
+    "n_trades": 17,
+    "origin": "flap",
+    "pnl_usd": 308.33,
+    "qualified": true,
+    "realised_multiple": 13.7,
+    "still_holding_pct": 52.0,
+    "symbol": "SPACEXLIFE",
+    "tier": "10x+",
+    "total_multiple": 31.63,
+    "transferred_out": false,
+    "unrealised_usd": 180.53,
+    "usd_in": 10.07,
+    "usd_out": 137.87,
+    "wallet": "0x3be4ddc6e67c88de7ef78ac208fb997906dfbb7a"
+   }
+  ]
+ },
  "0x3e297e979021929b70714961ef9e2d0b5e4f3711": {
   "hits": [
    {
@@ -559,6 +587,34 @@
    }
   ]
  },
+ "0x66b15e912c6ae60068d1cdde5e93b34fdef7ea78": {
+  "hits": [
+   {
+    "avg_entry_mcap": 12788,
+    "first_buy_sig": "0x1510a70bc3f107cd7011a44cf32620514511559492cd857a5018a8b4bed29bf9",
+    "first_buy_time": 1795664900,
+    "first_entry_mcap": 8458,
+    "found_at": "2026-11-26T04:03:59.779955+00:00",
+    "hold_fraction_at_target": 0.5,
+    "mint": "0xfb8b99ff90a33a6d81b0212f0ac80e9339e17777",
+    "multiple": 7.78,
+    "n_trades": 12,
+    "origin": "flap",
+    "pnl_usd": 1204.24,
+    "qualified": true,
+    "realised_multiple": 7.78,
+    "still_holding_pct": 14.1,
+    "symbol": "SPACEXLIFE",
+    "tier": "5x+",
+    "total_multiple": 9.97,
+    "transferred_out": false,
+    "unrealised_usd": 293.74,
+    "usd_in": 134.3,
+    "usd_out": 1044.8,
+    "wallet": "0x66b15e912c6ae60068d1cdde5e93b34fdef7ea78"
+   }
+  ]
+ },
  "0x67ade43a3ffd85b93f6a87e409c0de90538d613f": {
   "hits": [
    {
@@ -668,6 +724,34 @@
     "usd_in": 116.43,
     "usd_out": 688.45,
     "wallet": "0x6ce58d1fa9c7b1d8ea29245bf9cb19dd1250f408"
+   }
+  ]
+ },
+ "0x7369d3b4fd03fc47277a2cb292226de46b8aa8ac": {
+  "hits": [
+   {
+    "avg_entry_mcap": 5772,
+    "first_buy_sig": "0xdaf57ee2517795eebf190cf7910eb38bade9a0f535de959660c8cd4f363ef4ce",
+    "first_buy_time": 1795664876,
+    "first_entry_mcap": 5772,
+    "found_at": "2026-11-26T04:03:59.779955+00:00",
+    "hold_fraction_at_target": 0.7,
+    "mint": "0xfb8b99ff90a33a6d81b0212f0ac80e9339e17777",
+    "multiple": 11.7,
+    "n_trades": 18,
+    "origin": "flap",
+    "pnl_usd": 708.23,
+    "qualified": true,
+    "realised_multiple": 11.7,
+    "still_holding_pct": 36.4,
+    "symbol": "SPACEXLIFE",
+    "tier": "10x+",
+    "total_multiple": 24.25,
+    "transferred_out": false,
+    "unrealised_usd": 382.42,
+    "usd_in": 30.46,
+    "usd_out": 356.28,
+    "wallet": "0x7369d3b4fd03fc47277a2cb292226de46b8aa8ac"
    }
   ]
  },
@@ -892,6 +976,30 @@
     "usd_in": 122.49,
     "usd_out": 819.81,
     "wallet": "0xb750f03e86980a3dffdfad269a88f008bb78ea51"
+   },
+   {
+    "avg_entry_mcap": 5979,
+    "first_buy_sig": "0x46eb4934d94ba7d329d6bb56f0024cf3d29bdf1c21c4fa896e8fdef1e7497c3e",
+    "first_buy_time": 1795664876,
+    "first_entry_mcap": 5772,
+    "found_at": "2026-11-26T04:03:59.779955+00:00",
+    "hold_fraction_at_target": 1.0,
+    "mint": "0xfb8b99ff90a33a6d81b0212f0ac80e9339e17777",
+    "multiple": 13.21,
+    "n_trades": 19,
+    "origin": "flap",
+    "pnl_usd": 3572.4,
+    "qualified": true,
+    "realised_multiple": 13.21,
+    "still_holding_pct": 52.0,
+    "symbol": "SPACEXLIFE",
+    "tier": "10x+",
+    "total_multiple": 30.52,
+    "transferred_out": false,
+    "unrealised_usd": 2094.98,
+    "usd_in": 121.01,
+    "usd_out": 1598.43,
+    "wallet": "0xb750f03e86980a3dffdfad269a88f008bb78ea51"
    }
   ]
  },
@@ -976,6 +1084,34 @@
     "usd_in": 15.3,
     "usd_out": 149.33,
     "wallet": "0xcfa8f426fd42b559e5493906bcd64742d2857de9"
+   }
+  ]
+ },
+ "0xd27eacb4852c9f064db87e2988046ec46d1f30bb": {
+  "hits": [
+   {
+    "avg_entry_mcap": 5772,
+    "first_buy_sig": "0x56d48fa0014234a7c2787971de9dda4ab6060995f9bbccd9aea7a102faf9c516",
+    "first_buy_time": 1795664876,
+    "first_entry_mcap": 5772,
+    "found_at": "2026-11-26T04:03:59.779955+00:00",
+    "hold_fraction_at_target": 1.0,
+    "mint": "0xfb8b99ff90a33a6d81b0212f0ac80e9339e17777",
+    "multiple": 13.46,
+    "n_trades": 17,
+    "origin": "flap",
+    "pnl_usd": 3206.9,
+    "qualified": true,
+    "realised_multiple": 13.46,
+    "still_holding_pct": 52.9,
+    "symbol": "SPACEXLIFE",
+    "tier": "10x+",
+    "total_multiple": 31.69,
+    "transferred_out": false,
+    "unrealised_usd": 1905.17,
+    "usd_in": 104.48,
+    "usd_out": 1406.21,
+    "wallet": "0xd27eacb4852c9f064db87e2988046ec46d1f30bb"
    }
   ]
  },
