@@ -1311,6 +1311,34 @@
    }
   ]
  },
+ "0xf75ae610d6e66a855845eac5e5afbc190f8083a1": {
+  "hits": [
+   {
+    "avg_entry_mcap": 12067,
+    "first_buy_sig": "0xe0a5b8327f8da8e64dd97a273176081e2dcf394e407be917d58277992a766b2f",
+    "first_buy_time": 1795709319,
+    "first_entry_mcap": 11493,
+    "found_at": "2026-11-26T16:52:14.086198+00:00",
+    "hold_fraction_at_target": 1.0,
+    "mint": "0x7d52095e844251c504c14fc1382d031b66217777",
+    "multiple": 10.08,
+    "n_trades": 4,
+    "origin": "flap",
+    "pnl_usd": 112.98,
+    "qualified": true,
+    "realised_multiple": 10.08,
+    "still_holding_pct": 0.0,
+    "symbol": "Kuro",
+    "tier": "10x+",
+    "total_multiple": 10.08,
+    "transferred_out": false,
+    "unrealised_usd": 0.0,
+    "usd_in": 12.44,
+    "usd_out": 125.43,
+    "wallet": "0xf75ae610d6e66a855845eac5e5afbc190f8083a1"
+   }
+  ]
+ },
  "0xffbd5a03e1e936bfae82c567f8b41e0a95296dcc": {
   "hits": [
    {
