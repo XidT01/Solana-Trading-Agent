@@ -251,6 +251,34 @@
    }
   ]
  },
+ "0x2e5453a5f77a80fe7bfd09d98fd53d2cf2f46bbc": {
+  "hits": [
+   {
+    "avg_entry_mcap": 6776,
+    "first_buy_sig": "0xfa73da3f53810b345728abf30fa0d99c9807f49fbbe39a36da8de57326aada51",
+    "first_buy_time": 1795671294,
+    "first_entry_mcap": 6776,
+    "found_at": "2026-11-26T06:10:52.972651+00:00",
+    "hold_fraction_at_target": 0.239,
+    "mint": "0xdde27483de8c958e4d2657d64eb7551717457777",
+    "multiple": 8.61,
+    "n_trades": 30,
+    "origin": "flap",
+    "pnl_usd": 448.04,
+    "qualified": true,
+    "realised_multiple": 8.61,
+    "still_holding_pct": 0.3,
+    "symbol": "SpaceXCoin",
+    "tier": "5x+",
+    "total_multiple": 8.68,
+    "transferred_out": false,
+    "unrealised_usd": 4.23,
+    "usd_in": 58.32,
+    "usd_out": 502.13,
+    "wallet": "0x2e5453a5f77a80fe7bfd09d98fd53d2cf2f46bbc"
+   }
+  ]
+ },
  "0x33f3384c9c1b8d0b3d77466cd3823d9503a114cf": {
   "hits": [
    {
@@ -360,6 +388,34 @@
     "usd_in": 142.33,
     "usd_out": 811.03,
     "wallet": "0x3e297e979021929b70714961ef9e2d0b5e4f3711"
+   }
+  ]
+ },
+ "0x4085fe0d2b63cd457622e5473e48f130ef14f466": {
+  "hits": [
+   {
+    "avg_entry_mcap": 6866,
+    "first_buy_sig": "0x557611614a7fc448fda00f9384366be63c32c340360359f5046760e515df5ae6",
+    "first_buy_time": 1795671294,
+    "first_entry_mcap": 6776,
+    "found_at": "2026-11-26T06:10:52.972651+00:00",
+    "hold_fraction_at_target": 0.235,
+    "mint": "0xdde27483de8c958e4d2657d64eb7551717457777",
+    "multiple": 8.48,
+    "n_trades": 31,
+    "origin": "flap",
+    "pnl_usd": 2158.88,
+    "qualified": true,
+    "realised_multiple": 8.48,
+    "still_holding_pct": 0.0,
+    "symbol": "SpaceXCoin",
+    "tier": "5x+",
+    "total_multiple": 8.48,
+    "transferred_out": false,
+    "unrealised_usd": 0.0,
+    "usd_in": 288.74,
+    "usd_out": 2447.61,
+    "wallet": "0x4085fe0d2b63cd457622e5473e48f130ef14f466"
    }
   ]
  },
