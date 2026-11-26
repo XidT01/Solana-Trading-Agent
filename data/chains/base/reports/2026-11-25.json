@@ -1,0 +1,452 @@
+{
+ "ai_summary": null,
+ "analyzed_by_launchpad": [
+  [
+   "o1",
+   2
+  ]
+ ],
+ "chain": "base",
+ "date": "2026-11-25",
+ "filters": {
+  "highlight_multiple": 10,
+  "max_entry_mcap_usd": 30000,
+  "min_multiple": 5,
+  "target_mcap_usd": 100000
+ },
+ "generated_at": "2026-11-26T05:30:55.566995+00:00",
+ "leaderboard": [
+  {
+   "avg_entry_mcap": 11983,
+   "best_multiple": 13.03,
+   "hits": 1,
+   "last_hit": "2026-11-25T21:45:25.362522+00:00",
+   "median_multiple": 13.03,
+   "tenx_hits": 1,
+   "tokens": [
+    "ROSTRUM"
+   ],
+   "total_pnl": 1165.52,
+   "wallet": "0x771f4011d146f1954df453c23f2bb18f9d3e9d3d"
+  },
+  {
+   "avg_entry_mcap": 8214,
+   "best_multiple": 10.51,
+   "hits": 1,
+   "last_hit": "2026-11-17T18:49:15.283275+00:00",
+   "median_multiple": 10.51,
+   "tenx_hits": 1,
+   "tokens": [
+    "BASE"
+   ],
+   "total_pnl": 1513.03,
+   "wallet": "0xfae9e5a545bea1f90e715165b002150d04a28c41"
+  },
+  {
+   "avg_entry_mcap": 5720,
+   "best_multiple": 10.48,
+   "hits": 1,
+   "last_hit": "2026-11-17T18:49:15.283275+00:00",
+   "median_multiple": 10.48,
+   "tenx_hits": 1,
+   "tokens": [
+    "BASE"
+   ],
+   "total_pnl": 2849.17,
+   "wallet": "0x2f268190f9c97b14f3c81842c5daf10e694dee69"
+  },
+  {
+   "avg_entry_mcap": 13128,
+   "best_multiple": 10.15,
+   "hits": 1,
+   "last_hit": "2026-11-25T21:45:25.362522+00:00",
+   "median_multiple": 10.15,
+   "tenx_hits": 1,
+   "tokens": [
+    "ROSTRUM"
+   ],
+   "total_pnl": 1576.53,
+   "wallet": "0x0019d8d3772380234d6c727ea144475d0de3b4d5"
+  },
+  {
+   "avg_entry_mcap": 16524,
+   "best_multiple": 9.45,
+   "hits": 1,
+   "last_hit": "2026-11-25T21:45:25.362522+00:00",
+   "median_multiple": 9.45,
+   "tenx_hits": 0,
+   "tokens": [
+    "ROSTRUM"
+   ],
+   "total_pnl": 1218.17,
+   "wallet": "0x0efa149b5b064e869ba0fd145ebe76e71b708e83"
+  },
+  {
+   "avg_entry_mcap": 10593,
+   "best_multiple": 8.49,
+   "hits": 1,
+   "last_hit": "2026-11-17T18:49:15.283275+00:00",
+   "median_multiple": 8.49,
+   "tenx_hits": 0,
+   "tokens": [
+    "BASE"
+   ],
+   "total_pnl": 1465.12,
+   "wallet": "0xdb5c8b2ea50d9c49b84a58e5abe523109d4d167f"
+  },
+  {
+   "avg_entry_mcap": 10890,
+   "best_multiple": 8.25,
+   "hits": 1,
+   "last_hit": "2026-11-17T18:49:15.283275+00:00",
+   "median_multiple": 8.25,
+   "tenx_hits": 0,
+   "tokens": [
+    "BASE"
+   ],
+   "total_pnl": 1385.92,
+   "wallet": "0x31903817736130538a8805ff9dcdea22a6c7ef79"
+  },
+  {
+   "avg_entry_mcap": 6396,
+   "best_multiple": 7.63,
+   "hits": 1,
+   "last_hit": "2026-11-12T19:19:27.532345+00:00",
+   "median_multiple": 7.63,
+   "tenx_hits": 0,
+   "tokens": [
+    "PENNY"
+   ],
+   "total_pnl": 2042.44,
+   "wallet": "0x9295321db9fce6d1fcf33b84ea41d440e4b9659b"
+  },
+  {
+   "avg_entry_mcap": 7244,
+   "best_multiple": 7.54,
+   "hits": 1,
+   "last_hit": "2026-11-12T19:19:27.532345+00:00",
+   "median_multiple": 7.54,
+   "tenx_hits": 0,
+   "tokens": [
+    "PENNY"
+   ],
+   "total_pnl": 368.98,
+   "wallet": "0x82efd7b96e36688b391f25a1a2de38469bbc2420"
+  },
+  {
+   "avg_entry_mcap": 4323,
+   "best_multiple": 7.43,
+   "hits": 1,
+   "last_hit": "2026-11-12T19:19:27.532345+00:00",
+   "median_multiple": 7.43,
+   "tenx_hits": 0,
+   "tokens": [
+    "PENNY"
+   ],
+   "total_pnl": 1700.47,
+   "wallet": "0xce04388107acbea0a7d108bdc2ca3360bb797431"
+  },
+  {
+   "avg_entry_mcap": 14638,
+   "best_multiple": 7.33,
+   "hits": 1,
+   "last_hit": "2026-11-25T21:45:25.362522+00:00",
+   "median_multiple": 7.33,
+   "tenx_hits": 0,
+   "tokens": [
+    "ROSTRUM"
+   ],
+   "total_pnl": 92.62,
+   "wallet": "0x34e836abdbbafc4da915b38a3c69b1585e006558"
+  },
+  {
+   "avg_entry_mcap": 10890,
+   "best_multiple": 6.66,
+   "hits": 1,
+   "last_hit": "2026-11-17T18:49:15.283275+00:00",
+   "median_multiple": 6.66,
+   "tenx_hits": 0,
+   "tokens": [
+    "BASE"
+   ],
+   "total_pnl": 174.48,
+   "wallet": "0x8489ef662f3d488a7ae8e98e465733cdbd6d88c9"
+  },
+  {
+   "avg_entry_mcap": 10890,
+   "best_multiple": 5.94,
+   "hits": 1,
+   "last_hit": "2026-11-17T18:49:15.283275+00:00",
+   "median_multiple": 5.94,
+   "tenx_hits": 0,
+   "tokens": [
+    "BASE"
+   ],
+   "total_pnl": 169.26,
+   "wallet": "0x643af72dd514f5cd648e4fda750e218d4131e02e"
+  },
+  {
+   "avg_entry_mcap": 3736,
+   "best_multiple": 5.93,
+   "hits": 1,
+   "last_hit": "2026-11-25T09:24:03.799773+00:00",
+   "median_multiple": 5.93,
+   "tenx_hits": 0,
+   "tokens": [
+    "SVAG"
+   ],
+   "total_pnl": 526.18,
+   "wallet": "0x4c91d3bed372c11795b9ce9a9017dfe447bf050a"
+  },
+  {
+   "avg_entry_mcap": 10890,
+   "best_multiple": 5.89,
+   "hits": 1,
+   "last_hit": "2026-11-17T18:49:15.283275+00:00",
+   "median_multiple": 5.89,
+   "tenx_hits": 0,
+   "tokens": [
+    "BASE"
+   ],
+   "total_pnl": 174.09,
+   "wallet": "0xd67489b89278282954a646f4c3ea4ecc24c6bfe6"
+  },
+  {
+   "avg_entry_mcap": 4323,
+   "best_multiple": 5.25,
+   "hits": 1,
+   "last_hit": "2026-11-12T19:19:27.532345+00:00",
+   "median_multiple": 5.25,
+   "tenx_hits": 0,
+   "tokens": [
+    "PENNY"
+   ],
+   "total_pnl": 1183.83,
+   "wallet": "0x3c15baca26235742f42f5d34141d8d5ffd176d9e"
+  },
+  {
+   "avg_entry_mcap": 17598,
+   "best_multiple": 5.22,
+   "hits": 1,
+   "last_hit": "2026-11-25T09:24:03.799773+00:00",
+   "median_multiple": 5.22,
+   "tenx_hits": 0,
+   "tokens": [
+    "SVAG"
+   ],
+   "total_pnl": 1105.86,
+   "wallet": "0xb2d8c700b05437547c2eeef189e117fdf0f4442d"
+  },
+  {
+   "avg_entry_mcap": 24088,
+   "best_multiple": 5.21,
+   "hits": 1,
+   "last_hit": "2026-11-17T18:49:15.283275+00:00",
+   "median_multiple": 5.21,
+   "tenx_hits": 0,
+   "tokens": [
+    "BASE"
+   ],
+   "total_pnl": 93.88,
+   "wallet": "0x93ee59b236fd1af89619b3b420e4f96718efe1fa"
+  },
+  {
+   "avg_entry_mcap": 11117,
+   "best_multiple": 5.14,
+   "hits": 1,
+   "last_hit": "2026-11-17T18:49:15.283275+00:00",
+   "median_multiple": 5.14,
+   "tenx_hits": 0,
+   "tokens": [
+    "BASE"
+   ],
+   "total_pnl": 2194.11,
+   "wallet": "0x33ba61b4530f36befc324b211eacaa877dbe7801"
+  }
+ ],
+ "new_wallets": [
+  {
+   "avg_entry_mcap": 11983,
+   "first_buy_sig": "0xab5b56201494e3d8718cd4ab4bea343d5d54d31cfebc61a90603d599b8a065ef",
+   "first_buy_time": 1795641470,
+   "first_entry_mcap": 11983,
+   "hold_fraction_at_target": 1.0,
+   "mint": "0xb200000000000000000000c6c52211df918b5d01",
+   "multiple": 13.03,
+   "n_trades": 2,
+   "pnl_usd": 1165.52,
+   "qualified": true,
+   "realised_multiple": 13.03,
+   "still_holding_pct": 0.0,
+   "symbol": "ROSTRUM",
+   "tier": "10x+",
+   "total_multiple": 13.03,
+   "transferred_out": false,
+   "unrealised_usd": 0.0,
+   "usd_in": 96.85,
+   "usd_out": 1262.37,
+   "wallet": "0x771f4011d146f1954df453c23f2bb18f9d3e9d3d"
+  },
+  {
+   "avg_entry_mcap": 13128,
+   "first_buy_sig": "0x9f0113a11d704b65a1d089ac58695d80f095b8b76af67912f0683d1b450e7ce0",
+   "first_buy_time": 1795641508,
+   "first_entry_mcap": 13128,
+   "hold_fraction_at_target": 1.0,
+   "mint": "0xb200000000000000000000c6c52211df918b5d01",
+   "multiple": 10.15,
+   "n_trades": 2,
+   "pnl_usd": 1576.53,
+   "qualified": true,
+   "realised_multiple": 10.15,
+   "still_holding_pct": 0.0,
+   "symbol": "ROSTRUM",
+   "tier": "10x+",
+   "total_multiple": 10.15,
+   "transferred_out": false,
+   "unrealised_usd": 0.0,
+   "usd_in": 172.23,
+   "usd_out": 1748.76,
+   "wallet": "0x0019d8d3772380234d6c727ea144475d0de3b4d5"
+  },
+  {
+   "avg_entry_mcap": 16524,
+   "first_buy_sig": "0x28b5ee175acfe12ef3116074289ebc7fcac0e90f3648463e292d763d7f0b3e44",
+   "first_buy_time": 1795641520,
+   "first_entry_mcap": 13220,
+   "hold_fraction_at_target": 1.0,
+   "mint": "0xb200000000000000000000c6c52211df918b5d01",
+   "multiple": 9.45,
+   "n_trades": 4,
+   "pnl_usd": 1218.17,
+   "qualified": true,
+   "realised_multiple": 9.45,
+   "still_holding_pct": 0.0,
+   "symbol": "ROSTRUM",
+   "tier": "5x+",
+   "total_multiple": 9.45,
+   "transferred_out": false,
+   "unrealised_usd": 0.0,
+   "usd_in": 144.13,
+   "usd_out": 1362.3,
+   "wallet": "0x0efa149b5b064e869ba0fd145ebe76e71b708e83"
+  },
+  {
+   "avg_entry_mcap": 14638,
+   "first_buy_sig": "0xf1a91b95485faa1637b183851799ce69475c8f9c1c1ac619077d0ccf039a80b2",
+   "first_buy_time": 1795641585,
+   "first_entry_mcap": 14638,
+   "hold_fraction_at_target": 0.5,
+   "mint": "0xb200000000000000000000c6c52211df918b5d01",
+   "multiple": 7.33,
+   "n_trades": 5,
+   "pnl_usd": 92.62,
+   "qualified": true,
+   "realised_multiple": 7.33,
+   "still_holding_pct": 0.0,
+   "symbol": "ROSTRUM",
+   "tier": "5x+",
+   "total_multiple": 7.33,
+   "transferred_out": false,
+   "unrealised_usd": 0.0,
+   "usd_in": 14.62,
+   "usd_out": 107.25,
+   "wallet": "0x34e836abdbbafc4da915b38a3c69b1585e006558"
+  },
+  {
+   "avg_entry_mcap": 3736,
+   "first_buy_sig": "0x69c6a871d7bfea4317363293298397678d6b0b708d996d28f20230a92e9056af",
+   "first_buy_time": 1795520898,
+   "first_entry_mcap": 3736,
+   "hold_fraction_at_target": 0.069,
+   "mint": "0xb200000000000000000000c6bfaaf26aad50f901",
+   "multiple": 5.93,
+   "n_trades": 13,
+   "pnl_usd": 526.18,
+   "qualified": true,
+   "realised_multiple": 5.93,
+   "still_holding_pct": 6.9,
+   "symbol": "SVAG",
+   "tier": "5x+",
+   "total_multiple": 7.16,
+   "transferred_out": false,
+   "unrealised_usd": 104.44,
+   "usd_in": 85.48,
+   "usd_out": 507.22,
+   "wallet": "0x4c91d3bed372c11795b9ce9a9017dfe447bf050a"
+  },
+  {
+   "avg_entry_mcap": 17598,
+   "first_buy_sig": "0x4b9700d24db9d1b1086a80b49503e403e54c387c0980c76e07e6e99382ba8651",
+   "first_buy_time": 1795521760,
+   "first_entry_mcap": 7709,
+   "hold_fraction_at_target": 0.0,
+   "mint": "0xb200000000000000000000c6bfaaf26aad50f901",
+   "multiple": 5.22,
+   "n_trades": 9,
+   "pnl_usd": 1105.86,
+   "qualified": true,
+   "realised_multiple": 5.22,
+   "still_holding_pct": 0.0,
+   "symbol": "SVAG",
+   "tier": "5x+",
+   "total_multiple": 5.22,
+   "transferred_out": false,
+   "unrealised_usd": 0.0,
+   "usd_in": 262.05,
+   "usd_out": 1367.91,
+   "wallet": "0xb2d8c700b05437547c2eeef189e117fdf0f4442d"
+  }
+ ],
+ "passed_tokens": [
+  {
+   "early_buyers_checked": 50,
+   "liquidity_usd": 27086.27,
+   "mcap_usd": 66430,
+   "mint": "0xb200000000000000000000c6bfaaf26aad50f901",
+   "origin": "o1",
+   "symbol": "SVAG",
+   "url": "https://dexscreener.com/base/0xfc93768ac628364eaec1494d560f4749b20576165c18bdde9c61f623abdef66b",
+   "wallets_found": 2
+  },
+  {
+   "early_buyers_checked": 50,
+   "liquidity_usd": 47229.33,
+   "mcap_usd": 163881,
+   "mint": "0xb200000000000000000000c6c52211df918b5d01",
+   "origin": "o1",
+   "symbol": "ROSTRUM",
+   "url": "https://dexscreener.com/base/0x9bfc9fcea8c6272d7aa1bb9b994ba26503d5e24edea8dd7af2064612a3f92f9d",
+   "wallets_found": 4
+  }
+ ],
+ "pnl_unit": "USD",
+ "rejection_reasons": [
+  [
+   "never_pumped",
+   75
+  ],
+  [
+   "low_liquidity",
+   3
+  ],
+  [
+   "concentrated_holders_top10",
+   1
+  ],
+  [
+   "mintable_by_owner",
+   1
+  ]
+ ],
+ "stats": {
+  "analyzed": 2,
+  "discovered": 4835,
+  "rejected": 79,
+  "runs": 49,
+  "skipped": 1,
+  "tokens_checked": 82,
+  "wallets_10x": 2,
+  "wallets_found": 6
+ }
+}
