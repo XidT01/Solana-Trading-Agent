@@ -1027,17 +1027,17 @@
   "wins": 11
  },
  "7nLRnEdaYpMrDV7vbDVNAZU83owahuBLykXxrZBk8Vs9": {
-  "big_wins": 1,
-  "coins_traded": 3,
-  "days_covered": 6.4,
-  "losses": 2,
-  "median_roi": 0.84,
-  "pnl_sol": 10.59,
-  "profiled_at": "2026-11-25T18:16:07.274645+00:00",
-  "realised_pnl_sol": 10.59,
-  "txs_read": 140,
-  "win_rate": 0.333,
-  "wins": 1
+  "big_wins": 0,
+  "coins_traded": 0,
+  "days_covered": 0,
+  "losses": 0,
+  "median_roi": null,
+  "pnl_sol": 0.0,
+  "profiled_at": "2026-11-27T05:30:37.579661+00:00",
+  "realised_pnl_sol": 0.0,
+  "txs_read": 0,
+  "win_rate": null,
+  "wins": 0
  },
  "7qHaCrhuEixd98D6t2RQe7mGAfdF5A9wScV2St2gTKRG": {
   "big_wins": 6,
@@ -1703,17 +1703,17 @@
   "wins": 12
  },
  "CVzDeZvZPbqRA8Q41x1KogSMZosoTM6NNfEypBN3DW4A": {
-  "big_wins": 1,
-  "coins_traded": 4,
-  "days_covered": 6.7,
-  "losses": 3,
-  "median_roi": 0.39,
-  "pnl_sol": 3.38,
-  "profiled_at": "2026-11-25T18:51:17.367700+00:00",
-  "realised_pnl_sol": 3.37,
-  "txs_read": 78,
-  "win_rate": 0.25,
-  "wins": 1
+  "big_wins": 0,
+  "coins_traded": 0,
+  "days_covered": 0,
+  "losses": 0,
+  "median_roi": null,
+  "pnl_sol": 0.0,
+  "profiled_at": "2026-11-27T05:31:08.642271+00:00",
+  "realised_pnl_sol": 0.0,
+  "txs_read": 0,
+  "win_rate": null,
+  "wins": 0
  },
  "CY4b5BtE3KgCEpNH1AGrq68gG3Uf63tfE2UK3nwP2jqQ": {
   "big_wins": 1,
@@ -2054,17 +2054,17 @@
   "wins": 38
  },
  "Eb6ufCotEez3pMx89pgSpsAU2RfTN6rTX2aXtaKiorua": {
-  "big_wins": 1,
-  "coins_traded": 2,
-  "days_covered": 5.8,
-  "losses": 1,
-  "median_roi": 4.76,
-  "pnl_sol": 3.95,
-  "profiled_at": "2026-11-25T18:51:47.362589+00:00",
-  "realised_pnl_sol": 3.95,
-  "txs_read": 158,
-  "win_rate": 0.5,
-  "wins": 1
+  "big_wins": 0,
+  "coins_traded": 0,
+  "days_covered": 0,
+  "losses": 0,
+  "median_roi": null,
+  "pnl_sol": 0.0,
+  "profiled_at": "2026-11-27T05:31:39.697598+00:00",
+  "realised_pnl_sol": 0.0,
+  "txs_read": 0,
+  "win_rate": null,
+  "wins": 0
  },
  "EdxZHeFMKvfVdTqDvjHH96oNqasNaocV2xHCVtixVYjG": {
   "big_wins": 0,
