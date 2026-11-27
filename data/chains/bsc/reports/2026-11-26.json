@@ -1,0 +1,633 @@
+{
+ "ai_summary": null,
+ "analyzed_by_launchpad": [
+  [
+   "flap",
+   6
+  ]
+ ],
+ "chain": "bsc",
+ "date": "2026-11-26",
+ "filters": {
+  "highlight_multiple": 10,
+  "max_entry_mcap_usd": 30000,
+  "min_multiple": 5,
+  "target_mcap_usd": 100000
+ },
+ "generated_at": "2026-11-27T05:26:29.933355+00:00",
+ "leaderboard": [
+  {
+   "avg_entry_mcap": 6318,
+   "best_multiple": 13.21,
+   "hits": 2,
+   "last_hit": "2026-11-26T04:03:59.779955+00:00",
+   "median_multiple": 9.95,
+   "tenx_hits": 1,
+   "tokens": [
+    "IDRENT",
+    "SPACEXLIFE"
+   ],
+   "total_pnl": 4269.72,
+   "wallet": "0xb750f03e86980a3dffdfad269a88f008bb78ea51"
+  },
+  {
+   "avg_entry_mcap": 7334,
+   "best_multiple": 20.62,
+   "hits": 1,
+   "last_hit": "2026-11-22T14:11:27.003207+00:00",
+   "median_multiple": 20.62,
+   "tenx_hits": 1,
+   "tokens": [
+    "\u5927\u80c6\u5e01"
+   ],
+   "total_pnl": 1090.59,
+   "wallet": "0x3951ce0486fdb2d0a5ed24be9d36f666e467c8b5"
+  },
+  {
+   "avg_entry_mcap": 4202,
+   "best_multiple": 16.97,
+   "hits": 1,
+   "last_hit": "2026-11-19T07:06:01.465837+00:00",
+   "median_multiple": 16.97,
+   "tenx_hits": 1,
+   "tokens": [
+    "\u4e2d\u56fd\u5236\u9020"
+   ],
+   "total_pnl": 451.81,
+   "wallet": "0x601bd55b1326d10838e5beebc237a6c51e18c520"
+  },
+  {
+   "avg_entry_mcap": 3664,
+   "best_multiple": 14.79,
+   "hits": 1,
+   "last_hit": "2026-11-18T09:27:09.772757+00:00",
+   "median_multiple": 14.79,
+   "tenx_hits": 1,
+   "tokens": [
+    "IDRENT"
+   ],
+   "total_pnl": 816.39,
+   "wallet": "0x074e84898a4c2badaafc3cca68260c8b7f53b860"
+  },
+  {
+   "avg_entry_mcap": 5772,
+   "best_multiple": 13.7,
+   "hits": 1,
+   "last_hit": "2026-11-26T04:03:59.779955+00:00",
+   "median_multiple": 13.7,
+   "tenx_hits": 1,
+   "tokens": [
+    "SPACEXLIFE"
+   ],
+   "total_pnl": 308.33,
+   "wallet": "0x3be4ddc6e67c88de7ef78ac208fb997906dfbb7a"
+  },
+  {
+   "avg_entry_mcap": 5772,
+   "best_multiple": 13.46,
+   "hits": 1,
+   "last_hit": "2026-11-26T04:03:59.779955+00:00",
+   "median_multiple": 13.46,
+   "tenx_hits": 1,
+   "tokens": [
+    "SPACEXLIFE"
+   ],
+   "total_pnl": 3206.9,
+   "wallet": "0xd27eacb4852c9f064db87e2988046ec46d1f30bb"
+  },
+  {
+   "avg_entry_mcap": 21985,
+   "best_multiple": 12.01,
+   "hits": 1,
+   "last_hit": "2026-11-12T22:09:46.172751+00:00",
+   "median_multiple": 12.01,
+   "tenx_hits": 1,
+   "tokens": [
+    "\u9ed1\u5929\u9e45"
+   ],
+   "total_pnl": 286.13,
+   "wallet": "0x0343b800b8a2df8a016aabd623294ddcff850024"
+  },
+  {
+   "avg_entry_mcap": 5772,
+   "best_multiple": 11.7,
+   "hits": 1,
+   "last_hit": "2026-11-26T04:03:59.779955+00:00",
+   "median_multiple": 11.7,
+   "tenx_hits": 1,
+   "tokens": [
+    "SPACEXLIFE"
+   ],
+   "total_pnl": 708.23,
+   "wallet": "0x7369d3b4fd03fc47277a2cb292226de46b8aa8ac"
+  },
+  {
+   "avg_entry_mcap": 4833,
+   "best_multiple": 11.09,
+   "hits": 1,
+   "last_hit": "2026-11-19T07:06:01.465837+00:00",
+   "median_multiple": 11.09,
+   "tenx_hits": 1,
+   "tokens": [
+    "\u4e2d\u56fd\u5236\u9020"
+   ],
+   "total_pnl": 765.32,
+   "wallet": "0x6ba398ca797dbae6c64d84669ee6f1f953c4ac7c"
+  },
+  {
+   "avg_entry_mcap": 12067,
+   "best_multiple": 10.08,
+   "hits": 1,
+   "last_hit": "2026-11-26T16:52:14.086198+00:00",
+   "median_multiple": 10.08,
+   "tenx_hits": 1,
+   "tokens": [
+    "Kuro"
+   ],
+   "total_pnl": 112.98,
+   "wallet": "0xf75ae610d6e66a855845eac5e5afbc190f8083a1"
+  },
+  {
+   "avg_entry_mcap": 6255,
+   "best_multiple": 9.76,
+   "hits": 1,
+   "last_hit": "2026-11-18T09:27:09.772757+00:00",
+   "median_multiple": 9.76,
+   "tenx_hits": 0,
+   "tokens": [
+    "IDRENT"
+   ],
+   "total_pnl": 134.04,
+   "wallet": "0xcfa8f426fd42b559e5493906bcd64742d2857de9"
+  },
+  {
+   "avg_entry_mcap": 8289,
+   "best_multiple": 9.24,
+   "hits": 1,
+   "last_hit": "2026-11-21T08:48:06.246733+00:00",
+   "median_multiple": 9.24,
+   "tenx_hits": 0,
+   "tokens": [
+    "\u732a\u5c0f\u6212"
+   ],
+   "total_pnl": 392.79,
+   "wallet": "0x2590e295e8dc4c82d25efd750e6ddee685ba350a"
+  },
+  {
+   "avg_entry_mcap": 8485,
+   "best_multiple": 8.86,
+   "hits": 1,
+   "last_hit": "2026-11-16T23:51:06.855648+00:00",
+   "median_multiple": 8.86,
+   "tenx_hits": 0,
+   "tokens": [
+    "\u6c34"
+   ],
+   "total_pnl": 1377.64,
+   "wallet": "0xdfb6c7adb4d4e383e2d06a9f745513acb8e7358e"
+  },
+  {
+   "avg_entry_mcap": 6776,
+   "best_multiple": 8.61,
+   "hits": 1,
+   "last_hit": "2026-11-26T06:10:52.972651+00:00",
+   "median_multiple": 8.61,
+   "tenx_hits": 0,
+   "tokens": [
+    "SpaceXCoin"
+   ],
+   "total_pnl": 448.04,
+   "wallet": "0x2e5453a5f77a80fe7bfd09d98fd53d2cf2f46bbc"
+  },
+  {
+   "avg_entry_mcap": 11090,
+   "best_multiple": 8.56,
+   "hits": 1,
+   "last_hit": "2026-11-22T14:11:27.003207+00:00",
+   "median_multiple": 8.56,
+   "tenx_hits": 0,
+   "tokens": [
+    "\u5927\u80c6\u5e01"
+   ],
+   "total_pnl": 160.35,
+   "wallet": "0x63c2749637ec0186f8d1df8feac6f493c4837331"
+  },
+  {
+   "avg_entry_mcap": 6866,
+   "best_multiple": 8.48,
+   "hits": 1,
+   "last_hit": "2026-11-26T06:10:52.972651+00:00",
+   "median_multiple": 8.48,
+   "tenx_hits": 0,
+   "tokens": [
+    "SpaceXCoin"
+   ],
+   "total_pnl": 2158.88,
+   "wallet": "0x4085fe0d2b63cd457622e5473e48f130ef14f466"
+  },
+  {
+   "avg_entry_mcap": 10599,
+   "best_multiple": 8.07,
+   "hits": 1,
+   "last_hit": "2026-11-18T09:27:09.772757+00:00",
+   "median_multiple": 8.07,
+   "tenx_hits": 0,
+   "tokens": [
+    "IDRENT"
+   ],
+   "total_pnl": 164.42,
+   "wallet": "0x7e26098a323df2c45bff405befa6fa04951777c9"
+  },
+  {
+   "avg_entry_mcap": 4529,
+   "best_multiple": 7.95,
+   "hits": 1,
+   "last_hit": "2026-11-19T07:06:01.465837+00:00",
+   "median_multiple": 7.95,
+   "tenx_hits": 0,
+   "tokens": [
+    "\u4e2d\u56fd\u5236\u9020"
+   ],
+   "total_pnl": 124.01,
+   "wallet": "0xb15d1730a96eec5e385011f4cf6526eacf16ef7f"
+  },
+  {
+   "avg_entry_mcap": 8326,
+   "best_multiple": 7.92,
+   "hits": 1,
+   "last_hit": "2026-11-26T01:03:59.451666+00:00",
+   "median_multiple": 7.92,
+   "tenx_hits": 0,
+   "tokens": [
+    "\u9ec4\u5927\u4ed9"
+   ],
+   "total_pnl": 197.85,
+   "wallet": "0xdfb3608778168eac59fa243084e486792f6c5234"
+  },
+  {
+   "avg_entry_mcap": 4940,
+   "best_multiple": 7.91,
+   "hits": 1,
+   "last_hit": "2026-11-19T07:06:01.465837+00:00",
+   "median_multiple": 7.91,
+   "tenx_hits": 0,
+   "tokens": [
+    "\u4e2d\u56fd\u5236\u9020"
+   ],
+   "total_pnl": 594.17,
+   "wallet": "0x1a2a244a44a55001368ff9112f5562394c8fc4fe"
+  },
+  {
+   "avg_entry_mcap": 4958,
+   "best_multiple": 7.89,
+   "hits": 1,
+   "last_hit": "2026-11-19T07:06:01.465837+00:00",
+   "median_multiple": 7.89,
+   "tenx_hits": 0,
+   "tokens": [
+    "\u4e2d\u56fd\u5236\u9020"
+   ],
+   "total_pnl": 578.44,
+   "wallet": "0x49dcc0532c2a0a8040af8b14370a9b115b5588cb"
+  },
+  {
+   "avg_entry_mcap": 12788,
+   "best_multiple": 7.78,
+   "hits": 1,
+   "last_hit": "2026-11-26T04:03:59.779955+00:00",
+   "median_multiple": 7.78,
+   "tenx_hits": 0,
+   "tokens": [
+    "SPACEXLIFE"
+   ],
+   "total_pnl": 1204.24,
+   "wallet": "0x66b15e912c6ae60068d1cdde5e93b34fdef7ea78"
+  },
+  {
+   "avg_entry_mcap": 6560,
+   "best_multiple": 7.56,
+   "hits": 1,
+   "last_hit": "2026-11-25T19:15:17.015363+00:00",
+   "median_multiple": 7.56,
+   "tenx_hits": 0,
+   "tokens": [
+    "1"
+   ],
+   "total_pnl": 101.79,
+   "wallet": "0x67ade43a3ffd85b93f6a87e409c0de90538d613f"
+  },
+  {
+   "avg_entry_mcap": 5939,
+   "best_multiple": 7.51,
+   "hits": 1,
+   "last_hit": "2026-11-25T03:34:27.497973+00:00",
+   "median_multiple": 7.51,
+   "tenx_hits": 0,
+   "tokens": [
+    "\u83ab\u8fbe"
+   ],
+   "total_pnl": 2253.23,
+   "wallet": "0x4f55cb15805ce098bdde722d49d1c464b51cc222"
+  },
+  {
+   "avg_entry_mcap": 5236,
+   "best_multiple": 7.46,
+   "hits": 1,
+   "last_hit": "2026-11-22T10:41:26.113633+00:00",
+   "median_multiple": 7.46,
+   "tenx_hits": 0,
+   "tokens": [
+    "\u9886\u5934\u7f8a"
+   ],
+   "total_pnl": 1459.71,
+   "wallet": "0xffbd5a03e1e936bfae82c567f8b41e0a95296dcc"
+  }
+ ],
+ "new_wallets": [
+  {
+   "avg_entry_mcap": 5772,
+   "first_buy_sig": "0xff7c912f63148a5f6e5556d656d1b1c5fd63ad688e576b9bab250d2ab52c6fca",
+   "first_buy_time": 1795664876,
+   "first_entry_mcap": 5772,
+   "hold_fraction_at_target": 1.0,
+   "mint": "0xfb8b99ff90a33a6d81b0212f0ac80e9339e17777",
+   "multiple": 13.7,
+   "n_trades": 17,
+   "pnl_usd": 308.33,
+   "qualified": true,
+   "realised_multiple": 13.7,
+   "still_holding_pct": 52.0,
+   "symbol": "SPACEXLIFE",
+   "tier": "10x+",
+   "total_multiple": 31.63,
+   "transferred_out": false,
+   "unrealised_usd": 180.53,
+   "usd_in": 10.07,
+   "usd_out": 137.87,
+   "wallet": "0x3be4ddc6e67c88de7ef78ac208fb997906dfbb7a"
+  },
+  {
+   "avg_entry_mcap": 5772,
+   "first_buy_sig": "0x56d48fa0014234a7c2787971de9dda4ab6060995f9bbccd9aea7a102faf9c516",
+   "first_buy_time": 1795664876,
+   "first_entry_mcap": 5772,
+   "hold_fraction_at_target": 1.0,
+   "mint": "0xfb8b99ff90a33a6d81b0212f0ac80e9339e17777",
+   "multiple": 13.46,
+   "n_trades": 17,
+   "pnl_usd": 3206.9,
+   "qualified": true,
+   "realised_multiple": 13.46,
+   "still_holding_pct": 52.9,
+   "symbol": "SPACEXLIFE",
+   "tier": "10x+",
+   "total_multiple": 31.69,
+   "transferred_out": false,
+   "unrealised_usd": 1905.17,
+   "usd_in": 104.48,
+   "usd_out": 1406.21,
+   "wallet": "0xd27eacb4852c9f064db87e2988046ec46d1f30bb"
+  },
+  {
+   "avg_entry_mcap": 5979,
+   "first_buy_sig": "0x46eb4934d94ba7d329d6bb56f0024cf3d29bdf1c21c4fa896e8fdef1e7497c3e",
+   "first_buy_time": 1795664876,
+   "first_entry_mcap": 5772,
+   "hold_fraction_at_target": 1.0,
+   "mint": "0xfb8b99ff90a33a6d81b0212f0ac80e9339e17777",
+   "multiple": 13.21,
+   "n_trades": 19,
+   "pnl_usd": 3572.4,
+   "qualified": true,
+   "realised_multiple": 13.21,
+   "still_holding_pct": 52.0,
+   "symbol": "SPACEXLIFE",
+   "tier": "10x+",
+   "total_multiple": 30.52,
+   "transferred_out": false,
+   "unrealised_usd": 2094.98,
+   "usd_in": 121.01,
+   "usd_out": 1598.43,
+   "wallet": "0xb750f03e86980a3dffdfad269a88f008bb78ea51"
+  },
+  {
+   "avg_entry_mcap": 5772,
+   "first_buy_sig": "0xdaf57ee2517795eebf190cf7910eb38bade9a0f535de959660c8cd4f363ef4ce",
+   "first_buy_time": 1795664876,
+   "first_entry_mcap": 5772,
+   "hold_fraction_at_target": 0.7,
+   "mint": "0xfb8b99ff90a33a6d81b0212f0ac80e9339e17777",
+   "multiple": 11.7,
+   "n_trades": 18,
+   "pnl_usd": 708.23,
+   "qualified": true,
+   "realised_multiple": 11.7,
+   "still_holding_pct": 36.4,
+   "symbol": "SPACEXLIFE",
+   "tier": "10x+",
+   "total_multiple": 24.25,
+   "transferred_out": false,
+   "unrealised_usd": 382.42,
+   "usd_in": 30.46,
+   "usd_out": 356.28,
+   "wallet": "0x7369d3b4fd03fc47277a2cb292226de46b8aa8ac"
+  },
+  {
+   "avg_entry_mcap": 12067,
+   "first_buy_sig": "0xe0a5b8327f8da8e64dd97a273176081e2dcf394e407be917d58277992a766b2f",
+   "first_buy_time": 1795709319,
+   "first_entry_mcap": 11493,
+   "hold_fraction_at_target": 1.0,
+   "mint": "0x7d52095e844251c504c14fc1382d031b66217777",
+   "multiple": 10.08,
+   "n_trades": 4,
+   "pnl_usd": 112.98,
+   "qualified": true,
+   "realised_multiple": 10.08,
+   "still_holding_pct": 0.0,
+   "symbol": "Kuro",
+   "tier": "10x+",
+   "total_multiple": 10.08,
+   "transferred_out": false,
+   "unrealised_usd": 0.0,
+   "usd_in": 12.44,
+   "usd_out": 125.43,
+   "wallet": "0xf75ae610d6e66a855845eac5e5afbc190f8083a1"
+  },
+  {
+   "avg_entry_mcap": 6776,
+   "first_buy_sig": "0xfa73da3f53810b345728abf30fa0d99c9807f49fbbe39a36da8de57326aada51",
+   "first_buy_time": 1795671294,
+   "first_entry_mcap": 6776,
+   "hold_fraction_at_target": 0.239,
+   "mint": "0xdde27483de8c958e4d2657d64eb7551717457777",
+   "multiple": 8.61,
+   "n_trades": 30,
+   "pnl_usd": 448.04,
+   "qualified": true,
+   "realised_multiple": 8.61,
+   "still_holding_pct": 0.3,
+   "symbol": "SpaceXCoin",
+   "tier": "5x+",
+   "total_multiple": 8.68,
+   "transferred_out": false,
+   "unrealised_usd": 4.23,
+   "usd_in": 58.32,
+   "usd_out": 502.13,
+   "wallet": "0x2e5453a5f77a80fe7bfd09d98fd53d2cf2f46bbc"
+  },
+  {
+   "avg_entry_mcap": 6866,
+   "first_buy_sig": "0x557611614a7fc448fda00f9384366be63c32c340360359f5046760e515df5ae6",
+   "first_buy_time": 1795671294,
+   "first_entry_mcap": 6776,
+   "hold_fraction_at_target": 0.235,
+   "mint": "0xdde27483de8c958e4d2657d64eb7551717457777",
+   "multiple": 8.48,
+   "n_trades": 31,
+   "pnl_usd": 2158.88,
+   "qualified": true,
+   "realised_multiple": 8.48,
+   "still_holding_pct": 0.0,
+   "symbol": "SpaceXCoin",
+   "tier": "5x+",
+   "total_multiple": 8.48,
+   "transferred_out": false,
+   "unrealised_usd": 0.0,
+   "usd_in": 288.74,
+   "usd_out": 2447.61,
+   "wallet": "0x4085fe0d2b63cd457622e5473e48f130ef14f466"
+  },
+  {
+   "avg_entry_mcap": 8326,
+   "first_buy_sig": "0x221d070a18b5c53287d1b8af86a16ad6ef70d0a386cf3414af3e3c893cb6a817",
+   "first_buy_time": 1795652380,
+   "first_entry_mcap": 8326,
+   "hold_fraction_at_target": 0.068,
+   "mint": "0xa3dfecd6298d37f98ca17e19bdff902d2bbf7777",
+   "multiple": 7.92,
+   "n_trades": 12,
+   "pnl_usd": 197.85,
+   "qualified": true,
+   "realised_multiple": 7.92,
+   "still_holding_pct": 0.0,
+   "symbol": "\u9ec4\u5927\u4ed9",
+   "tier": "5x+",
+   "total_multiple": 7.92,
+   "transferred_out": false,
+   "unrealised_usd": 0.0,
+   "usd_in": 28.58,
+   "usd_out": 226.43,
+   "wallet": "0xdfb3608778168eac59fa243084e486792f6c5234"
+  },
+  {
+   "avg_entry_mcap": 12788,
+   "first_buy_sig": "0x1510a70bc3f107cd7011a44cf32620514511559492cd857a5018a8b4bed29bf9",
+   "first_buy_time": 1795664900,
+   "first_entry_mcap": 8458,
+   "hold_fraction_at_target": 0.5,
+   "mint": "0xfb8b99ff90a33a6d81b0212f0ac80e9339e17777",
+   "multiple": 7.78,
+   "n_trades": 12,
+   "pnl_usd": 1204.24,
+   "qualified": true,
+   "realised_multiple": 7.78,
+   "still_holding_pct": 14.1,
+   "symbol": "SPACEXLIFE",
+   "tier": "5x+",
+   "total_multiple": 9.97,
+   "transferred_out": false,
+   "unrealised_usd": 293.74,
+   "usd_in": 134.3,
+   "usd_out": 1044.8,
+   "wallet": "0x66b15e912c6ae60068d1cdde5e93b34fdef7ea78"
+  }
+ ],
+ "passed_tokens": [
+  {
+   "early_buyers_checked": 50,
+   "liquidity_usd": 32423.72,
+   "mcap_usd": 126543,
+   "mint": "0x7d52095e844251c504c14fc1382d031b66217777",
+   "origin": "flap",
+   "symbol": "Kuro",
+   "url": "https://dexscreener.com/bsc/0xb125406654faab05ba80ba999c63ac2e01e8b96b",
+   "wallets_found": 1
+  },
+  {
+   "early_buyers_checked": 50,
+   "liquidity_usd": 24926.03,
+   "mcap_usd": 79854,
+   "mint": "0xa3dfecd6298d37f98ca17e19bdff902d2bbf7777",
+   "origin": "flap",
+   "symbol": "\u9ec4\u5927\u4ed9",
+   "url": "https://dexscreener.com/bsc/0x0150fc068e28c3112f5e315bdd1028029cb8f527",
+   "wallets_found": 1
+  },
+  {
+   "early_buyers_checked": 0,
+   "liquidity_usd": 127479.85,
+   "mcap_usd": 2286716,
+   "mint": "0xa5545113be11f20a7cd8aa3db35febae586c7777",
+   "origin": "flap",
+   "symbol": "SpaceXCoin",
+   "url": "https://dexscreener.com/bsc/0xfb5ac4d5aa76b6c5de785fd51ffdc382e613a006",
+   "wallets_found": 0
+  },
+  {
+   "early_buyers_checked": 50,
+   "liquidity_usd": 39251.92,
+   "mcap_usd": 185359,
+   "mint": "0xdde27483de8c958e4d2657d64eb7551717457777",
+   "origin": "flap",
+   "symbol": "SpaceXCoin",
+   "url": "https://dexscreener.com/bsc/0x88011d9107c6a8118afb0a1e7ff4f376f988b846",
+   "wallets_found": 2
+  },
+  {
+   "early_buyers_checked": 50,
+   "liquidity_usd": 31195.84,
+   "mcap_usd": 123938,
+   "mint": "0xeaa9eeb2f743b210472252428c59737577197777",
+   "origin": "flap",
+   "symbol": "CiCi",
+   "url": "https://dexscreener.com/bsc/0xc38e33165880e7f6958c7febf7d027471d195363",
+   "wallets_found": 0
+  },
+  {
+   "early_buyers_checked": 50,
+   "liquidity_usd": 40049.12,
+   "mcap_usd": 198924,
+   "mint": "0xfb8b99ff90a33a6d81b0212f0ac80e9339e17777",
+   "origin": "flap",
+   "symbol": "SPACEXLIFE",
+   "url": "https://dexscreener.com/bsc/0xcc95ff26660e9b3bd9b44676d5d46c216a3b5c1b",
+   "wallets_found": 5
+  }
+ ],
+ "pnl_unit": "USD",
+ "rejection_reasons": [
+  [
+   "low_liquidity",
+   21
+  ],
+  [
+   "bundled_launch",
+   1
+  ],
+  [
+   "never_pumped",
+   1
+  ]
+ ],
+ "stats": {
+  "analyzed": 6,
+  "discovered": 4640,
+  "rejected": 23,
+  "runs": 49,
+  "skipped": 5,
+  "tokens_checked": 34,
+  "wallets_10x": 5,
+  "wallets_found": 9
+ }
+}
