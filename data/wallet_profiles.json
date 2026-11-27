@@ -546,17 +546,17 @@
   "wins": 45
  },
  "5DwW4yAHWwDta6Upv5tsGGgUr4Mkaw5SgbCcWP4yrmz": {
-  "big_wins": 5,
-  "coins_traded": 53,
-  "days_covered": 28.0,
-  "losses": 23,
-  "median_roi": 1.02,
-  "pnl_sol": 31.47,
-  "profiled_at": "2026-11-25T19:57:52.854124+00:00",
-  "realised_pnl_sol": 28.49,
-  "txs_read": 298,
-  "win_rate": 0.566,
-  "wins": 30
+  "big_wins": 0,
+  "coins_traded": 0,
+  "days_covered": 0,
+  "losses": 0,
+  "median_roi": null,
+  "pnl_sol": 0.0,
+  "profiled_at": "2026-11-27T07:30:37.262713+00:00",
+  "realised_pnl_sol": 0.0,
+  "txs_read": 0,
+  "win_rate": null,
+  "wins": 0
  },
  "5GkAnSrRnzcgcXdpJ3WGXNbEieWNhWiXv5GgwWF14Lze": {
   "big_wins": 5,
@@ -715,17 +715,17 @@
   "wins": 0
  },
  "5xoUmGiTHfRKKCryUQFmT84vkygV6SoBA18SCph25J6Z": {
-  "big_wins": 4,
-  "coins_traded": 86,
-  "days_covered": 29.2,
-  "losses": 57,
-  "median_roi": 0.92,
-  "pnl_sol": 15.22,
-  "profiled_at": "2026-11-25T20:34:56.196806+00:00",
-  "realised_pnl_sol": 13.9,
-  "txs_read": 439,
-  "win_rate": 0.337,
-  "wins": 29
+  "big_wins": 0,
+  "coins_traded": 0,
+  "days_covered": 0,
+  "losses": 0,
+  "median_roi": null,
+  "pnl_sol": 0.0,
+  "profiled_at": "2026-11-27T07:31:08.319021+00:00",
+  "realised_pnl_sol": 0.0,
+  "txs_read": 0,
+  "win_rate": null,
+  "wins": 0
  },
  "5yzVtM9eYzgRwQ3HkaJXpGqduhBv9c9VEq8JyUEDxjDh": {
   "big_wins": 1,
@@ -845,17 +845,17 @@
   "wins": 0
  },
  "6ZRkLmjjHtHXRawp8mjD9njC2KfNYjSiRpy4cZuHsWPm": {
-  "big_wins": 2,
-  "coins_traded": 24,
-  "days_covered": 28.0,
-  "losses": 15,
-  "median_roi": 0.97,
-  "pnl_sol": 6.79,
-  "profiled_at": "2026-11-25T20:35:16.586850+00:00",
-  "realised_pnl_sol": 6.79,
-  "txs_read": 102,
-  "win_rate": 0.375,
-  "wins": 9
+  "big_wins": 0,
+  "coins_traded": 0,
+  "days_covered": 0,
+  "losses": 0,
+  "median_roi": null,
+  "pnl_sol": 0.0,
+  "profiled_at": "2026-11-27T07:31:39.380874+00:00",
+  "realised_pnl_sol": 0.0,
+  "txs_read": 0,
+  "win_rate": null,
+  "wins": 0
  },
  "6e7iMmfjDXAxDmpAcZ5VpqLmh5UZuMF7NY5GNVWrXuw1": {
   "big_wins": 12,
