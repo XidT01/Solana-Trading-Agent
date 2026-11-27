@@ -858,17 +858,17 @@
   "wins": 0
  },
  "6e7iMmfjDXAxDmpAcZ5VpqLmh5UZuMF7NY5GNVWrXuw1": {
-  "big_wins": 12,
-  "coins_traded": 197,
-  "days_covered": 1.8,
-  "losses": 142,
-  "median_roi": 0.78,
-  "pnl_sol": -2.17,
-  "profiled_at": "2026-11-25T22:04:35.480470+00:00",
-  "realised_pnl_sol": -2.17,
-  "txs_read": 500,
-  "win_rate": 0.279,
-  "wins": 55
+  "big_wins": 0,
+  "coins_traded": 0,
+  "days_covered": 0,
+  "losses": 0,
+  "median_roi": null,
+  "pnl_sol": 0.0,
+  "profiled_at": "2026-11-27T09:08:46.907338+00:00",
+  "realised_pnl_sol": 0.0,
+  "txs_read": 0,
+  "win_rate": null,
+  "wins": 0
  },
  "6qfPANVM1CriAPd1CXWUMNBm2TX2SRxGEi1YxBb4iPa9": {
   "big_wins": 0,
@@ -2522,17 +2522,17 @@
   "wins": 1
  },
  "H9kuqGKNYgPFYCA17uUTkaqXGum7MK8y1GwbS7cxsjDg": {
-  "big_wins": 19,
-  "coins_traded": 154,
-  "days_covered": 0.2,
-  "losses": 99,
-  "median_roi": 0.89,
-  "pnl_sol": 30.35,
-  "profiled_at": "2026-11-25T22:27:35.198477+00:00",
-  "realised_pnl_sol": 24.03,
-  "txs_read": 500,
-  "win_rate": 0.357,
-  "wins": 55
+  "big_wins": 0,
+  "coins_traded": 0,
+  "days_covered": 0,
+  "losses": 0,
+  "median_roi": null,
+  "pnl_sol": 0.0,
+  "profiled_at": "2026-11-27T09:09:17.982248+00:00",
+  "realised_pnl_sol": 0.0,
+  "txs_read": 0,
+  "win_rate": null,
+  "wins": 0
  },
  "HFuxDUQHe1dqN4eFs4v3oPHEnopxkTyCaYSRd14W4wNa": {
   "big_wins": 2,
@@ -2717,17 +2717,17 @@
   "wins": 13
  },
  "waEX3ogavZjHhv1NnzDe1RCUEDATwsrH1xey76rG9eN": {
-  "big_wins": 2,
-  "coins_traded": 246,
-  "days_covered": 1.8,
-  "losses": 130,
-  "median_roi": 0.99,
-  "pnl_sol": 0.31,
-  "profiled_at": "2026-11-25T22:29:16.458468+00:00",
-  "realised_pnl_sol": 0.31,
-  "txs_read": 500,
-  "win_rate": 0.472,
-  "wins": 116
+  "big_wins": 0,
+  "coins_traded": 0,
+  "days_covered": 0,
+  "losses": 0,
+  "median_roi": null,
+  "pnl_sol": 0.0,
+  "profiled_at": "2026-11-27T09:09:49.065839+00:00",
+  "realised_pnl_sol": 0.0,
+  "txs_read": 0,
+  "win_rate": null,
+  "wins": 0
  },
  "winQcSPxum9ZUDkfxsyH7Z6gTYuQr38ACvm9uw7LDQy": {
   "big_wins": 0,
