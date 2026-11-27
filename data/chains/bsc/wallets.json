@@ -867,6 +867,34 @@
    }
   ]
  },
+ "0x907e631ba273bac89088e2f9c7be9ecad791dc0e": {
+  "hits": [
+   {
+    "avg_entry_mcap": 5202,
+    "first_buy_sig": "0xde4862a9bdf12dd5870d067730efce68d0aaed9e063f44a7def4b9683a5a7552",
+    "first_buy_time": 1795743534,
+    "first_entry_mcap": 4904,
+    "found_at": "2026-11-27T03:42:38.183038+00:00",
+    "hold_fraction_at_target": 1.0,
+    "mint": "0x91e6681779e175f3dcd42c21e896908d42ad7777",
+    "multiple": 5.49,
+    "n_trades": 5,
+    "origin": "flap",
+    "pnl_usd": 2206.74,
+    "qualified": true,
+    "realised_multiple": 5.49,
+    "still_holding_pct": 75.4,
+    "symbol": "DragonRiders",
+    "tier": "5x+",
+    "total_multiple": 17.67,
+    "transferred_out": false,
+    "unrealised_usd": 1611.68,
+    "usd_in": 132.38,
+    "usd_out": 727.44,
+    "wallet": "0x907e631ba273bac89088e2f9c7be9ecad791dc0e"
+   }
+  ]
+ },
  "0x90905f1046c6ba91b79fe262a1cad30b55fc3bb0": {
   "hits": [
    {
@@ -1280,6 +1308,34 @@
     "usd_in": 175.38,
     "usd_out": 1553.03,
     "wallet": "0xdfb6c7adb4d4e383e2d06a9f745513acb8e7358e"
+   }
+  ]
+ },
+ "0xe900fd711a6126683971d1ceb581f1c116d3ef77": {
+  "hits": [
+   {
+    "avg_entry_mcap": 8694,
+    "first_buy_sig": "0xbe25e9dbeebaf88760ce0a2342ee8f90eea56ff09d1d68818b91b209cdf68ddc",
+    "first_buy_time": 1795744330,
+    "first_entry_mcap": 8694,
+    "found_at": "2026-11-27T03:42:38.183038+00:00",
+    "hold_fraction_at_target": 0.0,
+    "mint": "0x91e6681779e175f3dcd42c21e896908d42ad7777",
+    "multiple": 6.95,
+    "n_trades": 6,
+    "origin": "flap",
+    "pnl_usd": 556.0,
+    "qualified": true,
+    "realised_multiple": 6.95,
+    "still_holding_pct": 0.0,
+    "symbol": "DragonRiders",
+    "tier": "5x+",
+    "total_multiple": 6.95,
+    "transferred_out": false,
+    "unrealised_usd": 0.0,
+    "usd_in": 93.42,
+    "usd_out": 649.42,
+    "wallet": "0xe900fd711a6126683971d1ceb581f1c116d3ef77"
    }
   ]
  },
