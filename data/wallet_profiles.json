@@ -1157,17 +1157,17 @@
   "wins": 0
  },
  "8TAPrnBYZPgMYEQmndDm36qsQuFENpPmmRERbwRe9bz9": {
-  "big_wins": 3,
-  "coins_traded": 8,
-  "days_covered": 17.2,
-  "losses": 4,
-  "median_roi": 0.95,
-  "pnl_sol": 5.63,
-  "profiled_at": "2026-11-26T10:20:23.461534+00:00",
-  "realised_pnl_sol": 5.63,
-  "txs_read": 38,
-  "win_rate": 0.5,
-  "wins": 4
+  "big_wins": 0,
+  "coins_traded": 0,
+  "days_covered": 0,
+  "losses": 0,
+  "median_roi": null,
+  "pnl_sol": 0.0,
+  "profiled_at": "2026-11-27T22:06:18.934099+00:00",
+  "realised_pnl_sol": 0.0,
+  "txs_read": 0,
+  "win_rate": null,
+  "wins": 0
  },
  "8UWMkKMwBPLMx1J4bhjFnX5tfovSqKejdMkyyHjFx9Cd": {
   "big_wins": 0,
@@ -1807,17 +1807,17 @@
   "wins": 1
  },
  "D4Dv3JLFarAYZim3s7fLUcEYs4DADxW4kVXr7px4EcEb": {
-  "big_wins": 3,
-  "coins_traded": 87,
-  "days_covered": 3.4,
-  "losses": 57,
-  "median_roi": 0.95,
-  "pnl_sol": 2.59,
-  "profiled_at": "2026-11-26T10:49:30.073250+00:00",
-  "realised_pnl_sol": 2.59,
-  "txs_read": 500,
-  "win_rate": 0.345,
-  "wins": 30
+  "big_wins": 0,
+  "coins_traded": 0,
+  "days_covered": 0,
+  "losses": 0,
+  "median_roi": null,
+  "pnl_sol": 0.0,
+  "profiled_at": "2026-11-27T22:06:50.111091+00:00",
+  "realised_pnl_sol": 0.0,
+  "txs_read": 0,
+  "win_rate": null,
+  "wins": 0
  },
  "DDQLBC9XNFauf3FsbzjYc1tY4vYyogd1knQyLUS7uAzm": {
   "big_wins": 4,
@@ -2028,17 +2028,17 @@
   "wins": 0
  },
  "EPRin8uw5DbsMTTjyRPX6T5sqbxkgi82CqEAnoB4xErV": {
-  "big_wins": 5,
-  "coins_traded": 55,
-  "days_covered": 27.8,
-  "losses": 34,
-  "median_roi": 0.94,
-  "pnl_sol": 20.6,
-  "profiled_at": "2026-11-26T10:50:13.862881+00:00",
-  "realised_pnl_sol": 20.6,
-  "txs_read": 215,
-  "win_rate": 0.382,
-  "wins": 21
+  "big_wins": 0,
+  "coins_traded": 0,
+  "days_covered": 0,
+  "losses": 0,
+  "median_roi": null,
+  "pnl_sol": 0.0,
+  "profiled_at": "2026-11-27T22:07:21.290008+00:00",
+  "realised_pnl_sol": 0.0,
+  "txs_read": 0,
+  "win_rate": null,
+  "wins": 0
  },
  "EXGvmSxq26Uq7Ee4fGMRnKResvNQFgD4ezMShjQWsvbc": {
   "big_wins": 0,
