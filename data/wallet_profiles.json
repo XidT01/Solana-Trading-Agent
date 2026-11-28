@@ -325,17 +325,17 @@
   "wins": 0
  },
  "3siERyALHAEukETTQ4qrKE4nP8opZc5jNKCMtkQxXUFe": {
-  "big_wins": 3,
-  "coins_traded": 18,
-  "days_covered": 25.4,
-  "losses": 11,
-  "median_roi": 0.94,
-  "pnl_sol": 18.72,
-  "profiled_at": "2026-11-26T15:10:16.408331+00:00",
-  "realised_pnl_sol": 18.72,
-  "txs_read": 79,
-  "win_rate": 0.389,
-  "wins": 7
+  "big_wins": 0,
+  "coins_traded": 0,
+  "days_covered": 0,
+  "losses": 0,
+  "median_roi": null,
+  "pnl_sol": 0.0,
+  "profiled_at": "2026-11-28T01:53:53.111246+00:00",
+  "realised_pnl_sol": 0.0,
+  "txs_read": 0,
+  "win_rate": null,
+  "wins": 0
  },
  "3ug4G3Y5H8kEvDDgJHjWZxnfBNPk2CiiDQ7VPwnWqqNG": {
   "big_wins": 3,
@@ -377,17 +377,17 @@
   "wins": 32
  },
  "44gUKGRXkYEjJ2AhQjwUdC6rFASPnjGXLFqSpDRxPync": {
-  "big_wins": 4,
-  "coins_traded": 32,
-  "days_covered": 5.8,
-  "losses": 24,
-  "median_roi": 0.87,
-  "pnl_sol": 9.95,
-  "profiled_at": "2026-11-26T15:44:39.541449+00:00",
-  "realised_pnl_sol": 2.95,
-  "txs_read": 500,
-  "win_rate": 0.25,
-  "wins": 8
+  "big_wins": 0,
+  "coins_traded": 0,
+  "days_covered": 0,
+  "losses": 0,
+  "median_roi": null,
+  "pnl_sol": 0.0,
+  "profiled_at": "2026-11-28T01:54:24.346549+00:00",
+  "realised_pnl_sol": 0.0,
+  "txs_read": 0,
+  "win_rate": null,
+  "wins": 0
  },
  "4848Anx3hH2xtnoarLHTuoznbRxSYtyzHBvTUwJZJmk4": {
   "big_wins": 0,
@@ -572,17 +572,17 @@
   "wins": 0
  },
  "5MLq6eUXA9G5cmT2TsnQLCSkD5VpaY9seibgVL3TMSH9": {
-  "big_wins": 1,
-  "coins_traded": 102,
-  "days_covered": 0.0,
-  "losses": 72,
-  "median_roi": 0.95,
-  "pnl_sol": -0.68,
-  "profiled_at": "2026-11-26T15:46:20.101592+00:00",
-  "realised_pnl_sol": -0.68,
-  "txs_read": 500,
-  "win_rate": 0.294,
-  "wins": 30
+  "big_wins": 0,
+  "coins_traded": 0,
+  "days_covered": 0,
+  "losses": 0,
+  "median_roi": null,
+  "pnl_sol": 0.0,
+  "profiled_at": "2026-11-28T01:54:55.624542+00:00",
+  "realised_pnl_sol": 0.0,
+  "txs_read": 0,
+  "win_rate": null,
+  "wins": 0
  },
  "5MgSwNTC2gfB9FHuZXVq1XEimsQEUPLoUdVaR7Egvdtp": {
   "big_wins": 3,
