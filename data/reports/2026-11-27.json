@@ -1,0 +1,381 @@
+{
+ "ai_summary": null,
+ "analyzed_by_launchpad": [],
+ "chain": "solana",
+ "date": "2026-11-27",
+ "filters": {
+  "highlight_multiple": 10,
+  "max_entry_mcap_usd": 30000,
+  "min_multiple": 5,
+  "target_mcap_usd": 100000
+ },
+ "generated_at": "2026-11-28T05:01:30.226951+00:00",
+ "leaderboard": [
+  {
+   "avg_entry_mcap": 9666,
+   "best_multiple": 12.9,
+   "hits": 2,
+   "last_hit": "2026-11-18T12:32:53.598504+00:00",
+   "median_multiple": 10.57,
+   "tenx_hits": 1,
+   "tokens": [
+    "BFS",
+    "HUGH"
+   ],
+   "total_pnl": 32.07,
+   "wallet": "2bhy5b5JFXkdaFxMfQmfYXPMMbbfN1JkkpxXYoS3tf5P"
+  },
+  {
+   "avg_entry_mcap": 9376,
+   "best_multiple": 8.79,
+   "hits": 2,
+   "last_hit": "2026-11-18T12:32:53.598504+00:00",
+   "median_multiple": 8.3,
+   "tenx_hits": 0,
+   "tokens": [
+    "BFS",
+    "HUGH"
+   ],
+   "total_pnl": 28.19,
+   "wallet": "7vWVz3gvJo3gNrRvLesd5mEKANnrrnopBxAi6wKSz5fJ"
+  },
+  {
+   "avg_entry_mcap": 1536,
+   "best_multiple": 92.98,
+   "hits": 1,
+   "last_hit": "2026-11-20T08:07:30.659115+00:00",
+   "median_multiple": 92.98,
+   "tenx_hits": 1,
+   "tokens": [
+    "MACCA"
+   ],
+   "total_pnl": 46.86,
+   "wallet": "HYu1ac7GSiVf94orRuCZHd95MvBokzaPjiDdTbhLXLic"
+  },
+  {
+   "avg_entry_mcap": 1094,
+   "best_multiple": 38.62,
+   "hits": 1,
+   "last_hit": "2026-11-20T08:07:30.659115+00:00",
+   "median_multiple": 38.62,
+   "tenx_hits": 1,
+   "tokens": [
+    "MACCA"
+   ],
+   "total_pnl": 50.11,
+   "wallet": "4xCUydpGcxGB6HYL6R3tkT8HL8SCs68hRnpb86jkhpEB"
+  },
+  {
+   "avg_entry_mcap": 1117,
+   "best_multiple": 34.42,
+   "hits": 1,
+   "last_hit": "2026-11-20T08:07:30.659115+00:00",
+   "median_multiple": 34.42,
+   "tenx_hits": 1,
+   "tokens": [
+    "MACCA"
+   ],
+   "total_pnl": 43.28,
+   "wallet": "EAGJynz3neSjjBYiUSVsRpahq6TGhL8n48Xyc1jn8xP1"
+  },
+  {
+   "avg_entry_mcap": 3468,
+   "best_multiple": 32.82,
+   "hits": 1,
+   "last_hit": "2026-11-15T14:49:21.402828+00:00",
+   "median_multiple": 32.82,
+   "tenx_hits": 1,
+   "tokens": [
+    "DOUG"
+   ],
+   "total_pnl": 12.71,
+   "wallet": "AuoFhRNUNhSiocs5crzXiaasioxCvfMjLun2EQECVMLd"
+  },
+  {
+   "avg_entry_mcap": 2425,
+   "best_multiple": 28.82,
+   "hits": 1,
+   "last_hit": "2026-11-23T20:06:05.504979+00:00",
+   "median_multiple": 28.82,
+   "tenx_hits": 1,
+   "tokens": [
+    "SCINU"
+   ],
+   "total_pnl": 14.12,
+   "wallet": "3siERyALHAEukETTQ4qrKE4nP8opZc5jNKCMtkQxXUFe"
+  },
+  {
+   "avg_entry_mcap": 1290,
+   "best_multiple": 28.56,
+   "hits": 1,
+   "last_hit": "2026-11-20T08:07:30.659115+00:00",
+   "median_multiple": 28.56,
+   "tenx_hits": 1,
+   "tokens": [
+    "MACCA"
+   ],
+   "total_pnl": 41.85,
+   "wallet": "BKpR4s8mVKyDZaGVnrDVN2Z7ucHBPRqBD3A3xVp1GSYF"
+  },
+  {
+   "avg_entry_mcap": 284,
+   "best_multiple": 26.69,
+   "hits": 1,
+   "last_hit": "2026-11-13T20:24:10.565963+00:00",
+   "median_multiple": 26.69,
+   "tenx_hits": 1,
+   "tokens": [
+    "S42"
+   ],
+   "total_pnl": 2.75,
+   "wallet": "FfHc3f74oRuURi5vxZq5Dbh4kjvfsbZ7xnkY6dqiTeEj"
+  },
+  {
+   "avg_entry_mcap": 4779,
+   "best_multiple": 25.05,
+   "hits": 1,
+   "last_hit": "2026-11-18T21:53:50.603523+00:00",
+   "median_multiple": 25.05,
+   "tenx_hits": 1,
+   "tokens": [
+    "APCY"
+   ],
+   "total_pnl": 9.69,
+   "wallet": "6HgQ4upDtLdytKGnTMcCjbmvWcTSmLBBtMg4obqPNo2N"
+  },
+  {
+   "avg_entry_mcap": 1073,
+   "best_multiple": 24.97,
+   "hits": 1,
+   "last_hit": "2026-11-20T08:07:30.659115+00:00",
+   "median_multiple": 24.97,
+   "tenx_hits": 1,
+   "tokens": [
+    "MACCA"
+   ],
+   "total_pnl": 51.71,
+   "wallet": "5YrRRnHev6hA6NYbhFSPji8RUv2JxSC3tzJMVBVnsWHB"
+  },
+  {
+   "avg_entry_mcap": 1058,
+   "best_multiple": 24.88,
+   "hits": 1,
+   "last_hit": "2026-11-20T08:07:30.659115+00:00",
+   "median_multiple": 24.88,
+   "tenx_hits": 1,
+   "tokens": [
+    "MACCA"
+   ],
+   "total_pnl": 44.19,
+   "wallet": "GvDWxdXK37Q9ibgRp7Cj8gBUKWQXn73zMjdaHXLskZwY"
+  },
+  {
+   "avg_entry_mcap": 5972,
+   "best_multiple": 22.12,
+   "hits": 1,
+   "last_hit": "2026-11-14T15:50:10.206779+00:00",
+   "median_multiple": 22.12,
+   "tenx_hits": 1,
+   "tokens": [
+    "SLIDES"
+   ],
+   "total_pnl": 9.9,
+   "wallet": "5qVUZi4JRKeDobzyofNaSag6skzSXfGTUJ5VxxKEwkFJ"
+  },
+  {
+   "avg_entry_mcap": 6680,
+   "best_multiple": 21.98,
+   "hits": 1,
+   "last_hit": "2026-11-21T11:03:44.578455+00:00",
+   "median_multiple": 21.98,
+   "tenx_hits": 1,
+   "tokens": [
+    "XV"
+   ],
+   "total_pnl": 10.66,
+   "wallet": "EFnUmfpeQy2cGD75CVUNvajEkoTrKMwwTxoQTkcmWVgY"
+  },
+  {
+   "avg_entry_mcap": 1038,
+   "best_multiple": 21.83,
+   "hits": 1,
+   "last_hit": "2026-11-20T08:07:30.659115+00:00",
+   "median_multiple": 21.83,
+   "tenx_hits": 1,
+   "tokens": [
+    "MACCA"
+   ],
+   "total_pnl": 48.65,
+   "wallet": "FbpkhCJVgXzp1worD3xv4XnHXXQqryK571VBdofGGAog"
+  },
+  {
+   "avg_entry_mcap": 7260,
+   "best_multiple": 20.87,
+   "hits": 1,
+   "last_hit": "2026-11-14T15:50:10.206779+00:00",
+   "median_multiple": 20.87,
+   "tenx_hits": 1,
+   "tokens": [
+    "SLIDES"
+   ],
+   "total_pnl": 10.59,
+   "wallet": "7nLRnEdaYpMrDV7vbDVNAZU83owahuBLykXxrZBk8Vs9"
+  },
+  {
+   "avg_entry_mcap": 11293,
+   "best_multiple": 20.85,
+   "hits": 1,
+   "last_hit": "2026-11-18T12:32:53.598504+00:00",
+   "median_multiple": 20.85,
+   "tenx_hits": 1,
+   "tokens": [
+    "HUGH"
+   ],
+   "total_pnl": 33.09,
+   "wallet": "GeDDnsyp5a9eNvft23Bp6iDNcghvry3bapjRvVAMdrW7"
+  },
+  {
+   "avg_entry_mcap": 10486,
+   "best_multiple": 18.94,
+   "hits": 1,
+   "last_hit": "2026-11-18T12:32:53.598504+00:00",
+   "median_multiple": 18.94,
+   "tenx_hits": 1,
+   "tokens": [
+    "HUGH"
+   ],
+   "total_pnl": 29.27,
+   "wallet": "8E3M5KqhsLM7GMA3nUe8diYEZFhxcPAYpAAXU467od3a"
+  },
+  {
+   "avg_entry_mcap": 3555,
+   "best_multiple": 18.63,
+   "hits": 1,
+   "last_hit": "2026-11-23T20:06:05.504979+00:00",
+   "median_multiple": 18.63,
+   "tenx_hits": 1,
+   "tokens": [
+    "SCINU"
+   ],
+   "total_pnl": 1.79,
+   "wallet": "BXvQqegGy5RL3kXsT2xoJQVfbtQpVk46NHhCrPidUKKX"
+  },
+  {
+   "avg_entry_mcap": 1134,
+   "best_multiple": 18.24,
+   "hits": 1,
+   "last_hit": "2026-11-20T08:07:30.659115+00:00",
+   "median_multiple": 18.24,
+   "tenx_hits": 1,
+   "tokens": [
+    "MACCA"
+   ],
+   "total_pnl": 48.6,
+   "wallet": "BTZZSfjtqr2wzgj7pi2Uxr8SYLf6951T7Zf1gkvssE7W"
+  },
+  {
+   "avg_entry_mcap": 8814,
+   "best_multiple": 17.91,
+   "hits": 1,
+   "last_hit": "2026-11-18T21:53:50.603523+00:00",
+   "median_multiple": 17.91,
+   "tenx_hits": 1,
+   "tokens": [
+    "APCY"
+   ],
+   "total_pnl": 51.29,
+   "wallet": "B23Lge8cY7pw1QvnYmf86rSR9uC7A7P7yNwpJbgCvwcW"
+  },
+  {
+   "avg_entry_mcap": 1822,
+   "best_multiple": 17.68,
+   "hits": 1,
+   "last_hit": "2026-11-20T08:07:30.659115+00:00",
+   "median_multiple": 17.68,
+   "tenx_hits": 1,
+   "tokens": [
+    "MACCA"
+   ],
+   "total_pnl": 47.54,
+   "wallet": "3159xZ6ekDizcHJtn3b19NuePSecH1ZuM3AvkSCdUDXi"
+  },
+  {
+   "avg_entry_mcap": 5090,
+   "best_multiple": 17.46,
+   "hits": 1,
+   "last_hit": "2026-11-24T21:32:14.676243+00:00",
+   "median_multiple": 17.46,
+   "tenx_hits": 1,
+   "tokens": [
+    "ANSEM"
+   ],
+   "total_pnl": 105.41,
+   "wallet": "DMYAeYrVQ9aVWvzjxUHistG9FDWjp6b61U9FSg4gr7bB"
+  },
+  {
+   "avg_entry_mcap": 4936,
+   "best_multiple": 17.19,
+   "hits": 1,
+   "last_hit": "2026-11-24T11:08:09.072339+00:00",
+   "median_multiple": 17.19,
+   "tenx_hits": 1,
+   "tokens": [
+    "PRV"
+   ],
+   "total_pnl": 24.33,
+   "wallet": "aMkQWhLUJEitQ2SyfMHVx3Y3HRG4rDnvryLgGQYMpj5"
+  },
+  {
+   "avg_entry_mcap": 6043,
+   "best_multiple": 16.86,
+   "hits": 1,
+   "last_hit": "2026-11-18T21:53:50.603523+00:00",
+   "median_multiple": 16.86,
+   "tenx_hits": 1,
+   "tokens": [
+    "APCY"
+   ],
+   "total_pnl": 32.05,
+   "wallet": "6M8veUzgjRH9uEbKs8JFjLoAcTcZKfJ6WCWdUsahwp7F"
+  }
+ ],
+ "new_wallets": [],
+ "passed_tokens": [],
+ "pnl_unit": "SOL",
+ "rejection_reasons": [
+  [
+   "mint_account_unreadable",
+   33
+  ],
+  [
+   "low_liquidity",
+   27
+  ],
+  [
+   "never_pumped",
+   5
+  ],
+  [
+   "thin_liquidity_vs_mcap",
+   4
+  ],
+  [
+   "concentrated_holders_top10",
+   2
+  ],
+  [
+   "insider_network_4541_wallets",
+   1
+  ]
+ ],
+ "stats": {
+  "analyzed": 0,
+  "discovered": 5826,
+  "rejected": 72,
+  "runs": 49,
+  "skipped": 5,
+  "tokens_checked": 77,
+  "wallets_10x": 0,
+  "wallets_found": 0
+ }
+}
